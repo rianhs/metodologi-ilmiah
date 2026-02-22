@@ -1,3 +1,3 @@
-- [🏠 Beranda](README.md)
-- [Deskripsi mata kuliah](deskripsi.md)
+- [🏠 Beranda](beranda.md)
+- [Informasi umum](informasi-umum.md)
 - [Modul 1](modul-1.md)
