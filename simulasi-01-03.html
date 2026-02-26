@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simulasi Etika AI Generatif: Risiko Etis dalam Karya Ilmiah</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --muted2: rgba(255,255,255,.52);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+
+      --good: #30d38a;
+      --warn: #ffb020;
+      --bad:  #ff4d5e;
+      --ink:  rgba(12,18,32,.92);
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background-color: #0f172a;
+      color: var(--text);
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 14px 26px;
+    }
+
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:stretch;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+
+    .brand{
+      flex: 1 1 520px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: var(--shadow);
+      min-width: 280px;
+    }
+    .brand h1{
+      margin:0 0 6px 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+      font-weight: 720;
+    }
+    .brand p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .controls{
+      flex: 0 0 360px;
+      min-width: 280px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .tiny{
+      color: var(--muted2);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+
+    .pillbar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .dot{
+      width:10px; height:10px;
+      border-radius:999px;
+      display:inline-block;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .dot.good{ background: var(--good); }
+    .dot.warn{ background: var(--warn); }
+    .dot.bad{  background: var(--bad);  }
+
+    .segmented{
+      display:flex;
+      width:100%;
+      border-radius: 999px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+    }
+    .segmented button{
+      flex:1;
+      border:0;
+      padding: 10px 10px;
+      background: transparent;
+      color: rgba(255,255,255,.78);
+      cursor:pointer;
+      font-weight: 740;
+      font-size: 12.5px;
+      letter-spacing:.15px;
+      transition: background .16s ease, color .16s ease;
+    }
+    .segmented button.active{
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.94);
+    }
+
+    .stage{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .stageHeader{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .title{
+      margin:0;
+      font-size: 13.5px;
+      font-weight: 760;
+      letter-spacing: .18px;
+      color: rgba(255,255,255,.92);
+      line-height: 1.35;
+    }
+    .subtitle{
+      margin:6px 0 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .box{ padding: 14px; }
+
+    .panel{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .grid2{ grid-template-columns: 1fr; }
+      .controls{ flex: 1 1 360px; }
+    }
+
+    .sectionTitle{
+      margin:0 0 10px 0;
+      font-size: 13px;
+      font-weight: 780;
+      letter-spacing:.18px;
+    }
+
+    .group{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .groupHeader{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+    .groupHeader h3{
+      margin:0;
+      font-size: 12.8px;
+      font-weight: 800;
+      letter-spacing:.15px;
+    }
+    .groupHeader p{
+      margin:3px 0 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .checks{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      transition: background .16s ease, transform .06s ease, border-color .16s ease;
+    }
+    .check:hover{
+      background: rgba(0,0,0,.24);
+      border-color: rgba(255,255,255,.14);
+    }
+    .check:active{ transform: scale(.995); }
+
+    .check input{
+      margin-top: 2px;
+      accent-color: rgba(255,255,255,.9);
+      transform: scale(1.05);
+    }
+    .check label{
+      cursor:pointer;
+      display:block;
+      width:100%;
+    }
+    .check .main{
+      font-size: 12.8px;
+      color: rgba(255,255,255,.90);
+      font-weight: 720;
+      line-height: 1.35;
+    }
+    .check .desc{
+      margin-top: 3px;
+      font-size: 12.2px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .badge{
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-weight: 800;
+      white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .btnrow{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    .btn{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.88);
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 780;
+      cursor:pointer;
+      transition: transform .08s ease, background .18s ease, opacity .18s ease;
+      min-width: 140px;
+      text-align:center;
+    }
+    .btn:hover{ background: rgba(255,255,255,.09); }
+    .btn:active{ transform: scale(.99); }
+    .btn:disabled{
+      opacity: .45;
+      cursor:not-allowed;
+    }
+
+    .btn.primary{
+      background: rgba(255,255,255,.10);
+    }
+
+    .sideCard{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding: 12px;
+    }
+    .sideCard h3{
+      margin:0 0 8px 0;
+      font-size: 12.8px;
+      font-weight: 800;
+      letter-spacing:.15px;
+    }
+    .sideCard p{
+      margin:0 0 10px 0;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin: 10px 0;
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items:start;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255,255,255,.10);
+    }
+    .kv:last-child{ border-bottom:0; }
+    .kv .k{
+      font-size: 12.5px;
+      color: rgba(255,255,255,.86);
+      font-weight: 720;
+      line-height:1.35;
+    }
+    .kv .v{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      white-space:nowrap;
+    }
+
+    .summary{
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+
+    .bigScore{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .bigScore .num{
+      font-size: 34px;
+      font-weight: 860;
+      letter-spacing: .2px;
+    }
+    .bigScore .lvl{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight: 860;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-size: 12.5px;
+      color: rgba(255,255,255,.90);
+    }
+
+    .note{
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 8px 0 0 0;
+    }
+
+    .srOnly{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Simulasi Risiko Etis Penggunaan AI Generatif dalam Karya Ilmiah</h1>
+        <p>
+          Anda akan melewati 5 tahap linear yang menyerupai alur nyata penulisan karya ilmiah.
+          Pada setiap tahap, centang aktivitas yang Anda lakukan dengan bantuan AI.
+          Skor risiko hanya akan ditampilkan di akhir (untuk refleksi).
+        </p>
+      </div>
+
+      <div class="controls">
+        <div class="row">
+          <div style="font-weight:760; font-size:13px;">Navigasi</div>
+          <span class="badge" id="stepBadge"><span class="dot warn"></span> Tahap 1/5</span>
+        </div>
+
+        <div class="segmented" role="tablist" aria-label="Kontrol">
+          <button id="btnReset" role="tab" aria-selected="false">Reset</button>
+          <button id="btnHelp" role="tab" aria-selected="false">Panduan</button>
+        </div>
+
+        <div class="tiny" id="controlText">
+          Catatan: beberapa pilihan bersifat “mitigasi” (menurunkan risiko), misalnya verifikasi referensi dan transparansi.
+        </div>
+
+        <div class="pillbar">
+          <span class="pill" title="Kemajuan">
+            <span class="dot warn"></span><span id="progressText">0%</span>
+            <span style="opacity:.55;">·</span>
+            <span style="opacity:.75;">Skor disembunyikan</span>
+          </span>
+          <span class="pill" title="Kondisi simulasi">
+            <span class="dot good"></span><span id="stateText">Belum selesai</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" aria-live="polite">
+      <div class="stageHeader">
+        <div>
+          <p class="title" id="stageTitle">Tahap 1 — Eksplorasi topik & perumusan masalah</p>
+          <p class="subtitle" id="stageSubtitle">
+            Di fase awal, AI sering digunakan untuk memahami topik dan mengembangkan ide. Risiko meningkat bila AI mengambil alih substansi dan Anda menyalinnya mentah.
+          </p>
+        </div>
+        <div class="pillbar">
+          <span class="badge" id="stageTag"><span class="dot warn"></span>Alur linear</span>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="grid2">
+          <div class="panel" id="mainPanel">
+            <!-- injected -->
+          </div>
+
+          <div class="sideCard" id="sidePanel">
+            <h3>Ringkasan tahap ini</h3>
+            <p id="sideHint">Centang aktivitas sesuai tindakan Anda. Anda boleh tidak mencentang apa pun.</p>
+
+            <div class="divider"></div>
+
+            <div id="sideFacts">
+              <div class="kv"><div class="k">Jumlah aktivitas dipilih (tahap ini)</div><div class="v" id="pickedNow">0</div></div>
+              <div class="kv"><div class="k">Jumlah aktivitas dipilih (total)</div><div class="v" id="pickedAll">0</div></div>
+              <div class="kv"><div class="k">Catatan</div><div class="v" id="noteFlag">—</div></div>
+            </div>
+
+            <p class="note" id="ethicNote">
+              Fokus etika: kontribusi intelektual Anda, verifikasi informasi, transparansi, dan perlindungan data.
+            </p>
+          </div>
+        </div>
+
+        <div class="btnrow">
+          <button class="btn" id="btnPrev" disabled>← Sebelumnya</button>
+          <button class="btn primary" id="btnNext">Lanjut →</button>
+        </div>
+      </div>
+    </div>
+
+    <span class="srOnly" id="srAnnounce"></span>
+  </div>
+
+  <script>
+    // =========================
+    // Model tahapan & item
+    // =========================
+    // Scoring philosophy (sesuai modul):
+    // - Risiko naik saat AI mengambil alih peran intelektual (argumentasi/interpretasi/kesimpulan) + ketika tidak ada verifikasi/transparansi.
+    // - Mitigasi (verifikasi, disclosure, anonymisasi) menurunkan risiko.
+    // Skor ditampilkan hanya di akhir.
+
+    const STEPS = [
+      {
+        id: "topic",
+        title: "Tahap 1 — Eksplorasi topik & perumusan masalah",
+        subtitle: "AI lazim dipakai untuk memahami topik dan brainstorming. Risiko naik bila Anda menyalin narasi substansial mentah.",
+        groups: [
+          {
+            title: "Eksplorasi ide (umum)",
+            desc: "Aktivitas yang sering dianggap wajar di awal, tetapi tetap perlu kendali penulis.",
+            items: [
+              { id:"t1_explain", label:"Meminta AI menjelaskan topik/konsep umum", desc:"Tujuan: memahami istilah atau gambaran umum sebelum membaca sumber primer.", w: 3, kind:"use" },
+              { id:"t1_questions", label:"Meminta AI mengusulkan pertanyaan penelitian", desc:"Anda tetap memilih dan mempertajam pertanyaan berdasarkan literatur dan konteks.", w: 6, kind:"use" },
+              { id:"t1_problem", label:"Meminta AI menyusun rumusan masalah awal", desc:"Risiko naik bila rumusan final sepenuhnya mengikuti AI tanpa refleksi.", w: 8, kind:"use" }
+            ]
+          },
+          {
+            title: "Latar belakang (substansi awal)",
+            desc: "Di sini mulai muncul risiko orisinalitas bila AI menulis narasi utama.",
+            items: [
+              { id:"t1_background_draft", label:"Meminta AI menyusun draf latar belakang proposal", desc:"Boleh sebagai draf awal, tetapi perlu ditulis ulang dengan logika Anda sendiri.", w: 14, kind:"use" },
+              { id:"t1_copy_background", label:"Menyalin hampir seluruh latar belakang dari AI tanpa perubahan substantif", desc:"Ini berisiko tinggi karena mengaburkan kontribusi intelektual.", w: 26, kind:"redflag" }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: "lit",
+        title: "Tahap 2 — Kajian literatur & referensi",
+        subtitle: "Risiko utama di fase ini: halusinasi, referensi fiktif, ringkasan tanpa membaca sumber. Mitigasi: verifikasi independen.",
+        groups: [
+          {
+            title: "Pencarian dan ringkasan literatur",
+            desc: "AI dapat membantu merangkum, tetapi tanggung jawab ilmiah tetap pada penulis.",
+            items: [
+              { id:"t2_find_refs", label:"Meminta AI mencarikan referensi ilmiah", desc:"Aktivitas ini menuntut verifikasi keberadaan dan relevansi sumber.", w: 10, kind:"use" },
+              { id:"t2_summarize_many", label:"Meminta AI merangkum beberapa artikel", desc:"Ringkasan perlu dicek dengan membaca bagian kunci artikel.", w: 12, kind:"use" },
+              { id:"t2_map_relations", label:"Meminta AI mengidentifikasi keterkaitan antar artikel", desc:"Gunakan sebagai peta awal, bukan kesimpulan final.", w: 10, kind:"use" }
+            ]
+          },
+          {
+            title: "Pelanggaran praktik baik (referensi)",
+            desc: "Ini meningkatkan risiko karena membuka peluang halusinasi/inakurasi.",
+            items: [
+              { id:"t2_quote_unchecked", label:"Mengutip referensi dari AI tanpa memeriksa keberadaannya", desc:"Risiko tinggi karena AI bisa memberi referensi fiktif.", w: 22, kind:"redflag" },
+              { id:"t2_use_summary_only", label:"Menggunakan ringkasan AI tanpa membaca artikel aslinya", desc:"Risiko meningkat karena pemahaman menjadi tidak terverifikasi.", w: 18, kind:"redflag" }
+            ]
+          },
+          {
+            title: "Mitigasi (menurunkan risiko)",
+            desc: "Pilihan ini menurunkan skor karena memperkuat akurasi dan tanggung jawab.",
+            items: [
+              { id:"t2_verify_all", label:"Memverifikasi semua referensi secara independen (database/jurnal)", desc:"Mitigasi kuat terhadap halusinasi dan kesalahan sitasi.", w: -14, kind:"mitigate" },
+              { id:"t2_read_sources", label:"Membaca artikel asli sebelum mengutip", desc:"Mitigasi kuat: memastikan pemahaman dan kesesuaian kutipan.", w: -12, kind:"mitigate" }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: "methods",
+        title: "Tahap 3 — Perancangan metodologi & metode",
+        subtitle: "Risiko naik saat AI menentukan desain/variabel/analisis tanpa pertimbangan ilmiah Anda. AI boleh membantu kejelasan redaksi.",
+        groups: [
+          {
+            title: "Bantuan struktural & teknis",
+            desc: "Umumnya risiko sedang, tergantung seberapa besar Anda menyandarkan keputusan ilmiah pada AI.",
+            items: [
+              { id:"t3_outline_methods", label:"Meminta AI menyusun kerangka bagian metode", desc:"Kerangka perlu disesuaikan dengan desain penelitian Anda.", w: 10, kind:"use" },
+              { id:"t3_clarity_methods", label:"Meminta AI memperjelas penulisan metode (tanpa mengubah substansi)", desc:"Ini lebih dekat bantuan kebahasaan untuk bagian metode.", w: 5, kind:"use" }
+            ]
+          },
+          {
+            title: "Keputusan ilmiah inti",
+            desc: "Di sini AI mulai menyentuh inti rancangan penelitian; risikonya lebih tinggi.",
+            items: [
+              { id:"t3_design", label:"Meminta AI menyarankan desain penelitian (mis. potong lintang, kohort)", desc:"Gunakan sebagai opsi awal; keputusan tetap harus berbasis literatur/konteks.", w: 16, kind:"use" },
+              { id:"t3_variables", label:"Meminta AI menentukan variabel dan cara ukur utama", desc:"Risiko naik bila variabel final bukan hasil pertimbangan ilmiah Anda.", w: 18, kind:"use" },
+              { id:"t3_analysis_plan", label:"Meminta AI memilih uji/statistik dan rencana analisis", desc:"Berisiko bila Anda tidak memahami asumsi dan interpretasinya.", w: 20, kind:"use" }
+            ]
+          },
+          {
+            title: "Mitigasi",
+            desc: "Menguatkan akuntabilitas penulis atas keputusan metodologis.",
+            items: [
+              { id:"t3_recheck_lit", label:"Memeriksa usulan desain/analisis AI dengan literatur dan pembimbing", desc:"Mitigasi: memastikan keputusan ilmiah dapat dipertanggungjawabkan.", w: -10, kind:"mitigate" }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: "analysis",
+        title: "Tahap 4 — Analisis data, interpretasi, dan keamanan data",
+        subtitle: "Zona risiko tertinggi: interpretasi data dan kesimpulan oleh AI, serta pengunggahan data sensitif/mentah ke AI publik.",
+        groups: [
+          {
+            title: "Analisis & interpretasi",
+            desc: "Ini berisiko tinggi karena menyentuh kontribusi intelektual dan tanggung jawab ilmiah.",
+            items: [
+              { id:"t4_interpret_stats", label:"Meminta AI menafsirkan output uji statistik", desc:"Risiko tinggi bila Anda tidak memverifikasi dan tidak memahami interpretasinya.", w: 26, kind:"redflag" },
+              { id:"t4_discussion", label:"Meminta AI menyusun pembahasan (discussion) dari hasil", desc:"Risiko tinggi karena AI dapat mengambil alih argumentasi ilmiah.", w: 26, kind:"redflag" },
+              { id:"t4_conclusion", label:"Meminta AI menarik kesimpulan penelitian", desc:"Risiko tinggi; kesimpulan harus melekat pada penulis.", w: 28, kind:"redflag" }
+            ]
+          },
+          {
+            title: "Data & kerahasiaan",
+            desc: "Pengunggahan data dapat menimbulkan risiko keamanan/kerahasiaan.",
+            items: [
+              { id:"t4_upload_raw", label:"Mengunggah data mentah yang belum dipublikasikan ke AI publik", desc:"Risiko sangat tinggi: potensi kebocoran dan pelanggaran kebijakan.", w: 30, kind:"redflag" },
+              { id:"t4_upload_ident", label:"Mengunggah data yang memuat identitas subjek penelitian", desc:"Risiko sangat tinggi (data sensitif).", w: 32, kind:"redflag" }
+            ]
+          },
+          {
+            title: "Mitigasi",
+            desc: "Langkah yang mengurangi risiko keamanan dan memperjelas akuntabilitas.",
+            items: [
+              { id:"t4_anonymize", label:"Menghilangkan identitas dan informasi sensitif sebelum memakai AI", desc:"Mitigasi penting untuk perlindungan data.", w: -16, kind:"mitigate" },
+              { id:"t4_no_raw", label:"Tidak memasukkan data mentah; hanya deskripsi agregat/anonim", desc:"Mitigasi: mengurangi risiko kebocoran data.", w: -10, kind:"mitigate" },
+              { id:"t4_manual_check", label:"Memverifikasi analisis/interpretasi AI dengan perhitungan/rujukan sendiri", desc:"Mitigasi: tanggung jawab ilmiah tetap pada penulis.", w: -12, kind:"mitigate" }
+            ]
+          }
+        ]
+      },
+
+      {
+        id: "finalize",
+        title: "Tahap 5 — Penyempurnaan naskah & transparansi",
+        subtitle: "Bantuan kebahasaan umumnya risiko rendah. Risiko bisa naik bila penggunaan AI disembunyikan atau AI menulis substansi akhir mentah.",
+        groups: [
+          {
+            title: "Bantuan kebahasaan (rendah)",
+            desc: "Biasanya aman jika substansi tetap Anda yang mengendalikan.",
+            items: [
+              { id:"t5_grammar", label:"Meminta AI memperbaiki tata bahasa dan ejaan", desc:"Risiko rendah (aspek kebahasaan).", w: 3, kind:"use" },
+              { id:"t5_consistency", label:"Meminta AI memeriksa konsistensi istilah", desc:"Risiko rendah.", w: 3, kind:"use" },
+              { id:"t5_clarity", label:"Meminta AI meningkatkan kejelasan kalimat (tanpa mengubah substansi)", desc:"Risiko rendah–sedang tergantung intensitas edit.", w: 5, kind:"use" }
+            ]
+          },
+          {
+            title: "Substansi akhir",
+            desc: "Bisa berisiko bila AI menulis abstrak/kesimpulan dari nol tanpa kontrol penulis.",
+            items: [
+              { id:"t5_abstract_from_scratch", label:"Meminta AI menulis abstrak dari nol (bukan merangkum draf Anda)", desc:"Risiko sedang–tinggi; abstrak harus mewakili pemahaman Anda.", w: 14, kind:"use" },
+              { id:"t5_copy_final", label:"Menyalin teks AI mentah sebagai versi final", desc:"Risiko tinggi karena kontribusi intelektual kabur.", w: 26, kind:"redflag" }
+            ]
+          },
+          {
+            title: "Transparansi (disclosure)",
+            desc: "Ketidaktransparanan dapat menaikkan risiko meskipun aktivitas tampak teknis.",
+            items: [
+              { id:"t5_no_disclose", label:"Tidak mengungkapkan penggunaan AI sama sekali", desc:"Berisiko (tergantung kebijakan institusi/jurnal).", w: 18, kind:"redflag" },
+              { id:"t5_disclose_specific", label:"Mengungkapkan penggunaan AI secara spesifik (bagian & tujuan)", desc:"Mitigasi kuat: memperjelas akuntabilitas penulis.", w: -14, kind:"mitigate" },
+              { id:"t5_disclose_general", label:"Mengungkapkan penggunaan AI secara umum (mis. hanya untuk bahasa)", desc:"Mitigasi sedang.", w: -8, kind:"mitigate" }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // =========================
+    // State
+    // =========================
+    const state = {
+      stepIdx: 0,
+      selections: new Set(), // item ids
+      done: false
+    };
+
+    // =========================
+    // Elements
+    // =========================
+    const stepBadge = document.getElementById("stepBadge");
+    const progressText = document.getElementById("progressText");
+    const stateText = document.getElementById("stateText");
+    const stageTitle = document.getElementById("stageTitle");
+    const stageSubtitle = document.getElementById("stageSubtitle");
+    const mainPanel = document.getElementById("mainPanel");
+    const pickedNow = document.getElementById("pickedNow");
+    const pickedAll = document.getElementById("pickedAll");
+    const noteFlag = document.getElementById("noteFlag");
+    const sideHint = document.getElementById("sideHint");
+    const btnPrev = document.getElementById("btnPrev");
+    const btnNext = document.getElementById("btnNext");
+    const btnReset = document.getElementById("btnReset");
+    const btnHelp = document.getElementById("btnHelp");
+    const srAnnounce = document.getElementById("srAnnounce");
+
+    // segmented mimic: we don't need active tab semantics; keep visual.
+    btnReset.addEventListener("click", resetAll);
+    btnHelp.addEventListener("click", showHelp);
+
+    btnPrev.addEventListener("click", () => go(-1));
+    btnNext.addEventListener("click", () => go(+1));
+
+    // =========================
+    // Render
+    // =========================
+    function render(){
+      const step = STEPS[state.stepIdx];
+      stageTitle.textContent = step.title;
+      stageSubtitle.textContent = step.subtitle;
+
+      // top indicators
+      const stepNo = state.stepIdx + 1;
+      stepBadge.innerHTML = `<span class="dot warn"></span> Tahap ${stepNo}/${STEPS.length}`;
+
+      const pct = Math.round((state.stepIdx) / (STEPS.length) * 100);
+      progressText.textContent = pct + "%";
+      stateText.textContent = state.done ? "Selesai" : "Belum selesai";
+
+      btnPrev.disabled = state.stepIdx === 0;
+      btnNext.textContent = (state.stepIdx === STEPS.length - 1) ? "Selesai →" : "Lanjut →";
+
+      // main panel
+      mainPanel.innerHTML = "";
+      if(step.id !== "result"){
+        mainPanel.appendChild(renderStepPanel(step));
+      }
+
+      // side panel stats
+      updateSideStats();
+
+      // announce
+      srAnnounce.textContent = `Menampilkan ${step.title}.`;
+    }
+
+    function renderStepPanel(step){
+      const root = document.createElement("div");
+      root.innerHTML = `
+        <div class="sectionTitle">Pilih aktivitas pada tahap ini</div>
+      `;
+
+      for(const g of step.groups){
+        const group = document.createElement("div");
+        group.className = "group";
+
+        // risk hint badge for group based on presence of redflag/mitigate
+        const gType = groupType(g.items);
+        const badgeHtml = badgeForGroup(gType);
+
+        group.innerHTML = `
+          <div class="groupHeader">
+            <div>
+              <h3>${escapeHtml(g.title)}</h3>
+              <p>${escapeHtml(g.desc)}</p>
+            </div>
+            ${badgeHtml}
+          </div>
+          <div class="checks"></div>
+        `;
+
+        const checks = group.querySelector(".checks");
+        for(const it of g.items){
+          const cid = it.id;
+          const checked = state.selections.has(cid);
+          const chip = chipForItem(it.kind);
+
+          const item = document.createElement("div");
+          item.className = "check";
+          item.innerHTML = `
+            <input type="checkbox" id="${cid}" ${checked ? "checked" : ""} />
+            <label for="${cid}">
+              <div class="main">${escapeHtml(it.label)} ${chip}</div>
+              <div class="desc">${escapeHtml(it.desc)}</div>
+            </label>
+          `;
+
+          const input = item.querySelector("input");
+          input.addEventListener("change", (e) => {
+            if(e.target.checked) state.selections.add(cid);
+            else state.selections.delete(cid);
+            updateSideStats();
+          });
+
+          checks.appendChild(item);
+        }
+
+        root.appendChild(group);
+      }
+
+      // note
+      const note = document.createElement("p");
+      note.className = "note";
+      note.textContent = "Catatan: skor risiko tidak ditampilkan sekarang. Skor hanya muncul di akhir untuk refleksi kelas.";
+      root.appendChild(note);
+
+      return root;
+    }
+
+    function updateSideStats(){
+      const step = STEPS[state.stepIdx];
+
+      const stepItemIds = new Set();
+      for(const g of step.groups){
+        for(const it of g.items) stepItemIds.add(it.id);
+      }
+
+      let now = 0;
+      for(const id of stepItemIds){
+        if(state.selections.has(id)) now++;
+      }
+
+      pickedNow.textContent = String(now);
+      pickedAll.textContent = String(state.selections.size);
+
+      const flag = detectImmediateFlags(stepItemIds);
+      noteFlag.textContent = flag;
+
+      // side hint
+      if(state.stepIdx === STEPS.length - 1){
+        sideHint.textContent = "Setelah ini, klik Selesai untuk melihat skor dan umpan balik diagnostik.";
+      } else {
+        sideHint.textContent = "Centang aktivitas sesuai tindakan Anda. Anda boleh tidak mencentang apa pun.";
+      }
+    }
+
+    function detectImmediateFlags(stepItemIds){
+      // we won't show score; only a neutral flag for teaching.
+      // Detect if any redflag selected in this step.
+      let hasRed = false;
+      let hasMit = false;
+
+      const step = STEPS[state.stepIdx];
+      for(const g of step.groups){
+        for(const it of g.items){
+          if(stepItemIds.has(it.id) && state.selections.has(it.id)){
+            if(it.kind === "redflag") hasRed = true;
+            if(it.kind === "mitigate") hasMit = true;
+          }
+        }
+      }
+
+      if(hasRed && hasMit) return "Ada risiko & mitigasi";
+      if(hasRed) return "Ada pilihan berisiko";
+      if(hasMit) return "Ada mitigasi";
+      return "—";
+    }
+
+    // =========================
+    // Navigation
+    // =========================
+    function go(delta){
+      const nextIdx = state.stepIdx + delta;
+
+      if(delta > 0 && state.stepIdx === STEPS.length - 1){
+        // finish
+        state.done = true;
+        showResults();
+        return;
+      }
+
+      if(nextIdx < 0 || nextIdx >= STEPS.length) return;
+      state.stepIdx = nextIdx;
+      render();
+    }
+
+    function resetAll(){
+      state.stepIdx = 0;
+      state.selections = new Set();
+      state.done = false;
+      // restore stage container from results if needed
+      restoreStageIfNeeded();
+      render();
+      srAnnounce.textContent = "Simulasi direset.";
+    }
+
+    function showHelp(){
+      const helpText =
+        "Cara pakai:\n" +
+        "1) Baca konteks tiap tahap.\n" +
+        "2) Centang aktivitas yang Anda lakukan dengan AI.\n" +
+        "3) Lanjut sampai akhir.\n\n" +
+        "Interpretasi:\n" +
+        "- Risiko naik saat AI mengambil alih argumentasi/interpretasi/kesimpulan atau saat referensi tidak diverifikasi.\n" +
+        "- Risiko naik saat penggunaan AI disembunyikan.\n" +
+        "- Mitigasi (verifikasi, transparansi, anonimisasi data) menurunkan risiko.\n\n" +
+        "Skor muncul hanya di akhir untuk refleksi kelas.";
+      alert(helpText);
+    }
+
+    // =========================
+    // Results
+    // =========================
+    function showResults(){
+      const score = computeScore();
+      const lvl = classify(score.total);
+      const breakdown = score.breakdown;
+      const diagnostics = buildDiagnostics(score, lvl);
+
+      // Replace main stage content with summary panel, keep topbar as is.
+      const stage = document.querySelector(".stage");
+      stage.querySelector(".stageHeader .title").textContent = "Hasil simulasi — Indeks Risiko Etis";
+      stage.querySelector(".stageHeader .subtitle").textContent =
+        "Skor ini adalah indikator pembelajaran. Gunakan untuk diskusi: bagian mana yang meningkatkan risiko, dan mitigasi apa yang paling berdampak.";
+
+      const box = stage.querySelector(".box");
+      box.innerHTML = `
+        <div class="grid2">
+          <div class="summary">
+            <div class="bigScore">
+              <div>
+                <div class="num">${score.total}<span style="font-size:14px; opacity:.75;">/100</span></div>
+                <div class="tiny">Indeks risiko etis (disimulasikan)</div>
+              </div>
+              <div class="lvl">${dotForLevel(lvl)} ${lvl.label}</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="sectionTitle">Diagnostik singkat</div>
+            <div class="tiny" style="white-space:pre-line;">${escapeHtml(diagnostics.primary)}</div>
+
+            <div class="divider"></div>
+
+            <div class="sectionTitle">Pertanyaan reflektif</div>
+            <div class="tiny" style="white-space:pre-line;">${escapeHtml(diagnostics.reflect)}</div>
+
+            <div class="divider"></div>
+
+            <div class="sectionTitle">Rekomendasi mitigasi (prioritas)</div>
+            <div class="tiny" style="white-space:pre-line;">${escapeHtml(diagnostics.mitigations)}</div>
+
+            <p class="note">
+              Prinsip umum: ketika AI menggantikan proses berpikir ilmiah penulis, integritas akademik menjadi taruhannya.
+            </p>
+          </div>
+
+          <div class="sideCard">
+            <h3>Rincian kontribusi risiko</h3>
+            <p>Angka ini membantu diskusi: risiko tidak hanya “jumlah centang”, tetapi bobot aktivitas dan adanya mitigasi.</p>
+
+            <div class="divider"></div>
+
+            <div class="kv"><div class="k">Tahap 1 (Topik)</div><div class="v">${breakdown.topic}</div></div>
+            <div class="kv"><div class="k">Tahap 2 (Literatur)</div><div class="v">${breakdown.lit}</div></div>
+            <div class="kv"><div class="k">Tahap 3 (Metode)</div><div class="v">${breakdown.methods}</div></div>
+            <div class="kv"><div class="k">Tahap 4 (Analisis & Data)</div><div class="v">${breakdown.analysis}</div></div>
+            <div class="kv"><div class="k">Tahap 5 (Finalisasi)</div><div class="v">${breakdown.finalize}</div></div>
+
+            <div class="divider"></div>
+
+            <div class="kv"><div class="k">Jumlah aktivitas dipilih</div><div class="v">${state.selections.size}</div></div>
+            <div class="kv"><div class="k">Mitigasi dipilih</div><div class="v">${score.mitigationsPicked}</div></div>
+            <div class="kv"><div class="k">Red-flag dipilih</div><div class="v">${score.redflagsPicked}</div></div>
+
+            <div class="btnrow" style="justify-content:stretch; margin-top:12px;">
+              <button class="btn" id="btnBackToSteps">Kembali ke tahap</button>
+              <button class="btn primary" id="btnReset2">Reset</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // update right controls status
+      progressText.textContent = "100%";
+      stateText.textContent = "Selesai";
+      stepBadge.innerHTML = `<span class="dot good"></span> Selesai`;
+
+      // wire buttons
+      box.querySelector("#btnReset2").addEventListener("click", resetAll);
+      box.querySelector("#btnBackToSteps").addEventListener("click", () => {
+        // go back to last step view (without losing selections)
+        state.done = false;
+        state.stepIdx = STEPS.length - 1;
+        restoreStageIfNeeded();
+        render();
+      });
+
+      srAnnounce.textContent = "Hasil simulasi ditampilkan.";
+    }
+
+    function computeScore(){
+      let raw = 0;
+
+      // breakdown per step
+      const b = { topic:0, lit:0, methods:0, analysis:0, finalize:0 };
+      let mitigationsPicked = 0;
+      let redflagsPicked = 0;
+
+      // helper: find item meta by id
+      const meta = new Map();
+      for(const s of STEPS){
+        for(const g of s.groups){
+          for(const it of g.items){
+            meta.set(it.id, { stepId: s.id, ...it });
+          }
+        }
+      }
+
+      for(const id of state.selections){
+        const it = meta.get(id);
+        if(!it) continue;
+        raw += it.w;
+
+        if(it.kind === "mitigate") mitigationsPicked++;
+        if(it.kind === "redflag") redflagsPicked++;
+
+        if(it.stepId === "topic") b.topic += it.w;
+        if(it.stepId === "lit") b.lit += it.w;
+        if(it.stepId === "methods") b.methods += it.w;
+        if(it.stepId === "analysis") b.analysis += it.w;
+        if(it.stepId === "finalize") b.finalize += it.w;
+      }
+
+      // interaction penalties (kombinasi)
+      // 1) Menyalin mentah + tidak disclosure => tambah penalti
+      const copied = hasAny(["t1_copy_background","t5_copy_final"]);
+      const noDisclose = state.selections.has("t5_no_disclose");
+      if(copied && noDisclose) raw += 12;
+
+      // 2) Meminta AI interpretasi/kesimpulan + tidak verifikasi manual => tambah penalti
+      const aiInterpret = hasAny(["t4_interpret_stats","t4_discussion","t4_conclusion"]);
+      const manualCheck = state.selections.has("t4_manual_check");
+      if(aiInterpret && !manualCheck) raw += 10;
+
+      // 3) Meminta AI cari referensi + mengutip tanpa cek => penalti
+      if(state.selections.has("t2_find_refs") && state.selections.has("t2_quote_unchecked")) raw += 10;
+
+      // 4) Upload data sensitif tanpa anonymize => penalti
+      const uploadSensitive = hasAny(["t4_upload_raw","t4_upload_ident"]);
+      const anonymize = state.selections.has("t4_anonymize") || state.selections.has("t4_no_raw");
+      if(uploadSensitive && !anonymize) raw += 10;
+
+      // normalize to 0..100
+      // raw can be negative if many mitigations selected; clamp.
+      const total = clamp(Math.round(raw), 0, 100);
+
+      // For breakdown, show clamped-ish but keep sign to reveal mitigation in a stage.
+      // Convert to display numbers that are easier to read: clamp each to [-20..60].
+      const disp = {
+        topic: clamp(Math.round(b.topic), -20, 60),
+        lit: clamp(Math.round(b.lit), -20, 60),
+        methods: clamp(Math.round(b.methods), -20, 60),
+        analysis: clamp(Math.round(b.analysis), -20, 60),
+        finalize: clamp(Math.round(b.finalize), -20, 60)
+      };
+
+      return { total, raw, breakdown: disp, mitigationsPicked, redflagsPicked };
+    }
+
+    function classify(total){
+      if(total <= 20) return { label:"Risiko rendah", key:"low" };
+      if(total <= 50) return { label:"Risiko sedang", key:"mid" };
+      if(total <= 80) return { label:"Risiko tinggi", key:"high" };
+      return { label:"Risiko kritis", key:"crit" };
+    }
+
+    function buildDiagnostics(score, lvl){
+      const picked = state.selections;
+
+      // primary message based on patterns
+      const lines = [];
+      const mitigations = [];
+
+      if(hasAny(["t4_upload_raw","t4_upload_ident"])){
+        lines.push("Ada risiko keamanan/kerahasiaan data karena data mentah atau identitas subjek dimasukkan ke AI publik.");
+        if(!hasAny(["t4_anonymize","t4_no_raw"])) mitigations.push("Prioritas 1: jangan unggah data mentah/beridentitas; lakukan anonimisasi atau gunakan deskripsi agregat.");
+      }
+
+      if(hasAny(["t4_interpret_stats","t4_conclusion","t4_discussion"])){
+        lines.push("AI terlibat pada interpretasi data/argumentasi/kesimpulan. Ini meningkatkan risiko karena kontribusi intelektual penulis bisa berkurang dan tanggung jawab ilmiah menjadi kabur.");
+        if(!picked.has("t4_manual_check")) mitigations.push("Prioritas 2: verifikasi analisis/interpretasi dengan perhitungan atau rujukan sendiri; pastikan Anda memahami asumsi dan makna hasil.");
+      }
+
+      if(picked.has("t2_quote_unchecked")){
+        lines.push("Ada risiko halusinasi/inakurasi karena referensi dari AI dikutip tanpa verifikasi.");
+        if(!picked.has("t2_verify_all")) mitigations.push("Prioritas 3: verifikasi semua referensi (DOI/jurnal/database) dan baca sumber asli sebelum mengutip.");
+      } else if(picked.has("t2_find_refs") && !picked.has("t2_verify_all")){
+        lines.push("AI dipakai untuk mencari referensi; tanpa verifikasi, ada risiko referensi tidak valid.");
+        mitigations.push("Prioritas 3: verifikasi semua referensi secara independen.");
+      }
+
+      if(picked.has("t5_no_disclose")){
+        lines.push("Penggunaan AI tidak diungkapkan. Ini berisiko pada prinsip transparansi, terutama bila kebijakan institusi/jurnal mensyaratkan disclosure.");
+        if(!hasAny(["t5_disclose_specific","t5_disclose_general"])) mitigations.push("Prioritas 4: tulis pernyataan penggunaan AI secara spesifik (bagian apa, untuk tujuan apa, dan siapa yang memverifikasi).");
+      }
+
+      if(hasAny(["t1_copy_background","t5_copy_final"])){
+        lines.push("Ada penyalinan teks AI mentah tanpa perubahan substantif. Ini berisiko tinggi pada orisinalitas dan integritas akademik.");
+        mitigations.push("Prioritas 5: tulis ulang dengan kerangka logika Anda sendiri; gunakan AI hanya untuk bahasa/kejelasan, bukan untuk menggantikan pemikiran.");
+      }
+
+      if(lines.length === 0){
+        lines.push("Tidak ada pola risiko besar yang terdeteksi dari pilihan Anda. Risiko tetap ada bila verifikasi dan transparansi diabaikan.");
+        mitigations.push("Pertahankan praktik baik: verifikasi sumber, dokumentasikan penggunaan AI bila diperlukan, dan hindari memasukkan data sensitif.");
+      }
+
+      const reflect =
+        "1) Apakah informasi yang dihasilkan AI akurat dan sudah diverifikasi?\n" +
+        "2) Apakah bagian ini benar-benar mencerminkan pemikiran saya sendiri?\n" +
+        "3) Apakah penggunaan AI pada bagian ini perlu diungkapkan demi transparansi?\n" +
+        "4) Apakah penggunaan AI ini mengurangi atau menggantikan kontribusi intelektual saya?";
+
+      // If mitigations empty, still provide general.
+      const mitigText = (mitigations.length ? mitigations : [
+        "Verifikasi informasi dan referensi sebelum digunakan.",
+        "Batasi AI pada bantuan kebahasaan atau kerangka awal yang Anda rekonstruksi.",
+        "Ungkapkan penggunaan AI bila kebijakan mengharuskan."
+      ]).join("\n");
+
+      return {
+        primary: lines.join("\n"),
+        reflect,
+        mitigations: mitigText
+      };
+    }
+
+    // =========================
+    // Utilities
+    // =========================
+    function hasAny(ids){
+      for(const id of ids){
+        if(state.selections.has(id)) return true;
+      }
+      return false;
+    }
+    function clamp(x, a, b){ return Math.max(a, Math.min(b, x)); }
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function groupType(items){
+      let hasRed=false, hasMit=false;
+      for(const it of items){
+        if(it.kind === "redflag") hasRed = true;
+        if(it.kind === "mitigate") hasMit = true;
+      }
+      if(hasRed && hasMit) return "mixed";
+      if(hasRed) return "risk";
+      if(hasMit) return "mit";
+      return "neutral";
+    }
+
+    function badgeForGroup(t){
+      if(t === "risk") return `<span class="badge"><span class="dot bad"></span>Berisiko</span>`;
+      if(t === "mit") return `<span class="badge"><span class="dot good"></span>Mitigasi</span>`;
+      if(t === "mixed") return `<span class="badge"><span class="dot warn"></span>Campuran</span>`;
+      return `<span class="badge"><span class="dot warn"></span>Aktivitas</span>`;
+    }
+
+    function chipForItem(kind){
+      if(kind === "redflag") return ` <span class="badge" title="Berisiko tinggi"><span class="dot bad"></span>Red-flag</span>`;
+      if(kind === "mitigate") return ` <span class="badge" title="Menurunkan risiko"><span class="dot good"></span>Mitigasi</span>`;
+      return ``;
+    }
+
+    function dotForLevel(lvl){
+      if(lvl.key === "low")  return `<span class="dot good"></span>`;
+      if(lvl.key === "mid")  return `<span class="dot warn"></span>`;
+      if(lvl.key === "high") return `<span class="dot bad"></span>`;
+      return `<span class="dot bad"></span>`;
+    }
+
+    function restoreStageIfNeeded(){
+      // If results replaced the box contents, restore original layout shell
+      const stage = document.querySelector(".stage");
+      const box = stage.querySelector(".box");
+      const hasGrid = box.querySelector(".grid2");
+      // If we're already in step view, it will exist; if in result view, our original panels are gone.
+      // We'll simply restore a fresh layout; render() will populate mainPanel.
+      if(!hasGrid || !box.querySelector("#mainPanel")){
+        box.innerHTML = `
+          <div class="grid2">
+            <div class="panel" id="mainPanel"></div>
+            <div class="sideCard" id="sidePanel">
+              <h3>Ringkasan tahap ini</h3>
+              <p id="sideHint">Centang aktivitas sesuai tindakan Anda. Anda boleh tidak mencentang apa pun.</p>
+
+              <div class="divider"></div>
+
+              <div id="sideFacts">
+                <div class="kv"><div class="k">Jumlah aktivitas dipilih (tahap ini)</div><div class="v" id="pickedNow">0</div></div>
+                <div class="kv"><div class="k">Jumlah aktivitas dipilih (total)</div><div class="v" id="pickedAll">0</div></div>
+                <div class="kv"><div class="k">Catatan</div><div class="v" id="noteFlag">—</div></div>
+              </div>
+
+              <p class="note" id="ethicNote">
+                Fokus etika: kontribusi intelektual Anda, verifikasi informasi, transparansi, dan perlindungan data.
+              </p>
+            </div>
+          </div>
+
+          <div class="btnrow">
+            <button class="btn" id="btnPrev" disabled>← Sebelumnya</button>
+            <button class="btn primary" id="btnNext">Lanjut →</button>
+          </div>
+        `;
+
+        // rebind references & listeners
+        // (We re-query elements because DOM nodes were replaced.)
+        window._rebind();
+      }
+    }
+
+    // Rebind helper because restore replaces DOM.
+    window._rebind = function(){
+      // update element references
+      const _btnPrev = document.getElementById("btnPrev");
+      const _btnNext = document.getElementById("btnNext");
+      const _mainPanel = document.getElementById("mainPanel");
+
+      const _pickedNow = document.getElementById("pickedNow");
+      const _pickedAll = document.getElementById("pickedAll");
+      const _noteFlag  = document.getElementById("noteFlag");
+      const _sideHint  = document.getElementById("sideHint");
+
+      // patch globals
+      btnPrev.replaceWith(_btnPrev);
+      btnNext.replaceWith(_btnNext);
+
+      // but in this script scope, btnPrev/btnNext are const;
+      // so we attach listeners directly on new nodes and query in render via DOM, not const.
+      // Instead, we will remove reliance on const for these two when restored:
+      // We'll set properties on window for dynamic use.
+      window.__btnPrev = _btnPrev;
+      window.__btnNext = _btnNext;
+      window.__mainPanel = _mainPanel;
+      window.__pickedNow = _pickedNow;
+      window.__pickedAll = _pickedAll;
+      window.__noteFlag  = _noteFlag;
+      window.__sideHint  = _sideHint;
+
+      _btnPrev.addEventListener("click", () => go(-1));
+      _btnNext.addEventListener("click", () => go(+1));
+    };
+
+    // Patch render & stats to use dynamic nodes if restored.
+    function dyn(id){
+      return document.getElementById(id);
+    }
+
+    // Override references for restored state safely:
+    // We'll update in-place each render.
+    function refreshDynamicRefs(){
+      // If restored, these exist; if not, fallback to original const.
+      const mp = dyn("mainPanel"); if(mp) window.__mainPanel = mp;
+      const pn = dyn("pickedNow"); if(pn) window.__pickedNow = pn;
+      const pa = dyn("pickedAll"); if(pa) window.__pickedAll = pa;
+      const nf = dyn("noteFlag");  if(nf) window.__noteFlag = nf;
+      const sh = dyn("sideHint");  if(sh) window.__sideHint = sh;
+
+      const bp = dyn("btnPrev");   if(bp) window.__btnPrev = bp;
+      const bn = dyn("btnNext");   if(bn) window.__btnNext = bn;
+    }
+
+    // Wrap render to refresh dynamic refs before touching panels/buttons.
+    const _render = render;
+    render = function(){
+      refreshDynamicRefs();
+
+      // buttons (may be dynamic)
+      const bp = window.__btnPrev || btnPrev;
+      const bn = window.__btnNext || btnNext;
+
+      const step = STEPS[state.stepIdx];
+      stageTitle.textContent = step.title;
+      stageSubtitle.textContent = step.subtitle;
+
+      const stepNo = state.stepIdx + 1;
+      stepBadge.innerHTML = `<span class="dot warn"></span> Tahap ${stepNo}/${STEPS.length}`;
+
+      const pct = Math.round((state.stepIdx) / (STEPS.length) * 100);
+      progressText.textContent = pct + "%";
+      stateText.textContent = state.done ? "Selesai" : "Belum selesai";
+
+      bp.disabled = state.stepIdx === 0;
+      bn.textContent = (state.stepIdx === STEPS.length - 1) ? "Selesai →" : "Lanjut →";
+
+      // main panel
+      const mp = window.__mainPanel || mainPanel;
+      mp.innerHTML = "";
+      mp.appendChild(renderStepPanel(step));
+
+      updateSideStats();
+      srAnnounce.textContent = `Menampilkan ${step.title}.`;
+    };
+
+    // Update updateSideStats to use dynamic refs.
+    const _updateSideStats = updateSideStats;
+    updateSideStats = function(){
+      refreshDynamicRefs();
+
+      const step = STEPS[state.stepIdx];
+      const stepItemIds = new Set();
+      for(const g of step.groups){
+        for(const it of g.items) stepItemIds.add(it.id);
+      }
+
+      let now = 0;
+      for(const id of stepItemIds){
+        if(state.selections.has(id)) now++;
+      }
+
+      const pn = window.__pickedNow || pickedNow;
+      const pa = window.__pickedAll || pickedAll;
+      const nf = window.__noteFlag  || noteFlag;
+      const sh = window.__sideHint  || sideHint;
+
+      pn.textContent = String(now);
+      pa.textContent = String(state.selections.size);
+
+      const flag = detectImmediateFlags(stepItemIds);
+      nf.textContent = flag;
+
+      if(state.stepIdx === STEPS.length - 1){
+        sh.textContent = "Setelah ini, klik Selesai untuk melihat skor dan umpan balik diagnostik.";
+      } else {
+        sh.textContent = "Centang aktivitas sesuai tindakan Anda. Anda boleh tidak mencentang apa pun.";
+      }
+    };
+
+    // initial bind buttons
+    // (If later restored, rebind helper handles)
+    btnPrev.addEventListener("click", () => go(-1));
+    btnNext.addEventListener("click", () => go(+1));
+
+    // initial render
+    render();
+  </script>
+</body>
+</html>
