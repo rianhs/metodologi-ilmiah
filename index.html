@@ -1,78 +1,23 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metodologi Ilmiah · Prodi Kedokteran Hewan Unhas</title>
-    <meta name="description" content="Portal mata kuliah Metodologi Ilmiah, Program Studi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin.">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // Warna aksen mata kuliah (emerald)
-                        accent: {
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-
-    <style>
-        body { overflow-x: hidden; }
-
-        @keyframes blob {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        .animate-blob { animation: blob 12s ease-in-out infinite; }
-        .delay-a { animation-delay: -4s; }
-        .delay-b { animation-delay: -8s; }
-        @media (prefers-reduced-motion: reduce) {
-            .animate-blob { animation: none; }
-            html { scroll-behavior: auto; }
-        }
-
-        /* Semua kotak memakai gaya yang sama */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-        }
-        .card-link { transition: all 0.3s ease; }
-        .card-link:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(16, 185, 129, 0.45);
-            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.25);
-        }
-
-        /* Carousel dosen */
-        .carousel { scrollbar-width: none; overscroll-behavior-x: contain; }
-        .carousel::-webkit-scrollbar { display: none; }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metodologi Ilmiah · Prodi Kedokteran Hewan Unhas</title>
+<meta name="description" content="Portal mata kuliah Metodologi Ilmiah, Program Studi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23059669'/%3E%3Ctext x='16' y='22' font-family='Inter,Arial,sans-serif' font-weight='700' font-size='17' fill='%23fff' text-anchor='middle'%3EMI%3C/text%3E%3C/svg%3E">
+<script>
+/* Tema: dibaca sebelum halaman digambar agar tidak berkedip. Kunci sama dengan rps.html. */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("mi-tema"); } catch (e) {}
+  document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+})();
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!--
 ╔══════════════════════════════════════════════════════════════════╗
@@ -138,98 +83,222 @@ const MI = {
   }
 };
 </script>
+<style>
+/* Warna mengikuti rps.html: terang = marun di atas kertas, gelap = emerald */
+:root{
+  --paper:#F7F6F2; --surface:#FFFFFF; --sunk:#F0EEE8;
+  --ink:#1C1D1F; --ink-2:#45484D; --ink-3:#74777D;
+  --rule:#E3E1DA; --rule-2:#CDCAC1;
+  --accent:#8E2B1E; --tint:#F4E8E4; --on-accent:#fff;
+  --shadow:rgba(28,29,31,.18);
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius:8px;
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0B1120; --surface:#172033; --sunk:#222D44;
+  --ink:#F1F5F9; --ink-2:#CBD5E1; --ink-3:#94A3B8;
+  --rule:#2A3650; --rule-2:#3A4866;
+  --accent:#34d399; --tint:rgba(16,185,129,.16); --on-accent:#022c22;
+  --shadow:rgba(16,185,129,.3);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+p,dl,dd{margin:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+[data-theme="dark"] ::selection{background:rgba(16,185,129,.3)}
+
+.wrap{max-width:1180px;margin:0 auto;padding-inline:28px}
+.box{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius)}
+
+/* Kepala */
+.hero{padding-block:72px 8px;text-align:center}
+.hero-icon{display:inline-flex;padding:14px;border-radius:50%;background:var(--tint);color:var(--accent);margin-bottom:20px}
+.hero-icon svg{width:36px;height:36px}
+.hero h1{font-size:clamp(2.4rem,6vw,3.75rem);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin-bottom:18px}
+.hero p{color:var(--ink-2);max-width:640px;margin:0 auto;font-size:1.0625rem}
+
+/* Bagian */
+main{padding-block:56px 96px;display:flex;flex-direction:column;gap:80px}
+.sec-head{margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.eyebrow{font:600 .75rem/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.sec-head h2{font-size:1.6rem;line-height:1.2}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:4px;background:var(--sunk);color:var(--ink-2);font-size:.75rem;font-weight:600;white-space:nowrap}
+.tag-accent{background:var(--tint);color:var(--accent)}
+.code{font-weight:600;font-size:.8125rem;letter-spacing:.02em;color:var(--ink-3)}
+
+/* Informasi umum */
+.info{display:grid;grid-template-columns:2fr 3fr;gap:16px}
+.desc{padding:24px;color:var(--ink-2);font-size:.95rem;line-height:1.7}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.facts div{padding:16px 18px}
+.facts dt{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.facts dd{font-weight:600;font-size:.95rem;line-height:1.4}
+
+/* Dosen */
+.nav{display:flex;gap:8px;flex:none}
+.carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;padding:2px 2px 6px;margin:-2px -2px 0}
+.carousel::-webkit-scrollbar{display:none}
+.person{flex:none;width:240px;scroll-snap-align:start;padding:14px;display:flex;flex-direction:column}
+.photo{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:var(--tint);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.9rem;letter-spacing:.04em;margin-bottom:14px}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.p-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.p-name{font-size:.95rem;line-height:1.4}
+
+/* Kartu */
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{padding:24px;display:flex;flex-direction:column}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.icon{display:inline-flex;padding:10px;border-radius:var(--radius);background:var(--tint);color:var(--accent);transition:background .2s,color .2s}
+.icon svg{width:22px;height:22px}
+.card h3{font-size:1.1rem;line-height:1.35;margin-bottom:8px;transition:color .2s}
+.card > p{color:var(--ink-2);font-size:.92rem;flex:1}
+.card-foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--rule)}
+.soon{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.is-off{opacity:.65}
+.is-off .icon{background:var(--sunk);color:var(--ink-3)}
+.card-link{transition:border-color .2s,box-shadow .2s,transform .2s}
+.card-link:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 28px -14px var(--shadow)}
+.card-link:hover h3{color:var(--accent)}
+.card-link:hover .icon{background:var(--accent);color:var(--on-accent)}
+.go{display:flex;align-items:center;gap:6px;color:var(--accent);font-weight:600;font-size:.9rem}
+.go svg,.link svg{width:16px;height:16px;flex:none;transition:transform .2s}
+.card-link:hover .go svg{transform:translateX(3px)}
+
+/* Tugas */
+.meta{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:.8125rem;color:var(--ink-3);margin-bottom:10px}
+.meta span{display:flex;align-items:center;gap:6px}
+.meta svg{width:14px;height:14px;color:var(--accent)}
+.links{display:flex;flex-direction:column;gap:2px;padding-top:8px}
+.link{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 -8px;padding:8px;border-radius:6px;font-size:.9rem;font-weight:600;color:var(--accent);transition:background .2s}
+.link span{display:flex;align-items:center;gap:8px}
+a.link:hover{background:var(--tint)}
+a.link:hover > svg{transform:translateX(3px)}
+.link.off{color:var(--ink-3)}
+.link.off small{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* Bahan ajar */
+.wide{padding:28px;display:flex;align-items:center;gap:24px}
+.wide-text{flex:1}
+.wide-title{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.wide-title .icon{padding:8px}
+.wide-title .icon svg{width:20px;height:20px}
+.wide p{color:var(--ink-2);font-size:.92rem;max-width:640px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 22px;border-radius:var(--radius);font-size:.9rem;font-weight:600;white-space:nowrap}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:var(--accent);color:var(--on-accent);transition:filter .2s,box-shadow .2s}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-off{background:var(--sunk);border:1px solid var(--rule-2);color:var(--ink-3);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+
+footer{border-top:1px solid var(--rule);padding:28px 0;text-align:center;font-size:.8125rem;color:var(--ink-3)}
+
+/* Tombol bundar: tema dan geser carousel */
+.theme-ctl{position:fixed;top:14px;right:16px;z-index:45}
+.ctl{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--rule-2);background:var(--surface);color:var(--ink-2);cursor:pointer;padding:0;transition:color .2s,border-color .2s,box-shadow .2s}
+.ctl:hover{color:var(--accent);border-color:var(--accent)}
+.ctl svg{width:18px;height:18px}
+.ic-sun{display:none}
+[data-theme="dark"] .ic-sun{display:block}
+[data-theme="dark"] .ic-moon{display:none}
+
+/* Sentuhan mode gelap, sama dengan rps.html */
+[data-theme="dark"] .hero h1{background:linear-gradient(90deg,#34d399,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+[data-theme="dark"] .eyebrow{text-shadow:0 0 18px rgba(52,211,153,.45)}
+[data-theme="dark"] .card-link:hover{border-color:rgba(16,185,129,.45)}
+[data-theme="dark"] .person{transition:border-color .2s,box-shadow .2s}
+[data-theme="dark"] .person:hover{border-color:rgba(16,185,129,.45);box-shadow:0 8px 24px -12px rgba(16,185,129,.3)}
+[data-theme="dark"] .ctl:hover,[data-theme="dark"] .btn-primary:hover{box-shadow:0 0 16px -4px rgba(52,211,153,.6)}
+
+/* Cahaya latar (mode gelap) */
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-50px) scale(1.1)}66%{transform:translate(-20px,20px) scale(.9)}}
+.bg-fx{display:none}
+[data-theme="dark"] .bg-fx{display:block;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-fx span{position:absolute;width:24rem;height:24rem;border-radius:50%;filter:blur(64px);opacity:.12;animation:blob 12s ease-in-out infinite}
+.bg-fx span:nth-child(1){top:2.5rem;left:2.5rem;background:#059669}
+.bg-fx span:nth-child(2){top:6rem;right:2.5rem;background:#2563eb;animation-delay:-4s}
+.bg-fx span:nth-child(3){bottom:2.5rem;left:33%;background:#9333ea;opacity:.08;animation-delay:-8s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bg-fx span{animation:none}
+}
+
+/* Responsif */
+@media (max-width:1023px){
+  .info{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  body{font-size:15px}
+  .wrap{padding-inline:20px}
+  .hero{padding-block-start:64px}
+  main{gap:64px;padding-block-start:40px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-2{grid-template-columns:1fr}
+  .person{width:220px}
+  .wide{flex-direction:column;align-items:stretch}
+  .theme-ctl{top:10px;right:10px}
+  .ctl{width:36px;height:36px}
+}
+</style>
 </head>
-<body class="min-h-screen relative bg-[#0f172a] text-slate-100 font-sans antialiased selection:bg-accent-500/30">
+<body>
 
-    <!-- Latar -->
-    <div class="fixed inset-0 overflow-hidden -z-10 pointer-events-none" aria-hidden="true">
-        <div class="absolute top-10 left-10 w-72 h-72 md:w-96 md:h-96 bg-emerald-600 rounded-full filter blur-3xl opacity-[0.12] animate-blob"></div>
-        <div class="absolute top-24 right-10 w-72 h-72 md:w-96 md:h-96 bg-blue-600 rounded-full filter blur-3xl opacity-[0.12] animate-blob delay-a"></div>
-        <div class="absolute bottom-10 left-1/3 w-72 h-72 md:w-96 md:h-96 bg-purple-600 rounded-full filter blur-3xl opacity-[0.08] animate-blob delay-b"></div>
+<div class="bg-fx" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<div class="theme-ctl">
+  <button class="ctl" type="button" id="theme-toggle">
+    <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+
+<header class="hero wrap">
+  <div class="hero-icon"><i data-lucide="book-open-text"></i></div>
+  <h1>Metodologi Ilmiah</h1>
+  <p>Portal mata kuliah Metodologi Ilmiah untuk mahasiswa S1 Kedokteran Hewan Fakultas Kedokteran Universitas Hasanuddin</p>
+</header>
+
+<main class="wrap">
+
+  <section id="informasi">
+    <div class="sec-head"><div><p class="eyebrow">Informasi umum</p><h2>Tentang mata kuliah</h2></div></div>
+    <div class="info">
+      <p id="deskripsi" class="box desc"></p>
+      <dl id="facts" class="facts"></dl>
     </div>
+  </section>
 
-    <!-- Kepala -->
-    <header class="pt-16 pb-6 px-4 text-center">
-        <div class="inline-block p-3 rounded-full bg-accent-500/10 border border-accent-500/20 mb-5 shadow-lg shadow-emerald-900/20">
-            <i data-lucide="book-open-text" class="w-10 h-10 text-accent-400"></i>
-        </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-5 leading-none text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400 pb-1">
-            Metodologi Ilmiah
-        </h1>
-        <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg">
-            Portal mata kuliah Metodologi Ilmiah untuk mahasiswa S1 Kedokteran Hewan Fakultas Kedokteran Universitas Hasanuddin
-        </p>
-    </header>
+  <section id="dosen">
+    <div class="sec-head">
+      <div><p class="eyebrow">Tim pengajar</p><h2>Dosen</h2></div>
+      <div class="nav">
+        <button id="dosen-prev" class="ctl" type="button" aria-label="Geser ke dosen sebelumnya"><i data-lucide="chevron-left"></i></button>
+        <button id="dosen-next" class="ctl" type="button" aria-label="Geser ke dosen berikutnya"><i data-lucide="chevron-right"></i></button>
+      </div>
+    </div>
+    <div id="daftar-dosen" class="carousel" tabindex="0" role="region" aria-label="Daftar dosen, geser untuk melihat semua"></div>
+  </section>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20 pb-24">
+  <section id="perencanaan">
+    <div class="sec-head"><div><p class="eyebrow">Perangkat pembelajaran</p><h2>Rencana perkuliahan</h2></div></div>
+    <div id="daftar-perencanaan" class="grid-2"></div>
+  </section>
 
-        <!-- Informasi umum -->
-        <section id="informasi">
-            <div class="mb-8">
-                <p class="text-accent-400 text-[11px] font-bold tracking-widest uppercase mb-2">Informasi umum</p>
-                <h2 class="text-2xl font-bold text-white">Tentang mata kuliah</h2>
-            </div>
-            <div class="grid lg:grid-cols-5 gap-6">
-                <div class="glass rounded-2xl p-6 lg:col-span-2">
-                    <p id="deskripsi" class="text-slate-300 text-sm leading-relaxed"></p>
-                </div>
-                <dl id="facts" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:col-span-3"></dl>
-            </div>
-        </section>
+  <section id="tugas">
+    <div class="sec-head"><div><p class="eyebrow">Asesmen proyek</p><h2>Tugas dan penilaian</h2></div></div>
+    <div id="daftar-tugas" class="grid-2"></div>
+  </section>
 
-        <!-- Dosen -->
-        <section id="dosen">
-            <div class="mb-8 flex items-end justify-between gap-4">
-                <div>
-                    <p class="text-accent-400 text-[11px] font-bold tracking-widest uppercase mb-2">Tim pengajar</p>
-                    <h2 class="text-2xl font-bold text-white">Dosen</h2>
-                </div>
-                <div class="flex gap-2 shrink-0">
-                    <button id="dosen-prev" type="button" aria-label="Geser ke dosen sebelumnya" class="glass w-10 h-10 rounded-full flex items-center justify-center text-slate-300 hover:text-accent-400 hover:border-accent-500/50 transition-colors">
-                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
-                    </button>
-                    <button id="dosen-next" type="button" aria-label="Geser ke dosen berikutnya" class="glass w-10 h-10 rounded-full flex items-center justify-center text-slate-300 hover:text-accent-400 hover:border-accent-500/50 transition-colors">
-                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
-                    </button>
-                </div>
-            </div>
-            <div id="daftar-dosen" class="carousel flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2 focus:outline-none" tabindex="0" role="region" aria-label="Daftar dosen, geser untuk melihat semua"></div>
-        </section>
+  <section id="bahan-ajar">
+    <div class="sec-head"><div><p class="eyebrow">Belajar</p><h2>Bahan ajar</h2></div></div>
+    <div id="kartu-bahan"></div>
+  </section>
 
-        <!-- Dokumen perencanaan -->
-        <section id="perencanaan">
-            <div class="mb-8">
-                <p class="text-accent-400 text-[11px] font-bold tracking-widest uppercase mb-2">Perangkat pembelajaran</p>
-                <h2 class="text-2xl font-bold text-white">Rencana perkuliahan</h2>
-            </div>
-            <div id="daftar-perencanaan" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-        </section>
+</main>
 
-        <!-- Tugas dan penilaian -->
-        <section id="tugas">
-            <div class="mb-8">
-                <p class="text-accent-400 text-[11px] font-bold tracking-widest uppercase mb-2">Asesmen proyek</p>
-                <h2 class="text-2xl font-bold text-white">Tugas dan penilaian</h2>
-            </div>
-            <div id="daftar-tugas" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-        </section>
-
-        <!-- Bahan ajar -->
-        <section id="bahan-ajar">
-            <div class="mb-8">
-                <p class="text-accent-400 text-[11px] font-bold tracking-widest uppercase mb-2">Belajar</p>
-                <h2 class="text-2xl font-bold text-white">Bahan ajar</h2>
-            </div>
-            <div id="kartu-bahan"></div>
-        </section>
-
-    </main>
-
-    <footer class="border-t border-slate-800/50 bg-[#0f172a]">
-        <div class="max-w-7xl mx-auto px-6 py-8 text-center text-slate-500 text-sm">
-            <p id="footer-teks"></p>
-        </div>
-    </footer>
+<footer><div class="wrap" id="footer-teks"></div></footer>
 
 <script>
 (() => {
@@ -239,40 +308,26 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": 
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* Komponen kecil */
-const iconBox = (ikon, aktif) => `<div class="p-3 rounded-lg w-fit ${aktif
-  ? "bg-accent-500/20 text-accent-400 group-hover:bg-accent-500 group-hover:text-white transition-colors"
-  : "bg-slate-800 text-slate-500"}"><i data-lucide="${esc(ikon)}" class="w-6 h-6"></i></div>`;
-const badge = (txt, aktif) => `<span class="${aktif ? "bg-accent-500/20 text-accent-300" : "bg-slate-800 text-slate-400"} text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">${esc(txt)}</span>`;
-const segera = `<div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mt-6 pt-4 border-t border-slate-800">Segera hadir</div>`;
+const icon = ikon => `<span class="icon"><i data-lucide="${esc(ikon)}"></i></span>`;
+const tag = (txt, aktif) => `<span class="tag${aktif ? " tag-accent" : ""}">${esc(txt)}</span>`;
 
 /* Informasi umum */
 function renderInfo() {
   $("deskripsi").textContent = MI.deskripsi;
   const I = MI.info;
-  const rows = [
+  $("facts").innerHTML = [
     ["Kode", I.kode], ["Bobot", I.bobot], ["Semester", I.semester],
     ["Sifat", I.sifat], ["Prasyarat", I.prasyarat], ["Koordinator", I.koordinator]
-  ];
-  $("facts").innerHTML = rows.map(([k, v]) => `
-    <div class="glass rounded-2xl p-5">
-      <dt class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">${esc(k)}</dt>
-      <dd class="text-sm font-semibold text-slate-100 leading-snug">${esc(v)}</dd>
-    </div>`).join("");
+  ].map(([k, v]) => `<div class="box"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("");
 }
 
-/* Dosen: kartu vertikal */
+/* Dosen: kartu vertikal. Jika foto gagal dimuat, kode dosen tampil sebagai pengganti. */
 function renderDosen() {
   $("daftar-dosen").innerHTML = MI.dosen.map(d => `
-    <article class="glass snap-start shrink-0 w-[220px] sm:w-[250px] rounded-2xl p-4 flex flex-col">
-      <div class="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-accent-500/10 border border-accent-500/20 flex items-center justify-center text-accent-300 font-extrabold text-3xl tracking-wide mb-4">
-        ${esc(d.kode)}
-        ${d.foto ? `<img src="${esc(d.foto)}" alt="Foto ${esc(d.nama)}" loading="lazy" draggable="false" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">` : ""}
-      </div>
-      <div class="flex items-center gap-2 mb-1.5">
-        <span class="text-[11px] font-bold tracking-wider text-slate-500">${esc(d.kode)}</span>
-        ${d.peran ? `<span class="bg-accent-500/20 text-accent-300 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">${esc(d.peran)}</span>` : ""}
-      </div>
-      <h3 class="text-sm font-semibold text-slate-100 leading-snug">${esc(d.nama)}</h3>
+    <article class="box person">
+      <div class="photo">${esc(d.kode)}${d.foto ? `<img src="${esc(d.foto)}" alt="Foto ${esc(d.nama)}" loading="lazy" draggable="false" onerror="this.remove()">` : ""}</div>
+      <div class="p-meta"><span class="code">${esc(d.kode)}</span>${d.peran ? tag(d.peran, true) : ""}</div>
+      <h3 class="p-name">${esc(d.nama)}</h3>
     </article>`).join("");
 }
 
@@ -335,45 +390,32 @@ function setupCarousel() {
 /* Rencana perkuliahan */
 function kartuPerencanaan(d) {
   const aktif = !!d.href;
-  const head = `<div class="flex justify-between items-start mb-4">${iconBox(d.ikon, aktif)}${badge(d.singkat, aktif)}</div>`;
-  if (!aktif) return `<div class="glass rounded-2xl p-6 flex flex-col opacity-60">
-      ${head}
-      <h3 class="text-lg font-bold mb-2 text-slate-300 leading-snug">${esc(d.judul)}</h3>
-      <p class="text-slate-500 text-sm flex-grow">${esc(d.deskripsi)}</p>
-      ${segera}
-    </div>`;
-  return `<a href="${esc(d.href)}" class="card-link group glass rounded-2xl p-6 flex flex-col">
-      ${head}
-      <h3 class="text-lg font-bold mb-2 text-slate-100 leading-snug group-hover:text-accent-400 transition-colors">${esc(d.judul)}</h3>
-      <p class="text-slate-400 text-sm flex-grow">${esc(d.deskripsi)}</p>
-      <div class="flex items-center text-sm text-accent-400 font-bold mt-6 pt-4 border-t border-accent-500/30">
-        ${esc(d.label)} <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-      </div>
+  const isi = `<div class="card-top">${icon(d.ikon)}${tag(d.singkat, aktif)}</div>
+      <h3>${esc(d.judul)}</h3>
+      <p>${esc(d.deskripsi)}</p>`;
+  if (!aktif) return `<div class="box card is-off">${isi}<div class="card-foot soon">Segera hadir</div></div>`;
+  return `<a href="${esc(d.href)}" class="box card card-link">${isi}
+      <div class="card-foot go">${esc(d.label)} <i data-lucide="arrow-right"></i></div>
     </a>`;
 }
 
 /* Tugas dan penilaian */
 function barisTautan(label, ikon, href) {
-  if (!href) return `<div class="flex items-center justify-between gap-2 -mx-2 px-2 py-2 text-sm font-semibold text-slate-500">
-      <span class="flex items-center gap-2"><i data-lucide="${ikon}" class="w-4 h-4"></i>${esc(label)}</span>
-      <span class="text-[10px] uppercase tracking-wider">Segera hadir</span>
-    </div>`;
-  return `<a href="${esc(href)}" class="group/l flex items-center justify-between gap-2 -mx-2 px-2 py-2 rounded-lg text-sm font-semibold text-accent-400 hover:bg-accent-500/10 hover:text-accent-300 transition-colors">
-      <span class="flex items-center gap-2"><i data-lucide="${ikon}" class="w-4 h-4"></i>${esc(label)}</span>
-      <i data-lucide="arrow-right" class="w-4 h-4 shrink-0 group-hover/l:translate-x-1 transition-transform"></i>
-    </a>`;
+  const kiri = `<span><i data-lucide="${ikon}"></i>${esc(label)}</span>`;
+  if (!href) return `<div class="link off">${kiri}<small>Segera hadir</small></div>`;
+  return `<a href="${esc(href)}" class="link">${kiri}<i data-lucide="arrow-right"></i></a>`;
 }
 
 function kartuTugas(t) {
-  return `<div class="glass rounded-2xl p-6 flex flex-col">
-    <div class="flex justify-between items-start mb-4">${iconBox(t.ikon, true)}${badge("Tugas " + t.no, true)}</div>
-    <h3 class="text-lg font-bold mb-2 text-slate-100 leading-snug">${esc(t.judul)}</h3>
-    <div class="flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-400 mb-3">
-      <span class="flex items-center gap-1.5"><i data-lucide="calendar-days" class="w-3.5 h-3.5 text-accent-400"></i>${esc(t.pekan)}</span>
-      <span class="flex items-center gap-1.5"><i data-lucide="percent" class="w-3.5 h-3.5 text-accent-400"></i>Bobot ${esc(t.bobot)} nilai akhir</span>
+  return `<div class="box card">
+    <div class="card-top">${icon(t.ikon)}${tag("Tugas " + t.no, true)}</div>
+    <h3>${esc(t.judul)}</h3>
+    <div class="meta">
+      <span><i data-lucide="calendar-days"></i>${esc(t.pekan)}</span>
+      <span><i data-lucide="percent"></i>Bobot ${esc(t.bobot)} nilai akhir</span>
     </div>
-    <p class="text-slate-400 text-sm flex-grow">${esc(t.deskripsi)}</p>
-    <div class="mt-6 pt-3 border-t border-accent-500/30 space-y-0.5">
+    <p>${esc(t.deskripsi)}</p>
+    <div class="card-foot links">
       ${barisTautan("Rencana tugas mahasiswa", "clipboard-list", t.rtm)}
       ${barisTautan("Rubrik penilaian", "clipboard-check", t.rubrik)}
     </div>
@@ -384,31 +426,43 @@ function kartuTugas(t) {
 function renderBahan() {
   const b = MI.bahanAjar, aktif = !!b.href;
   $("kartu-bahan").innerHTML = `
-    <div class="glass rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row gap-6 md:items-center ${aktif ? "" : "opacity-60"}">
-      <div class="flex-grow">
-        <div class="flex items-center gap-3 mb-3">
-          <div class="p-2.5 rounded-lg ${aktif ? "bg-accent-500/15 text-accent-400" : "bg-slate-800 text-slate-500"}"><i data-lucide="book-open" class="w-5 h-5"></i></div>
-          <h3 class="text-lg font-bold ${aktif ? "text-slate-100" : "text-slate-300"}">Bahan ajar per pekan</h3>
-        </div>
-        <p class="text-slate-400 text-sm leading-relaxed max-w-2xl">${esc(b.deskripsi)}</p>
+    <div class="box wide${aktif ? "" : " is-off"}">
+      <div class="wide-text">
+        <div class="wide-title">${icon("book-open")}<h3>Bahan ajar per pekan</h3></div>
+        <p>${esc(b.deskripsi)}</p>
       </div>
-      <div class="shrink-0 w-full md:w-auto">
-        ${aktif
-          ? `<a href="${esc(b.href)}" class="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent-500 hover:bg-accent-400 text-slate-900 text-sm font-bold transition-all shadow-lg shadow-accent-500/20">Buka bahan ajar <i data-lucide="arrow-right" class="w-4 h-4"></i></a>`
-          : `<span class="flex items-center justify-center px-6 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-500 text-xs font-semibold uppercase tracking-wider">Segera hadir</span>`}
-      </div>
+      ${aktif
+        ? `<a href="${esc(b.href)}" class="btn btn-primary">Buka bahan ajar <i data-lucide="arrow-right"></i></a>`
+        : `<span class="btn btn-off">Segera hadir</span>`}
     </div>`;
 }
 
+/* Tema terang/gelap, disimpan dengan kunci yang sama dengan rps.html */
+function setupTheme() {
+  const btn = $("theme-toggle"), root = document.documentElement;
+  const sync = () => {
+    const label = root.dataset.theme === "dark" ? "Ganti ke mode terang" : "Ganti ke mode gelap";
+    btn.setAttribute("aria-label", label);
+    btn.title = label;
+  };
+  btn.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem("mi-tema", root.dataset.theme); } catch (e) {}
+    sync();
+  });
+  sync();
+}
+
 /* Mulai */
-$("footer-teks").innerHTML = `&copy; ${esc(MI.tahun)} · Prodi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin · Dibuat oleh RianHS`;
+$("footer-teks").textContent = `© ${MI.tahun} · Prodi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin · Dibuat oleh RianHS`;
 renderInfo();
 renderDosen();
 $("daftar-perencanaan").innerHTML = MI.perencanaan.map(kartuPerencanaan).join("");
 $("daftar-tugas").innerHTML = MI.tugas.map(kartuTugas).join("");
 renderBahan();
-lucide.createIcons();
+if (window.lucide) lucide.createIcons();
 setupCarousel();
+setupTheme();
 })();
 </script>
 </body>
