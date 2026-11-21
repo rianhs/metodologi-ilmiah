@@ -176,7 +176,7 @@ const RPS = {
     bentuk: "Kuliah",
     formatif: ["Umpan balik", "Kuis interaktif"],
     kriteria: "Unjuk kerja tugas dinilai dengan rubrik",
-    waktu: { terbimbing: "1 × 2 × 50 menit", terstruktur: "1 × 2 × 60 menit", mandiri: "1 × 2 × 60 menit" }
+    waktu: { terbimbing: "2 × 50 menit", terstruktur: "2 × 60 menit", mandiri: "2 × 60 menit" }
   },
 
   /* Jadwal per pekan. Urutan pekan 1–16. dosen: daftar kode, atau "semua".
@@ -292,7 +292,6 @@ p{margin:0 0 1em}
 ul,ol{margin:0;padding-left:1.2em}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .muted{color:var(--ink-3)}
 .small{font-size:var(--fs-sm)}
 .num{font-variant-numeric:tabular-nums}
@@ -311,7 +310,6 @@ main{min-width:0;padding:56px 0 96px;max-width:var(--content)}
 /* ── Tombol dan label ─────────────────────── */
 .btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--rule-2);background:var(--surface);border-radius:6px;font-size:var(--fs-sm);font-weight:500;cursor:pointer;text-decoration:none;color:var(--ink);white-space:nowrap}
 .btn:hover{border-color:var(--ink-3)}
-.btn svg{width:16px;height:16px;flex:none}
 .btn-quiet{border-color:transparent;background:transparent;padding:0 8px;color:var(--ink-2)}
 .btn-quiet:hover{background:var(--sunk);border-color:transparent}
 .tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:4px;background:var(--sunk);color:var(--ink-2);font-size:var(--fs-label);font-weight:600;letter-spacing:.01em;white-space:nowrap}
@@ -370,18 +368,16 @@ h3{font-size:1.15rem;margin:0 0 10px}
 .cp-flow li + li::before{content:"→";color:var(--ink-2)}
 .cp-flow b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
 .cp-list{display:flex;flex-direction:column;gap:12px}
-.cp-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
 .cp-path{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:var(--fs-xs);font-weight:600;color:var(--ink-3)}
 .cp-path .arr{color:var(--ink-2);font-weight:400}
 .cp-path b{color:var(--ink)}
-.cp-weight{text-align:right;flex:none}
-.cp-weight b{display:block;font:600 1.6rem/1 var(--sans);font-variant-numeric:tabular-nums}
-.cp-weight span{font-size:var(--fs-label);color:var(--ink-3)}
-.cp-text{font:600 var(--fs-title)/1.45 var(--sans);margin:6px 0 16px}
+.cp-text{font:600 var(--fs-title)/1.45 var(--sans);margin:8px 0 16px}
 .cp-subs{list-style:none;padding:0;margin:0}
 .cp-subs li{display:grid;grid-template-columns:92px minmax(0,1fr) 96px 44px;gap:14px;padding:11px 0;border-top:1px solid var(--rule);align-items:baseline;font-size:var(--fs-sm);line-height:1.5}
 .cp-subs li.cp-subs-head{font-size:var(--fs-label);font-weight:600;letter-spacing:.04em;color:var(--ink-3);padding:8px 0;border-top:1px solid var(--strong)}
 .cp-subs .r{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.cp-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:11px;border-top:1px solid var(--strong);font-size:var(--fs-sm);font-weight:600;color:var(--ink-2)}
+.cp-total b{font-size:var(--fs-title);font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
 .week-link{font-size:var(--fs-label);font-weight:600;color:var(--accent);text-decoration:none;height:22px;display:inline-flex;align-items:center;padding:0 2px}
 .week-link:hover{text-decoration:underline}
 
@@ -393,7 +389,7 @@ h3{font-size:1.15rem;margin:0 0 10px}
 .chip[aria-pressed="true"]{background:var(--chip-on-bg);border-color:var(--chip-on-bg);color:var(--chip-on-fg)}
 .filter-note{font-size:var(--fs-xs);color:var(--ink-3);margin:-4px 0 14px;min-height:1.3em}
 .weeks{display:flex;flex-direction:column;gap:8px}
-.week{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius)}
+.week{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);scroll-margin-top:24px}
 .week[hidden]{display:none}
 .week > summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:18px 64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 18px}
 .week > summary::-webkit-details-marker{display:none}
@@ -405,7 +401,7 @@ h3{font-size:1.15rem;margin:0 0 10px}
 .wk-topic{font:600 var(--fs-title)/1.35 var(--sans);transition:color .12s}
 .wk-date{display:block;font:400 var(--fs-xs)/1.4 var(--sans);color:var(--ink-3);margin-top:2px}
 .wk-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-.wk-body{padding:4px 18px 22px 114px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule);margin:0 18px;padding-left:0;padding-right:0;padding-top:18px}
+.wk-body{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule);margin:0 18px}
 .wk-body h4{margin:0 0 6px;font-size:var(--fs-label);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .wk-body p,.wk-body li{font-size:var(--fs-sm);line-height:1.55}
 .wk-body ul{padding-left:1.1em}
@@ -434,11 +430,10 @@ td.r,th.r{text-align:right;padding-right:0}
 .matrix th:first-child,.matrix td:first-child{text-align:left;padding-left:0}
 .matrix .cell{display:block;padding:4px 8px;border-radius:4px;background:var(--tint);color:var(--accent);font-weight:600;font-size:var(--fs-xs);line-height:1.35}
 .matrix .cell small{display:block;font-weight:500;font-size:var(--fs-label);color:var(--ink-2)}
-.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .note{font-size:var(--fs-sm);color:var(--ink-2);margin-top:14px}
 
 /* ── Jadwal ───────────────────────────────── */
-.sched-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sched-head{margin-bottom:14px}
 .sched-when{font-weight:600}
 .sched-when span{font-weight:400;color:var(--ink-3)}
 .week-gap{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:baseline;padding:10px 18px 10px 50px;border:1px solid var(--rule);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--ink-3);background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--sunk) 6px 7px)}
@@ -499,7 +494,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   .toc nav a{padding:13px 10px;border-left:none;border-bottom:2px solid transparent;margin:0}
   .toc nav a[aria-current="true"]{border-bottom-color:var(--mark)}
   main{padding-top:36px;max-width:none}
-  section{scroll-margin-top:56px}
+  section,.week{scroll-margin-top:64px}
 }
 @media (max-width:720px){
   body{font-size:15px}
@@ -524,7 +519,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   .holidays ul{grid-template-columns:1fr}
   .matrix td,.matrix th{padding:8px 3px}
   .matrix .cell{padding:4px 4px}
-  .team,.grid-2{grid-template-columns:1fr}
+  .team{grid-template-columns:1fr}
   .appx .appx-body{padding-left:18px}
   section{padding-top:56px}
 }
@@ -534,7 +529,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 @media print{
   :root{--paper:#fff}
   body{font-size:10.5pt;background:#fff}
-  .toc,.toolbar,.filter-note,.no-print,#checks,#tip,.sched-head .btn{display:none !important}
+  .toc,.toolbar,.filter-note,#checks,#tip{display:none !important}
   .shell{display:block;padding:0;max-width:none}
   main{padding:0;max-width:none}
   section{padding-top:28px;break-inside:auto}
@@ -588,7 +583,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 
   /* Sentuhan neon */
   [data-theme="dark"] .week.is-now,[data-theme="dark"] .now{border-color:rgba(16,185,129,.5);box-shadow:0 0 0 1px rgba(16,185,129,.15),0 0 28px -8px rgba(16,185,129,.35)}
-  [data-theme="dark"] .now-big,[data-theme="dark"] .cp-weight b{color:var(--accent);text-shadow:0 0 20px rgba(52,211,153,.45)}
+  [data-theme="dark"] .now-big,[data-theme="dark"] .cp-total b{color:var(--accent);text-shadow:0 0 20px rgba(52,211,153,.45)}
   [data-theme="dark"] .bar i{box-shadow:0 0 10px rgba(52,211,153,.5)}
   [data-theme="dark"] .chip[aria-pressed="true"]{box-shadow:0 0 16px -2px rgba(52,211,153,.6)}
   [data-theme="dark"] .ctl:hover{box-shadow:0 0 16px -4px rgba(52,211,153,.6)}
@@ -674,10 +669,6 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
       </div>
       <div class="sched-head">
         <div class="sched-when" id="sched-when"></div>
-        <button class="btn" type="button" data-action="ics">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="12" rx="1.5"/><path d="M1.5 6.5h13M5 1v3M11 1v3M8 9v3.5M6.3 10.8 8 12.5l1.7-1.7"/></svg>
-          Tambahkan ke kalender
-        </button>
       </div>
       <div class="toolbar">
         <div class="chips" id="chips" role="group" aria-label="Saring berdasarkan dosen"></div>
@@ -950,13 +941,9 @@ function renderCapaian() {
     const cpls = [].concat(c.cpl).map(k => cplByKode[k]).filter(Boolean);
     const subs = RPS.subcpmk.filter(s => s.cpmk === c.kode);
     const bobot = subs.reduce((a, s) => a + s.bobot, 0);
-    const jenis = [...new Set(subs.map(s => JENIS_ASESMEN[s.asesmen]?.id || s.asesmen))].join(", ");
     const cplTag = cpls.map(l => `<span class="term" tabindex="0" data-tip="${esc(l.kode + ": " + l.teks)}">${esc(l.kode)}</span>`).join(", ");
     return `<article class="box cp">
-      <div class="cp-head">
-        <div class="cp-path">${cplTag}<span class="arr" aria-hidden="true">→</span><b>${esc(c.kode)}</b><span class="tag">${esc(jenis)}</span></div>
-        <div class="cp-weight"><b>${bobot}%</b><span>nilai akhir</span></div>
-      </div>
+      <div class="cp-path">${cplTag}<span class="arr" aria-hidden="true">→</span><b>${esc(c.kode)}</b></div>
       <p class="cp-text">${esc(c.teks)}</p>
       <ol class="cp-subs">
         <li class="cp-subs-head"><span>Sub-CPMK</span><span>Kemampuan akhir</span><span>Pekan</span><span class="r">Bobot</span></li>
@@ -967,6 +954,7 @@ function renderCapaian() {
             <span class="r">${s.bobot}%</span></li>`;
         }).join("")}
       </ol>
+      <div class="cp-total"><span>Bobot ${esc(c.kode)} terhadap nilai akhir</span><b>${bobot}%</b></div>
     </article>`;
   }).join("");
 }
@@ -1160,37 +1148,6 @@ function renderLampiran() {
   $("#foot-right").textContent = `RPS ${M.namaMK} · ${M.periode} ${M.tahunAkademik}`;
 }
 
-/* ── Kalender (.ics) ─────────────────────────────────────────────── */
-function downloadICS() {
-  const pad = n => String(n).padStart(2, "0");
-  const [h1, m1] = RPS.jadwal.jamMulai.split(/[.:]/).map(Number);
-  const [h2, m2] = RPS.jadwal.jamSelesai.split(/[.:]/).map(Number);
-  const OFFSET = 8; // WITA = UTC+8
-  const utc = (t, h, m) => { const d = new Date(t + (h - OFFSET) * 36e5 + m * 6e4); return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`; };
-  const dval = t => D.iso(t).replace(/-/g, "");
-  const tx = s => String(s).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
-  const fold = l => { const out = []; while (l.length > 74) { out.push(l.slice(0, 74)); l = " " + l.slice(74); } out.push(l); return out.join("\r\n"); };
-  const now = new Date(), stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
-  const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//RPS " + tx(M.namaMK) + "//ID", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:" + tx(M.namaMK)];
-  SCHED.sessions.forEach(s => {
-    if (s.libur && !s.pengganti) return; // jadwal pengganti belum ada
-    L.push("BEGIN:VEVENT", `UID:${M.kode}-${M.tahunAkademik.replace("/", "")}-p${s.pekan}@rps`, `DTSTAMP:${stamp}`);
-    if (s.sepekan) { L.push(`DTSTART;VALUE=DATE:${dval(s.rangeStart)}`, `DTEND;VALUE=DATE:${dval(D.add(s.rangeEnd, 1))}`); }
-    else { const t = s.pengganti || s.date; L.push(`DTSTART:${utc(t, h1, m1)}`, `DTEND:${utc(t, h2, m2)}`); }
-    L.push("SUMMARY:" + tx(`${M.namaMK} · Pekan ${s.pekan}: ${s.topik}`));
-    L.push("DESCRIPTION:" + tx(`Dosen: ${s.dosenList.length === RPS.dosen.length ? "Semua dosen" : dosenNames(s.dosenList)}\nSub-CPMK: ${s.sub}`));
-    if (RPS.jadwal.ruang) L.push("LOCATION:" + tx(RPS.jadwal.ruang));
-    L.push("END:VEVENT");
-  });
-  L.push("END:VCALENDAR");
-  const blob = new Blob([L.map(fold).join("\r\n") + "\r\n"], { type: "text/calendar;charset=utf-8" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `${M.namaMK.toLowerCase().replace(/\s+/g, "-")}-${M.tahunAkademik.replace("/", "-")}.ics`;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-}
-
 /* ── Panel periksa (?periksa) ────────────────────────────────────── */
 function renderChecks() {
   if (!new URLSearchParams(location.search).has("periksa")) return;
@@ -1247,7 +1204,6 @@ document.addEventListener("click", e => {
   const a = t.dataset.action;
   if (a === "expand") $$("#weeks .week:not([hidden])").forEach(d => d.open = true);
   if (a === "collapse") $$("#weeks .week").forEach(d => d.open = false);
-  if (a === "ics") downloadICS();
   if (a === "close-checks") $("#checks")?.remove();
 });
 
