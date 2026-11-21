@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SAP Metodologi Ilmiah · Prodi Kedokteran Hewan Unhas</title>
+<meta name="description" content="Satuan Acara Perkuliahan mata kuliah Metodologi Ilmiah, Program Studi Kedokteran Hewan, Universitas Hasanuddin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23059669'/%3E%3Ctext x='16' y='22' font-family='Inter,Arial,sans-serif' font-weight='700' font-size='17' fill='%23fff' text-anchor='middle'%3EMI%3C/text%3E%3C/svg%3E">
+<script>
+/* Tema: dibaca sebelum halaman digambar agar tidak berkedip (kunci sama dengan RPS) */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("mi-tema"); } catch (e) {}
+  document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║  CARA MEMPERBARUI SAP                                                  ║
+║  1. Objek RPS di bawah adalah salinan dari rps.html. Jika RPS berubah, ║
+║     salin ulang seluruh blok "const RPS = { ... };" dari rps.html.     ║
+║  2. Objek SAP berisi langkah pembelajaran per pekan. Bagian ini        ║
+║     khusus untuk SAP.                                                  ║
+║  Tips: tambahkan ?periksa di akhir URL untuk memeriksa total menit,    ║
+║  kelengkapan pekan, dan kecocokan data dengan RPS.                     ║
+╚══════════════════════════════════════════════════════════════════════╝
+-->
+<script>
+/* ── Salinan data RPS (dari rps.html) ─────────────────────────────── */
+const RPS = {
+
+  meta: {
+    namaMK: "Metodologi Ilmiah",
+    kode: "23C03112802",
+    sksTeori: 2,
+    sksPraktik: 0,
+    semester: "IV",
+    sifat: "Mata Kuliah Wajib",
+    periode: "Semester Genap",
+    tahunAkademik: "2026/2027",
+    angkatan: "2026",
+    prasyarat: ["Biostatistika"],
+    tanggalPenyusunan: "2024-03-10",  // format TTTT-BB-HH
+    tanggalRevisi: "2026-11-21",
+    prodi: "Program Studi Kedokteran Hewan",
+    fakultas: "Fakultas Kedokteran",
+    universitas: "Universitas Hasanuddin",
+    kota: "Makassar",
+    otorisasi: {
+      pengembang: "drh. Rian Hari Suharto, M.Sc.",
+      koordinator: "drh. Rian Hari Suharto, M.Sc.",
+      ketuaProdi: "Prof. Dr. drh. Dwi Kesuma Sari, APVet."
+    }
+  },
+
+  /* Jadwal. Tanggal pertemuan pekan 1–16 dihitung dari tanggal mulai.
+     lewatiPekanLibur: jika kelima hari kerja dalam satu pekan libur semua,
+     pekan itu otomatis dilewati (menjadi pekan jeda).
+     pekanJeda: tanggal mana saja di pekan yang ingin dilewati secara manual. */
+  jadwal: {
+    mulai: "2027-02-15",
+    jamMulai: "07.30",
+    jamSelesai: "09.10",
+    zonaWaktu: "WITA",
+    ruang: "",                        // contoh: "Student Center"
+    lewatiPekanLibur: true,
+    pekanJeda: []
+  },
+
+  /* Libur nasional dan cuti bersama di rentang semester.
+     Sumber: SKB Menteri Agama, Menteri Ketenagakerjaan, dan Menteri PANRB
+     Nomor 1205, 3, 2 Tahun 2026. Tanggal Idulfitri dan Iduladha
+     mengikuti Keputusan Menteri Agama. */
+  libur: [
+    { tanggal: "2027-03-08", nama: "Hari Suci Nyepi", jenis: "Libur nasional" },
+    { tanggal: "2027-03-09", nama: "Idulfitri 1448 H", jenis: "Cuti bersama" },
+    { tanggal: "2027-03-10", nama: "Idulfitri 1448 H", jenis: "Libur nasional" },
+    { tanggal: "2027-03-11", nama: "Idulfitri 1448 H", jenis: "Libur nasional" },
+    { tanggal: "2027-03-12", nama: "Idulfitri 1448 H", jenis: "Cuti bersama" },
+    { tanggal: "2027-03-15", nama: "Idulfitri 1448 H", jenis: "Cuti bersama" },
+    { tanggal: "2027-03-25", nama: "Wafat Yesus Kristus", jenis: "Cuti bersama" },
+    { tanggal: "2027-03-26", nama: "Wafat Yesus Kristus", jenis: "Libur nasional" },
+    { tanggal: "2027-05-06", nama: "Kenaikan Yesus Kristus", jenis: "Libur nasional" },
+    { tanggal: "2027-05-17", nama: "Iduladha 1448 H", jenis: "Libur nasional" },
+    { tanggal: "2027-05-18", nama: "Iduladha 1448 H", jenis: "Cuti bersama" },
+    { tanggal: "2027-05-19", nama: "Waisak 2571 BE", jenis: "Cuti bersama" },
+    { tanggal: "2027-05-20", nama: "Waisak 2571 BE", jenis: "Libur nasional" },
+    { tanggal: "2027-06-01", nama: "Hari Lahir Pancasila", jenis: "Libur nasional" }
+  ],
+  sumberLibur: "SKB Menteri Agama, Menteri Ketenagakerjaan, dan Menteri PANRB Nomor 1205, 3, 2 Tahun 2026. Tanggal Idulfitri dan Iduladha mengikuti Keputusan Menteri Agama.",
+
+  /* Tim pengajar. Kode dipakai di jadwal per pekan. Nomor telepon sengaja tidak dicantumkan. */
+  dosen: [
+    { kode: "RHS", nama: "drh. Rian Hari Suharto, M.Sc.", peran: "Koordinator" },
+    { kode: "DKS", nama: "Prof. Dr. drh. Dwi Kesuma Sari, APVet.", peran: "" },
+    { kode: "FYP", nama: "Dr. drh. Fika Yuliza Purba, M.Sc.", peran: "" },
+    { kode: "AWJ", nama: "Abdul Wahid Jamaluddin, S.Farm., M.Farm., Apt.", peran: "" },
+    { kode: "BY",  nama: "drh. Baso Yusuf, M.Sc.", peran: "" },
+    { kode: "KDK", nama: "drh. Kadek Dian Krisna Putri K., M.Sc.", peran: "" },
+    { kode: "AMK", nama: "drh. Anjani Marisa Kartikasari, M.Si.", peran: "" }
+  ],
+
+  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan proposalnya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
+
+  bahanKajian: [
+    "Ilmu, riset, dan metodologi ilmiah",
+    "Etika riset dan integritas akademik",
+    "Kemajuan riset dalam ilmu kedokteran hewan",
+    "Penelusuran dan pengelolaan literatur",
+    "Perangkat lunak yang mendukung riset",
+    "Telaah artikel riset dan teknik sitasi",
+    "Tema, topik, state-of-the-art, rumusan masalah, dan pertanyaan riset",
+    "Desain riset, variabel, pengukuran, dan analisis data",
+    "Penyajian data, hasil, pembahasan, dan penarikan kesimpulan",
+    "Penyajian proposal riset melalui poster dan presentasi lisan"
+  ],
+
+  /* Teks CPL mengikuti dokumen kurikulum prodi. Jangan diubah di RPS. */
+  cpl: [
+    { kode: "CPL-1", teks: "Mampu menunjukkan sikap bertanggung jawab, mandiri, disiplin, kreatif, dan profesional berdasarkan nilai ketuhanan dan kemanusiaan yang memiliki semangat kolaboratif dan kewirausahaan di bidang keahliannya." },
+    { kode: "CPL-5", teks: "Mampu mengelola, mengendalikan, dan mengembangkan sumber daya yang berkaitan dengan kesehatan hewan dan kesehatan masyarakat veteriner." },
+    { kode: "CPL-7", teks: "Mampu mengambil keputusan secara tepat, mengembangkan jaringan kerja, bertanggung jawab atas pencapaian hasil kerja, dan melakukan proses evaluasi diri dalam konteks penyelesaian masalah di bidang keahliannya berdasarkan hasil analisis informasi dan data." },
+    { kode: "CPL-9", teks: "Mampu menggali dan bertukar informasi secara verbal dan nonverbal mengenai kesehatan hewan dengan klien dan pasien, masyarakat, kolega, dan profesi lainnya, serta mampu mengembangkan penelitian di bidang kedokteran hewan dan pelayanan berbasis bukti melalui kolaborasi." }
+  ],
+
+  /* Setiap CPMK dan Sub-CPMK memakai satu kata kerja operasional. */
+  cpmk: [
+    { kode: "CPMK-1", cpl: "CPL-1", teks: "Mahasiswa mampu menerapkan prinsip etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab, dalam penyusunan proposal riset." },
+    { kode: "CPMK-2", cpl: "CPL-5", teks: "Mahasiswa mampu menganalisis literatur ilmiah sebagai landasan riset kedokteran hewan." },
+    { kode: "CPMK-3", cpl: "CPL-7", teks: "Mahasiswa mampu mengevaluasi komponen karya ilmiah kedokteran hewan secara sistematis sebagai dasar penyusunan proposal riset." },
+    { kode: "CPMK-4", cpl: "CPL-9", teks: "Mahasiswa mampu mengomunikasikan proposal riset kedokteran hewan secara tertulis dan lisan melalui poster ilmiah dan presentasi." }
+  ],
+
+  /* asesmen: "kasus" | "masalah" | "proyek" (lihat JENIS_ASESMEN di bawah)
+     Urutan Sub-CPMK mengikuti urutan pekan; tidak ada Sub-CPMK yang lompat pekan. */
+  subcpmk: [
+    { kode: "Sub-CPMK-1", cpmk: "CPMK-1", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL"],
+      teks: "Mahasiswa mampu menerapkan prinsip etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab, dalam penyusunan proposal riset.",
+      indikator: "Ketepatan menjawab soal kasus tentang prinsip etika riset, integritas akademik, persetujuan etik riset yang menggunakan hewan, dan penggunaan kecerdasan buatan generatif secara bertanggung jawab.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-2", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu menganalisis tren riset kedokteran hewan melalui penelusuran dan pengelolaan literatur ilmiah yang relevan dan mutakhir.",
+      indikator: "Ketepatan menjawab soal tentang jenis dan tren riset kedokteran hewan, strategi penelusuran literatur, pengelolaan referensi, gaya sitasi, dan interpretasi laporan kesamaan teks.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-3", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengidentifikasi kesenjangan riset pada topik pilihannya berdasarkan analisis artikel riset kedokteran hewan.",
+      indikator: "Ketepatan menjawab soal telaah artikel riset dengan kerangka PICO/PECO, daftar periksa CASP, dan pedoman pelaporan riset, serta identifikasi kesenjangan riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-4", cpmk: "CPMK-3", bobot: 4,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengevaluasi pendahuluan artikel riset sebagai dasar penyusunan pendahuluan proposal riset.",
+      indikator: "Ketepatan menilai state-of-the-art, rumusan masalah, pertanyaan riset, dan alur logis pendahuluan pada soal kasus artikel riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-5", cpmk: "CPMK-3", bobot: 5,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengevaluasi metode riset yang mencakup desain, variabel, penarikan sampel, instrumen, dan analisis data sebagai dasar penyusunan metode proposal riset.",
+      indikator: "Ketepatan menilai desain, variabel, perancu, teknik penarikan sampel, instrumen, dan kesesuaian uji statistik pada soal kasus artikel riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-6", cpmk: "CPMK-3", bobot: 2,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengevaluasi penyajian data, hasil, pembahasan, dan kesimpulan artikel riset sebagai dasar perencanaan penyajian data proposal riset.",
+      indikator: "Ketepatan menilai penyajian tabel dan grafik, hasil, pembahasan, dan keselarasan kesimpulan dengan tujuan pada soal kasus artikel riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-7", cpmk: "CPMK-4", bobot: 10, asesmen: "proyek",  metode: ["PjBL"],
+      teks: "Mahasiswa mampu menyajikan proposal riset dalam bentuk poster ilmiah sesuai standar akademik.",
+      indikator: "Kelengkapan isi poster proposal (latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, rencana etik), keterbacaan tata letak, dan ketepatan penjelasan saat sesi poster.",
+      teknik: "Unjuk kerja" },
+    { kode: "Sub-CPMK-8", cpmk: "CPMK-4", bobot: 70, asesmen: "proyek",  metode: ["PjBL"],
+      teks: "Mahasiswa mampu mempertahankan proposal riset dalam presentasi lisan sesuai kaidah ilmiah.",
+      indikator: "Kualitas naskah proposal, kelengkapan dan ketepatan unsur proposal riset, penyampaian presentasi, dan ketepatan jawaban atas pertanyaan penguji sesuai rubrik presentasi proposal riset.",
+      teknik: "Unjuk kerja" }
+  ],
+
+  /* Pengaturan bersama untuk setiap pertemuan (bisa ditimpa per pekan). */
+  bawaanPertemuan: {
+    bentuk: "Kuliah",
+    formatif: ["Umpan balik", "Kuis interaktif di kelas"],
+    kriteria: "Skor kuis di LMS Sikola",
+    waktu: { terbimbing: "2 × 50 menit", terstruktur: "2 × 60 menit", mandiri: "2 × 60 menit" }
+  },
+
+  /* Jadwal per pekan. Urutan pekan 1–16. dosen: daftar kode, atau "semua".
+     sepekan: true berarti kegiatan berlangsung sepanjang pekan (misalnya presentasi).
+     formatif: isi untuk menimpa bentuk asesmen formatif bawaan pada pekan tertentu.
+     tanggalPengganti: isi jika pertemuan jatuh pada hari libur dan sudah ada jadwal pengganti. */
+  pertemuan: [
+    { pekan: 1,  sub: "Sub-CPMK-1", dosen: ["RHS"], topik: "Pengantar metodologi ilmiah",
+      materi: ["Ilmu pengetahuan, riset, dan metodologi ilmiah", "Hakikat riset ilmiah di bidang kedokteran hewan", "Struktur umum proposal riset", "Proposal riset sebagai proyek semester", "Prinsip penggunaan kecerdasan buatan generatif dalam penulisan ilmiah"] },
+    { pekan: 2,  sub: "Sub-CPMK-1", dosen: ["DKS"], topik: "Etika riset",
+      materi: ["Prinsip dasar etika riset", "Integritas akademik dan plagiarisme", "Konflik kepentingan dalam riset", "Persetujuan etik (ethical clearance) dan etika riset yang menggunakan hewan"] },
+    { pekan: 3,  sub: "Sub-CPMK-2", dosen: ["FYP"], topik: "Riset kedokteran hewan",
+      formatif: ["Umpan balik calon topik", "Kuis interaktif di kelas"],
+      materi: ["Jenis-jenis riset di bidang kedokteran hewan", "Tren riset terkini dalam ilmu kedokteran hewan", "Menu topik riset dari setiap bidang"] },
+    { pekan: 4,  sub: "Sub-CPMK-2", dosen: ["FYP"], topik: "Penelusuran literatur",
+      formatif: ["Umpan balik calon topik", "Kuis interaktif di kelas"],
+      materi: ["Strategi penelusuran literatur ilmiah", "Pangkalan data ilmiah dan teknik penelusuran", "Identifikasi literatur yang relevan dan mutakhir", "Evaluasi kualitas penyedia sumber ilmiah"] },
+    { pekan: 5,  sub: "Sub-CPMK-2", dosen: ["AWJ"], topik: "Manajemen sitasi dan deteksi kesamaan teks",
+      materi: ["Penggunaan perangkat manajemen referensi", "Konsistensi gaya sitasi", "Perangkat deteksi kesamaan teks dan interpretasi laporan similarity index"] },
+    { pekan: 6,  sub: "Sub-CPMK-3", dosen: ["KDK"], topik: "Telaah artikel dan kesenjangan riset",
+      formatif: ["Umpan balik topik riset", "Kuis interaktif di kelas"],
+      materi: ["Struktur artikel riset", "Telaah artikel riset dengan kerangka PICO/PECO dan daftar periksa CASP", "Pedoman pelaporan riset veteriner: ARRIVE 2.0, STROBE-Vet, dan REFLECT", "Identifikasi kesenjangan riset dan penetapan topik", "Teknik sitasi dan parafrase akademik"] },
+    { pekan: 7,  sub: "Sub-CPMK-4", dosen: ["AWJ"], topik: "Pendahuluan",
+      formatif: ["Umpan balik draf pendahuluan proposal", "Kuis interaktif di kelas"],
+      materi: ["Tema, topik, dan judul riset", "State-of-the-art dan relevansi riset", "Rumusan masalah dan pertanyaan riset", "Koherensi dan alur logis pendahuluan"] },
+    { pekan: 8,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Metode: desain dan variabel",
+      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      materi: ["Jenis desain riset", "Identifikasi dan definisi variabel", "Validitas dan reliabilitas pengukuran", "Pengendalian perancu"] },
+    { pekan: 9,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Metode: populasi, sampel, dan instrumen",
+      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      materi: ["Populasi target dan sampel dalam riset veteriner", "Teknik penarikan sampel", "Instrumen pengumpulan data"] },
+    { pekan: 10, sub: "Sub-CPMK-5", dosen: ["RHS"], topik: "Metode: analisis data",
+      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      materi: ["Kesesuaian metode analisis dengan pertanyaan riset", "Kesesuaian uji statistik dengan jenis data", "Asumsi uji statistik dan interpretasi hasil", "Kesalahan umum dalam analisis data"] },
+    { pekan: 11, sub: "Sub-CPMK-6", dosen: ["RHS"], topik: "Penyajian dan visualisasi data",
+      formatif: ["Umpan balik rencana penyajian data", "Kuis interaktif di kelas"],
+      materi: ["Prinsip penyajian data dalam tabel dan grafik", "Pemilihan bentuk visualisasi sesuai jenis data", "Kesalahan umum dalam visualisasi data ilmiah", "Kerangka tabel (dummy table) untuk proposal riset"] },
+    { pekan: 12, sub: "Sub-CPMK-6", dosen: ["AMK"], topik: "Hasil, pembahasan, dan kesimpulan",
+      formatif: ["Umpan balik rencana penyajian data", "Kuis interaktif di kelas"],
+      materi: ["Perbedaan hasil dan pembahasan", "Struktur penulisan hasil", "Strategi pembahasan berbasis literatur", "Keselarasan tujuan dan kesimpulan riset", "Penarikan kesimpulan ilmiah"] },
+    { pekan: 13, sub: "Sub-CPMK-7", dosen: ["KDK"], topik: "Poster proposal riset", kriteria: "Unjuk kerja dinilai dengan rubrik",
+      materi: ["Struktur poster proposal riset (work in progress)", "Prinsip desain grafis akademik", "Penyajian metode dalam diagram alur dan kerangka tabel", "Standar presentasi poster ilmiah"] },
+    { pekan: 14, sub: "Sub-CPMK-7", dosen: "semua", topik: "Presentasi poster proposal riset", bentuk: "Seminar", kriteria: "Unjuk kerja dinilai dengan rubrik",
+      formatif: ["Umpan balik dosen tim pengajar"],
+      materi: ["Presentasi poster proposal riset di hadapan dosen tim pengajar", "Asesmen poster oleh dosen tim pengajar", "Umpan balik sebelum presentasi akhir"] },
+    { pekan: 15, sub: "Sub-CPMK-8", dosen: ["AMK"], topik: "Strategi presentasi ilmiah", kriteria: "Unjuk kerja dinilai dengan rubrik",
+      materi: ["Struktur presentasi proposal", "Teknik komunikasi akademik", "Manajemen waktu presentasi", "Teknik menjawab pertanyaan ilmiah"] },
+    { pekan: 16, sub: "Sub-CPMK-8", dosen: "semua", topik: "Presentasi proposal riset", bentuk: "Seminar", sepekan: true, kriteria: "Unjuk kerja dinilai dengan rubrik",
+      formatif: ["Umpan balik dosen penguji"],
+      materi: ["Presentasi proposal riset di hadapan dosen penguji sesuai bidang topik", "Tanya jawab dengan dosen penguji", "Penilaian naskah dan presentasi proposal dengan rubrik"] }
+  ],
+
+  /* Rencana penugasan terstruktur: tahapan proyek proposal riset sepanjang semester.
+     Draf pekan 3–12 bersifat formatif (umpan balik, tanpa bobot). Nilai sumatif proyek
+     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8). */
+  penugasan: [
+    { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2",
+      luaran: "Dua atau tiga calon topik, masing-masing dengan minimal lima artikel acuan yang tersimpan di perangkat manajemen referensi.",
+      deskripsi: "Mahasiswa memilih calon topik dari menu topik setiap bidang, lalu menelusuri literatur untuk setiap calon topik. Formatif, tanpa bobot nilai." },
+    { judul: "Topik final dan kesenjangan riset", pekan: [6], sub: "Sub-CPMK-3",
+      luaran: "Lembar topik berisi judul sementara, bidang, rumusan kesenjangan riset, dan tiga artikel kunci.",
+      deskripsi: "Mahasiswa menetapkan satu topik berdasarkan kesenjangan riset yang ditemukan. Lembar topik menjadi dasar penetapan dosen penguji sesuai bidang. Formatif, tanpa bobot nilai." },
+    { judul: "Draf pendahuluan proposal", pekan: [7], sub: "Sub-CPMK-4",
+      luaran: "Draf pendahuluan berisi state-of-the-art, rumusan masalah, pertanyaan riset, tujuan, dan manfaat riset.",
+      deskripsi: "Mahasiswa menerapkan hasil telaah pendahuluan artikel pada topiknya sendiri. Formatif, tanpa bobot nilai." },
+    { judul: "Draf metode proposal", pekan: [8, 9, 10], sub: "Sub-CPMK-5",
+      luaran: "Draf metode berisi desain, variabel, populasi dan sampel, instrumen, rencana analisis data, dan rencana persetujuan etik.",
+      deskripsi: "Mahasiswa menyusun draf metode secara bertahap mengikuti materi pekan 8–10. Formatif, tanpa bobot nilai." },
+    { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6",
+      luaran: "Kerangka tabel dan rancangan grafik untuk data yang akan dikumpulkan.",
+      deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset. Formatif, tanpa bobot nilai." },
+    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7",
+      luaran: "Poster proposal riset yang dipresentasikan pada pekan 14.",
+      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14. Sumatif, bobot 10%." },
+    { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8",
+      luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
+      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset. Sumatif, bobot 70%." }
+  ],
+
+  /* Pustaka. Gaya Harvard (Cite Them Right): Nama belakang, Inisial. (Tahun) *Judul buku*.
+     Disunting oleh (jika ada editor). Edisi. Kota: Penerbit. ISBN. Semua penulis dibalik, dipisah koma, "dan" sebelum penulis terakhir.
+     Artikel jurnal: Nama belakang, Inisial. (Tahun) 'Judul artikel', *Nama jurnal*, volume(nomor), halaman. doi.
+     Judul memakai huruf kapital di awal judul dan nama diri saja.
+     Teks di antara dua tanda bintang ditampilkan miring, misalnya *Judul buku*. */
+  pustaka: {
+    utama: [
+      "Hardani, Andriani, H., Ustiawaty, J., Utami, E.F., Istiqomah, R.R., Fardani, R.A., Sukmana, D.J. dan Auliya, N.H. (2020) *Metode penelitian kualitatif & kuantitatif*. Disunting oleh H. Abadi. Yogyakarta: Pustaka Ilmu. ISBN 978-623-7066-33-0.",
+      "Hikmawati, F. (2017) *Metodologi penelitian*. Depok: Rajawali Pers. ISBN 978-602-425-141-3.",
+      "Kothari, C.R. (2004) *Research methodology: methods and techniques*. 2nd rev. edn. New Delhi: New Age International. ISBN 978-81-224-2488-1.",
+      "Kumar, R. (2011) *Research methodology: a step-by-step guide for beginners*. 3rd edn. London: SAGE. ISBN 978-1-84920-300-5.",
+      "Nurhayati, D.A.W. (2020) *Research methodology*. Tulungagung: Akademia Pustaka. ISBN 978-623-6704-42-4.",
+      "Sembiring, T.B., Irmawati, Sabir, M. dan Tjahyadi, I. (2023) *Buku ajar metodologi penelitian (teori dan praktik)*. Karawang: Saba Jaya Publisher. ISBN 978-623-09-7074-0."
+    ],
+    pendukung: [
+      "Direktorat Pembelajaran dan Kemahasiswaan (2024) *Panduan penggunaan generative artificial intelligence (GenAI) pada pembelajaran di perguruan tinggi*. Jakarta: Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi.",
+      "Dohoo, I., Martin, W. dan Stryhn, H. (2009) *Veterinary epidemiologic research*. 2nd edn. Charlottetown: VER Inc. ISBN 978-0-919013-60-5.",
+      "Percie du Sert, N. dkk. (2020) 'The ARRIVE guidelines 2.0: updated guidelines for reporting animal research', *PLoS Biology*, 18(7), e3000410. doi:10.1371/journal.pbio.3000410.",
+      "Petrie, A. dan Watson, P. (2013) *Statistics for veterinary and animal science*. 3rd edn. Chichester: Wiley-Blackwell. ISBN 978-0-470-67075-0."
+    ]
+  },
+
+  visi: "Menjadi Program Studi Kedokteran Hewan bereputasi yang menghasilkan dokter hewan humanis dan berbasis benua maritim Indonesia (BMI) dan potensi lokal.",
+  misi: [
+    "Menyelenggarakan strata akademik dan profesi bidang kedokteran hewan yang mempunyai kompetensi sesuai dengan OIE Day 1 Graduate Competencies.",
+    "Menyelenggarakan penelitian di bidang kedokteran hewan yang inovatif, kompetitif, implementatif, dan kolaboratif.",
+    "Menyelenggarakan pengabdian masyarakat dalam bidang kedokteran hewan berbasis pemberdayaan masyarakat.",
+    "Menyelenggarakan tridarma perguruan tinggi berbasis satu kesehatan (one health)."
+  ],
+  profilLulusan: [
+    { nama: "Profesional", teks: "Seseorang yang mampu menguasai teori dalam studi kedokteran hewan, mampu mengoperasikan media teknologi bidang kedokteran hewan, serta mampu berinteraksi dan bekerja sama antar-institusi dan lintas profesi." },
+    { nama: "Pengambil keputusan", teks: "Seseorang yang mampu mengaplikasikan konsep kesehatan hewan untuk melindungi, mengamankan, dan menjamin kesehatan dan kesejahteraan hewan, manusia, dan lingkungan melalui pengendalian dan penanggulangan penyakit hewan dan zoonosis secara tepat berdasarkan peraturan perundang-undangan di bidang penyelenggaraan kesehatan hewan; dan mampu melakukan pengambilan keputusan tentang kesehatan hewan yang didasarkan pada hasil kajian regulasi kondisi sosial budaya masyarakat sesuai prinsip kolaborasi." },
+    { nama: "Peneliti", teks: "Seseorang yang mampu melakukan penelitian dan tahapan-tahapan penelitian kedokteran hewan; mampu menerapkan ilmu penelitian kedokteran hewan dan pelayanan berbasis bukti; dan mampu menerapkan metode dan teknik penelitian menggunakan teknologi terbaru melalui kolaborasi penelitian antarinstitusi dan lintas profesi." },
+    { nama: "Manajer dan pemimpin", teks: "Seseorang yang memiliki jiwa kepemimpinan dan kewirausahaan, mampu berkomunikasi, gigih, tangguh, dan bertanggung jawab pada pekerjaan secara mandiri maupun berkelompok, menghormati klien dan tim kerja, serta memiliki spiritualitas dan komitmen yang tinggi; serta mampu mengelola, mengendalikan, dan mengembangkan sumber daya yang berkaitan dengan kesehatan hewan." },
+    { nama: "Konsultan", teks: "Seseorang yang memiliki etika dan moral yang tinggi, berjiwa mandiri, unggul, dan bertanggung jawab; mampu berkomunikasi medis secara efektif; mampu menerapkan pemikiran logis, kritis, sistematis dan inovatif; dan menguasai ilmu-ilmu kedokteran hewan." }
+  ],
+
+  /* Catatan untuk penyusun. Tampil di panel ?periksa, tidak terlihat oleh pembaca biasa. */
+  catatanPenyusun: [
+    "Peta analisis pembelajaran pada RPS 2026 berupa gambar dan perlu dibuat ulang mengikuti struktur Sub-CPMK yang baru.",
+    "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) dan rubrik poster proposal (Sub-CPMK-7) belum tersedia.",
+    "Tentukan mekanisme penilaian poster pekan 14: semua dosen menilai semua poster, atau setiap dosen menilai poster mahasiswa yang juga diujinya pada pekan 16.",
+    "Bagian penugasan di RPS memuat ringkasan. Instruksi, kriteria, dan rubrik setiap tugas disusun di dokumen RTM.",
+    "Rubrik presentasi proposal perlu diselaraskan: istilah \"penelitian\" menjadi \"riset\" dan unsur pertimbangan etik ditambahkan ke butir C.7.",
+    "Teks CPL, visi, misi, dan profil lulusan sengaja tidak diubah karena mengikuti dokumen kurikulum prodi.",
+    "Periksa kembali nama Ketua Prodi dan tanggal penyusunan sebelum RPS disahkan."
+  ]
+};
+</script>
+<script>
+/* ╔══════════════════════════════════════════════════════════════════════╗
+   ║  DATA SAP (Satuan Acara Perkuliahan)                                   ║
+   ║  Setiap pekan berisi langkah pembelajaran untuk satu pertemuan.        ║
+   ║  Format setiap langkah: [menit, "kegiatan dosen", "kegiatan mahasiswa"] ║
+   ║  Total menit per pertemuan sebaiknya sama dengan SAP.durasi.          ║
+   ║  Pekan dengan perMahasiswa: true dihitung per sesi mahasiswa.          ║
+   ║  sumatif: kosongkan agar keterangan dibuat otomatis dari data RPS.     ║
+   ╚══════════════════════════════════════════════════════════════════════╝ */
+const SAP = {
+  durasi: 100,              // menit per pertemuan (2 × 50 menit)
+
+  pekan: {
+    1: {
+      media: ["Slide presentasi", "LMS Sikola", "Contoh proposal riset mahasiswa tahun sebelumnya", "Contoh kasus penggunaan kecerdasan buatan generatif"],
+      langkah: {
+        pendahuluan: [
+          [10, "Memperkenalkan mata kuliah, RPS, tim pengajar, dan sistem asesmen (kuis Sikola, poster, presentasi proposal)", "Menyimak dan bertanya tentang RPS serta sistem asesmen"]
+        ],
+        inti: [
+          [25, "Menjelaskan ilmu pengetahuan, riset, metodologi ilmiah, dan hakikat riset di bidang kedokteran hewan", "Menyimak, mencatat, dan menjawab pertanyaan pemantik"],
+          [20, "Membagikan contoh proposal riset dan memandu diskusi kelompok kecil", "Mengidentifikasi bagian-bagian proposal riset dan alur logisnya"],
+          [15, "Menjelaskan proyek proposal riset sepanjang semester beserta tahapan Tugas 01 sampai Tugas 07", "Menyimak dan mencatat tenggat setiap tahapan"],
+          [15, "Menyajikan kasus penggunaan kecerdasan buatan generatif dalam penulisan ilmiah", "Mendiskusikan batas penggunaan yang dapat diterima dan yang tidak"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [7, "Merangkum materi dan menyampaikan persiapan pekan 2", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Membaca panduan penggunaan kecerdasan buatan generatif dari Ditjen Diktiristek dan contoh proposal riset yang diunggah di Sikola.",
+      bacaan: ["Direktorat Pembelajaran dan Kemahasiswaan (2024)", "Kumar (2011)"]
+    },
+
+    2: {
+      media: ["Slide presentasi", "Kumpulan kasus pelanggaran etika riset", "Contoh formulir pengajuan persetujuan etik riset yang menggunakan hewan"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan menanyakan pemahaman mahasiswa tentang plagiarisme", "Berbagi pendapat dan pengalaman tentang plagiarisme"]
+        ],
+        inti: [
+          [25, "Menjelaskan prinsip dasar etika riset, integritas akademik, dan konflik kepentingan", "Menyimak dan mencatat"],
+          [20, "Membagikan kasus plagiarisme, fabrikasi, falsifikasi, dan konflik kepentingan", "Berdiskusi dalam kelompok untuk menentukan jenis pelanggaran dan usulan perbaikannya"],
+          [20, "Menjelaskan persetujuan etik riset yang menggunakan hewan, prinsip 3R, dan alur pengajuan ke komite etik", "Menelaah contoh formulir pengajuan persetujuan etik"],
+          [10, "Memberi umpan balik atas hasil diskusi kelompok", "Memaparkan hasil diskusi kelompok"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [7, "Merangkum materi dan menyampaikan jadwal kuis Sub-CPMK-1 di Sikola", "Mencatat jadwal kuis"]
+        ]
+      },
+      mandiri: "Membaca pedoman komite etik hewan institusi dan ringkasan pedoman ARRIVE 2.0, lalu mengerjakan kuis Sub-CPMK-1 di Sikola.",
+      bacaan: ["Percie du Sert dkk. (2020)", "Hikmawati (2017)"]
+    },
+
+    3: {
+      media: ["Slide presentasi", "Menu topik riset dari setiap bidang", "Contoh judul artikel riset terbaru"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan mengaitkan materi dengan proyek proposal semester", "Menyebutkan bidang kedokteran hewan yang diminati"]
+        ],
+        inti: [
+          [25, "Menjelaskan jenis-jenis riset di bidang kedokteran hewan (eksperimental, observasional, survei, kualitatif, dan tinjauan sistematis)", "Mengelompokkan contoh judul artikel menurut jenis riset"],
+          [20, "Memaparkan tren riset terkini dalam ilmu kedokteran hewan", "Berdiskusi dalam kelompok untuk memetakan tren dari judul artikel terbaru per bidang"],
+          [20, "Memaparkan menu topik riset dari setiap bidang", "Memilih dua atau tiga calon topik awal"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menjelaskan instruksi Tugas 01 (calon topik riset)", "Mencatat instruksi dan bertanya bila belum jelas"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menelusuri tiga artikel terbaru untuk setiap calon topik.",
+      bacaan: ["Dohoo dkk. (2009)", "Kothari (2004)"]
+    },
+
+    4: {
+      media: ["Laptop dan akses internet", "Pangkalan data ilmiah yang tersedia melalui perpustakaan", "Lembar kerja strategi penelusuran"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan meninjau calon topik mahasiswa", "Menyebutkan calon topik masing-masing"]
+        ],
+        inti: [
+          [20, "Menjelaskan strategi penelusuran literatur: kata kunci, sinonim, operator Boolean, dan filter", "Menyimak dan mencatat"],
+          [30, "Membimbing praktik penelusuran pada calon topik mahasiswa", "Menyusun string pencarian dan mencatat hasil penelusuran"],
+          [15, "Menjelaskan kriteria relevansi, kemutakhiran, dan kualitas penyedia sumber ilmiah, termasuk ciri jurnal predator", "Menilai tiga sumber hasil penelusuran sendiri"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Memberi umpan balik atas calon topik mahasiswa", "Menyimak umpan balik untuk calon topiknya"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Melanjutkan penelusuran literatur untuk Tugas 01.",
+      bacaan: ["Kumar (2011)", "Hardani dkk. (2020)"]
+    },
+
+    5: {
+      media: ["Laptop dan akses internet", "Perangkat manajemen referensi (misalnya Zotero atau Mendeley)", "Contoh laporan pemeriksaan kesamaan teks"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan memastikan perangkat manajemen referensi sudah terpasang", "Menyiapkan laptop dan perangkat manajemen referensi"]
+        ],
+        inti: [
+          [20, "Menjelaskan konsep manajemen referensi dan konsistensi gaya sitasi", "Menyimak dan mencatat"],
+          [25, "Membimbing praktik memasukkan artikel dan menyisipkan sitasi ke dalam dokumen", "Memasukkan artikel Tugas 01 ke perangkat manajemen referensi dan menyisipkan sitasi"],
+          [20, "Menjelaskan cara membaca laporan similarity index, termasuk kesamaan yang wajar dan yang bermasalah", "Menafsirkan contoh laporan kesamaan teks"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menyampaikan jadwal kuis Sub-CPMK-2 dan tenggat Tugas 01", "Mencatat jadwal kuis dan tenggat tugas"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Merapikan pustaka Tugas 01 di perangkat manajemen referensi dan mengerjakan kuis Sub-CPMK-2 di Sikola.",
+      bacaan: []
+    },
+
+    6: {
+      media: ["Slide presentasi", "Artikel riset contoh", "Daftar periksa CASP", "Pedoman ARRIVE 2.0, STROBE-Vet, dan REFLECT", "Lembar kerja PICO/PECO"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan menanyakan calon topik yang paling diminati mahasiswa", "Menyebutkan calon topik yang paling diminati"]
+        ],
+        inti: [
+          [20, "Menjelaskan struktur artikel riset, kerangka PICO/PECO, daftar periksa CASP, dan pedoman pelaporan riset veteriner", "Menyimak dan mencatat"],
+          [25, "Memandu telaah artikel contoh dalam kelompok kecil", "Menelaah artikel contoh dengan lembar kerja PICO/PECO dan daftar periksa CASP"],
+          [15, "Mencontohkan cara merumuskan kesenjangan riset dari beberapa artikel", "Merumuskan kesenjangan riset pada calon topik dan memilih topik final"],
+          [10, "Mencontohkan teknik parafrase akademik yang disertai sitasi", "Berlatih memparafrasakan satu paragraf artikel"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [7, "Menjelaskan Tugas 02 (lembar topik) dan jadwal kuis Sub-CPMK-3", "Mencatat instruksi tugas dan jadwal kuis"],
+          [5, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyelesaikan lembar topik (Tugas 02) dan mengerjakan kuis Sub-CPMK-3 di Sikola.",
+      bacaan: ["Percie du Sert dkk. (2020)", "Petrie dan Watson (2013)"],
+      catatan: "Lembar topik Tugas 02 menjadi dasar koordinator menetapkan dosen penguji sesuai bidang topik riset."
+    },
+
+    7: {
+      media: ["Slide presentasi", "Artikel riset contoh", "Lembar telaah pendahuluan"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan mengumumkan pembagian dosen penguji", "Mencatat dosen penguji masing-masing"]
+        ],
+        inti: [
+          [20, "Menjelaskan tema, topik, judul, state-of-the-art, rumusan masalah, pertanyaan riset, dan alur logis pendahuluan", "Menyimak dan mencatat"],
+          [25, "Memandu telaah pendahuluan artikel contoh dalam kelompok kecil", "Menelaah pendahuluan artikel contoh dengan lembar telaah"],
+          [20, "Mencontohkan cara mengubah kesenjangan riset menjadi rumusan masalah dan pertanyaan riset", "Menyusun kerangka pendahuluan proposal sendiri"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menjelaskan Tugas 03 (draf pendahuluan) dan jadwal kuis Sub-CPMK-4", "Mencatat instruksi tugas dan jadwal kuis"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyusun draf pendahuluan proposal (Tugas 03) dan mengerjakan kuis Sub-CPMK-4 di Sikola.",
+      bacaan: ["Kumar (2011)", "Hikmawati (2017)"]
+    },
+
+    8: {
+      media: ["Slide presentasi", "Artikel riset contoh dengan berbagai desain", "Bagan alir pemilihan desain riset"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan menyampaikan umpan balik umum atas draf pendahuluan", "Menyimak umpan balik umum"]
+        ],
+        inti: [
+          [20, "Menjelaskan jenis desain riset (eksperimental, kohort, kasus-kontrol, potong lintang) dan kesesuaiannya dengan pertanyaan riset", "Menyimak dan mencatat"],
+          [20, "Menjelaskan identifikasi dan definisi variabel, validitas dan reliabilitas pengukuran, serta pengendalian perancu", "Menyimak dan menjawab pertanyaan pemantik"],
+          [25, "Memandu diskusi kelompok kecil tentang desain dan variabel artikel contoh", "Menilai desain dan variabel artikel contoh, lalu menentukan desain dan variabel proposal sendiri"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menjelaskan Tugas 04 (draf metode)", "Mencatat instruksi tugas"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyusun bagian desain dan variabel pada draf metode (Tugas 04).",
+      bacaan: ["Dohoo dkk. (2009)", "Kothari (2004)"]
+    },
+
+    9: {
+      media: ["Slide presentasi", "Artikel riset contoh", "Contoh kuesioner dan lembar observasi"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan mengaitkan desain riset dengan pemilihan sampel", "Menjawab pertanyaan pemantik"]
+        ],
+        inti: [
+          [20, "Menjelaskan populasi target, populasi terjangkau, unit sampel, dan teknik penarikan sampel", "Menyimak dan mencatat"],
+          [15, "Memperagakan perhitungan besar sampel sederhana", "Mengikuti dan mencoba perhitungan besar sampel"],
+          [15, "Menjelaskan jenis instrumen pengumpulan data dan validasinya", "Menyimak dan mencatat"],
+          [15, "Memandu diskusi kelompok kecil tentang sampel dan instrumen artikel contoh", "Menilai bagian sampel dan instrumen artikel contoh"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Memberi umpan balik atas rancangan sampel proposal mahasiswa", "Menyimak umpan balik"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyusun bagian populasi, sampel, dan instrumen pada draf metode (Tugas 04).",
+      bacaan: ["Dohoo dkk. (2009)", "Kumar (2011)"]
+    },
+
+    10: {
+      media: ["Slide presentasi", "Bagan alir pemilihan uji statistik", "Artikel riset contoh"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan mengulas jenis data dari Biostatistika", "Menjawab pertanyaan pemantik tentang jenis data"]
+        ],
+        inti: [
+          [20, "Menjelaskan kesesuaian metode analisis dengan pertanyaan riset dan jenis data", "Menyimak dan menelusuri bagan alir pemilihan uji"],
+          [15, "Menjelaskan asumsi uji statistik serta interpretasi nilai p dan selang kepercayaan", "Menyimak dan mencatat"],
+          [20, "Memandu diskusi kelompok kecil tentang analisis data artikel contoh", "Menilai ketepatan analisis data dan menemukan kesalahan umum"],
+          [10, "Membimbing penyusunan rencana analisis data", "Menentukan rencana analisis data untuk proposal sendiri"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menyampaikan jadwal kuis Sub-CPMK-5 dan tenggat Tugas 04", "Mencatat jadwal kuis dan tenggat tugas"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Melengkapi rencana analisis data dan rencana persetujuan etik pada draf metode (Tugas 04), lalu mengerjakan kuis Sub-CPMK-5 di Sikola.",
+      bacaan: ["Petrie dan Watson (2013)"]
+    },
+
+    11: {
+      media: ["Slide presentasi", "Contoh tabel dan grafik dari artikel riset", "Contoh grafik yang menyesatkan", "Contoh kerangka tabel"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan menampilkan satu grafik yang menyesatkan", "Menebak masalah pada grafik tersebut"]
+        ],
+        inti: [
+          [20, "Menjelaskan prinsip penyajian data dalam tabel dan grafik serta pemilihan visualisasi sesuai jenis data", "Menyimak dan mencatat"],
+          [20, "Membagikan contoh tabel dan grafik yang bermasalah", "Berdiskusi dalam kelompok untuk memperbaiki contoh tersebut"],
+          [25, "Mencontohkan penyusunan kerangka tabel dari tujuan dan variabel riset", "Menyusun kerangka tabel untuk proposal sendiri"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menjelaskan Tugas 05 (rencana penyajian data)", "Mencatat instruksi tugas"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyusun kerangka tabel dan rancangan grafik (Tugas 05).",
+      bacaan: ["Petrie dan Watson (2013)"]
+    },
+
+    12: {
+      media: ["Slide presentasi", "Artikel riset contoh", "Lembar telaah hasil, pembahasan, dan kesimpulan"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan mengaitkan kerangka tabel dengan bab hasil", "Menjawab pertanyaan pemantik"]
+        ],
+        inti: [
+          [20, "Menjelaskan perbedaan hasil dan pembahasan serta struktur penulisan hasil", "Menyimak dan mencatat"],
+          [20, "Menjelaskan strategi pembahasan berbasis literatur dan keselarasan tujuan dengan kesimpulan", "Menyimak dan menjawab pertanyaan pemantik"],
+          [25, "Memandu telaah hasil, pembahasan, dan kesimpulan artikel contoh dalam kelompok kecil", "Menelaah artikel contoh dengan lembar telaah"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menyampaikan jadwal kuis Sub-CPMK-6 dan tenggat Tugas 05", "Mencatat jadwal kuis dan tenggat tugas"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyelesaikan Tugas 05 dan mengerjakan kuis Sub-CPMK-6 di Sikola.",
+      bacaan: ["Kothari (2004)", "Kumar (2011)"]
+    },
+
+    13: {
+      media: ["Slide presentasi", "Contoh poster proposal riset", "Templat poster", "Perangkat desain (misalnya PowerPoint atau Canva)"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan menampilkan dua contoh poster untuk dibandingkan", "Menilai poster mana yang lebih mudah dibaca dan alasannya"]
+        ],
+        inti: [
+          [20, "Menjelaskan struktur poster proposal riset (work in progress)", "Menyimak dan mencatat"],
+          [20, "Menjelaskan prinsip desain grafis akademik: hierarki, kontras, dan keterbacaan dari jarak", "Menyimak dan menjawab pertanyaan pemantik"],
+          [25, "Memberi umpan balik atas sketsa tata letak poster", "Menyusun sketsa tata letak poster proposal sendiri"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menjelaskan Tugas 06, ukuran cetak, dan alur sesi poster pekan 14", "Mencatat ketentuan poster dan alur sesi"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyelesaikan dan mencetak poster proposal riset (Tugas 06).",
+      bacaan: []
+    },
+
+    14: {
+      media: ["Poster cetak mahasiswa", "Rubrik penilaian poster", "Papan atau dinding poster"],
+      langkah: {
+        pendahuluan: [
+          [10, "Koordinator membuka sesi, menjelaskan alur, dan menyampaikan pembagian penilai", "Memasang poster di tempat yang ditentukan"]
+        ],
+        inti: [
+          [35, "Gelombang 1: penilai mengunjungi poster sesuai pembagian dan mengisi rubrik", "Separuh mahasiswa menjelaskan posternya; separuh lainnya berkeliling dan memberi umpan balik sejawat"],
+          [35, "Gelombang 2: penilai melanjutkan kunjungan dan penilaian", "Kelompok mahasiswa bertukar peran"]
+        ],
+        penutup: [
+          [15, "Menyampaikan umpan balik umum dari seluruh penilai", "Mencatat masukan untuk perbaikan naskah proposal"],
+          [5, "Menyampaikan jadwal presentasi proposal pekan 16", "Mencatat jadwal presentasi"]
+        ]
+      },
+      mandiri: "Memperbaiki naskah proposal berdasarkan umpan balik sesi poster.",
+      bacaan: [],
+      catatan: "Mekanisme penilaian poster masih menunggu keputusan tim pengajar: semua dosen menilai semua poster, atau setiap dosen menilai poster mahasiswa yang juga diujinya pada pekan 16."
+    },
+
+    15: {
+      media: ["Slide presentasi", "Contoh rekaman atau slide presentasi proposal", "Pengatur waktu"],
+      langkah: {
+        pendahuluan: [
+          [10, "Membuka kuliah dan menanyakan kekhawatiran mahasiswa menjelang presentasi", "Menyampaikan kekhawatiran dan pertanyaan"]
+        ],
+        inti: [
+          [20, "Menjelaskan struktur presentasi proposal dan teknik komunikasi akademik", "Menyimak dan mencatat"],
+          [15, "Menjelaskan manajemen waktu presentasi dan penyusunan slide", "Menyimak dan menjawab pertanyaan pemantik"],
+          [15, "Menjelaskan teknik menjawab pertanyaan ilmiah", "Berlatih menjawab contoh pertanyaan penguji secara berpasangan"],
+          [15, "Memberi umpan balik atas simulasi singkat", "Beberapa mahasiswa berlatih membuka presentasi selama dua menit"]
+        ],
+        penutup: [
+          [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
+          [10, "Menjelaskan Tugas 07, jadwal presentasi, dan ketentuan pengumpulan naskah final", "Mencatat jadwal dan ketentuan"],
+          [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
+        ]
+      },
+      mandiri: "Menyelesaikan naskah proposal final (Tugas 07) dan berlatih presentasi sesuai batas waktu.",
+      bacaan: []
+    },
+
+    16: {
+      perMahasiswa: true,
+      media: ["Slide presentasi mahasiswa", "Naskah proposal final", "Rubrik penilaian presentasi proposal riset", "Pengatur waktu"],
+      langkah: {
+        pendahuluan: [
+          [2, "Penguji membuka sesi dan memeriksa naskah proposal final", "Menyiapkan slide presentasi"]
+        ],
+        inti: [
+          [10, "Menyimak presentasi dan mulai mengisi rubrik", "Mempresentasikan proposal riset"],
+          [10, "Mengajukan pertanyaan tentang isi dan metode proposal", "Menjawab pertanyaan penguji"]
+        ],
+        penutup: [
+          [3, "Memberi umpan balik singkat dan melengkapi rubrik", "Menyimak umpan balik"]
+        ]
+      },
+      mandiri: "Merevisi proposal berdasarkan masukan penguji sebagai bekal riset tugas akhir.",
+      bacaan: [],
+      catatan: "Presentasi berlangsung sepanjang pekan sesuai jadwal setiap dosen penguji. Alokasi waktu di atas berlaku untuk satu mahasiswa."
+    }
+  }
+};
+</script>
+
+<style>
+:root{
+  --paper:#F7F6F2; --surface:#FFFFFF; --sunk:#F0EEE8;
+  --ink:#1C1D1F; --ink-2:#45484D; --ink-3:#74777D;
+  --rule:#E3E1DA; --rule-2:#CDCAC1;
+  --accent:#8E2B1E; --accent-2:#B65A45; --accent-3:#DDB1A3; --tint:#F4E8E4;
+  --warn:#8A5A00; --warn-bg:#FBF1DC; --ok:#2E6A4E; --ok-bg:#E5F1EA;
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius:8px;
+  /* Token turunan, ditimpa di mode gelap */
+  --strong:var(--ink); --mark:var(--ink);
+  --chip-on-bg:var(--ink); --chip-on-fg:#fff;
+  --tip-bg:var(--ink); --tip-fg:#F4F3EF; --tip-ref:#B9B7B0;
+  --on-accent:#fff; --on-accent-2:#fff; --on-accent-3:var(--ink);
+  --pad:20px;
+  --content:780px;
+  /* Skala huruf: satu jenis huruf (Inter) untuk judul dan isi */
+  --fs-title:1.0625rem; --fs-body:1rem; --fs-sm:.9rem; --fs-xs:.8125rem; --fs-label:.75rem;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);font-feature-settings:"tnum" 1, "cv11" 1;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+h1,h2,h3{font-family:var(--sans);font-weight:600;letter-spacing:-.01em;margin:0;color:var(--ink)}
+p{margin:0 0 1em}
+ul,ol{margin:0;padding-left:1.2em}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.muted{color:var(--ink-3)}
+.small{font-size:var(--fs-sm)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ── Kerangka ─────────────────────────────── */
+.shell{max-width:1180px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px}
+.toc{position:sticky;top:0;align-self:start;height:100vh;padding:40px 0;display:flex;flex-direction:column;gap:28px}
+.toc-brand{font:600 var(--fs-label)/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.toc-brand strong{display:block;font:600 var(--fs-title)/1.25 var(--sans);letter-spacing:0;text-transform:none;color:var(--ink);margin-top:4px}
+.toc nav ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--rule)}
+.toc nav a{display:block;padding:6px 0 6px 14px;margin-left:-1px;border-left:1px solid transparent;color:var(--ink-3);text-decoration:none;font-size:var(--fs-sm)}
+.toc nav a:hover{color:var(--ink)}
+.toc nav a[aria-current="true"]{color:var(--ink);border-left-color:var(--mark);font-weight:600}
+main{min-width:0;padding:56px 0 96px;max-width:var(--content)}
+
+/* ── Tombol dan label ─────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border:1px solid var(--rule-2);background:var(--surface);border-radius:6px;font-size:var(--fs-sm);font-weight:500;cursor:pointer;text-decoration:none;color:var(--ink);white-space:nowrap}
+.btn:hover{border-color:var(--ink-3)}
+.btn-quiet{border-color:transparent;background:transparent;padding:0 8px;color:var(--ink-2)}
+.btn-quiet:hover{background:var(--sunk);border-color:transparent}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:4px;background:var(--sunk);color:var(--ink-2);font-size:var(--fs-label);font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.tag-accent{background:var(--tint);color:var(--accent)}
+.tag-warn{background:var(--warn-bg);color:var(--warn)}
+.code{font-weight:600;font-size:var(--fs-xs);letter-spacing:.02em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* Istilah dengan tooltip */
+.term{border-bottom:1px dotted var(--ink-3);cursor:help}
+.term:focus-visible{outline-offset:1px}
+#tip{position:fixed;z-index:50;max-width:320px;padding:10px 12px;background:var(--tip-bg);color:var(--tip-fg);border-radius:6px;font-size:var(--fs-xs);line-height:1.5;pointer-events:none;opacity:0;transform:translateY(2px);transition:opacity .12s, transform .12s}
+#tip[data-show="true"]{opacity:1;transform:none}
+#tip .tip-ref{display:block;margin-top:6px;color:var(--tip-ref);font-size:var(--fs-label)}
+
+/* ── Kepala halaman ───────────────────────── */
+.eyebrow{font:600 var(--fs-label)/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(2.4rem,5.6vw,3.6rem);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:14px 0 14px}
+.hero .lede{font-size:var(--fs-title);color:var(--ink-2);margin:0 0 32px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--strong);border-bottom:1px solid var(--rule);margin:0}
+.facts div{padding:14px 16px 16px}
+.facts div:nth-child(3n+1){padding-left:0}
+.facts div:not(:nth-child(3n+1)){border-left:1px solid var(--rule)}
+.facts div:nth-child(n+4){border-top:1px solid var(--rule)}
+.facts dt{font-size:var(--fs-label);color:var(--ink-3);margin-bottom:4px}
+.facts dd{margin:0;font-weight:600;font-size:var(--fs-body);line-height:1.35}
+.facts dd span{display:block;font-weight:400;color:var(--ink-3);font-size:var(--fs-xs)}
+
+/* Kotak seragam */
+.box{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);padding:var(--pad)}
+
+.now{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:8px 24px;align-items:start}
+.now-label{font-size:var(--fs-label);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.now-title{font:600 1.15rem/1.3 var(--sans);margin:6px 0 4px}
+.now-meta{color:var(--ink-2);font-size:var(--fs-sm)}
+.now-side{text-align:right}
+.now-big{font:600 2.2rem/1 var(--sans);font-variant-numeric:tabular-nums}
+.now-next{grid-column:1/-1;border-top:1px solid var(--rule);margin-top:10px;padding-top:12px;font-size:var(--fs-sm);color:var(--ink-2)}
+
+/* ── Bagian ───────────────────────────────── */
+section{scroll-margin-top:24px;padding-top:72px}
+.sec-head{margin-bottom:24px}
+.sec-head h2{font-size:1.85rem;line-height:1.2}
+.sec-head p{color:var(--ink-2);margin:8px 0 0}
+h3{font-size:1.15rem;margin:0 0 10px}
+.prose{font-family:var(--sans);font-size:var(--fs-body);line-height:1.65;color:var(--ink)}
+.prose p{margin:0 0 1em}
+.two-col{columns:2;column-gap:40px}
+.two-col li{break-inside:avoid;margin-bottom:6px}
+.list-plain{list-style:none;padding:0}
+.list-rule li{padding:10px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:28px minmax(0,1fr)}
+.list-rule li:first-child{border-top:1px solid var(--rule)}
+
+/* ── Peta keselarasan ─────────────────────── */
+.cp-flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 18px;padding:0;list-style:none;font-size:var(--fs-xs);color:var(--ink-3)}
+.cp-flow li{display:flex;align-items:center;gap:10px}
+.cp-flow li + li::before{content:"→";color:var(--ink-2)}
+.cp-flow b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.cp-list{display:flex;flex-direction:column;gap:12px}
+.cp-path{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:var(--fs-xs);font-weight:600;color:var(--ink-3)}
+.cp-path .arr{color:var(--ink-2);font-weight:400}
+.cp-path b{color:var(--ink)}
+.cp-text{font:600 var(--fs-title)/1.45 var(--sans);margin:8px 0 16px}
+.cp-subs{list-style:none;padding:0;margin:0}
+.cp-subs li{display:grid;grid-template-columns:92px minmax(0,1fr) 96px 44px;gap:14px;padding:11px 0;border-top:1px solid var(--rule);align-items:baseline;font-size:var(--fs-sm);line-height:1.5}
+.cp-subs li.cp-subs-head{font-size:var(--fs-label);font-weight:600;letter-spacing:.04em;color:var(--ink-3);padding:8px 0;border-top:1px solid var(--strong)}
+.cp-subs .r{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.cp-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:11px;border-top:1px solid var(--strong);font-size:var(--fs-sm);font-weight:600;color:var(--ink-2)}
+.cp-total b{font-size:var(--fs-title);font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.week-link{font-size:var(--fs-label);font-weight:600;color:var(--accent);text-decoration:none;height:22px;display:inline-flex;align-items:center;padding:0 2px}
+.week-link:hover{text-decoration:underline}
+
+/* ── Jadwal per pekan ─────────────────────── */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{height:32px;padding:0 12px;border-radius:16px;border:1px solid var(--rule-2);background:var(--surface);font-size:var(--fs-xs);font-weight:600;cursor:pointer;color:var(--ink-2)}
+.chip:hover{border-color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--chip-on-bg);border-color:var(--chip-on-bg);color:var(--chip-on-fg)}
+.filter-note{font-size:var(--fs-xs);color:var(--ink-3);margin:-4px 0 14px;min-height:1.3em}
+.weeks{display:flex;flex-direction:column;gap:8px}
+.week{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);scroll-margin-top:24px}
+.week[hidden]{display:none}
+.week > summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:18px 64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 18px}
+.week > summary::-webkit-details-marker{display:none}
+.week > summary::before{content:"▶";font-size:.65rem;color:var(--ink-3);line-height:1}
+.week[open] > summary::before{content:"▼"}
+.week > summary:hover .wk-topic{color:var(--accent)}
+.wk-no{font-size:var(--fs-label);color:var(--ink-3);line-height:1.2}
+.wk-no b{display:block;font:600 1.35rem/1.1 var(--sans);color:var(--ink);font-variant-numeric:tabular-nums}
+.wk-topic{font:600 var(--fs-title)/1.35 var(--sans);transition:color .12s}
+.wk-date{display:block;font:400 var(--fs-xs)/1.4 var(--sans);color:var(--ink-3);margin-top:2px}
+.wk-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.wk-body{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule);margin:0 18px}
+.wk-body h4{margin:0 0 6px;font-size:var(--fs-label);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.wk-body p,.wk-body li{font-size:var(--fs-sm);line-height:1.55}
+.wk-body ul{padding-left:1.1em}
+.wk-body li{margin-bottom:3px}
+.wk-wide{grid-column:1/-1}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:var(--fs-sm);margin:0}
+.kv dt{color:var(--ink-3)}
+.kv dd{margin:0}
+.week.is-now{border-color:var(--mark)}
+
+/* ── Asesmen ────────────────────────────── */
+.stack{display:flex;height:44px;border-radius:6px;overflow:hidden;gap:2px;background:var(--paper)}
+.stack span{display:flex;align-items:center;justify-content:flex-end;padding:0 10px;color:#fff;font-weight:700;font-size:var(--fs-sm);min-width:0;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;padding:0;list-style:none;font-size:var(--fs-sm)}
+.legend li{display:flex;align-items:center;gap:8px}
+.sw{width:12px;height:12px;border-radius:3px;flex:none}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:var(--fs-sm)}
+th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-size:var(--fs-label);font-weight:600;color:var(--ink-3);letter-spacing:.03em;border-bottom:1px solid var(--strong)}
+tfoot td{font-weight:700;border-bottom:none;border-top:1px solid var(--strong)}
+td.r,th.r{text-align:right;padding-right:0}
+.bar{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.bar i{display:block;height:8px;border-radius:2px;background:var(--accent)}
+.matrix td,.matrix th{text-align:center;padding:10px 8px}
+.matrix th:first-child,.matrix td:first-child{text-align:left;padding-left:0}
+.matrix .cell{display:block;padding:4px 8px;border-radius:4px;background:var(--tint);color:var(--accent);font-weight:600;font-size:var(--fs-xs);line-height:1.35}
+.matrix .cell small{display:block;font-weight:500;font-size:var(--fs-label);color:var(--ink-2)}
+.note{font-size:var(--fs-sm);color:var(--ink-2);margin-top:14px}
+
+/* ── Jadwal ───────────────────────────────── */
+.sched-head{margin-bottom:14px}
+.sched-when{font-weight:600}
+.sched-when span{font-weight:400;color:var(--ink-3)}
+.week-gap{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:baseline;padding:10px 18px 10px 50px;border:1px solid var(--rule);border-radius:var(--radius);font-size:var(--fs-xs);color:var(--ink-3);background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--sunk) 6px 7px)}
+.week-gap b{font-weight:600;color:var(--ink-2)}
+.week-gap[hidden]{display:none}
+.holidays{margin-top:16px}
+.holidays > summary{list-style:none;cursor:pointer;font-size:var(--fs-sm);font-weight:600;display:flex;gap:10px;align-items:center;padding:6px 0}
+.holidays > summary::-webkit-details-marker{display:none}
+.holidays > summary::before{content:"▶";font-size:.6rem;color:var(--ink-3)}
+.holidays[open] > summary::before{content:"▼"}
+.holidays ul{list-style:none;padding:8px 0 0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px;font-size:var(--fs-xs)}
+.holidays li{display:flex;gap:10px;padding:4px 0;border-bottom:1px solid var(--rule)}
+.holidays li b{font-weight:600;min-width:118px;font-variant-numeric:tabular-nums}
+
+/* ── Tim ──────────────────────────────────── */
+.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.person{display:flex;flex-direction:column;gap:6px}
+.person .p-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.person .p-name{font:600 var(--fs-title)/1.35 var(--sans)}
+.person .p-weeks{font-size:var(--fs-xs);color:var(--ink-3)}
+
+/* ── Lampiran ─────────────────────────────── */
+.appx{display:flex;flex-direction:column;gap:8px}
+.appx details{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius)}
+.appx summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;gap:14px;align-items:center;font:600 var(--fs-title)/1.3 var(--sans)}
+.appx summary::-webkit-details-marker{display:none}
+.appx summary::before{content:"▶";font:400 .65rem/1 var(--sans);color:var(--ink-3);width:10px}
+.appx details[open] summary::before{content:"▼"}
+.appx .appx-body{padding:4px 18px 20px 42px;font-size:var(--fs-sm)}
+.defs{margin:0}
+.defs dt{font-weight:600;margin-top:14px}
+.defs dt:first-child{margin-top:0}
+.defs dd{margin:4px 0 0;color:var(--ink-2)}
+.defs dd small{display:block;color:var(--ink-3);margin-top:2px}
+
+footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-size:var(--fs-xs);color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+/* ── Panel periksa ────────────────────────── */
+#checks{position:fixed;right:20px;bottom:20px;width:min(420px,calc(100vw - 40px));max-height:70vh;overflow:auto;z-index:40;box-shadow:0 12px 40px rgba(28,29,31,.14)}
+#checks h2{font-size:1.1rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+#checks ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:var(--fs-xs)}
+#checks li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+#checks li:last-child{border-bottom:none}
+.st{font-weight:700;font-size:var(--fs-label);letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:3px;white-space:nowrap}
+.st-ok{background:var(--ok-bg);color:var(--ok)}
+.st-warn{background:var(--warn-bg);color:var(--warn)}
+.st-info{background:var(--sunk);color:var(--ink-2)}
+
+/* ── Responsif ────────────────────────────── */
+@media (max-width:1023px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding:0 20px}
+  .toc{min-width:0}
+  .toc{position:sticky;top:0;height:auto;padding:0;z-index:30;background:var(--paper);margin:0 -20px;border-bottom:1px solid var(--rule);flex-direction:row;align-items:center;gap:0}
+  .toc-brand{display:none}
+  .toc nav{overflow-x:auto;scrollbar-width:none;width:100%}
+  .toc nav::-webkit-scrollbar{display:none}
+  .toc nav ol{flex-direction:row;border-left:none;gap:0;padding:0 12px;white-space:nowrap}
+  .toc nav a{padding:13px 10px;border-left:none;border-bottom:2px solid transparent;margin:0}
+  .toc nav a[aria-current="true"]{border-bottom-color:var(--mark)}
+  main{padding-top:36px;max-width:none}
+  section,.week{scroll-margin-top:64px}
+}
+@media (max-width:720px){
+  body{font-size:15px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts div:nth-child(even){padding-left:16px;border-left:1px solid var(--rule)}
+  .facts div:nth-child(odd){padding-left:0;border-left:none}
+  .facts div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .now{grid-template-columns:1fr}
+  .now-side{text-align:left}
+  .two-col{columns:1}
+  .cp-subs li{grid-template-columns:minmax(0,1fr) auto;gap:2px 12px}
+  .cp-subs li.cp-subs-head{display:none}
+  .cp-subs li > :nth-child(1){grid-column:1;grid-row:1}
+  .cp-subs li > :nth-child(4){grid-column:2;grid-row:1}
+  .cp-subs li > :nth-child(2){grid-column:1 / -1}
+  .cp-subs li > :nth-child(3){grid-column:1 / -1}
+  .week > summary{grid-template-columns:14px 44px minmax(0,1fr);gap:10px;padding:12px 14px}
+  .wk-right{grid-column:3;justify-content:flex-start}
+  .wk-no b{font-size:1.15rem}
+  .wk-body{grid-template-columns:1fr;margin:0 14px}
+  .week-gap{grid-template-columns:1fr;gap:2px;padding:10px 14px}
+  .holidays ul{grid-template-columns:1fr}
+  .matrix td,.matrix th{padding:8px 3px}
+  .matrix .cell{padding:4px 4px}
+  .team{grid-template-columns:1fr}
+  .appx .appx-body{padding-left:18px}
+  section{padding-top:56px}
+}
+
+/* ── Cetak ────────────────────────────────── */
+@page{size:A4;margin:16mm 14mm}
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;background:#fff}
+  .toc,.toolbar,.filter-note,#checks,#tip{display:none !important}
+  .shell{display:block;padding:0;max-width:none}
+  main{padding:0;max-width:none}
+  section{padding-top:28px;break-inside:auto}
+  .sec-head{break-after:avoid}
+  #rencana,#asesmen,#lampiran{break-before:page;padding-top:0}
+  .box,.week,.appx details{border-color:#bbb}
+  .week,.week-gap,.cp,tr{break-inside:avoid}
+  .week[hidden]{display:block !important}
+  .week-gap[hidden]{display:grid !important}
+  .now{display:none}
+  a{color:inherit;text-decoration:none}
+  .stack span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sw,.matrix .cell,.bar i,.tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ── Tombol kanan atas ────────────────────── */
+.theme-ctl{position:fixed;top:14px;right:16px;z-index:45;display:flex;gap:8px}
+.ctl{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--rule-2);background:var(--surface);color:var(--ink-2);cursor:pointer;text-decoration:none;padding:0;transition:color .2s,border-color .2s,box-shadow .2s}
+.ctl:hover{color:var(--accent);border-color:var(--accent)}
+.ctl svg{width:18px;height:18px}
+.ic-sun{display:none}
+[data-theme="dark"] .ic-sun{display:block}
+[data-theme="dark"] .ic-moon{display:none}
+.bg-fx{display:none}
+@media print{.theme-ctl,.bg-fx{display:none !important}}
+
+/* ── Mode gelap: emerald, selaras dengan portal mata kuliah ──
+   Struktur mengikuti mode terang: huruf Inter, kartu padat
+   di atas latar yang lebih gelap, sudut 8px, jarak antarkartu sama. */
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-50px) scale(1.1)}66%{transform:translate(-20px,20px) scale(.9)}}
+@media screen{
+  [data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#0B1120; --surface:#172033; --sunk:#222D44;
+    --ink:#F1F5F9; --ink-2:#CBD5E1; --ink-3:#94A3B8;
+    --rule:#2A3650; --rule-2:#3A4866;
+    --accent:#34d399; --accent-2:#10b981; --accent-3:#065f46; --tint:rgba(16,185,129,.16);
+    --warn:#fbbf24; --warn-bg:rgba(251,191,36,.12); --ok:#34d399; --ok-bg:rgba(52,211,153,.12);
+    --strong:#56657F; --mark:var(--accent);
+    --chip-on-bg:var(--accent); --chip-on-fg:#022c22;
+    --tip-bg:#2A3650; --tip-fg:#E2E8F0; --tip-ref:#94A3B8;
+    --on-accent:#022c22; --on-accent-2:#022c22; --on-accent-3:#d1fae5;
+  }
+  [data-theme="dark"] ::selection{background:rgba(16,185,129,.3)}
+  [data-theme="dark"] .hero h1{background:linear-gradient(90deg,#34d399,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+  [data-theme="dark"] .eyebrow{text-shadow:0 0 18px rgba(52,211,153,.45)}
+
+  /* Kartu: sorotan emerald saat diarahkan kursor */
+  [data-theme="dark"] .week,[data-theme="dark"] .appx details,[data-theme="dark"] .person{transition:border-color .2s,box-shadow .2s}
+  [data-theme="dark"] .week:hover,[data-theme="dark"] .appx details:hover,[data-theme="dark"] .person:hover{border-color:rgba(16,185,129,.45);box-shadow:0 8px 24px -12px rgba(16,185,129,.3)}
+
+  /* Sentuhan neon */
+  [data-theme="dark"] .week.is-now,[data-theme="dark"] .now{border-color:rgba(16,185,129,.5);box-shadow:0 0 0 1px rgba(16,185,129,.15),0 0 28px -8px rgba(16,185,129,.35)}
+  [data-theme="dark"] .now-big,[data-theme="dark"] .cp-total b{color:var(--accent);text-shadow:0 0 20px rgba(52,211,153,.45)}
+  [data-theme="dark"] .bar i{box-shadow:0 0 10px rgba(52,211,153,.5)}
+  [data-theme="dark"] .chip[aria-pressed="true"]{box-shadow:0 0 16px -2px rgba(52,211,153,.6)}
+  [data-theme="dark"] .ctl:hover{box-shadow:0 0 16px -4px rgba(52,211,153,.6)}
+  [data-theme="dark"] #tip{border:1px solid var(--rule-2)}
+  [data-theme="dark"] #checks{box-shadow:0 12px 40px rgba(0,0,0,.5)}
+
+  /* Cahaya latar */
+  [data-theme="dark"] .bg-fx{display:block;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .bg-fx span{position:absolute;width:24rem;height:24rem;border-radius:50%;filter:blur(64px);opacity:.12;animation:blob 12s ease-in-out infinite}
+  .bg-fx span:nth-child(1){top:2.5rem;left:2.5rem;background:#059669}
+  .bg-fx span:nth-child(2){top:6rem;right:2.5rem;background:#2563eb;animation-delay:-4s}
+  .bg-fx span:nth-child(3){bottom:2.5rem;left:33%;background:#9333ea;opacity:.08;animation-delay:-8s}
+}
+@media (prefers-reduced-motion:reduce){.bg-fx span{animation:none}}
+@media (max-width:1023px){
+  .toc nav{width:auto;flex:1;min-width:0;margin-right:88px}
+  .theme-ctl{top:6px;right:10px}
+  .ctl{width:36px;height:36px}
+  [data-theme="dark"] .toc{background:rgba(11,17,32,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+}
+
+/* ── Tambahan khusus SAP ──────────────────── */
+.steps{font-size:var(--fs-sm)}
+.steps th,.steps td{padding:9px 12px 9px 0}
+.steps .stage{font-weight:600;color:var(--ink-2);white-space:nowrap;width:104px}
+.steps td.min,.steps th.min{text-align:right;padding-right:0;width:56px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.steps tr.stage-first td{border-top:1px solid var(--rule-2)}
+.steps tbody tr:first-child td{border-top:none}
+.steps tfoot td{font-weight:700}
+.task-list{list-style:none;padding:0;margin:0 0 10px;display:flex;flex-direction:column;gap:8px}
+.task-list li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;align-items:baseline}
+.task-list .t-luaran{grid-column:2;color:var(--ink-3);font-size:var(--fs-xs)}
+.wk-note{font-size:var(--fs-sm);color:var(--ink-2);background:var(--sunk);border-radius:6px;padding:10px 12px;margin:0}
+.pattern{margin-top:20px}
+.pattern-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.link-rps{font-weight:600;text-decoration:none}
+.link-rps:hover{text-decoration:underline}
+@media (max-width:720px){
+  .steps .stage{width:auto}
+  .steps thead{display:none}
+  .steps tr.stage-first td{border-top:none}
+  .steps tr.stage-first{border-top:1px solid var(--rule-2)}
+  .steps tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:10px 0;border-bottom:1px solid var(--rule)}
+  .steps td{border:none;padding:0}
+  .steps td.stage{grid-column:1;font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3)}
+  .steps td.stage:empty{display:none}
+  .steps td.min{grid-column:2;grid-row:1}
+  .steps td.d,.steps td.m{grid-column:1 / -1}
+  .steps td.d::before{content:"Dosen: ";font-weight:600;color:var(--ink-3)}
+  .steps td.m::before{content:"Mahasiswa: ";font-weight:600;color:var(--ink-3)}
+  .steps tfoot tr{display:flex;justify-content:space-between}
+}
+@media print{
+  #pertemuan .week{break-before:page;break-inside:auto}
+  #pertemuan .week:first-of-type{break-before:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fx" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<div class="theme-ctl">
+  <a class="ctl" href="index.html" aria-label="Kembali ke portal mata kuliah" title="Portal mata kuliah">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+  </a>
+  <button class="ctl" type="button" id="theme-toggle">
+    <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+
+<div class="shell">
+  <aside class="toc" aria-label="Daftar isi">
+    <div class="toc-brand">SAP <strong id="toc-title"></strong></div>
+    <nav>
+      <ol id="toc-list">
+        <li><a href="#ringkasan">Ringkasan</a></li>
+        <li><a href="#pertemuan">Pertemuan</a></li>
+        <li><a href="#pustaka">Pustaka</a></li>
+        <li><a href="#lampiran">Lampiran</a></li>
+        <li><a href="rps.html" data-external>RPS ↗</a></li>
+      </ol>
+    </nav>
+  </aside>
+
+  <main id="main">
+    <header class="hero" id="top">
+      <div class="eyebrow" id="hero-eyebrow"></div>
+      <h1 id="hero-title"></h1>
+      <p class="lede" id="hero-lede"></p>
+      <dl class="facts" id="facts"></dl>
+      <div class="box now" id="now" aria-live="polite"></div>
+    </header>
+
+    <section id="ringkasan" aria-labelledby="h-ringkasan">
+      <div class="sec-head"><h2 id="h-ringkasan">Ringkasan</h2></div>
+      <div class="prose" id="sap-intro"></div>
+      <div class="pattern">
+        <div class="pattern-head"><h3 style="margin:0">Pola pertemuan</h3><span class="muted small" id="pattern-note"></span></div>
+        <div class="stack" id="pattern-stack" role="img"></div>
+        <ul class="legend" id="pattern-legend"></ul>
+      </div>
+    </section>
+
+    <section id="pertemuan" aria-labelledby="h-pertemuan">
+      <div class="sec-head">
+        <h2 id="h-pertemuan">Pertemuan</h2>
+        <p>Buka satu pekan untuk melihat langkah pembelajaran, media, asesmen, dan tugasnya. Pilih kode dosen untuk menampilkan pekan yang diampu.</p>
+      </div>
+      <div class="sched-head"><div class="sched-when" id="sched-when"></div></div>
+      <div class="toolbar">
+        <div class="chips" id="chips" role="group" aria-label="Saring berdasarkan dosen"></div>
+        <div>
+          <button class="btn btn-quiet" type="button" data-action="expand">Buka semua</button>
+          <button class="btn btn-quiet" type="button" data-action="collapse">Tutup semua</button>
+        </div>
+      </div>
+      <p class="filter-note" id="filter-note"></p>
+      <div class="weeks" id="weeks"></div>
+    </section>
+
+    <section id="pustaka" aria-labelledby="h-pustaka">
+      <div class="sec-head"><h2 id="h-pustaka">Pustaka</h2><p>Bacaan per pekan merujuk pada daftar ini. Bab yang dibaca ditentukan dosen pengampu.</p></div>
+      <h3>Utama</h3>
+      <ol class="list-rule list-plain small" id="pustaka-utama"></ol>
+      <h3 style="margin-top:28px">Pendukung</h3>
+      <ol class="list-rule list-plain small" id="pustaka-pendukung"></ol>
+    </section>
+
+    <section id="lampiran" aria-labelledby="h-lampiran">
+      <div class="sec-head"><h2 id="h-lampiran">Lampiran</h2></div>
+      <div class="appx" id="appx"></div>
+    </section>
+
+    <footer>
+      <span id="foot-left"></span>
+      <span id="foot-right"></span>
+    </footer>
+  </main>
+</div>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+(() => {
+"use strict";
+
+const TAHAP = {
+  pendahuluan: { label: "Pendahuluan", warna: "var(--accent-3)", teks: "var(--on-accent-3)" },
+  inti:        { label: "Kegiatan inti", warna: "var(--accent)", teks: "var(--on-accent)" },
+  penutup:     { label: "Penutup", warna: "var(--accent-2)", teks: "var(--on-accent-2)" }
+};
+
+const REF53 = "Permendikbudristek No. 53 Tahun 2023";
+const GLOSARIUM = {
+  "CPMK": { t: "Capaian Pembelajaran Mata Kuliah: kemampuan yang dijabarkan secara spesifik dari CPL yang dibebankan pada mata kuliah." },
+  "Sub-CPMK": { t: "Kemampuan yang dijabarkan dari CPMK, dapat diukur, dan merupakan kemampuan akhir yang direncanakan pada setiap tahap pembelajaran." },
+  "SGD": { t: "Small group discussion (diskusi kelompok kecil)." },
+  "CBL": { t: "Case-based learning (pembelajaran berbasis kasus)." },
+  "PjBL": { t: "Project-based learning (pembelajaran berbasis proyek)." },
+  "PICO": { t: "Population, intervention, comparison, outcome." },
+  "PECO": { t: "Population, exposure, comparison, outcome. Dipakai untuk merumuskan pertanyaan riset observasional." },
+  "CASP": { t: "Critical Appraisal Skills Programme: perangkat daftar periksa untuk menilai kualitas artikel riset." },
+  "ARRIVE 2.0": { t: "Animal Research: Reporting of In Vivo Experiments. Pedoman pelaporan riset yang menggunakan hewan, diperbarui pada 2020." },
+  "STROBE-Vet": { t: "Perluasan pedoman STROBE untuk pelaporan studi observasional di bidang kedokteran hewan." },
+  "REFLECT": { t: "Pedoman pelaporan uji klinis teracak pada ternak dan keamanan pangan." },
+  "dummy table": { t: "Kerangka tabel: tabel kosong yang kepala kolom dan barisnya berisi variabel serta kategorinya. Sel diisi setelah data terkumpul." },
+  "Formatif": { t: "Evaluasi berkelanjutan selama pembelajaran untuk memantau perkembangan belajar, memberi umpan balik, dan memperbaiki proses pembelajaran.", r: REF53 + " Pasal 27 ayat (2)" },
+  "Sumatif": { t: "Asesmen pencapaian hasil belajar sebagai dasar kelulusan mata kuliah, mengacu pada pemenuhan CPL.", r: REF53 + " Pasal 27 ayat (4) dan (5)" },
+  "Penugasan terstruktur": { t: "Tugas yang dirancang dosen dan dikerjakan mahasiswa di luar jam kuliah.", r: REF53 + " Pasal 16" },
+  "Belajar mandiri": { t: "Kegiatan belajar yang dilakukan mahasiswa secara mandiri.", r: REF53 + " Pasal 16" }
+};
+const TERM_RE = /\b(PICO|PECO|CASP|ARRIVE 2\.0|STROBE-Vet|REFLECT|dummy table)\b/g;
+
+/* ── Utilitas ────────────────────────────────────────────────────── */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const term = (k, label) => {
+  const g = GLOSARIUM[k]; if (!g) return esc(label || k);
+  return `<span class="term" tabindex="0" data-tip="${esc(g.t)}"${g.r ? ` data-ref="${esc(g.r)}"` : ""}>${esc(label || k)}</span>`;
+};
+const withTerms = s => esc(s).replace(TERM_RE, k => term(k));
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+const HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+const BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+const BLN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+const DAY = 864e5;
+const D = {
+  parse(s) { if (!s) return null; const [y, m, d] = s.split("-").map(Number); return Date.UTC(y, m - 1, d); },
+  iso(t) { return new Date(t).toISOString().slice(0, 10); },
+  add(t, n) { return t + n * DAY; },
+  dow(t) { return new Date(t).getUTCDay(); },
+  long(t) { const d = new Date(t); return `${HARI[d.getUTCDay()]}, ${d.getUTCDate()} ${BULAN[d.getUTCMonth()]} ${d.getUTCFullYear()}`; },
+  mid(t) { const d = new Date(t); return `${d.getUTCDate()} ${BULAN[d.getUTCMonth()]} ${d.getUTCFullYear()}`; },
+  short(t) { const d = new Date(t); return `${d.getUTCDate()} ${BLN[d.getUTCMonth()]}`; },
+  shortDay(t) { const d = new Date(t); return `${HARI[d.getUTCDay()]}, ${d.getUTCDate()} ${BLN[d.getUTCMonth()]}`; },
+  range(a, b) {
+    const x = new Date(a), y = new Date(b);
+    if (x.getUTCMonth() === y.getUTCMonth()) return `${x.getUTCDate()}–${y.getUTCDate()} ${BULAN[y.getUTCMonth()]} ${y.getUTCFullYear()}`;
+    return `${x.getUTCDate()} ${BULAN[x.getUTCMonth()]} – ${y.getUTCDate()} ${BULAN[y.getUTCMonth()]} ${y.getUTCFullYear()}`;
+  },
+  today() {
+    const q = new URLSearchParams(location.search).get("tanggal");
+    if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return D.parse(q);
+    const n = new Date(); return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate());
+  }
+};
+
+/* ── Data turunan ────────────────────────────────────────────────── */
+const M = RPS.meta;
+const dosenByKode = Object.fromEntries(RPS.dosen.map(d => [d.kode, d]));
+const subByKode = Object.fromEntries(RPS.subcpmk.map(s => [s.kode, s]));
+const liburByIso = {};
+RPS.libur.forEach(l => { (liburByIso[l.tanggal] ||= []).push(l); });
+
+const pertemuan = [...RPS.pertemuan].sort((a, b) => a.pekan - b.pekan).map(p => ({
+  ...RPS.bawaanPertemuan, ...p,
+  dosenList: p.dosen === "semua" ? RPS.dosen.map(d => d.kode) : (p.dosen || [])
+}));
+const pekanOf = kode => pertemuan.filter(p => p.sub === kode).map(p => p.pekan);
+const fmtPekan = arr => arr.length ? "Pekan " + [...new Set(arr)].sort((a, b) => a - b).join(", ") : "–";
+const menitTahap = (sap, k) => ((sap.langkah || {})[k] || []).reduce((a, r) => a + (+r[0] || 0), 0);
+const menitTotal = sap => Object.keys(TAHAP).reduce((a, k) => a + menitTahap(sap, k), 0);
+
+/* Jadwal: sama dengan perhitungan di RPS */
+function buildSchedule() {
+  const J = RPS.jadwal, start = D.parse(J.mulai);
+  const offset = (D.dow(start) + 6) % 7;
+  let monday = D.add(start, -offset);
+  const manual = new Set((J.pekanJeda || []).map(s => { const t = D.parse(s); return D.iso(D.add(t, -((D.dow(t) + 6) % 7))); }));
+  const sessions = [], gaps = [];
+  for (const p of pertemuan) {
+    for (let guard = 0; guard < 10; guard++) {
+      const days = [0, 1, 2, 3, 4].map(i => D.add(monday, i));
+      const allOff = days.every(d => liburByIso[D.iso(d)]);
+      if ((J.lewatiPekanLibur && allOff) || manual.has(D.iso(monday))) {
+        const names = [...new Set(days.flatMap(d => (liburByIso[D.iso(d)] || []).map(l => l.nama)))];
+        gaps.push({ monday, reason: names.length ? names.join(", ") : "Pekan jeda", beforePekan: p.pekan });
+        monday = D.add(monday, 7); continue;
+      }
+      break;
+    }
+    const days = [0, 1, 2, 3, 4].map(i => D.add(monday, i));
+    const date = D.add(monday, offset);
+    const s = { ...p, monday, date, libur: null, pengganti: D.parse(p.tanggalPengganti) };
+    if (p.sepekan) {
+      const open = days.filter(d => !liburByIso[D.iso(d)]);
+      s.rangeStart = open[0]; s.rangeEnd = open[open.length - 1];
+    } else {
+      s.libur = liburByIso[D.iso(date)] || null;
+    }
+    sessions.push(s);
+    monday = D.add(monday, 7);
+  }
+  return { sessions, gaps };
+}
+const SCHED = buildSchedule();
+const sessionByPekan = Object.fromEntries(SCHED.sessions.map(s => [s.pekan, s]));
+const firstDate = SCHED.sessions[0]?.date;
+const last = SCHED.sessions[SCHED.sessions.length - 1];
+const lastDate = last ? (last.rangeEnd || last.date) : null;
+const jam = `${RPS.jadwal.jamMulai}–${RPS.jadwal.jamSelesai} ${RPS.jadwal.zonaWaktu}`;
+const hariKuliah = firstDate != null ? HARI[D.dow(firstDate)] : "";
+const sessionDateLabel = (s, style = "long") => {
+  if (s.sepekan) return D.range(s.rangeStart, s.rangeEnd);
+  const t = s.pengganti || s.date;
+  return style === "long" ? D.long(t) : D.shortDay(t);
+};
+function dosenNames(list) { return list.map(k => dosenByKode[k]?.nama || k).join("; "); }
+function dosenCodes(list) { return list.length === RPS.dosen.length ? "Semua dosen" : list.join(", "); }
+
+/* Keterangan sumatif otomatis dari data RPS */
+function sumatifNote(p, sub) {
+  const pk = pekanOf(p.sub), akhir = Math.max(...pk);
+  if (!sub.kode) return "";
+  if (sub.asesmen === "proyek") {
+    if (p.bentuk === "Seminar") return `${sub.teknik} dengan rubrik · bobot ${sub.bobot}%`;
+    return `Belum ada; ${sub.kode} dinilai pada pekan ${akhir}`;
+  }
+  if (p.pekan === akhir) return `${sub.teknik}: kuis ${sub.kode} dibuka setelah pertemuan ini · bobot ${sub.bobot}%`;
+  return `Belum ada; kuis ${sub.kode} dibuka setelah pekan ${akhir}`;
+}
+
+/* Status tugas pada pekan tertentu */
+function tugasPekan(n) {
+  return (RPS.penugasan || []).map((t, i) => ({ ...t, no: i + 1, pk: [].concat(t.pekan || []) }))
+    .filter(t => t.pk.includes(n))
+    .map(t => {
+      const a = Math.min(...t.pk), b = Math.max(...t.pk);
+      const st = a === b ? "Pekan ini" : n === a ? "Mulai" : n === b ? "Tenggat" : "Berlanjut";
+      return { ...t, st };
+    });
+}
+
+/* ── Render: kepala ──────────────────────────────────────────────── */
+function renderHero() {
+  document.title = `SAP ${M.namaMK} · ${M.periode} ${M.tahunAkademik}`;
+  $("#toc-title").textContent = M.namaMK;
+  $("#hero-eyebrow").textContent = `Satuan Acara Perkuliahan · ${M.periode} ${M.tahunAkademik}`;
+  $("#hero-title").textContent = M.namaMK;
+  $("#hero-lede").textContent = `${M.prodi}, ${M.fakultas}, ${M.universitas}.`;
+  const facts = [
+    ["Kode", M.kode, M.sifat],
+    ["Bobot", `${M.sksTeori + M.sksPraktik} sks`, `Teori ${M.sksTeori} · Praktik ${M.sksPraktik}`],
+    ["Semester", M.semester, `Angkatan ${M.angkatan}`],
+    ["Jadwal", hariKuliah ? `${hariKuliah}, ${RPS.jadwal.jamMulai}–${RPS.jadwal.jamSelesai}` : "Menyusul", RPS.jadwal.zonaWaktu],
+    ["Durasi", `${SAP.durasi} menit`, "per pertemuan"],
+    ["Pertemuan", `${pertemuan.length} pekan`, firstDate != null ? `${D.short(firstDate)} – ${D.short(lastDate)} ${new Date(lastDate).getUTCFullYear()}` : ""]
+  ];
+  $("#facts").innerHTML = facts.map(([k, v, s]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}${s ? `<span>${esc(s)}</span>` : ""}</dd></div>`).join("");
+}
+
+function renderNow() {
+  const el = $("#now"), today = D.today();
+  if (!SCHED.sessions.length) { el.hidden = true; return; }
+  const cur = SCHED.sessions.find(s => today >= s.monday && today < D.add(s.monday, 7));
+  const gap = SCHED.gaps.find(g => today >= g.monday && today < D.add(g.monday, 7));
+  const link = s => `<a class="week-link" href="#pekan-${s.pekan}" data-open="${s.pekan}">Buka SAP pekan ${s.pekan}</a>`;
+  let html = "";
+  if (today < SCHED.sessions[0].monday) {
+    const s = SCHED.sessions[0], n = Math.round((s.date - today) / DAY);
+    html = `<div><div class="now-label">Kuliah pertama</div>
+      <div class="now-title">${esc(s.topik)}</div>
+      <div class="now-meta">${esc(sessionDateLabel(s))}, ${esc(RPS.jadwal.jamMulai)} ${esc(RPS.jadwal.zonaWaktu)} · ${link(s)}</div></div>
+      <div class="now-side"><div class="now-big">${n}</div><div class="muted small">hari lagi</div></div>`;
+  } else if (cur) {
+    const next = SCHED.sessions.find(s => s.pekan > cur.pekan);
+    html = `<div><div class="now-label">Pekan ini</div>
+      <div class="now-title">Pekan ${cur.pekan}: ${esc(cur.topik)}</div>
+      <div class="now-meta">${esc(sessionDateLabel(cur))} · ${esc(dosenCodes(cur.dosenList))} · ${link(cur)}</div></div>
+      <div class="now-side"><div class="now-big">${cur.pekan}<span class="muted" style="font-size:1rem"> / ${pertemuan.length}</span></div></div>
+      ${next ? `<div class="now-next">Berikutnya: Pekan ${next.pekan} · ${esc(next.topik)}, ${esc(sessionDateLabel(next, "short"))}</div>` : ""}`;
+  } else if (gap) {
+    const next = SCHED.sessions.find(s => s.monday > gap.monday);
+    html = `<div><div class="now-label">Pekan jeda</div>
+      <div class="now-title">Tidak ada perkuliahan pekan ini</div>
+      <div class="now-meta">${esc(gap.reason)}</div></div>
+      ${next ? `<div class="now-next">Berikutnya: Pekan ${next.pekan} · ${esc(next.topik)}, ${esc(sessionDateLabel(next, "short"))}</div>` : ""}`;
+  } else if (today > lastDate) {
+    html = `<div><div class="now-label">Semester selesai</div>
+      <div class="now-title">Perkuliahan berakhir ${esc(D.mid(lastDate))}</div>
+      <div class="now-meta">${pertemuan.length} pekan telah dilaksanakan.</div></div>`;
+  } else { el.hidden = true; return; }
+  el.innerHTML = html;
+}
+
+/* ── Render: ringkasan ───────────────────────────────────────────── */
+function renderRingkasan() {
+  $("#sap-intro").innerHTML = `<p>SAP ini menjabarkan RPS ${esc(M.namaMK)} menjadi skenario setiap pertemuan: apa yang dilakukan dosen, apa yang dikerjakan mahasiswa, berapa lama, dengan media apa, dan bagaimana kemampuan akhir diukur. Kemampuan akhir, indikator, materi, dan bobot diambil langsung dari RPS, sehingga keduanya selalu sejalan.</p>
+    <p>Setiap pertemuan berlangsung ${SAP.durasi} menit (${esc(jam)}). Langkah pembelajaran adalah rancangan awal; dosen pengampu dapat menyesuaikan urutan dan alokasi waktu selama total menit tetap sama. Rincian instruksi tugas ada di dokumen Rencana Tugas Mahasiswa (RTM).</p>`;
+  const reguler = pertemuan.map(p => SAP.pekan[p.pekan]).filter(s => s && !s.perMahasiswa && menitTotal(s) > 0);
+  const avg = {};
+  Object.keys(TAHAP).forEach(k => { avg[k] = Math.round(reguler.reduce((a, s) => a + menitTahap(s, k), 0) / (reguler.length || 1)); });
+  $("#pattern-note").textContent = `Rata-rata ${reguler.length} pertemuan kelas`;
+  $("#pattern-stack").setAttribute("aria-label", Object.keys(TAHAP).map(k => `${TAHAP[k].label} ${avg[k]} menit`).join(", "));
+  $("#pattern-stack").innerHTML = Object.keys(TAHAP).map(k => `<span style="flex:${avg[k]};background:${TAHAP[k].warna};color:${TAHAP[k].teks}">${avg[k]}′</span>`).join("");
+  $("#pattern-legend").innerHTML = Object.keys(TAHAP).map(k => `<li><i class="sw" style="background:${TAHAP[k].warna}"></i><span><b class="num">${avg[k]} menit</b> ${esc(TAHAP[k].label)}</span></li>`).join("");
+}
+
+/* ── Render: pertemuan ───────────────────────────────────────────── */
+function stepsTable(sap) {
+  const rows = Object.keys(TAHAP).map(k => ((sap.langkah || {})[k] || []).map((r, i) =>
+    `<tr${i === 0 ? ' class="stage-first"' : ""}><td class="stage">${i === 0 ? esc(TAHAP[k].label) : ""}</td><td class="d">${withTerms(r[1])}</td><td class="m">${withTerms(r[2])}</td><td class="min">${+r[0] || 0}′</td></tr>`).join("")).join("");
+  const tot = menitTotal(sap);
+  return `<div class="tbl-wrap"><table class="steps">
+    <thead><tr><th>Tahap</th><th>Kegiatan dosen</th><th>Kegiatan mahasiswa</th><th class="min">Menit</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr><td colspan="3">${sap.perMahasiswa ? "Jumlah per mahasiswa" : "Jumlah"}</td><td class="min">${tot}′</td></tr></tfoot>
+  </table></div>`;
+}
+
+function renderWeeks() {
+  const W = RPS.bawaanPertemuan.waktu;
+  $("#weeks").innerHTML = pertemuan.map(p => {
+    const s = sessionByPekan[p.pekan], sub = subByKode[p.sub] || {}, sap = SAP.pekan[p.pekan] || {};
+    const w = { ...W, ...(p.waktu || {}) };
+    const metode = (p.metode || sub.metode || []).map(m => term(m)).join(", ");
+    let libur = "";
+    if (s?.libur && !s.pengganti) libur = ` · <span style="color:var(--warn)">${esc([...new Set(s.libur.map(l => l.nama))].join(", "))}, jadwal pengganti menyusul</span>`;
+    else if (s?.libur && s.pengganti) libur = ` · pengganti hari libur ${esc(D.shortDay(s.date))}`;
+    const gaps = SCHED.gaps.filter(g => g.beforePekan === p.pekan).map(g =>
+      `<div class="week-gap"><span>Pekan jeda</span><span><b>${esc(D.range(g.monday, D.add(g.monday, 4)))}</b> · ${esc(g.reason)}</span></div>`).join("");
+    const tugas = tugasPekan(p.pekan);
+    const tugasHtml = tugas.length ? `<ul class="task-list">${tugas.map(t => `<li><span class="tag">${esc(t.st)}</span><span>Tugas ${String(t.no).padStart(2, "0")} · ${esc(t.judul)}</span><span class="t-luaran">${esc(t.luaran || "")}</span></li>`).join("")}</ul>` : "";
+    const bacaan = (sap.bacaan || []).length ? `<ul>${sap.bacaan.map(b => `<li>${esc(b)}</li>`).join("")}</ul>` : `<p class="muted">Materi dari dosen pengampu.</p>`;
+    return gaps + `<details class="week" id="pekan-${p.pekan}" data-dosen="${esc(p.dosenList.join(" "))}">
+      <summary>
+        <span class="wk-no">Pekan<b>${String(p.pekan).padStart(2, "0")}</b></span>
+        <span><span class="wk-topic">${esc(p.topik)}</span><span class="wk-date">${s ? esc(sessionDateLabel(s, "short")) : ""}${libur}</span></span>
+        <span class="wk-right"><span class="tag">${esc(p.sub)}</span><span class="tag tag-accent">${esc(dosenCodes(p.dosenList))}</span></span>
+      </summary>
+      <div class="wk-body">
+        <div><h4>Kemampuan akhir</h4><p>${esc(sub.teks || "")}</p>
+          <p class="muted small" style="margin:0">Indikator: ${withTerms(sub.indikator || "")}</p></div>
+        <div><h4>Materi pokok</h4><ul>${p.materi.map(m => `<li>${withTerms(m)}</li>`).join("")}</ul></div>
+        <div class="wk-wide"><h4>Langkah pembelajaran</h4>${stepsTable(sap)}</div>
+        <div><h4>Metode dan media</h4>
+          <dl class="kv">
+            <dt>Bentuk</dt><dd>${esc(p.bentuk)}${metode ? ` · ${metode}` : ""}</dd>
+            <dt>Media</dt><dd>${esc((sap.media || []).join("; ") || "–")}</dd>
+            <dt>Dosen</dt><dd>${esc(p.dosenList.length === RPS.dosen.length ? "Semua dosen tim pengajar" : dosenNames(p.dosenList))}</dd>
+          </dl></div>
+        <div><h4>Asesmen</h4>
+          <dl class="kv">
+            <dt>${term("Formatif")}</dt><dd>${esc(p.formatif.join(", "))}</dd>
+            <dt>${term("Sumatif")}</dt><dd>${esc(sap.sumatif || sumatifNote(p, sub))}</dd>
+            <dt>Kriteria</dt><dd>${esc(p.kriteria)}</dd>
+          </dl></div>
+        <div><h4>Tugas dan belajar mandiri</h4>${tugasHtml}
+          <dl class="kv">
+            <dt>${term("Penugasan terstruktur")}</dt><dd>${esc(w.terstruktur)}</dd>
+            <dt>${term("Belajar mandiri")}</dt><dd>${esc(w.mandiri)}</dd>
+          </dl>
+          <p class="small" style="margin:8px 0 0">${esc(sap.mandiri || "")}</p></div>
+        <div><h4>Bacaan</h4>${bacaan}</div>
+        ${sap.catatan ? `<div class="wk-wide"><p class="wk-note">${esc(sap.catatan)}</p></div>` : ""}
+      </div>
+    </details>`;
+  }).join("");
+}
+
+/* ── Filter dosen ────────────────────────────────────────────────── */
+let filterDosen = store.get("sap-mi-dosen") || "semua";
+if (filterDosen !== "semua" && !dosenByKode[filterDosen]) filterDosen = "semua";
+function renderChips() {
+  $("#chips").innerHTML = [`<button class="chip" type="button" data-dosen="semua">Semua</button>`]
+    .concat(RPS.dosen.map(d => `<button class="chip" type="button" data-dosen="${esc(d.kode)}" data-tip="${esc(d.nama)}">${esc(d.kode)}</button>`)).join("");
+}
+function applyFilter() {
+  $$("#chips .chip").forEach(c => c.setAttribute("aria-pressed", String(c.dataset.dosen === filterDosen)));
+  let n = 0;
+  $$("#weeks .week").forEach(w => {
+    const show = filterDosen === "semua" || w.dataset.dosen.split(" ").includes(filterDosen);
+    w.hidden = !show; if (show) n++;
+  });
+  $$("#weeks .week-gap").forEach(g => g.hidden = filterDosen !== "semua");
+  $("#filter-note").textContent = filterDosen === "semua" ? "" : `${dosenByKode[filterDosen].nama} mengampu ${n} pekan.`;
+  store.set("sap-mi-dosen", filterDosen);
+}
+
+/* ── Render: jadwal, pustaka, lampiran ───────────────────────────── */
+function renderJadwal() {
+  $("#sched-when").innerHTML = `${esc(hariKuliah)}, ${esc(jam)} <span>· ${esc(RPS.jadwal.ruang ? "Ruang " + RPS.jadwal.ruang : "Ruang menyusul")}</span>`;
+}
+function renderPustaka() {
+  const fmt = x => esc(x).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  const li = (x, i) => `<li><span class="muted num">${i + 1}.</span><span>${fmt(x)}</span></li>`;
+  $("#pustaka-utama").innerHTML = RPS.pustaka.utama.map(li).join("");
+  $("#pustaka-pendukung").innerHTML = RPS.pustaka.pendukung.map(li).join("");
+}
+function renderLampiran() {
+  const O = M.otorisasi;
+  const defs = [
+    ["Satuan Acara Perkuliahan (SAP)", "Rancangan pelaksanaan satu pertemuan yang menjabarkan kemampuan akhir, materi, langkah pembelajaran, media, alokasi waktu, dan asesmen berdasarkan RPS."],
+    ["Pendahuluan", "Bagian awal pertemuan untuk membuka kuliah, menyampaikan kemampuan akhir, dan mengaitkan materi dengan pengetahuan atau pengalaman mahasiswa."],
+    ["Kegiatan inti", "Bagian utama pertemuan berisi penyajian materi, diskusi, latihan, atau praktik yang mengarah pada pencapaian Sub-CPMK."],
+    ["Penutup", "Bagian akhir pertemuan untuk asesmen formatif, rangkuman, umpan balik, dan penyampaian tugas atau persiapan pertemuan berikutnya."],
+    ["Media pembelajaran", "Sarana yang dipakai untuk menyampaikan materi dan mendukung kegiatan belajar, misalnya slide, artikel contoh, lembar kerja, atau LMS."]
+  ];
+  $("#appx").innerHTML = `
+    <details><summary>Identitas dan otorisasi dokumen</summary><div class="appx-body">
+      <dl class="kv" style="font-size:var(--fs-sm);gap:8px 20px">
+        <dt>Mata kuliah</dt><dd>${esc(M.namaMK)} (${esc(M.kode)})</dd>
+        <dt>Bobot</dt><dd>T = ${M.sksTeori}, P = ${M.sksPraktik}</dd>
+        <dt>Semester</dt><dd>${esc(M.semester)} · ${esc(M.periode)} ${esc(M.tahunAkademik)}</dd>
+        <dt>Acuan</dt><dd>RPS ${esc(M.namaMK)}, revisi ${esc(M.tanggalRevisi ? D.mid(D.parse(M.tanggalRevisi)) : "–")}</dd>
+        <dt>Koordinator MK</dt><dd>${esc(O.koordinator)}</dd>
+        <dt>Ketua Prodi</dt><dd>${esc(O.ketuaProdi)}</dd>
+      </dl>
+    </div></details>
+    <details><summary>Catatan istilah</summary><div class="appx-body">
+      <dl class="defs">${defs.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+    </div></details>`;
+  $("#foot-left").textContent = `${M.prodi} · ${M.fakultas} · ${M.universitas} · ${M.kota}`;
+  $("#foot-right").textContent = `SAP ${M.namaMK} · ${M.periode} ${M.tahunAkademik}`;
+}
+
+/* ── Panel periksa (?periksa) ────────────────────────────────────── */
+function renderChecks() {
+  if (!new URLSearchParams(location.search).has("periksa")) return;
+  const out = [], add = (st, msg) => out.push({ st, msg });
+  const kosong = pertemuan.filter(p => !SAP.pekan[p.pekan]).map(p => p.pekan);
+  add(kosong.length ? "warn" : "ok", kosong.length ? `Pekan tanpa SAP: ${kosong.join(", ")}.` : `Setiap pekan (${pertemuan.length}) memiliki SAP.`);
+  const yatim = Object.keys(SAP.pekan).map(Number).filter(n => !pertemuan.some(p => p.pekan === n));
+  if (yatim.length) add("warn", `SAP untuk pekan yang tidak ada di RPS: ${yatim.join(", ")}.`);
+  const salah = pertemuan.filter(p => SAP.pekan[p.pekan] && !SAP.pekan[p.pekan].perMahasiswa && menitTotal(SAP.pekan[p.pekan]) !== SAP.durasi)
+    .map(p => `pekan ${p.pekan} (${menitTotal(SAP.pekan[p.pekan])} menit)`);
+  add(salah.length ? "warn" : "ok", salah.length ? `Total menit tidak sama dengan ${SAP.durasi}: ${salah.join(", ")}.` : `Total menit setiap pertemuan kelas = ${SAP.durasi}.`);
+  pertemuan.filter(p => SAP.pekan[p.pekan]?.perMahasiswa).forEach(p => add("info", `Pekan ${p.pekan} dihitung per mahasiswa: ${menitTotal(SAP.pekan[p.pekan])} menit.`));
+  const tanpaMedia = pertemuan.filter(p => SAP.pekan[p.pekan] && !(SAP.pekan[p.pekan].media || []).length).map(p => p.pekan);
+  if (tanpaMedia.length) add("info", `Media belum diisi: pekan ${tanpaMedia.join(", ")}.`);
+  const tanpaBacaan = pertemuan.filter(p => SAP.pekan[p.pekan] && !(SAP.pekan[p.pekan].bacaan || []).length).map(p => p.pekan);
+  if (tanpaBacaan.length) add("info", `Bacaan belum diisi: pekan ${tanpaBacaan.join(", ")}.`);
+  add("info", `Data RPS yang dipakai: revisi ${M.tanggalRevisi}. Salin ulang objek RPS jika rps.html diperbarui.`);
+  const order = { warn: 0, info: 1, ok: 2 };
+  out.sort((a, b) => order[a.st] - order[b.st]);
+  const label = { ok: "Aman", warn: "Cek", info: "Info" };
+  const panel = document.createElement("aside");
+  panel.id = "checks"; panel.className = "box"; panel.setAttribute("aria-label", "Panel pemeriksaan");
+  panel.innerHTML = `<h2>Pemeriksaan SAP <button class="btn btn-quiet" type="button" data-action="close-checks" aria-label="Tutup">Tutup</button></h2>
+    <ul>${out.map(o => `<li><span class="st st-${o.st}">${label[o.st]}</span><span>${esc(o.msg)}</span></li>`).join("")}</ul>`;
+  document.body.appendChild(panel);
+}
+
+/* ── Interaksi ───────────────────────────────────────────────────── */
+function openWeek(n) {
+  const w = document.getElementById("pekan-" + n); if (!w) return;
+  if (w.hidden) { filterDosen = "semua"; applyFilter(); }
+  w.open = true;
+  w.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  history.replaceState(null, "", "#pekan-" + n);
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-action],[data-open],[data-dosen].chip");
+  if (!t) return;
+  if (t.dataset.open) { e.preventDefault(); openWeek(t.dataset.open); return; }
+  if (t.classList.contains("chip")) { filterDosen = t.dataset.dosen; applyFilter(); return; }
+  const a = t.dataset.action;
+  if (a === "expand") $$("#weeks .week:not([hidden])").forEach(d => d.open = true);
+  if (a === "collapse") $$("#weeks .week").forEach(d => d.open = false);
+  if (a === "close-checks") $("#checks")?.remove();
+});
+
+/* Tooltip */
+const tip = $("#tip"); let tipFor = null;
+function showTip(el) {
+  tipFor = el;
+  tip.innerHTML = esc(el.dataset.tip) + (el.dataset.ref ? `<span class="tip-ref">${esc(el.dataset.ref)}</span>` : "");
+  tip.dataset.show = "true";
+  const r = el.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
+  let x = Math.min(Math.max(8, r.left + r.width / 2 - tw / 2), innerWidth - tw - 8);
+  let y = r.top - th - 8; if (y < 8) y = r.bottom + 8;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+function hideTip() { tip.dataset.show = "false"; tipFor = null; }
+document.addEventListener("mouseover", e => { const el = e.target.closest("[data-tip]"); if (el && el !== tipFor) showTip(el); else if (!el && tipFor) hideTip(); });
+document.addEventListener("focusin", e => { const el = e.target.closest("[data-tip]"); if (el) showTip(el); });
+document.addEventListener("focusout", hideTip);
+document.addEventListener("keydown", e => { if (e.key === "Escape") hideTip(); });
+document.addEventListener("touchstart", e => { const el = e.target.closest(".term"); if (el) { if (tipFor === el) hideTip(); else showTip(el); } else if (tipFor) hideTip(); }, { passive: true });
+addEventListener("scroll", () => { if (tipFor) hideTip(); }, { passive: true });
+
+/* Penanda daftar isi */
+function scrollSpy() {
+  const links = $$("#toc-list a:not([data-external])"), map = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      links.forEach(a => a.removeAttribute("aria-current"));
+      const a = map.get(en.target.id); if (a) {
+        a.setAttribute("aria-current", "true");
+        if (innerWidth < 1024) a.scrollIntoView({ block: "nearest", inline: "center" });
+      }
+    });
+  }, { rootMargin: "-30% 0px -60% 0px" });
+  $$("main section").forEach(s => io.observe(s));
+}
+
+/* Cetak: buka semua akordeon, lalu kembalikan */
+let openState = [];
+addEventListener("beforeprint", () => { openState = $$("details").map(d => d.open); $$("details").forEach(d => d.open = true); });
+addEventListener("afterprint", () => { $$("details").forEach((d, i) => d.open = openState[i] ?? d.open); });
+
+/* ── Tema terang/gelap ───────────────────────────────────────────── */
+function setupTheme() {
+  const btn = $("#theme-toggle"), root = document.documentElement;
+  const sync = () => {
+    const label = root.dataset.theme === "dark" ? "Ganti ke mode terang" : "Ganti ke mode gelap";
+    btn.setAttribute("aria-label", label); btn.title = label;
+  };
+  btn.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    store.set("mi-tema", root.dataset.theme); sync();
+  });
+  sync();
+}
+
+/* ── Mulai ───────────────────────────────────────────────────────── */
+renderHero(); renderNow(); renderRingkasan(); renderWeeks(); renderJadwal();
+renderPustaka(); renderLampiran(); renderChips(); applyFilter(); renderChecks(); scrollSpy(); setupTheme();
+
+const cur = SCHED.sessions.find(s => { const t = D.today(); return t >= s.monday && t < D.add(s.monday, 7); });
+if (cur) document.getElementById("pekan-" + cur.pekan)?.classList.add("is-now");
+if (/^#pekan-\d+$/.test(location.hash)) { const w = $(location.hash); if (w) w.open = true; }
+})();
+</script>
+</body>
+</html>
