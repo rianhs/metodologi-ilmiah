@@ -106,21 +106,22 @@ const RPS = {
     { kode: "AMK", nama: "drh. Anjani Marisa Kartikasari, M.Si.", peran: "" }
   ],
 
-  deskripsi: "Metodologi Ilmiah merupakan mata kuliah wajib berbobot 2 sks yang diselenggarakan pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini bertujuan membekali mahasiswa dengan kemampuan mengevaluasi karya ilmiah kedokteran hewan secara metodologis dan sistematis serta mengomunikasikan karya ilmiah secara akademik melalui poster dan presentasi lisan. Perkuliahan dilaksanakan melalui pembelajaran berbasis kasus dan pembelajaran berbasis proyek. Materi yang diberikan adalah analisis literatur; evaluasi kualitas bab latar belakang, metodologi, hasil, pembahasan, dan kesimpulan; serta penerapan etika penelitian dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab. Menjelang akhir semester, poster ilmiah mahasiswa dinilai oleh seluruh dosen tim pengajar. Pada pekan terakhir, setiap mahasiswa mempresentasikan proposal penelitiannya kepada seorang dosen penguji yang menilai kualitas proposal penelitian dan kemampuan komunikasi mahasiswa.",
+  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan proposalnya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
 
   bahanKajian: [
     "Ilmu, riset, dan metodologi ilmiah",
-    "Etika dalam riset",
+    "Etika riset dan integritas akademik",
     "Kemajuan riset dalam ilmu kedokteran hewan",
-    "Penelusuran literatur",
+    "Penelusuran dan pengelolaan literatur",
     "Perangkat lunak yang mendukung riset",
-    "Review artikel dan teknik pengutipan sumber",
-    "Tema, topik, state-of-the-art, rumusan masalah, dan pertanyaan penelitian",
+    "Telaah artikel riset dan teknik sitasi",
+    "Tema, topik, state-of-the-art, rumusan masalah, dan pertanyaan riset",
     "Desain riset, variabel, pengukuran, dan analisis data",
-    "Hasil, pembahasan, dan penarikan kesimpulan",
-    "Penyajian proposal riset dan hasil riset"
+    "Penyajian data, hasil, pembahasan, dan penarikan kesimpulan",
+    "Penyajian proposal riset melalui poster dan presentasi lisan"
   ],
 
+  /* Teks CPL mengikuti dokumen kurikulum prodi. Jangan diubah di RPS. */
   cpl: [
     { kode: "CPL-1", teks: "Mampu menunjukkan sikap bertanggung jawab, mandiri, disiplin, kreatif, dan profesional berdasarkan nilai ketuhanan dan kemanusiaan yang memiliki semangat kolaboratif dan kewirausahaan di bidang keahliannya." },
     { kode: "CPL-5", teks: "Mampu mengelola, mengendalikan, dan mengembangkan sumber daya yang berkaitan dengan kesehatan hewan dan kesehatan masyarakat veteriner." },
@@ -128,101 +129,138 @@ const RPS = {
     { kode: "CPL-9", teks: "Mampu menggali dan bertukar informasi secara verbal dan nonverbal mengenai kesehatan hewan dengan klien dan pasien, masyarakat, kolega, dan profesi lainnya, serta mampu mengembangkan penelitian di bidang kedokteran hewan dan pelayanan berbasis bukti melalui kolaborasi." }
   ],
 
+  /* Setiap CPMK dan Sub-CPMK memakai satu kata kerja operasional. */
   cpmk: [
-    { kode: "CPMK-1", cpl: "CPL-1", teks: "Mahasiswa mampu menerapkan prinsip etika penelitian dan integritas akademik dalam penyusunan artikel ilmiah." },
-    { kode: "CPMK-2", cpl: "CPL-7", teks: "Mahasiswa mampu menganalisis landasan ilmiah dan metodologis penelitian kedokteran hewan berbasis literatur." },
-    { kode: "CPMK-3", cpl: "CPL-5", teks: "Mahasiswa mampu mengevaluasi kualitas komponen karya ilmiah kedokteran hewan secara metodologis dan sistematis." },
-    { kode: "CPMK-4", cpl: "CPL-9", teks: "Mahasiswa mampu mengomunikasikan komponen karya ilmiah kedokteran hewan melalui media poster dan presentasi." }
+    { kode: "CPMK-1", cpl: "CPL-1", teks: "Mahasiswa mampu menerapkan prinsip etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab, dalam penyusunan proposal riset." },
+    { kode: "CPMK-2", cpl: "CPL-5", teks: "Mahasiswa mampu menganalisis literatur ilmiah sebagai landasan riset kedokteran hewan." },
+    { kode: "CPMK-3", cpl: "CPL-7", teks: "Mahasiswa mampu mengevaluasi komponen karya ilmiah kedokteran hewan secara sistematis sebagai dasar penyusunan proposal riset." },
+    { kode: "CPMK-4", cpl: "CPL-9", teks: "Mahasiswa mampu mengomunikasikan proposal riset kedokteran hewan secara tertulis dan lisan melalui poster ilmiah dan presentasi." }
   ],
 
-  /* asesmen: "kasus" | "masalah" | "proyek" (lihat JENIS_ASESMEN di bawah) */
+  /* asesmen: "kasus" | "masalah" | "proyek" (lihat JENIS_ASESMEN di bawah)
+     Urutan Sub-CPMK mengikuti urutan pekan; tidak ada Sub-CPMK yang lompat pekan. */
   subcpmk: [
     { kode: "Sub-CPMK-1", cpmk: "CPMK-1", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL"],
-      teks: "Mahasiswa mampu menerapkan prinsip etika penelitian dan integritas akademik dalam penyusunan artikel ilmiah.",
-      indikator: "Ketepatan penerapan prinsip etika penelitian dan integritas akademik dalam penyusunan dan presentasi proposal.",
-      teknik: "Unjuk kerja case-based learning" },
-    { kode: "Sub-CPMK-2", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL"],
-      teks: "Mahasiswa mampu menganalisis jenis dan tren riset kedokteran hewan melalui penelusuran dan pengelolaan literatur ilmiah yang relevan dan mutakhir.",
-      indikator: "Ketepatan analisis jenis dan tren riset kedokteran hewan melalui penelusuran dan pengelolaan literatur ilmiah yang relevan dan mutakhir.",
-      teknik: "Unjuk kerja" },
-    { kode: "Sub-CPMK-3", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL"],
-      teks: "Mahasiswa mampu menganalisis artikel ilmiah kedokteran hewan untuk mengidentifikasi kesenjangan penelitian.",
-      indikator: "Ketepatan analisis artikel ilmiah untuk mengidentifikasi kesenjangan penelitian.",
-      teknik: "Unjuk kerja" },
-    { kode: "Sub-CPMK-4", cpmk: "CPMK-3", bobot: 4,  asesmen: "kasus",   metode: ["SGD", "CBL"],
-      teks: "Mahasiswa mampu mengevaluasi kualitas latar belakang dan pertanyaan penelitian berbasis literatur secara kritis.",
-      indikator: "Ketepatan evaluasi latar belakang dan pertanyaan penelitian berbasis literatur secara kritis.",
-      teknik: "Unjuk kerja" },
-    { kode: "Sub-CPMK-5", cpmk: "CPMK-3", bobot: 5,  asesmen: "kasus",   metode: ["SGD", "CBL"],
-      teks: "Mahasiswa mampu mengevaluasi kualitas metodologi penelitian yang mencakup desain, variabel, teknik sampling, dan analisis data secara kritis.",
-      indikator: "Ketepatan evaluasi metodologi penelitian yang mencakup desain, variabel, teknik sampling, dan analisis data secara kritis.",
-      teknik: "Unjuk kerja" },
-    { kode: "Sub-CPMK-6", cpmk: "CPMK-3", bobot: 2,  asesmen: "kasus",   metode: ["SGD", "CBL"],
-      teks: "Mahasiswa mampu mengevaluasi sistematika penulisan hasil, pembahasan, dan kesimpulan penelitian secara kritis.",
-      indikator: "Ketepatan evaluasi sistematika penulisan hasil, pembahasan, dan kesimpulan penelitian secara kritis.",
-      teknik: "Unjuk kerja" },
+      teks: "Mahasiswa mampu menerapkan prinsip etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab, dalam penyusunan proposal riset.",
+      indikator: "Ketepatan menjawab soal kasus tentang prinsip etika riset, integritas akademik, persetujuan etik riset yang menggunakan hewan, dan penggunaan kecerdasan buatan generatif secara bertanggung jawab.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-2", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu menganalisis tren riset kedokteran hewan melalui penelusuran dan pengelolaan literatur ilmiah yang relevan dan mutakhir.",
+      indikator: "Ketepatan menjawab soal tentang jenis dan tren riset kedokteran hewan, strategi penelusuran literatur, pengelolaan referensi, gaya sitasi, dan interpretasi laporan kesamaan teks.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-3", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengidentifikasi kesenjangan riset pada topik pilihannya berdasarkan analisis artikel riset kedokteran hewan.",
+      indikator: "Ketepatan menjawab soal telaah artikel riset dengan kerangka PICO/PECO, daftar periksa CASP, dan pedoman pelaporan riset, serta identifikasi kesenjangan riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-4", cpmk: "CPMK-3", bobot: 4,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengevaluasi pendahuluan artikel riset sebagai dasar penyusunan pendahuluan proposal riset.",
+      indikator: "Ketepatan menilai state-of-the-art, rumusan masalah, pertanyaan riset, dan alur logis pendahuluan pada soal kasus artikel riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-5", cpmk: "CPMK-3", bobot: 5,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengevaluasi metode riset yang mencakup desain, variabel, penarikan sampel, instrumen, dan analisis data sebagai dasar penyusunan metode proposal riset.",
+      indikator: "Ketepatan menilai desain, variabel, perancu, teknik penarikan sampel, instrumen, dan kesesuaian uji statistik pada soal kasus artikel riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
+    { kode: "Sub-CPMK-6", cpmk: "CPMK-3", bobot: 2,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
+      teks: "Mahasiswa mampu mengevaluasi penyajian data, hasil, pembahasan, dan kesimpulan artikel riset sebagai dasar perencanaan penyajian data proposal riset.",
+      indikator: "Ketepatan menilai penyajian tabel dan grafik, hasil, pembahasan, dan keselarasan kesimpulan dengan tujuan pada soal kasus artikel riset.",
+      teknik: "Tes tertulis (kuis di LMS Sikola)" },
     { kode: "Sub-CPMK-7", cpmk: "CPMK-4", bobot: 10, asesmen: "proyek",  metode: ["PjBL"],
-      teks: "Mahasiswa mampu mempresentasikan poster ilmiah penelitian sesuai standar akademik.",
-      indikator: "Ketepatan presentasi poster ilmiah penelitian sesuai standar akademik.",
+      teks: "Mahasiswa mampu menyajikan proposal riset dalam bentuk poster ilmiah sesuai standar akademik.",
+      indikator: "Kelengkapan isi poster proposal (latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, rencana etik), keterbacaan tata letak, dan ketepatan penjelasan saat sesi poster.",
       teknik: "Unjuk kerja" },
     { kode: "Sub-CPMK-8", cpmk: "CPMK-4", bobot: 70, asesmen: "proyek",  metode: ["PjBL"],
-      teks: "Mahasiswa mampu mempresentasikan proposal penelitian secara lisan sesuai kaidah ilmiah.",
-      indikator: "Ketepatan presentasi proposal penelitian secara lisan sesuai kaidah ilmiah.",
+      teks: "Mahasiswa mampu mempertahankan proposal riset dalam presentasi lisan sesuai kaidah ilmiah.",
+      indikator: "Kualitas naskah proposal, kelengkapan dan ketepatan unsur proposal riset, penyampaian presentasi, dan ketepatan jawaban atas pertanyaan penguji sesuai rubrik presentasi proposal riset.",
       teknik: "Unjuk kerja" }
   ],
 
   /* Pengaturan bersama untuk setiap pertemuan (bisa ditimpa per pekan). */
   bawaanPertemuan: {
     bentuk: "Kuliah",
-    formatif: ["Umpan balik", "Kuis interaktif"],
-    kriteria: "Unjuk kerja tugas dinilai dengan rubrik",
+    formatif: ["Umpan balik", "Kuis interaktif di kelas"],
+    kriteria: "Skor kuis di LMS Sikola",
     waktu: { terbimbing: "2 × 50 menit", terstruktur: "2 × 60 menit", mandiri: "2 × 60 menit" }
   },
 
   /* Jadwal per pekan. Urutan pekan 1–16. dosen: daftar kode, atau "semua".
      sepekan: true berarti kegiatan berlangsung sepanjang pekan (misalnya presentasi).
+     formatif: isi untuk menimpa bentuk asesmen formatif bawaan pada pekan tertentu.
      tanggalPengganti: isi jika pertemuan jatuh pada hari libur dan sudah ada jadwal pengganti. */
   pertemuan: [
     { pekan: 1,  sub: "Sub-CPMK-1", dosen: ["RHS"], topik: "Pengantar metodologi ilmiah",
-      materi: ["Ilmu pengetahuan, penelitian, dan metodologi ilmiah", "Hakikat penelitian ilmiah di bidang kedokteran hewan", "Struktur umum dokumen penelitian", "Prinsip penggunaan AI dalam penulisan ilmiah"] },
-    { pekan: 2,  sub: "Sub-CPMK-1", dosen: ["DKS"], topik: "Etika penelitian",
-      materi: ["Prinsip dasar etika penelitian", "Integritas akademik dan plagiarisme", "Konflik kepentingan dalam penelitian", "Ethical clearance dan etika penelitian terhadap hewan"] },
+      materi: ["Ilmu pengetahuan, riset, dan metodologi ilmiah", "Hakikat riset ilmiah di bidang kedokteran hewan", "Struktur umum proposal riset", "Proposal riset sebagai proyek semester", "Prinsip penggunaan kecerdasan buatan generatif dalam penulisan ilmiah"] },
+    { pekan: 2,  sub: "Sub-CPMK-1", dosen: ["DKS"], topik: "Etika riset",
+      materi: ["Prinsip dasar etika riset", "Integritas akademik dan plagiarisme", "Konflik kepentingan dalam riset", "Persetujuan etik (ethical clearance) dan etika riset yang menggunakan hewan"] },
     { pekan: 3,  sub: "Sub-CPMK-2", dosen: ["FYP"], topik: "Riset kedokteran hewan",
-      materi: ["Jenis-jenis riset di bidang kedokteran hewan", "Tren riset terkini dalam ilmu kedokteran hewan"] },
+      formatif: ["Umpan balik calon topik", "Kuis interaktif di kelas"],
+      materi: ["Jenis-jenis riset di bidang kedokteran hewan", "Tren riset terkini dalam ilmu kedokteran hewan", "Menu topik riset dari setiap bidang"] },
     { pekan: 4,  sub: "Sub-CPMK-2", dosen: ["FYP"], topik: "Penelusuran literatur",
-      materi: ["Strategi pencarian literatur ilmiah", "Database ilmiah dan teknik penelusuran", "Identifikasi literatur yang relevan dan mutakhir", "Evaluasi kualitas penyedia sumber ilmiah"] },
+      formatif: ["Umpan balik calon topik", "Kuis interaktif di kelas"],
+      materi: ["Strategi penelusuran literatur ilmiah", "Pangkalan data ilmiah dan teknik penelusuran", "Identifikasi literatur yang relevan dan mutakhir", "Evaluasi kualitas penyedia sumber ilmiah"] },
     { pekan: 5,  sub: "Sub-CPMK-2", dosen: ["AWJ"], topik: "Manajemen sitasi dan deteksi kesamaan teks",
       materi: ["Penggunaan perangkat manajemen referensi", "Konsistensi gaya sitasi", "Perangkat deteksi kesamaan teks dan interpretasi laporan similarity index"] },
-    { pekan: 6,  sub: "Sub-CPMK-3", dosen: ["KDK"], topik: "Review artikel ilmiah",
-      materi: ["Struktur artikel ilmiah", "Evaluasi artikel ilmiah menggunakan kerangka PICO dan/atau CASP", "Teknik pengutipan dan parafrase akademik"] },
-    { pekan: 7,  sub: "Sub-CPMK-4", dosen: ["AWJ"], topik: "Bab pendahuluan",
-      materi: ["Tema, topik, dan judul penelitian", "State-of-the-art dan relevansi penelitian", "Rumusan masalah dan pertanyaan penelitian", "Koherensi dan alur logis bab pendahuluan"] },
-    { pekan: 8,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Bab metode: desain dan variabel",
-      materi: ["Jenis desain penelitian", "Identifikasi dan definisi variabel", "Validitas dan reliabilitas pengukuran", "Kontrol variabel pengganggu (perancu)"] },
-    { pekan: 9,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Bab metode: populasi, sampel, dan instrumen",
-      materi: ["Target populasi dan sampel dalam penelitian veteriner", "Desain penarikan sampel", "Instrumen pengumpulan data"] },
-    { pekan: 10, sub: "Sub-CPMK-5", dosen: ["RHS"], topik: "Bab metode: analisis data",
-      materi: ["Pemilihan metode analisis data", "Uji statistika dan aplikasinya", "Asumsi statistik dan interpretasi hasil", "Kesalahan umum dalam analisis data"] },
-    { pekan: 11, sub: "Sub-CPMK-5", dosen: ["RHS"], topik: "Penyajian dan visualisasi data",
-      materi: ["Prinsip penyajian data dalam tabel dan grafik", "Pemilihan bentuk visualisasi sesuai jenis data", "Kesalahan umum dalam visualisasi data ilmiah"] },
-    { pekan: 12, sub: "Sub-CPMK-6", dosen: ["AMK"], topik: "Bab hasil, pembahasan, dan kesimpulan",
-      materi: ["Perbedaan hasil dan pembahasan", "Struktur penulisan hasil", "Strategi pembahasan berbasis literatur", "Keselarasan tujuan dan kesimpulan penelitian", "Penarikan kesimpulan ilmiah"] },
-    { pekan: 13, sub: "Sub-CPMK-7", dosen: ["KDK"], topik: "Poster ilmiah",
-      materi: ["Struktur poster ilmiah", "Prinsip desain grafis akademik", "Standar presentasi poster ilmiah"] },
-    { pekan: 14, sub: "Sub-CPMK-7", dosen: "semua", topik: "Presentasi poster ilmiah", bentuk: "Seminar",
-      materi: ["Presentasi poster ilmiah di hadapan dosen tim pengajar", "Asesmen poster oleh seluruh dosen tim pengajar", "Umpan balik terhadap isi dan desain poster"] },
-    { pekan: 15, sub: "Sub-CPMK-8", dosen: ["AMK"], topik: "Strategi presentasi ilmiah",
+    { pekan: 6,  sub: "Sub-CPMK-3", dosen: ["KDK"], topik: "Telaah artikel dan kesenjangan riset",
+      formatif: ["Umpan balik topik riset", "Kuis interaktif di kelas"],
+      materi: ["Struktur artikel riset", "Telaah artikel riset dengan kerangka PICO/PECO dan daftar periksa CASP", "Pedoman pelaporan riset veteriner: ARRIVE 2.0, STROBE-Vet, dan REFLECT", "Identifikasi kesenjangan riset dan penetapan topik", "Teknik sitasi dan parafrase akademik"] },
+    { pekan: 7,  sub: "Sub-CPMK-4", dosen: ["AWJ"], topik: "Pendahuluan",
+      formatif: ["Umpan balik draf pendahuluan proposal", "Kuis interaktif di kelas"],
+      materi: ["Tema, topik, dan judul riset", "State-of-the-art dan relevansi riset", "Rumusan masalah dan pertanyaan riset", "Koherensi dan alur logis pendahuluan"] },
+    { pekan: 8,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Metode: desain dan variabel",
+      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      materi: ["Jenis desain riset", "Identifikasi dan definisi variabel", "Validitas dan reliabilitas pengukuran", "Pengendalian perancu"] },
+    { pekan: 9,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Metode: populasi, sampel, dan instrumen",
+      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      materi: ["Populasi target dan sampel dalam riset veteriner", "Teknik penarikan sampel", "Instrumen pengumpulan data"] },
+    { pekan: 10, sub: "Sub-CPMK-5", dosen: ["RHS"], topik: "Metode: analisis data",
+      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      materi: ["Kesesuaian metode analisis dengan pertanyaan riset", "Kesesuaian uji statistik dengan jenis data", "Asumsi uji statistik dan interpretasi hasil", "Kesalahan umum dalam analisis data"] },
+    { pekan: 11, sub: "Sub-CPMK-6", dosen: ["RHS"], topik: "Penyajian dan visualisasi data",
+      formatif: ["Umpan balik rencana penyajian data", "Kuis interaktif di kelas"],
+      materi: ["Prinsip penyajian data dalam tabel dan grafik", "Pemilihan bentuk visualisasi sesuai jenis data", "Kesalahan umum dalam visualisasi data ilmiah", "Kerangka tabel (dummy table) untuk proposal riset"] },
+    { pekan: 12, sub: "Sub-CPMK-6", dosen: ["AMK"], topik: "Hasil, pembahasan, dan kesimpulan",
+      formatif: ["Umpan balik rencana penyajian data", "Kuis interaktif di kelas"],
+      materi: ["Perbedaan hasil dan pembahasan", "Struktur penulisan hasil", "Strategi pembahasan berbasis literatur", "Keselarasan tujuan dan kesimpulan riset", "Penarikan kesimpulan ilmiah"] },
+    { pekan: 13, sub: "Sub-CPMK-7", dosen: ["KDK"], topik: "Poster proposal riset", kriteria: "Unjuk kerja dinilai dengan rubrik",
+      materi: ["Struktur poster proposal riset (work in progress)", "Prinsip desain grafis akademik", "Penyajian metode dalam diagram alur dan kerangka tabel", "Standar presentasi poster ilmiah"] },
+    { pekan: 14, sub: "Sub-CPMK-7", dosen: "semua", topik: "Presentasi poster proposal riset", bentuk: "Seminar", kriteria: "Unjuk kerja dinilai dengan rubrik",
+      formatif: ["Umpan balik dosen tim pengajar"],
+      materi: ["Presentasi poster proposal riset di hadapan dosen tim pengajar", "Asesmen poster oleh dosen tim pengajar", "Umpan balik sebelum presentasi akhir"] },
+    { pekan: 15, sub: "Sub-CPMK-8", dosen: ["AMK"], topik: "Strategi presentasi ilmiah", kriteria: "Unjuk kerja dinilai dengan rubrik",
       materi: ["Struktur presentasi proposal", "Teknik komunikasi akademik", "Manajemen waktu presentasi", "Teknik menjawab pertanyaan ilmiah"] },
-    { pekan: 16, sub: "Sub-CPMK-8", dosen: "semua", topik: "Presentasi proposal penelitian", bentuk: "Seminar", sepekan: true,
-      materi: ["Presentasi proposal penelitian di hadapan dosen penguji", "Respons terhadap pertanyaan penguji", "Evaluasi performa akademik"] }
+    { pekan: 16, sub: "Sub-CPMK-8", dosen: "semua", topik: "Presentasi proposal riset", bentuk: "Seminar", sepekan: true, kriteria: "Unjuk kerja dinilai dengan rubrik",
+      materi: ["Presentasi proposal riset di hadapan dosen penguji sesuai bidang topik", "Tanya jawab dengan dosen penguji", "Penilaian naskah dan presentasi proposal dengan rubrik"] }
   ],
 
-  /* Rencana penugasan terstruktur. Bagian ini tampil otomatis jika diisi.
-     Contoh: { judul: "Telaah kasus etika", pekan: [1,3], sub: "Sub-CPMK-1", luaran: "Esai 1.000 kata", deskripsi: "..." } */
-  penugasan: [],
+  /* Rencana penugasan terstruktur: tahapan proyek proposal riset sepanjang semester.
+     Draf pekan 3–12 bersifat formatif (umpan balik, tanpa bobot). Nilai sumatif proyek
+     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8). */
+  penugasan: [
+    { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2",
+      luaran: "Dua atau tiga calon topik, masing-masing dengan minimal lima artikel acuan yang tersimpan di perangkat manajemen referensi.",
+      deskripsi: "Mahasiswa memilih calon topik dari menu topik setiap bidang, lalu menelusuri literatur untuk setiap calon topik. Formatif, tanpa bobot nilai." },
+    { judul: "Topik final dan kesenjangan riset", pekan: [6], sub: "Sub-CPMK-3",
+      luaran: "Lembar topik berisi judul sementara, bidang, rumusan kesenjangan riset, dan tiga artikel kunci.",
+      deskripsi: "Mahasiswa menetapkan satu topik berdasarkan kesenjangan riset yang ditemukan. Lembar topik menjadi dasar penetapan dosen penguji sesuai bidang. Formatif, tanpa bobot nilai." },
+    { judul: "Draf pendahuluan proposal", pekan: [7], sub: "Sub-CPMK-4",
+      luaran: "Draf pendahuluan berisi state-of-the-art, rumusan masalah, pertanyaan riset, tujuan, dan manfaat riset.",
+      deskripsi: "Mahasiswa menerapkan hasil telaah pendahuluan artikel pada topiknya sendiri. Formatif, tanpa bobot nilai." },
+    { judul: "Draf metode proposal", pekan: [8, 9, 10], sub: "Sub-CPMK-5",
+      luaran: "Draf metode berisi desain, variabel, populasi dan sampel, instrumen, rencana analisis data, dan rencana persetujuan etik.",
+      deskripsi: "Mahasiswa menyusun draf metode secara bertahap mengikuti materi pekan 8–10. Formatif, tanpa bobot nilai." },
+    { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6",
+      luaran: "Kerangka tabel dan rancangan grafik untuk data yang akan dikumpulkan.",
+      deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset. Formatif, tanpa bobot nilai." },
+    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7",
+      luaran: "Poster proposal riset yang dipresentasikan pada pekan 14.",
+      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14. Sumatif, bobot 10%." },
+    { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8",
+      luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
+      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset. Sumatif, bobot 70%." }
+  ],
 
   /* Pustaka. Gaya Harvard (Cite Them Right): Nama belakang, Inisial. (Tahun) *Judul buku*.
      Disunting oleh (jika ada editor). Edisi. Kota: Penerbit. ISBN. Semua penulis dibalik, dipisah koma, "dan" sebelum penulis terakhir.
+     Artikel jurnal: Nama belakang, Inisial. (Tahun) 'Judul artikel', *Nama jurnal*, volume(nomor), halaman. doi.
      Judul memakai huruf kapital di awal judul dan nama diri saja.
      Teks di antara dua tanda bintang ditampilkan miring, misalnya *Judul buku*. */
   pustaka: {
@@ -235,7 +273,10 @@ const RPS = {
       "Sembiring, T.B., Irmawati, Sabir, M. dan Tjahyadi, I. (2023) *Buku ajar metodologi penelitian (teori dan praktik)*. Karawang: Saba Jaya Publisher. ISBN 978-623-09-7074-0."
     ],
     pendukung: [
-      "Direktorat Pembelajaran dan Kemahasiswaan (2024) *Panduan penggunaan generative artificial intelligence (GenAI) pada pembelajaran di perguruan tinggi*. Jakarta: Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi."
+      "Direktorat Pembelajaran dan Kemahasiswaan (2024) *Panduan penggunaan generative artificial intelligence (GenAI) pada pembelajaran di perguruan tinggi*. Jakarta: Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi.",
+      "Dohoo, I., Martin, W. dan Stryhn, H. (2009) *Veterinary epidemiologic research*. 2nd edn. Charlottetown: VER Inc. ISBN 978-0-919013-60-5.",
+      "Percie du Sert, N. dkk. (2020) 'The ARRIVE guidelines 2.0: updated guidelines for reporting animal research', *PLoS Biology*, 18(7), e3000410. doi:10.1371/journal.pbio.3000410.",
+      "Petrie, A. dan Watson, P. (2013) *Statistics for veterinary and animal science*. 3rd edn. Chichester: Wiley-Blackwell. ISBN 978-0-470-67075-0."
     ]
   },
 
@@ -256,8 +297,12 @@ const RPS = {
 
   /* Catatan untuk penyusun. Tampil di panel ?periksa, tidak terlihat oleh pembaca biasa. */
   catatanPenyusun: [
-    "Bagian \"Asesmen dan Evaluasi Ketercapaian CPMK\" dan \"Rencana Penugasan Terstruktur\" pada RPS 2026 masih kosong. Isi array penugasan jika sudah siap.",
-    "Peta analisis pembelajaran pada RPS 2026 berupa gambar dan belum dipindahkan ke templat ini.",
+    "Peta analisis pembelajaran pada RPS 2026 berupa gambar dan perlu dibuat ulang mengikuti struktur Sub-CPMK yang baru.",
+    "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) dan rubrik poster proposal (Sub-CPMK-7) belum tersedia.",
+    "Tentukan mekanisme penilaian poster pekan 14: semua dosen menilai semua poster, atau setiap dosen menilai poster mahasiswa yang juga diujinya pada pekan 16.",
+    "Bagian penugasan di RPS memuat ringkasan. Instruksi, kriteria, dan rubrik setiap tugas disusun di dokumen RTM.",
+    "Rubrik presentasi proposal perlu diselaraskan: istilah \"penelitian\" menjadi \"riset\" dan unsur pertimbangan etik ditambahkan ke butir C.7.",
+    "Teks CPL, visi, misi, dan profil lulusan sengaja tidak diubah karena mengikuti dokumen kurikulum prodi.",
     "Periksa kembali nama Ketua Prodi dan tanggal penyusunan sebelum RPS disahkan."
   ]
 };
@@ -702,7 +747,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
     </section>
 
     <section id="penugasan" aria-labelledby="h-penugasan" hidden>
-      <div class="sec-head"><h2 id="h-penugasan">Rencana penugasan terstruktur</h2></div>
+      <div class="sec-head"><h2 id="h-penugasan">Rencana penugasan terstruktur</h2><p>Ringkasan tahapan proyek proposal riset. Instruksi, kriteria, dan rubrik setiap tugas dimuat dalam Rencana Tugas Mahasiswa (RTM).</p></div>
       <div class="weeks" id="tugas"></div>
     </section>
 
@@ -757,7 +802,12 @@ const GLOSARIUM = {
   "PBL": { t: "Problem-based learning (pembelajaran berbasis masalah)." },
   "PjBL": { t: "Project-based learning (pembelajaran berbasis proyek)." },
   "PICO": { t: "Population, intervention, comparison, outcome." },
-  "CASP": { t: "Critical Appraisal Skills Programme: perangkat daftar periksa untuk menilai kualitas artikel penelitian." },
+  "CASP": { t: "Critical Appraisal Skills Programme: perangkat daftar periksa untuk menilai kualitas artikel riset." },
+  "PECO": { t: "Population, exposure, comparison, outcome. Dipakai untuk merumuskan pertanyaan riset observasional." },
+  "ARRIVE 2.0": { t: "Animal Research: Reporting of In Vivo Experiments. Pedoman pelaporan riset yang menggunakan hewan, diperbarui pada 2020." },
+  "STROBE-Vet": { t: "Perluasan pedoman STROBE untuk pelaporan studi observasional di bidang kedokteran hewan." },
+  "REFLECT": { t: "Pedoman pelaporan uji klinis teracak pada ternak dan keamanan pangan." },
+  "dummy table": { t: "Kerangka tabel: tabel kosong yang kepala kolom dan barisnya berisi variabel serta kategorinya. Sel diisi setelah data terkumpul." },
   "Formatif": { t: "Evaluasi berkelanjutan selama pembelajaran untuk memantau perkembangan belajar, memberi umpan balik, dan memperbaiki proses pembelajaran.", r: REF53 + " Pasal 27 ayat (2)" },
   "Sumatif": { t: "Asesmen pencapaian hasil belajar sebagai dasar kelulusan mata kuliah, mengacu pada pemenuhan CPL.", r: REF53 + " Pasal 27 ayat (4) dan (5)" },
   "Belajar terbimbing": { t: "Kegiatan belajar bersama dosen, misalnya kuliah atau seminar.", r: REF53 + " Pasal 16" },
@@ -972,7 +1022,7 @@ function renderWeeks() {
     else if (s?.sepekan && s.liburDalamPekan?.length) libur = ` · <span style="color:var(--warn)">${s.liburDalamPekan.map(d => esc(D.shortDay(d)) + " libur").join(", ")}</span>`;
     const gaps = SCHED.gaps.filter(g => g.beforePekan === p.pekan).map(g =>
       `<div class="week-gap"><span>Pekan jeda</span><span><b>${esc(D.range(g.monday, D.add(g.monday, 4)))}</b> · ${esc(g.reason)}</span></div>`).join("");
-    const materi = p.materi.map(m => `<li>${m.replace(/\b(PICO|CASP)\b/g, k => term(k))}</li>`).join("");
+    const materi = p.materi.map(m => `<li>${m.replace(/\b(PICO|PECO|CASP|ARRIVE 2\.0|STROBE-Vet|REFLECT|dummy table)\b/g, k => term(k))}</li>`).join("");
     return gaps + `<details class="week" id="pekan-${p.pekan}" data-dosen="${esc(p.dosenList.join(" "))}">
       <summary>
         <span class="wk-no">Pekan<b>${String(p.pekan).padStart(2, "0")}</b></span>
@@ -1029,7 +1079,7 @@ function renderAsesmen() {
   const per = {};
   RPS.subcpmk.forEach(s => { per[s.asesmen] = (per[s.asesmen] || 0) + s.bobot; });
   const keys = Object.keys(JENIS_ASESMEN).filter(k => per[k]);
-  $("#asesmen-lede").innerHTML = `Nilai akhir berasal dari asesmen ${term("Sumatif", "sumatif")} setiap Sub-CPMK. Asesmen ${term("Formatif", "formatif")} berupa umpan balik dan kuis interaktif tidak menambah bobot. Setiap unjuk kerja dinilai dengan rubrik.`;
+  $("#asesmen-lede").innerHTML = `Nilai akhir berasal dari asesmen ${term("Sumatif", "sumatif")} setiap Sub-CPMK. Sumatif Sub-CPMK-1 sampai Sub-CPMK-6 berupa kuis di LMS Sikola, sedangkan poster dan presentasi proposal dinilai dengan rubrik. Asesmen ${term("Formatif", "formatif")} berupa umpan balik dan kuis interaktif di kelas tidak menambah bobot.`;
   $("#stack").setAttribute("aria-label", keys.map(k => `${JENIS_ASESMEN[k].id} ${per[k]}%`).join(", "));
   $("#stack").innerHTML = keys.map(k => `<span style="flex:${per[k]};background:${JENIS_ASESMEN[k].warna};color:${JENIS_ASESMEN[k].teks}">${per[k] >= 8 ? per[k] + "%" : ""}</span>`).join("");
   $("#legend").innerHTML = keys.map(k => `<li><i class="sw" style="background:${JENIS_ASESMEN[k].warna}"></i><span><b class="num">${per[k]}%</b> ${esc(JENIS_ASESMEN[k].id)}</span></li>`).join("");
@@ -1170,7 +1220,8 @@ function renderChecks() {
   if (unusedCpl.length) add("warn", `CPL tanpa CPMK: ${unusedCpl.join(", ")}.`);
   const unusedDosen = RPS.dosen.filter(d => !pertemuan.some(p => p.dosen !== "semua" && p.dosenList.includes(d.kode))).map(d => d.kode);
   if (unusedDosen.length) add("info", `Dosen yang hanya muncul di pekan bersama: ${unusedDosen.join(", ")}.`);
-  RPS.subcpmk.forEach(s => { const c = cpmkByKode[s.cpmk]; if (c && c.teks.trim() === s.teks.trim()) add("warn", `${s.kode} sama persis dengan ${c.kode}.`); });
+  /* Sub-CPMK boleh sama dengan CPMK jika CPMK tersebut hanya punya satu Sub-CPMK. */
+  RPS.subcpmk.forEach(s => { const c = cpmkByKode[s.cpmk]; const n = RPS.subcpmk.filter(x => x.cpmk === s.cpmk).length; if (c && n > 1 && c.teks.trim() === s.teks.trim()) add("warn", `${s.kode} sama persis dengan ${c.kode}, padahal ${c.kode} punya lebih dari satu Sub-CPMK.`); });
   SCHED.sessions.filter(s => s.libur && !s.pengganti).forEach(s => add("warn", `Pekan ${s.pekan} (${D.shortDay(s.date)}) jatuh pada ${s.libur[0].nama}. Isi tanggalPengganti jika sudah ada.`));
   SCHED.gaps.forEach(g => add("info", `Pekan jeda ${D.range(g.monday, D.add(g.monday, 4))}: ${g.reason}.`));
   if (lastDate != null) add("info", `Pertemuan terakhir: ${D.long(lastDate)}.`);
