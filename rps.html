@@ -234,29 +234,30 @@ const RPS = {
 
   /* Rencana penugasan terstruktur: tahapan proyek proposal riset sepanjang semester.
      Draf pekan 3–12 bersifat formatif (umpan balik, tanpa bobot). Nilai sumatif proyek
-     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8). */
+     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8).
+     sifat: "formatif" | "sumatif". Bobot tugas sumatif diambil otomatis dari bobot Sub-CPMK-nya. */
   penugasan: [
-    { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2",
+    { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2", sifat: "formatif",
       luaran: "Dua atau tiga calon topik, masing-masing dengan minimal lima artikel acuan yang tersimpan di perangkat manajemen referensi.",
-      deskripsi: "Mahasiswa memilih calon topik dari menu topik setiap bidang, lalu menelusuri literatur untuk setiap calon topik. Formatif, tanpa bobot nilai." },
-    { judul: "Topik final dan kesenjangan riset", pekan: [6], sub: "Sub-CPMK-3",
+      deskripsi: "Mahasiswa memilih calon topik dari menu topik setiap bidang, lalu menelusuri literatur untuk setiap calon topik." },
+    { judul: "Topik final dan kesenjangan riset", pekan: [6], sub: "Sub-CPMK-3", sifat: "formatif",
       luaran: "Lembar topik berisi judul sementara, bidang, rumusan kesenjangan riset, dan tiga artikel kunci.",
-      deskripsi: "Mahasiswa menetapkan satu topik berdasarkan kesenjangan riset yang ditemukan. Lembar topik menjadi dasar penetapan dosen penguji sesuai bidang. Formatif, tanpa bobot nilai." },
-    { judul: "Draf pendahuluan proposal", pekan: [7], sub: "Sub-CPMK-4",
+      deskripsi: "Mahasiswa menetapkan satu topik berdasarkan kesenjangan riset yang ditemukan. Lembar topik menjadi dasar penetapan dosen penguji sesuai bidang." },
+    { judul: "Draf pendahuluan proposal", pekan: [7], sub: "Sub-CPMK-4", sifat: "formatif",
       luaran: "Draf pendahuluan berisi state-of-the-art, rumusan masalah, pertanyaan riset, tujuan, dan manfaat riset.",
-      deskripsi: "Mahasiswa menerapkan hasil telaah pendahuluan artikel pada topiknya sendiri. Formatif, tanpa bobot nilai." },
-    { judul: "Draf metode proposal", pekan: [8, 9, 10], sub: "Sub-CPMK-5",
+      deskripsi: "Mahasiswa menerapkan hasil telaah pendahuluan artikel pada topiknya sendiri." },
+    { judul: "Draf metode proposal", pekan: [8, 9, 10], sub: "Sub-CPMK-5", sifat: "formatif",
       luaran: "Draf metode berisi desain, variabel, populasi dan sampel, instrumen, rencana analisis data, dan rencana persetujuan etik.",
-      deskripsi: "Mahasiswa menyusun draf metode secara bertahap mengikuti materi pekan 8–10. Formatif, tanpa bobot nilai." },
-    { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6",
+      deskripsi: "Mahasiswa menyusun draf metode secara bertahap mengikuti materi pekan 8–10." },
+    { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6", sifat: "formatif",
       luaran: "Kerangka tabel dan rancangan grafik untuk data yang akan dikumpulkan.",
-      deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset. Formatif, tanpa bobot nilai." },
-    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7",
+      deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset." },
+    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7", sifat: "sumatif",
       luaran: "Poster proposal riset yang dipresentasikan pada pekan 14.",
-      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14. Sumatif, bobot 10%." },
-    { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8",
+      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14." },
+    { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8", sifat: "sumatif",
       luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
-      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset. Sumatif, bobot 70%." }
+      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset." }
   ],
 
   /* Pustaka. Gaya Harvard (Cite Them Right): Nama belakang, Inisial. (Tahun) *Judul buku*.
@@ -413,11 +414,23 @@ h3{font-size:1.15rem;margin:0 0 10px}
 .cp-flow li{display:flex;align-items:center;gap:10px}
 .cp-flow li + li::before{content:"→";color:var(--ink-2)}
 .cp-flow b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
-.cp-list{display:flex;flex-direction:column;gap:12px}
+.toolbar .cp-flow{margin:0}
+.toolbar-note{font-size:var(--fs-xs);color:var(--ink-3)}
+.acc-ctl{display:flex;gap:2px;margin-left:auto}
+.cp-list{display:flex;flex-direction:column;gap:8px}
+.cp{padding:0}
+.cp > summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:18px minmax(0,1fr);gap:14px;align-items:start;padding:16px 18px}
+.cp > summary::-webkit-details-marker{display:none}
+.cp > summary::before{content:"▶";font-size:.65rem;color:var(--ink-3);line-height:1;margin-top:5px}
+.cp[open] > summary::before{content:"▼"}
+.cp > summary:hover .cp-text{color:var(--accent)}
 .cp-path{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:var(--fs-xs);font-weight:600;color:var(--ink-3)}
 .cp-path .arr{color:var(--ink-2);font-weight:400}
 .cp-path b{color:var(--ink)}
-.cp-text{font:600 var(--fs-title)/1.45 var(--sans);margin:8px 0 16px}
+.cp-text{display:block;font:600 var(--fs-title)/1.45 var(--sans);margin:6px 0 0;transition:color .12s}
+.cp-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cp-sum{font:700 var(--fs-title)/1 var(--sans);color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cp-body{margin:0 18px;padding:0 0 14px}
 .cp-subs{list-style:none;padding:0;margin:0}
 .cp-subs li{display:grid;grid-template-columns:92px minmax(0,1fr) 96px 44px;gap:14px;padding:11px 0;border-top:1px solid var(--rule);align-items:baseline;font-size:var(--fs-sm);line-height:1.5}
 .cp-subs li.cp-subs-head{font-size:var(--fs-label);font-weight:600;letter-spacing:.04em;color:var(--ink-3);padding:8px 0;border-top:1px solid var(--strong)}
@@ -495,11 +508,18 @@ td.r,th.r{text-align:right;padding-right:0}
 .holidays li b{font-weight:600;min-width:118px;font-variant-numeric:tabular-nums}
 
 /* ── Tim ──────────────────────────────────── */
-.team{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.person{display:flex;flex-direction:column;gap:6px}
-.person .p-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.person .p-name{font:600 var(--fs-title)/1.35 var(--sans)}
-.person .p-weeks{font-size:var(--fs-xs);color:var(--ink-3)}
+.team-legend{margin:0 0 14px}
+.team{display:flex;flex-direction:column;gap:8px}
+.person{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 14px;align-items:center;padding:16px 18px}
+.p-av{grid-row:1;width:44px;height:44px;border-radius:50%;background:var(--tint);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:var(--fs-xs);letter-spacing:.02em}
+.p-main{min-width:0}
+.p-name{font:600 var(--fs-title)/1.35 var(--sans);display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.p-meta{font-size:var(--fs-xs);color:var(--ink-3)}
+.p-strip{grid-column:2 / -1;display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:3px;margin-top:8px}
+.p-strip > *{height:24px;border-radius:3px;background:var(--sunk);display:flex;align-items:center;justify-content:center;font-size:.6875rem;color:var(--ink-3);text-decoration:none;font-variant-numeric:tabular-nums}
+.p-strip .on{background:var(--accent);color:var(--on-accent);font-weight:700}
+.p-strip .shared{background:var(--tint);color:var(--accent);font-weight:600}
+.sw-off{background:var(--sunk);border:1px solid var(--rule-2)}
 
 /* ── Lampiran ─────────────────────────────── */
 .appx{display:flex;flex-direction:column;gap:8px}
@@ -565,7 +585,12 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   .holidays ul{grid-template-columns:1fr}
   .matrix td,.matrix th{padding:8px 3px}
   .matrix .cell{padding:4px 4px}
-  .team{grid-template-columns:1fr}
+  .person{grid-template-columns:40px minmax(0,1fr);padding:14px}
+  .p-av{width:40px;height:40px}
+  .p-strip{grid-column:1 / -1;gap:2px}
+  .p-strip > *{height:22px;font-size:.625rem}
+  .cp > summary{grid-template-columns:14px minmax(0,1fr);gap:10px;padding:14px}
+  .cp-body{margin:0 14px}
   .appx .appx-body{padding-left:18px}
   section{padding-top:56px}
 }
@@ -575,7 +600,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 @media print{
   :root{--paper:#fff}
   body{font-size:10.5pt;background:#fff}
-  .toc,.toolbar,.filter-note,#checks,#tip{display:none !important}
+  .toc,.toolbar .chips,.acc-ctl,.filter-note,#checks,#tip{display:none !important}
   .shell{display:block;padding:0;max-width:none}
   main{padding:0;max-width:none}
   section{padding-top:28px;break-inside:auto}
@@ -588,7 +613,8 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   .now{display:none}
   a{color:inherit;text-decoration:none}
   .stack span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .sw,.matrix .cell,.bar i,.tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sw,.matrix .cell,.bar i,.tag,.p-av,.p-strip > *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .person{break-inside:avoid}
 }
 
 /* ── Tombol kanan atas ────────────────────── */
@@ -624,8 +650,8 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   [data-theme="dark"] .eyebrow{text-shadow:0 0 18px rgba(52,211,153,.45)}
 
   /* Kartu: sorotan emerald saat diarahkan kursor */
-  [data-theme="dark"] .week,[data-theme="dark"] .appx details,[data-theme="dark"] .person{transition:border-color .2s,box-shadow .2s}
-  [data-theme="dark"] .week:hover,[data-theme="dark"] .appx details:hover,[data-theme="dark"] .person:hover{border-color:rgba(16,185,129,.45);box-shadow:0 8px 24px -12px rgba(16,185,129,.3)}
+  [data-theme="dark"] .week,[data-theme="dark"] .cp,[data-theme="dark"] .appx details{transition:border-color .2s,box-shadow .2s}
+  [data-theme="dark"] .week:hover,[data-theme="dark"] .cp:hover,[data-theme="dark"] .appx details:hover{border-color:rgba(16,185,129,.45);box-shadow:0 8px 24px -12px rgba(16,185,129,.3)}
 
   /* Sentuhan neon */
   [data-theme="dark"] .week.is-now,[data-theme="dark"] .now{border-color:rgba(16,185,129,.5);box-shadow:0 0 0 1px rgba(16,185,129,.15),0 0 28px -8px rgba(16,185,129,.35)}
@@ -704,7 +730,13 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
         <h2 id="h-capaian">Capaian pembelajaran</h2>
         <p id="capaian-lede"></p>
       </div>
-      <ol class="cp-flow" id="cp-flow" aria-label="Alur turunan capaian"></ol>
+      <div class="toolbar">
+        <ol class="cp-flow" id="cp-flow" aria-label="Alur turunan capaian"></ol>
+        <div class="acc-ctl">
+          <button class="btn btn-quiet" type="button" data-action="expand" data-target="#align">Buka semua</button>
+          <button class="btn btn-quiet" type="button" data-action="collapse" data-target="#align">Tutup semua</button>
+        </div>
+      </div>
       <div class="cp-list" id="align"></div>
     </section>
 
@@ -718,9 +750,9 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
       </div>
       <div class="toolbar">
         <div class="chips" id="chips" role="group" aria-label="Saring berdasarkan dosen"></div>
-        <div>
-          <button class="btn btn-quiet" type="button" data-action="expand">Buka semua</button>
-          <button class="btn btn-quiet" type="button" data-action="collapse">Tutup semua</button>
+        <div class="acc-ctl">
+          <button class="btn btn-quiet" type="button" data-action="expand" data-target="#weeks">Buka semua</button>
+          <button class="btn btn-quiet" type="button" data-action="collapse" data-target="#weeks">Tutup semua</button>
         </div>
       </div>
       <p class="filter-note" id="filter-note"></p>
@@ -749,13 +781,26 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 
     <section id="penugasan" aria-labelledby="h-penugasan" hidden>
       <div class="sec-head"><h2 id="h-penugasan">Rencana penugasan terstruktur</h2><p>Ringkasan tahapan proyek proposal riset. Instruksi, kriteria, dan rubrik setiap tugas dimuat dalam Rencana Tugas Mahasiswa (RTM).</p></div>
+      <div class="toolbar">
+        <span class="toolbar-note" id="tugas-note"></span>
+        <div class="acc-ctl">
+          <button class="btn btn-quiet" type="button" data-action="expand" data-target="#tugas">Buka semua</button>
+          <button class="btn btn-quiet" type="button" data-action="collapse" data-target="#tugas">Tutup semua</button>
+        </div>
+      </div>
       <div class="weeks" id="tugas"></div>
     </section>
 
     <section id="tim" aria-labelledby="h-tim">
       <div class="sec-head">
         <h2 id="h-tim">Tim pengajar</h2>
+        <p>Setiap baris menunjukkan pekan yang diampu dosen.</p>
       </div>
+      <ul class="legend team-legend">
+        <li><i class="sw" style="background:var(--accent)"></i>Mengampu</li>
+        <li><i class="sw" style="background:var(--tint)"></i>Pekan bersama (seminar)</li>
+        <li><i class="sw sw-off"></i>Tidak mengampu</li>
+      </ul>
       <div class="team" id="team"></div>
     </section>
 
@@ -984,7 +1029,7 @@ function renderRingkasan() {
 }
 
 function renderCapaian() {
-  $("#capaian-lede").innerHTML = `Setiap ${term("CPMK")} diturunkan dari ${term("CPL")} prodi, lalu dijabarkan menjadi ${term("Sub-CPMK")} yang dicapai dan dinilai pada pekan tertentu. Arahkan kursor atau ketuk kode CPL untuk membaca bunyinya.`;
+  $("#capaian-lede").innerHTML = `Setiap ${term("CPMK")} diturunkan dari ${term("CPL")} prodi, lalu dijabarkan menjadi ${term("Sub-CPMK")} yang dicapai dan dinilai pada pekan tertentu. Buka satu CPMK untuk melihat Sub-CPMK, pekan, dan bobotnya. Arahkan kursor atau ketuk kode CPL untuk membaca bunyinya.`;
   $("#cp-flow").innerHTML = [
     [RPS.cpl.length, "CPL prodi"], [RPS.cpmk.length, "CPMK"], [RPS.subcpmk.length, "Sub-CPMK"], [pertemuan.length, "pekan"]
   ].map(([n, l]) => `<li><span><b>${n}</b> ${esc(l)}</span></li>`).join("");
@@ -993,9 +1038,13 @@ function renderCapaian() {
     const subs = RPS.subcpmk.filter(s => s.cpmk === c.kode);
     const bobot = subs.reduce((a, s) => a + s.bobot, 0);
     const cplTag = cpls.map(l => `<span class="term" tabindex="0" data-tip="${esc(l.kode + ": " + l.teks)}">${esc(l.kode)}</span>`).join(", ");
-    return `<article class="box cp">
-      <div class="cp-path">${cplTag}<span class="arr" aria-hidden="true">→</span><b>${esc(c.kode)}</b></div>
-      <p class="cp-text">${esc(c.teks)}</p>
+    return `<details class="box cp" id="${esc(c.kode.toLowerCase())}">
+      <summary>
+        <span><span class="cp-top"><span class="cp-path">${cplTag}<span class="arr" aria-hidden="true">→</span><b>${esc(c.kode)}</b></span>
+          <span class="cp-sum" data-tip="${esc(`Bobot ${c.kode} terhadap nilai akhir`)}">${bobot}%</span></span>
+          <span class="cp-text">${esc(c.teks)}</span></span>
+      </summary>
+      <div class="cp-body">
       <ol class="cp-subs">
         <li class="cp-subs-head"><span>Sub-CPMK</span><span>Kemampuan akhir</span><span>Pekan</span><span class="r">Bobot</span></li>
         ${subs.map(s => {
@@ -1005,8 +1054,8 @@ function renderCapaian() {
             <span class="r">${s.bobot}%</span></li>`;
         }).join("")}
       </ol>
-      <div class="cp-total"><span>Bobot ${esc(c.kode)} terhadap nilai akhir</span><b>${bobot}%</b></div>
-    </article>`;
+      </div>
+    </details>`;
   }).join("");
 }
 
@@ -1040,7 +1089,7 @@ function renderWeeks() {
             <dt>${term("Sumatif")}</dt><dd>${esc(sub.teknik || "")}</dd>
             <dt>Kriteria</dt><dd>${esc(p.kriteria)}</dd>
           </dl></div>
-        <div><h4>Bentuk dan Metode Pembelajaran</h4>
+        <div><h4>Bentuk dan metode pembelajaran</h4>
           <dl class="kv">
             <dt>Bentuk</dt><dd>${esc(p.bentuk)}${metode ? ` · ${metode}` : ""}</dd>
             <dt>${term("Belajar terbimbing")}</dt><dd>${esc(w.terbimbing)}</dd>
@@ -1124,22 +1173,43 @@ function renderJadwal() {
 function renderPenugasan() {
   if (!RPS.penugasan?.length) return;
   $("#penugasan").hidden = false; $("#toc-penugasan").hidden = false;
+  const semuaPekan = RPS.penugasan.flatMap(t => [].concat(t.pekan || []));
+  const nSifat = k => RPS.penugasan.filter(t => t.sifat === k).length;
+  const rincian = [nSifat("formatif") ? `${nSifat("formatif")} formatif` : "", nSifat("sumatif") ? `${nSifat("sumatif")} sumatif` : ""].filter(Boolean).join(", ");
+  $("#tugas-note").textContent = `${RPS.penugasan.length} tahap tugas` + (rincian ? ` (${rincian})` : "") + (semuaPekan.length ? ` · pekan ${Math.min(...semuaPekan)}–${Math.max(...semuaPekan)}` : "");
+  const tagSifat = t => {
+    if (t.sifat === "formatif") return `<span class="tag">Formatif</span>`;
+    if (t.sifat === "sumatif") { const b = subByKode[t.sub]?.bobot; return `<span class="tag tag-accent">Sumatif${b != null ? " " + b + "%" : ""}</span>`; }
+    return "";
+  };
   $("#tugas").innerHTML = RPS.penugasan.map((t, i) => `<details class="week">
     <summary><span class="wk-no">Tugas<b>${String(i + 1).padStart(2, "0")}</b></span>
       <span><span class="wk-topic">${esc(t.judul)}</span><span class="wk-date">${esc(fmtPekan([].concat(t.pekan || [])))}</span></span>
-      <span class="wk-right">${t.sub ? `<span class="tag">${esc(t.sub)}</span>` : ""}</span></summary>
+      <span class="wk-right">${t.sub ? `<span class="tag">${esc(t.sub)}</span>` : ""}${tagSifat(t)}</span></summary>
     <div class="wk-body"><div class="wk-wide"><p>${esc(t.deskripsi || "")}</p>${t.luaran ? `<p class="small"><b>Luaran:</b> ${esc(t.luaran)}</p>` : ""}</div></div>
   </details>`).join("");
 }
 
 /* ── Render: tim, pustaka, lampiran ──────────────────────────────── */
 function renderTim() {
+  const pByPekan = Object.fromEntries(pertemuan.map(p => [p.pekan, p]));
+  const maxPekan = Math.max(16, ...pertemuan.map(p => p.pekan));
   $("#team").innerHTML = RPS.dosen.map(d => {
-    const pk = pertemuan.filter(p => p.dosenList.includes(d.kode)).map(p => p.pekan);
+    const sendiri = pertemuan.filter(p => p.dosen !== "semua" && p.dosenList.includes(d.kode)).length;
+    const bersama = pertemuan.filter(p => p.dosen === "semua").length;
+    const meta = [sendiri ? `${sendiri} pekan` : "", bersama ? `${bersama} pekan bersama` : ""].filter(Boolean).join(" · ");
+    const strip = Array.from({ length: maxPekan }, (_, i) => {
+      const n = i + 1, p = pByPekan[n];
+      if (!p || !p.dosenList.includes(d.kode)) return `<span>${n}</span>`;
+      return `<span class="${p.dosen === "semua" ? "shared" : "on"}">${n}</span>`;
+    }).join("");
     return `<div class="box person">
-      <span class="p-top"><span class="code">${esc(d.kode)}</span>${d.peran ? `<span class="tag tag-accent">${esc(d.peran)}</span>` : ""}</span>
-      <span class="p-name">${esc(d.nama)}</span>
-      <span class="p-weeks">${esc(fmtPekan(pk))}</span>
+      <span class="p-av" aria-hidden="true">${esc(d.kode)}</span>
+      <span class="p-main">
+        <span class="p-name">${esc(d.nama)}${d.peran ? `<span class="tag tag-accent">${esc(d.peran)}</span>` : ""}</span>
+        <span class="p-meta">${esc(d.kode)} · ${esc(meta || "Belum ada pekan")}</span>
+      </span>
+      <span class="p-strip" role="img" aria-label="${esc(`Pekan yang diampu ${d.nama}: ${fmtPekan(pertemuan.filter(p => p.dosenList.includes(d.kode)).map(p => p.pekan))}`)}">${strip}</span>
     </div>`;
   }).join("");
 }
@@ -1249,13 +1319,15 @@ function openWeek(n) {
 }
 
 document.addEventListener("click", e => {
+  /* Ketuk kode CPL di judul akordeon: tampilkan tooltip, jangan buka-tutup kartu */
+  if (e.target.closest("summary .term")) { e.preventDefault(); return; }
   const t = e.target.closest("[data-action],[data-open],[data-dosen].chip");
   if (!t) return;
   if (t.dataset.open) { e.preventDefault(); openWeek(t.dataset.open); return; }
   if (t.classList.contains("chip")) { filterDosen = t.dataset.dosen; applyFilter(); return; }
-  const a = t.dataset.action;
-  if (a === "expand") $$("#weeks .week:not([hidden])").forEach(d => d.open = true);
-  if (a === "collapse") $$("#weeks .week").forEach(d => d.open = false);
+  const a = t.dataset.action, box = t.dataset.target || "#weeks";
+  if (a === "expand") $$(box + " details:not([hidden])").forEach(d => d.open = true);
+  if (a === "collapse") $$(box + " details").forEach(d => d.open = false);
   if (a === "close-checks") $("#checks")?.remove();
 });
 
