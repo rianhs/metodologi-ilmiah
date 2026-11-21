@@ -67,13 +67,21 @@ const MI = {
       href: "sap.html", label: "Buka SAP" }
   ],
 
-  /* Setiap tugas punya satu RTM dan satu rubrik. */
+  /* Tugas mengikuti penomoran RPS.
+     Formatif (Tugas 1–5): dikerjakan di lembar kerja, dinilai sendiri oleh mahasiswa.
+     Sumatif (Tugas 6–7): setiap tugas punya satu RTM dan satu rubrik. */
+  lembarKerja: "lembar-kerja.html",
   tugas: [
-    { no: 1, judul: "Poster ilmiah", ikon: "presentation", pekan: "Pekan 13–14", bobot: "10%",
-      deskripsi: "Membuat poster ilmiah, lalu mempresentasikannya di hadapan dosen tim pengajar.",
+    { no: 1, sifat: "formatif", judul: "Calon topik riset", pekan: "Pekan 3–5" },
+    { no: 2, sifat: "formatif", judul: "Topik final dan kesenjangan riset", pekan: "Pekan 6" },
+    { no: 3, sifat: "formatif", judul: "Draf pendahuluan proposal", pekan: "Pekan 7" },
+    { no: 4, sifat: "formatif", judul: "Draf metode proposal", pekan: "Pekan 8–10" },
+    { no: 5, sifat: "formatif", judul: "Rencana penyajian data", pekan: "Pekan 11–12" },
+    { no: 6, sifat: "sumatif", judul: "Poster proposal riset", ikon: "presentation", pekan: "Pekan 13–14", bobot: "10%",
+      deskripsi: "Membuat poster proposal riset, lalu mempresentasikannya di hadapan dosen tim pengajar.",
       rtm: "", rubrik: "" },
-    { no: 2, judul: "Proposal riset", ikon: "file-text", pekan: "Pekan 15–16", bobot: "70%",
-      deskripsi: "Menyusun dokumen proposal riset, lalu mempresentasikannya secara lisan di hadapan dosen penguji.",
+    { no: 7, sifat: "sumatif", judul: "Naskah proposal final", ikon: "file-text", pekan: "Pekan 15–16", bobot: "70%",
+      deskripsi: "Menyusun naskah proposal riset final, lalu mempresentasikannya secara lisan di hadapan dosen penguji.",
       rtm: "", rubrik: "rubrik-proposal.html" }
   ],
 
@@ -180,6 +188,18 @@ a.link:hover > svg{transform:translateX(3px)}
 .link.off{color:var(--ink-3)}
 .link.off small{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
 
+/* Tahapan tugas */
+.stage{margin-bottom:28px}
+.stage:last-child{margin-bottom:0}
+.stage-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.stage-head h3{font-size:1.05rem;display:flex;align-items:center;gap:10px}
+.stage-head p{color:var(--ink-2);font-size:.9rem;max-width:640px;margin-top:4px}
+.grid-5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.mini{padding:16px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.mini h3{font-size:.95rem;line-height:1.35;margin:4px 0 0;transition:color .2s}
+.mini .wk{font-size:.8rem;color:var(--ink-3);flex:1}
+.mini .go{font-size:.82rem;margin-top:8px}
+
 /* Bahan ajar */
 .wide{padding:28px;display:flex;align-items:center;gap:24px}
 .wide-text{flex:1}
@@ -228,6 +248,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;text-align:center;font-si
 /* Responsif */
 @media (max-width:1023px){
   .info{grid-template-columns:1fr}
+  .grid-5{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:720px){
   body{font-size:15px}
@@ -236,6 +257,9 @@ footer{border-top:1px solid var(--rule);padding:28px 0;text-align:center;font-si
   main{gap:64px;padding-block-start:40px}
   .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .grid-2{grid-template-columns:1fr}
+  .grid-5{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+  .grid-5::-webkit-scrollbar{display:none}
+  .mini{flex:none;width:200px;scroll-snap-align:start}
   .person{width:220px}
   .wide{flex-direction:column;align-items:stretch}
   .theme-ctl{top:10px;right:10px}
@@ -288,7 +312,19 @@ footer{border-top:1px solid var(--rule);padding:28px 0;text-align:center;font-si
 
   <section id="tugas">
     <div class="sec-head"><div><p class="eyebrow">Asesmen proyek</p><h2>Tugas dan penilaian</h2></div></div>
-    <div id="daftar-tugas" class="grid-2"></div>
+    <div class="stage">
+      <div class="stage-head">
+        <div><h3>Tahap formatif <span class="tag">Tidak dinilai</span></h3>
+          <p>Tugas 1 sampai 5 dikerjakan bertahap di lembar kerja dan dinilai sendiri oleh mahasiswa. Dosen dapat menjadi tempat konsultasi bila dibutuhkan.</p></div>
+        <a id="tombol-lembar" class="btn btn-primary" href="#">Buka lembar kerja <i data-lucide="arrow-right"></i></a>
+      </div>
+      <div id="daftar-formatif" class="grid-5"></div>
+    </div>
+    <div class="stage">
+      <div class="stage-head"><div><h3>Tahap sumatif <span class="tag tag-accent">Dinilai dosen</span></h3>
+        <p>Tugas 6 dan 7 dinilai dengan rubrik dan menyumbang nilai akhir.</p></div></div>
+      <div id="daftar-tugas" class="grid-2"></div>
+    </div>
   </section>
 
   <section id="bahan-ajar">
@@ -406,6 +442,15 @@ function barisTautan(label, ikon, href) {
   return `<a href="${esc(href)}" class="link">${kiri}<i data-lucide="arrow-right"></i></a>`;
 }
 
+function kartuFormatif(t) {
+  return `<a href="${esc(MI.lembarKerja)}#tugas-${t.no}" class="box mini card-link">
+    ${tag("Tugas " + t.no)}
+    <h3>${esc(t.judul)}</h3>
+    <span class="wk">${esc(t.pekan)}</span>
+    <span class="go">Buka <i data-lucide="arrow-right"></i></span>
+  </a>`;
+}
+
 function kartuTugas(t) {
   return `<div class="box card">
     <div class="card-top">${icon(t.ikon)}${tag("Tugas " + t.no, true)}</div>
@@ -458,7 +503,9 @@ $("footer-teks").textContent = `© ${MI.tahun} · Prodi Kedokteran Hewan, Fakult
 renderInfo();
 renderDosen();
 $("daftar-perencanaan").innerHTML = MI.perencanaan.map(kartuPerencanaan).join("");
-$("daftar-tugas").innerHTML = MI.tugas.map(kartuTugas).join("");
+$("daftar-formatif").innerHTML = MI.tugas.filter(t => t.sifat === "formatif").map(kartuFormatif).join("");
+$("daftar-tugas").innerHTML = MI.tugas.filter(t => t.sifat === "sumatif").map(kartuTugas).join("");
+$("tombol-lembar").href = MI.lembarKerja;
 renderBahan();
 if (window.lucide) lucide.createIcons();
 setupCarousel();

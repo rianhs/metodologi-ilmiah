@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lembar Kerja Tugas 1–5 · Metodologi Ilmiah · Prodi Kedokteran Hewan Unhas</title>
+<meta name="description" content="Lembar kerja asesmen diri Tugas 1–5 (formatif) mata kuliah Metodologi Ilmiah, Program Studi Kedokteran Hewan Unhas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23059669'/%3E%3Ctext x='16' y='22' font-family='Inter,Arial,sans-serif' font-weight='700' font-size='17' fill='%23fff' text-anchor='middle'%3EMI%3C/text%3E%3C/svg%3E">
+<script>
+/* Tema: dibaca sebelum halaman digambar agar tidak berkedip. Kunci sama dengan index.html dan rps.html. */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("mi-tema"); } catch (e) {}
+  document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+})();
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║  BAGIAN YANG DIEDIT                                               ║
+║  Teks panduan dan daftar periksa berasal dari objek LK di bawah.  ║
+║  - sikolaUrl: tautan kelas di Sikola. Kosong = tautan tidak       ║
+║    ditampilkan, pengingatnya tetap muncul.                        ║
+║  - bidang: daftar bidang topik riset (dasar pembagian penguji).   ║
+║  - Setiap tugas: langkah (panduan) dan asesmen (daftar periksa).  ║
+║  Mengubah teks aman. Jangan mengubah "no" tugas, karena data      ║
+║  mahasiswa yang tersimpan memakai nomor itu.                      ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+<script>
+const LK = {
+
+  tahun: "2026",
+  sikolaUrl: "",
+
+  bidang: [
+    "Anatomi dan histologi veteriner",
+    "Biokimia dan fisiologi veteriner",
+    "Farmakologi dan toksikologi veteriner",
+    "Parasitologi veteriner",
+    "Mikrobiologi veteriner",
+    "Kesehatan masyarakat veteriner dan epidemiologi veteriner",
+    "Patologi veteriner",
+    "Ilmu reproduksi veteriner",
+    "Ilmu penyakit dalam dan patologi klinik veteriner",
+    "Ilmu bedah dan radiologi veteriner"
+  ],
+
+  /* Jumlah minimal artikel acuan untuk setiap calon topik (Tugas 1). */
+  minArtikel: 5,
+
+  tugas: [
+    { no: 1, judul: "Calon topik riset", pekan: "Pekan 3–5", sub: "Sub-CPMK-2",
+      capaian: "Mahasiswa mampu menganalisis tren riset kedokteran hewan melalui penelusuran dan pengelolaan literatur ilmiah yang relevan dan mutakhir.",
+      luaran: "Dua atau tiga calon topik, masing-masing dengan minimal lima artikel acuan yang tersimpan di Zotero.",
+      langkah: [
+        "Pilih dua atau tiga calon topik dari menu topik setiap bidang yang dibahas di pekan 3.",
+        "Susun kata kunci untuk setiap calon topik, lalu telusuri literatur di pangkalan data ilmiah yang dibahas di pekan 4.",
+        "Simpan minimal lima artikel acuan per calon topik ke Zotero. Buat satu koleksi untuk setiap calon topik.",
+        "Catat artikel tersebut di lembar ini, lalu nilai sendiri hasil kerja Anda dengan daftar periksa di bagian bawah."
+      ],
+      catatan: "Zotero adalah perangkat manajemen referensi bawaan mata kuliah ini. Mendeley boleh dipakai sebagai pilihan tambahan.",
+      asesmen: [
+        "Saya memilih dua atau tiga calon topik dari bidang yang tersedia.",
+        "Setiap calon topik punya minimal lima artikel acuan.",
+        "Artikel acuan berasal dari jurnal ilmiah yang bisa ditelusuri, misalnya punya DOI atau terindeks di pangkalan data.",
+        "Sebagian besar artikel terbit dalam sepuluh tahun terakhir, kecuali artikel rujukan klasik.",
+        "Saya sudah memeriksa kualitas jurnal dan penerbitnya, termasuk kemungkinan jurnal predator.",
+        "Semua artikel tersimpan di Zotero, satu koleksi untuk setiap calon topik.",
+        "Saya mencatat kata kunci dan pangkalan data yang dipakai sehingga penelusuran bisa diulang.",
+        "Sitasi yang dihasilkan Zotero tampil konsisten dalam satu gaya sitasi."
+      ] },
+
+    { no: 2, judul: "Topik final dan kesenjangan riset", pekan: "Pekan 6", sub: "Sub-CPMK-3",
+      capaian: "Mahasiswa mampu mengidentifikasi kesenjangan riset pada topik pilihannya berdasarkan analisis artikel riset kedokteran hewan.",
+      luaran: "Lembar topik berisi judul sementara, bidang, rumusan kesenjangan riset, dan tiga artikel kunci.",
+      langkah: [
+        "Bandingkan calon topik di Tugas 1, lalu pilih satu yang kesenjangan risetnya paling jelas dan bisa Anda kerjakan.",
+        "Uraikan topik dengan kerangka PICO atau PECO.",
+        "Telaah tiga artikel kunci dengan daftar periksa CASP yang dibahas di pekan 6.",
+        "Rumuskan kesenjangan riset dalam satu atau dua kalimat.",
+        "Masukkan topik final melalui activity choice di Sikola. Dosen koordinator menetapkan dosen penguji berdasarkan bidang topik."
+      ],
+      catatan: "",
+      asesmen: [
+        "Saya memilih topik final berdasarkan kesenjangan riset yang saya temukan.",
+        "Judul sementara memuat variabel utama, hewan atau populasi, dan lokasi bila relevan.",
+        "Unsur PICO atau PECO terisi dan sejalan dengan judul sementara.",
+        "Tiga artikel kunci sudah saya telaah, termasuk desain dan keterbatasannya.",
+        "Rumusan kesenjangan menyebut apa yang sudah diketahui dan apa yang belum.",
+        "Kesenjangan itu bisa dijawab dengan riset skala mahasiswa dari segi waktu, biaya, dan sampel.",
+        "Saya sudah memasukkan topik final melalui activity choice di Sikola."
+      ] },
+
+    { no: 3, judul: "Draf pendahuluan proposal", pekan: "Pekan 7", sub: "Sub-CPMK-4",
+      capaian: "Mahasiswa mampu mengevaluasi pendahuluan artikel riset sebagai dasar penyusunan pendahuluan proposal riset.",
+      luaran: "Draf pendahuluan berisi state-of-the-art, rumusan masalah, pertanyaan riset, tujuan, dan manfaat riset.",
+      langkah: [
+        "Susun alur pendahuluan dari umum ke khusus: masalah, apa yang sudah diketahui, kesenjangan, lalu riset yang Anda usulkan.",
+        "Tulis poin kunci setiap paragraf beserta sitasinya. Naskah utuh ditulis di Word dengan sitasi dari Zotero.",
+        "Turunkan rumusan masalah menjadi pertanyaan riset, lalu pasangkan setiap pertanyaan dengan satu tujuan khusus.",
+        "Periksa peta keselarasan di bagian bawah, lalu nilai sendiri dengan daftar periksa."
+      ],
+      catatan: "Tombol Ekspor ke Word menghasilkan kerangka naskah yang bisa Anda lanjutkan menjadi naskah utuh.",
+      asesmen: [
+        "Paragraf pembuka menunjukkan besarnya masalah dengan data yang bersumber.",
+        "State-of-the-art merangkum temuan riset terdahulu yang paling relevan dan mutakhir.",
+        "Kesenjangan riset di pendahuluan sama dengan rumusan di Tugas 2.",
+        "Setiap pertanyaan riset punya pasangan tujuan khusus.",
+        "Pertanyaan riset spesifik dan bisa dijawab dengan data.",
+        "Setiap klaim faktual diberi sitasi dan ditulis dengan parafrasa sendiri.",
+        "Alur antarparagraf logis, dari umum ke khusus.",
+        "Manfaat riset realistis dan sesuai dengan tujuan.",
+        "Jika memakai AI generatif, saya memakainya sesuai prinsip yang dibahas di pekan 1 dan menyatakannya."
+      ] },
+
+    { no: 4, judul: "Draf metode proposal", pekan: "Pekan 8–10", sub: "Sub-CPMK-5",
+      capaian: "Mahasiswa mampu mengevaluasi metode riset yang mencakup desain, variabel, penarikan sampel, instrumen, dan analisis data sebagai dasar penyusunan metode proposal riset.",
+      luaran: "Draf metode berisi desain, variabel, populasi dan sampel, instrumen, rencana analisis data, dan rencana persetujuan etik.",
+      langkah: [
+        "Pekan 8: tentukan desain riset dan variabel beserta definisi operasionalnya.",
+        "Pekan 9: tentukan populasi, sampel, teknik penarikan sampel, dan instrumen.",
+        "Pekan 10: susun rencana analisis untuk setiap pertanyaan riset.",
+        "Lengkapi rencana persetujuan etik. Riset yang memakai hewan memerlukan persetujuan komisi etik sebelum data dikumpulkan."
+      ],
+      catatan: "Cocokkan metode Anda dengan pedoman pelaporan yang sesuai: ARRIVE 2.0, STROBE-Vet, atau REFLECT.",
+      asesmen: [
+        "Desain riset sesuai dengan pertanyaan riset.",
+        "Setiap variabel punya definisi operasional dan cara ukur yang jelas.",
+        "Skala data setiap variabel sudah ditentukan.",
+        "Perancu potensial sudah diidentifikasi beserta cara pengendaliannya.",
+        "Populasi target, kriteria inklusi, dan kriteria eksklusi dirumuskan dengan jelas.",
+        "Besar sampel punya dasar perhitungan atau rujukan.",
+        "Teknik penarikan sampel sesuai dengan desain dan populasi.",
+        "Uji statistik sesuai dengan jenis data dan pertanyaan riset, beserta asumsinya.",
+        "Rencana persetujuan etik sudah dijelaskan, termasuk prinsip 3R bila memakai hewan.",
+        "Metode cukup rinci sehingga orang lain bisa mengulang riset ini."
+      ] },
+
+    { no: 5, judul: "Rencana penyajian data", pekan: "Pekan 11–12", sub: "Sub-CPMK-6",
+      capaian: "Mahasiswa mampu mengevaluasi penyajian data, hasil, pembahasan, dan kesimpulan artikel riset sebagai dasar perencanaan penyajian data proposal riset.",
+      luaran: "Kerangka tabel dan rancangan grafik untuk data yang akan dikumpulkan.",
+      langkah: [
+        "Rancang minimal satu tabel atau grafik untuk setiap tujuan khusus.",
+        "Buat kerangka tabel: judul, kolom, dan baris tanpa angka.",
+        "Pilih jenis grafik yang sesuai dengan jenis data.",
+        "Tulis hasil yang Anda harapkan dan artikel pembanding untuk pembahasan."
+      ],
+      catatan: "",
+      asesmen: [
+        "Setiap tujuan khusus punya minimal satu tabel atau grafik.",
+        "Judul tabel dan grafik menjelaskan apa, pada hewan atau populasi apa, di mana, dan kapan.",
+        "Jenis grafik sesuai dengan jenis data, kategoris atau numerik.",
+        "Tabel dan grafik tidak menyajikan data yang sama dua kali.",
+        "Satuan dan kepanjangan singkatan dicantumkan.",
+        "Kolom statistik di kerangka tabel sesuai dengan rencana analisis.",
+        "Saya sudah tahu artikel yang akan dipakai sebagai pembanding di pembahasan."
+      ] }
+  ]
+};
+</script>
+<style>
+/* Warna mengikuti index.html dan rps.html: terang = marun di atas kertas, gelap = emerald */
+:root{
+  --paper:#F7F6F2; --surface:#FFFFFF; --sunk:#F0EEE8;
+  --ink:#1C1D1F; --ink-2:#45484D; --ink-3:#74777D;
+  --rule:#E3E1DA; --rule-2:#CDCAC1;
+  --accent:#8E2B1E; --tint:#F4E8E4; --on-accent:#fff;
+  --ok:#2F6B3A; --ok-tint:#E4F0E2; --mid:#8A5A00; --mid-tint:#F6ECD6;
+  --shadow:rgba(28,29,31,.18);
+  --tip-bg:#1C1D1F; --tip-fg:#F4F3EF;
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius:8px;
+}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0B1120; --surface:#172033; --sunk:#222D44;
+  --ink:#F1F5F9; --ink-2:#CBD5E1; --ink-3:#94A3B8;
+  --rule:#2A3650; --rule-2:#3A4866;
+  --accent:#34d399; --tint:rgba(16,185,129,.16); --on-accent:#022c22;
+  --ok:#34d399; --ok-tint:rgba(16,185,129,.16); --mid:#fbbf24; --mid-tint:rgba(251,191,36,.14);
+  --shadow:rgba(16,185,129,.3);
+  --tip-bg:#F1F5F9; --tip-fg:#0B1120;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+p,ol,ul{margin:0}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+[data-theme="dark"] ::selection{background:rgba(16,185,129,.3)}
+
+.wrap{max-width:1000px;margin:0 auto;padding-inline:28px}
+.box{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius)}
+.muted{color:var(--ink-3)}
+.small{font-size:.85rem}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:4px;background:var(--sunk);color:var(--ink-2);font-size:.75rem;font-weight:600;white-space:nowrap}
+.tag-accent{background:var(--tint);color:var(--accent)}
+.eyebrow{font:600 .75rem/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+
+/* Kepala */
+.topbar{padding-top:18px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:.875rem;font-weight:600;color:var(--ink-2);text-decoration:none}
+.back:hover{color:var(--accent)}
+.back svg{width:16px;height:16px}
+.hero{padding-block:40px 8px}
+.hero h1{font-size:clamp(2rem,5vw,2.9rem);font-weight:800;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px}
+.hero p{color:var(--ink-2);max-width:700px}
+
+main{padding-block:28px 96px;display:flex;flex-direction:column;gap:28px}
+
+/* Identitas dan penyimpanan */
+.top-grid{display:grid;grid-template-columns:3fr 2fr;gap:16px}
+.pad{padding:22px}
+.box-title{display:flex;align-items:center;gap:8px;font-size:1rem;margin-bottom:14px}
+.box-title svg{width:18px;height:18px;color:var(--accent)}
+.status{display:flex;align-items:flex-start;gap:8px;font-size:.875rem;color:var(--ink-2);margin-bottom:14px;min-height:2.6em}
+.status svg{width:16px;height:16px;flex:none;margin-top:3px;color:var(--ok)}
+.status.warn svg{color:var(--mid)}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:38px;padding:0 14px;border-radius:var(--radius);border:1px solid var(--rule-2);background:var(--surface);color:var(--ink);font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s,background .2s,filter .2s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn svg{width:15px;height:15px}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{color:var(--on-accent);filter:brightness(1.1)}
+.btn-quiet{border-color:transparent;background:transparent;color:var(--ink-3);height:32px;padding:0 8px}
+.btn-quiet:hover{border-color:transparent;color:var(--accent)}
+.btn-danger.armed{border-color:#B42318;color:#B42318}
+[data-theme="dark"] .btn-danger.armed{border-color:#f87171;color:#f87171}
+.btn-sm{height:32px;padding:0 10px;font-size:.8rem}
+
+.cara{margin-top:18px;padding:14px 16px 14px 34px;border-radius:6px;background:var(--sunk);color:var(--ink-2);font-size:.85rem;display:flex;flex-direction:column;gap:4px}
+
+/* Langkah tugas */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.step{display:flex;flex-direction:column;gap:4px;padding:12px 14px;text-align:left;cursor:pointer;border:1px solid var(--rule);border-radius:var(--radius);background:var(--surface);transition:border-color .2s,background .2s}
+.step:hover{border-color:var(--accent)}
+.step[aria-selected="true"]{border-color:var(--accent);background:var(--tint)}
+.step-no{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.step-title{font-size:.875rem;font-weight:600;line-height:1.3}
+.step-meta{font-size:.75rem;color:var(--ink-3)}
+.bar{height:4px;border-radius:2px;background:var(--sunk);overflow:hidden;margin-top:6px}
+.bar span{display:block;height:100%;background:var(--accent);transition:width .3s}
+
+/* Panel tugas */
+.panel{display:flex;flex-direction:column;gap:20px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.panel-head h2{font-size:1.6rem;line-height:1.2;margin-top:2px}
+.panel-tags{display:flex;gap:6px;flex-wrap:wrap}
+.capaian{color:var(--ink-2);font-size:.92rem;margin-top:8px;max-width:760px}
+
+details.acc{background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius)}
+details.acc > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 18px;font-weight:600}
+details.acc > summary::-webkit-details-marker{display:none}
+details.acc > summary::before{content:"▶";font-size:.65rem;color:var(--ink-3);width:12px;flex:none}
+details.acc[open] > summary::before{content:"▼"}
+details.acc > summary:hover{color:var(--accent)}
+.acc-body{padding:0 18px 18px 42px;color:var(--ink-2);font-size:.92rem}
+.acc-body ol{padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.acc-body .luaran{margin-bottom:12px}
+.acc-body .note{margin-top:12px;color:var(--ink-3)}
+
+.sec{padding:22px}
+.sec > h3{font-size:1.05rem;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.sec > .hint{color:var(--ink-3);font-size:.85rem;margin-bottom:16px}
+.sec > h3 + .grid, .sec > h3 + .f{margin-top:14px}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.span-2{grid-column:span 2}
+.span-all{grid-column:1 / -1}
+.f{display:flex;flex-direction:column;gap:5px;min-width:0}
+.lb{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--ink-2)}
+input[type=text],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--rule-2);border-radius:6px;background:var(--paper);font-size:.9rem;line-height:1.5;transition:border-color .2s,background .2s}
+input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+textarea{resize:vertical;min-height:72px}
+::placeholder{color:var(--ink-3);opacity:.8}
+.chk{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-2);cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:var(--accent)}
+
+/* Tooltip */
+.tip{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--sunk);color:var(--ink-3);font-size:.65rem;font-weight:700;cursor:help;flex:none}
+.tip:hover,.tip:focus{background:var(--accent);color:var(--on-accent);outline:none}
+#tip{position:fixed;z-index:60;max-width:320px;padding:10px 12px;background:var(--tip-bg);color:var(--tip-fg);border-radius:6px;font-size:.8rem;line-height:1.5;pointer-events:none;opacity:0;transform:translateY(2px);transition:opacity .12s,transform .12s}
+#tip[data-show="true"]{opacity:1;transform:none}
+
+/* Butir berulang */
+.items{display:flex;flex-direction:column;gap:14px}
+.item{border:1px solid var(--rule);border-radius:var(--radius);padding:16px;background:var(--paper)}
+.item-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.item-head h4{font-size:.95rem}
+.item .item{background:var(--surface)}
+.sub-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0 10px;flex-wrap:wrap}
+.sub-head h4{font-size:.9rem}
+.count{font-size:.78rem;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--sunk);color:var(--ink-2)}
+.count.ok{background:var(--ok-tint);color:var(--ok)}
+.art{display:grid;grid-template-columns:28px 1.1fr 2fr 1.2fr 1.2fr;gap:8px;align-items:start;padding:10px 0;border-top:1px solid var(--rule)}
+.art:first-of-type{border-top:0}
+.art-no{font-size:.8rem;font-weight:700;color:var(--ink-3);padding-top:9px}
+.art-foot{grid-column:2 / -1;display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center}
+.add{margin-top:12px}
+
+/* Asesmen diri */
+.as-list{display:flex;flex-direction:column}
+.as-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:11px 0;border-top:1px solid var(--rule);font-size:.9rem}
+.as-row:first-child{border-top:0}
+.seg{display:inline-flex;border:1px solid var(--rule-2);border-radius:6px;overflow:hidden;flex:none}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;padding:5px 10px;font-size:.78rem;font-weight:600;color:var(--ink-3);border-left:1px solid var(--rule-2)}
+.seg label:first-child span{border-left:0}
+.seg input:checked + span{background:var(--sunk);color:var(--ink)}
+.seg input[value="sebagian"]:checked + span{background:var(--mid-tint);color:var(--mid)}
+.seg input[value="sudah"]:checked + span{background:var(--ok-tint);color:var(--ok)}
+.seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:-2px}
+.as-sum{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+
+/* Tabel bantu dan pratinjau */
+.tbl-wrap{overflow-x:auto}
+table.view{width:100%;border-collapse:collapse;font-size:.85rem}
+table.view th,table.view td{border:1px solid var(--rule-2);padding:6px 9px;text-align:left;vertical-align:top}
+table.view th{background:var(--sunk);font-weight:600}
+table.view td.empty{color:var(--ink-3);text-align:center}
+.cap{font-size:.85rem;font-weight:600;margin-bottom:6px}
+.foot-note{font-size:.78rem;color:var(--ink-3);margin-top:6px}
+.preview{margin-top:14px;padding:14px;border:1px dashed var(--rule-2);border-radius:6px;background:var(--surface)}
+.preview-lb{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.callout{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;border-radius:var(--radius);background:var(--tint);color:var(--ink);font-size:.9rem}
+.callout svg{width:18px;height:18px;flex:none;color:var(--accent);margin-top:2px}
+.callout p + p{margin-top:4px}
+.pick{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:16px}
+.pick .f{flex:1;min-width:220px}
+
+.nav-bottom{display:flex;justify-content:space-between;gap:10px}
+
+footer{border-top:1px solid var(--rule);padding:28px 0;text-align:center;font-size:.8125rem;color:var(--ink-3)}
+
+/* Notifikasi singkat */
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,12px);z-index:70;max-width:min(92vw,520px);padding:11px 16px;border-radius:var(--radius);background:var(--tip-bg);color:var(--tip-fg);font-size:.875rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+#toast[data-show="true"]{opacity:1;transform:translate(-50%,0)}
+
+/* Tombol tema */
+.theme-ctl{position:fixed;top:14px;right:16px;z-index:45}
+.ctl{width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--rule-2);background:var(--surface);color:var(--ink-2);cursor:pointer;padding:0;transition:color .2s,border-color .2s,box-shadow .2s}
+.ctl:hover{color:var(--accent);border-color:var(--accent)}
+.ctl svg{width:18px;height:18px}
+.ic-sun{display:none}
+[data-theme="dark"] .ic-sun{display:block}
+[data-theme="dark"] .ic-moon{display:none}
+
+/* Sentuhan mode gelap, sama dengan index.html */
+[data-theme="dark"] .hero h1{background:linear-gradient(90deg,#34d399,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+[data-theme="dark"] .eyebrow{text-shadow:0 0 18px rgba(52,211,153,.45)}
+[data-theme="dark"] .ctl:hover,[data-theme="dark"] .btn-primary:hover{box-shadow:0 0 16px -4px rgba(52,211,153,.6)}
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-50px) scale(1.1)}66%{transform:translate(-20px,20px) scale(.9)}}
+.bg-fx{display:none}
+[data-theme="dark"] .bg-fx{display:block;position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-fx span{position:absolute;width:24rem;height:24rem;border-radius:50%;filter:blur(64px);opacity:.12;animation:blob 12s ease-in-out infinite}
+.bg-fx span:nth-child(1){top:2.5rem;left:2.5rem;background:#059669}
+.bg-fx span:nth-child(2){top:6rem;right:2.5rem;background:#2563eb;animation-delay:-4s}
+.bg-fx span:nth-child(3){bottom:2.5rem;left:33%;background:#9333ea;opacity:.08;animation-delay:-8s}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bg-fx span{animation:none}}
+
+/* Responsif */
+@media (max-width:860px){
+  .top-grid{grid-template-columns:1fr}
+  .steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
+  .step{flex:none;width:180px;scroll-snap-align:start}
+  .art{grid-template-columns:24px 1fr 1fr}
+  .art > .f:nth-of-type(2){grid-column:2 / -1}
+  .art-foot{grid-column:2 / -1}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .wrap{padding-inline:16px}
+  .grid,.grid-3{grid-template-columns:1fr}
+  .span-2{grid-column:auto}
+  .sec,.pad{padding:18px}
+  .acc-body{padding-left:18px}
+  .as-row{grid-template-columns:1fr}
+  .art{grid-template-columns:1fr}
+  .art-no{padding-top:0}
+  .art > .f:nth-of-type(2),.art-foot{grid-column:auto}
+  .art-foot{grid-template-columns:1fr auto}
+  .art-foot > .f{grid-column:1 / -1}
+  .theme-ctl{top:10px;right:10px}
+  .ctl{width:36px;height:36px}
+}
+
+/* Cetak: yang tercetak adalah dokumen ringkasan */
+#cetak{display:none}
+@media print{
+  body{background:#fff;color:#000}
+  body > *:not(#cetak){display:none !important}
+  #cetak{display:block;font:11pt/1.5 Georgia,"Times New Roman",serif;color:#000}
+  #cetak h1{font-size:16pt;margin:0 0 4pt}
+  #cetak h2{font-size:13pt;margin:16pt 0 6pt;border-bottom:1px solid #999;padding-bottom:2pt}
+  #cetak h3{font-size:11.5pt;margin:10pt 0 4pt}
+  #cetak p,#cetak li{margin:0 0 4pt}
+  #cetak table{border-collapse:collapse;width:100%;margin:4pt 0 8pt;font-size:10pt}
+  #cetak th,#cetak td{border:1px solid #777;padding:3pt 5pt;text-align:left;vertical-align:top}
+  #cetak th{background:#eee}
+  #cetak .kosong{color:#777;font-style:italic}
+  #cetak h2,#cetak h3{break-after:avoid}
+  #cetak table{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fx" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<div class="theme-ctl">
+  <button class="ctl" type="button" id="theme-toggle">
+    <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+
+<div class="wrap topbar"><a class="back" href="index.html"><i data-lucide="arrow-left"></i>Portal Metodologi Ilmiah</a></div>
+
+<header class="hero wrap">
+  <p class="eyebrow">Tugas formatif · tidak dinilai</p>
+  <h1>Lembar kerja proposal riset</h1>
+  <p>Tempat Anda mengerjakan Tugas 1 sampai 5 secara bertahap dan menilai sendiri hasilnya. Isian ini menjadi bahan poster (Tugas 6) dan naskah proposal final (Tugas 7). Dosen siap menjadi tempat konsultasi bila Anda membutuhkannya.</p>
+</header>
+
+<main class="wrap">
+
+  <div class="top-grid">
+    <section class="box pad" aria-labelledby="h-identitas">
+      <h2 class="box-title" id="h-identitas"><i data-lucide="user-round"></i>Identitas</h2>
+      <div class="grid grid-3" id="identitas"></div>
+      <ol class="cara">
+        <li>Kerjakan tugas sesuai pekannya. Pilih tugas pada deretan kartu di bawah.</li>
+        <li>Setelah mengisi, nilai sendiri hasil kerja Anda di bagian asesmen diri.</li>
+        <li>Unduh file simpanan setiap selesai bekerja, lalu muat file itu bila berganti perangkat.</li>
+      </ol>
+    </section>
+
+    <section class="box pad" aria-labelledby="h-simpan">
+      <h2 class="box-title" id="h-simpan"><i data-lucide="hard-drive"></i>Penyimpanan
+        <span class="tip" tabindex="0" data-tip="Isian tersimpan otomatis di browser perangkat ini dan tidak dikirim ke mana pun. Isian bisa hilang jika riwayat browser dihapus, memakai mode penyamaran, atau berganti perangkat. Karena itu, unduh file simpanan secara berkala. File itu bisa dimuat lagi di perangkat mana pun.">?</span></h2>
+      <p class="status" id="status" aria-live="polite"></p>
+      <div class="btn-row">
+        <button class="btn btn-primary" type="button" data-act="unduh"><i data-lucide="download"></i>Unduh file simpanan</button>
+        <button class="btn" type="button" data-act="muat"><i data-lucide="upload"></i>Muat file simpanan</button>
+        <button class="btn" type="button" data-act="word"><i data-lucide="file-text"></i>Ekspor ke Word</button>
+        <button class="btn" type="button" data-act="cetak"><i data-lucide="printer"></i>Cetak atau PDF</button>
+        <button class="btn btn-quiet btn-danger" type="button" data-act="hapus"><i data-lucide="trash-2"></i><span>Kosongkan semua</span></button>
+      </div>
+      <input type="file" id="file-muat" accept=".json,application/json" hidden>
+    </section>
+  </div>
+
+  <nav class="steps" id="steps" role="tablist" aria-label="Pilih tugas"></nav>
+
+  <section class="panel" id="panel" role="tabpanel"></section>
+
+</main>
+
+<footer><div class="wrap" id="footer-teks"></div></footer>
+
+<div id="tip" role="tooltip"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="cetak"></div>
+
+<script>
+(() => {
+"use strict";
+
+/* ── Utilitas ─────────────────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const tip = t => `<span class="tip" tabindex="0" data-tip="${esc(t)}">?</span>`;
+const KUNCI = "mi-lembar-kerja-v1";
+const APP = "mi-lembar-kerja";
+
+/* ── Bentuk data ──────────────────────────────────────────────────── */
+const artikelBaru = () => ({ penulis: "", tahun: "", judul: "", jurnal: "", doi: "", zotero: false, catatan: "" });
+const BARU = {
+  topik: () => ({ bidang: "", judul: "", alasan: "", kataKunci: "", pangkalan: "", artikel: Array.from({ length: LK.minArtikel }, artikelBaru) }),
+  artikel: artikelBaru,
+  kunci: () => ({ sitasi: "", desain: "", temuan: "", keterbatasan: "" }),
+  teks: () => "",
+  variabel: () => ({ nama: "", peran: "", definisi: "", alat: "", skala: "" }),
+  analisis: () => ({ pertanyaan: "", variabel: "", uji: "", asumsi: "" }),
+  tabel: () => ({ judul: "", tujuan: "", kolom: "", baris: "", catatan: "" }),
+  grafik: () => ({ judul: "", tujuan: "", jenis: "", x: "", y: "", kelompok: "", alasan: "" })
+};
+const kosong = () => ({
+  identitas: { nama: "", nim: "", kelas: "" },
+  t1: { topik: [BARU.topik(), BARU.topik()] },
+  t2: { bidang: "", judul: "", alasan: "", p: "", i: "", c: "", o: "", artikel: [BARU.kunci(), BARU.kunci(), BARU.kunci()], jenisGap: "", gap: "" },
+  t3: { tema: "", topik: "", judul: "", p1: "", p2: "", p3: "", p4: "", rumusan: "", pertanyaan: [""], hipotesis: "", tujuanUmum: "", tujuanKhusus: [""], manfaatIlmu: "", manfaatPraktis: "" },
+  t4: { desain: "", alasanDesain: "", waktuLokasi: "", variabel: [BARU.variabel()], validitas: "", perancu: "", popTarget: "", popTerjangkau: "", inklusi: "", eksklusi: "", besarSampel: "", sampling: "", instrumen: "", analisis: [BARU.analisis()], software: "", subjekEtik: "", etik: "" },
+  t5: { tabel: [BARU.tabel()], grafik: [BARU.grafik()], harapan: "", pembahasan: "" },
+  asesmen: { t1: {}, t2: {}, t3: {}, t4: {}, t5: {} },
+  refleksi: { t1: { catatan: "", tanya: "" }, t2: { catatan: "", tanya: "" }, t3: { catatan: "", tanya: "" }, t4: { catatan: "", tanya: "" }, t5: { catatan: "", tanya: "" } }
+});
+
+/* Gabungkan data muatan dengan bentuk bawaan agar kolom baru tetap ada */
+function gabung(def, src) {
+  if (Array.isArray(def)) {
+    if (!Array.isArray(src)) return def;
+    const tpl = def[0];
+    return src.map(x => (tpl !== undefined && typeof tpl === "object") ? gabung(tpl, x) : (typeof x === "string" ? x : ""));
+  }
+  if (def && typeof def === "object") {
+    if (!src || typeof src !== "object" || Array.isArray(src)) return def;
+    if (!Object.keys(def).length) return { ...src };
+    const out = {};
+    for (const k of Object.keys(def)) out[k] = k in src ? gabung(def[k], src[k]) : def[k];
+    return out;
+  }
+  return typeof src === typeof def ? src : def;
+}
+
+let S = kosong();
+let meta = { diubah: null, diunduh: null };
+
+const ambil = path => path.split(".").reduce((o, k) => (o == null ? o : o[k]), S);
+function pasang(path, val) {
+  const ks = path.split("."); const akhir = ks.pop();
+  const o = ks.reduce((o, k) => o[k], S);
+  o[akhir] = val;
+}
+
+/* ── Penyimpanan ──────────────────────────────────────────────────── */
+let bisaSimpan = true;
+function simpanLokal() {
+  meta.diubah = new Date().toISOString();
+  try { localStorage.setItem(KUNCI, JSON.stringify({ app: APP, versi: 1, meta, data: S })); bisaSimpan = true; }
+  catch (e) { bisaSimpan = false; }
+  tampilStatus();
+}
+let timer = null;
+const simpanNanti = () => { clearTimeout(timer); timer = setTimeout(simpanLokal, 400); };
+
+function bacaLokal() {
+  try {
+    const raw = localStorage.getItem(KUNCI);
+    if (!raw) return;
+    const o = JSON.parse(raw);
+    if (o && o.app === APP) { S = gabung(kosong(), o.data); meta = { ...meta, ...(o.meta || {}) }; }
+  } catch (e) { bisaSimpan = false; }
+}
+
+const jam = iso => iso ? new Date(iso).toLocaleString("id-ID", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
+function tampilStatus() {
+  const el = $("status");
+  let teks, warn = false;
+  if (!bisaSimpan) { teks = "Browser ini tidak mengizinkan penyimpanan otomatis. Unduh file simpanan sebelum menutup halaman."; warn = true; }
+  else if (!meta.diubah) teks = "Belum ada isian. Isian akan tersimpan otomatis di browser ini.";
+  else {
+    teks = `Tersimpan otomatis di browser ini, ${jam(meta.diubah)}.`;
+    if (!meta.diunduh || meta.diunduh < meta.diubah) { teks += " Ada perubahan yang belum masuk file simpanan."; warn = true; }
+    else teks += ` File simpanan terakhir diunduh ${jam(meta.diunduh)}.`;
+  }
+  el.className = "status" + (warn ? " warn" : "");
+  el.innerHTML = `<i data-lucide="${warn ? "alert-circle" : "check-circle-2"}"></i><span>${esc(teks)}</span>`;
+  ikon(el);
+}
+
+const slug = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const tglFile = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+const namaDasar = () => slug(S.identitas.nim || S.identitas.nama) || "mahasiswa";
+
+function unduh(nama, isi, tipe) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([isi], { type: tipe }));
+  a.download = nama;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+function unduhSimpanan() {
+  if (!meta.diubah) simpanLokal();
+  meta.diunduh = new Date().toISOString();
+  unduh(`lembar-kerja-mi-${namaDasar()}-${tglFile()}.json`, JSON.stringify({ app: APP, versi: 1, meta, data: S }, null, 2), "application/json");
+  try { localStorage.setItem(KUNCI, JSON.stringify({ app: APP, versi: 1, meta, data: S })); } catch (e) {}
+  tampilStatus();
+  toast("File simpanan diunduh. Simpan file itu di tempat yang mudah Anda temukan.");
+}
+
+function muatFile(file) {
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const o = JSON.parse(r.result);
+      if (!o || o.app !== APP) throw new Error("bukan");
+      S = gabung(kosong(), o.data);
+      simpanLokal();
+      meta.diunduh = meta.diubah;   // isian sama persis dengan file yang baru dimuat
+      try { localStorage.setItem(KUNCI, JSON.stringify({ app: APP, versi: 1, meta, data: S })); } catch (err) {}
+      tampilStatus();
+      renderIdentitas(); renderSteps(); renderPanel();
+      toast(`File "${file.name}" berhasil dimuat.`);
+    } catch (e) {
+      toast("File ini tidak bisa dibaca. Pastikan Anda memilih file simpanan dari lembar kerja ini (berakhiran .json).");
+    }
+  };
+  r.readAsText(file);
+}
+
+let toastTimer = null;
+function toast(t) {
+  const el = $("toast"); el.textContent = t; el.dataset.show = "true";
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { el.dataset.show = "false"; }, 4200);
+}
+
+/* ── Komponen isian ───────────────────────────────────────────────── */
+const idDari = k => "f-" + k.replace(/\./g, "-");
+function label(k, teks, o) { return `<span class="lb"><label for="${idDari(k)}">${esc(teks)}</label>${o.tip ? tip(o.tip) : ""}</span>`; }
+const F = {
+  text: (k, teks, o = {}) => `<div class="f ${o.cls || ""}">${label(k, teks, o)}<input type="text" id="${idDari(k)}" data-k="${k}" value="${esc(ambil(k))}" placeholder="${esc(o.ph || "")}"></div>`,
+  area: (k, teks, o = {}) => `<div class="f ${o.cls || ""}">${label(k, teks, o)}<textarea id="${idDari(k)}" data-k="${k}" rows="${o.rows || 3}" placeholder="${esc(o.ph || "")}">${esc(ambil(k))}</textarea></div>`,
+  select: (k, teks, opsi, o = {}) => {
+    const v = ambil(k);
+    const ops = opsi.map(x => { const [val, lb] = Array.isArray(x) ? x : [x, x]; return `<option value="${esc(val)}"${val === v ? " selected" : ""}>${esc(lb)}</option>`; }).join("");
+    return `<div class="f ${o.cls || ""}">${label(k, teks, o)}<select id="${idDari(k)}" data-k="${k}"><option value="">${esc(o.kosong || "Pilih")}</option>${ops}</select></div>`;
+  },
+  check: (k, teks) => `<label class="chk"><input type="checkbox" data-k="${k}"${ambil(k) ? " checked" : ""}>${esc(teks)}</label>`
+};
+const tombolTambah = (list, jenis, teks) => `<button class="btn btn-sm add" type="button" data-act="tambah" data-list="${list}" data-jenis="${jenis}"><i data-lucide="plus"></i>${esc(teks)}</button>`;
+const tombolHapus = (list, i, teks = "Hapus") => `<button class="btn btn-quiet btn-sm" type="button" data-act="buang" data-list="${list}" data-i="${i}" aria-label="${esc(teks)}"><i data-lucide="x"></i>${esc(teks)}</button>`;
+const ikon = root => { if (window.lucide) lucide.createIcons({ root: root || document }); };
+
+/* ── Identitas ────────────────────────────────────────────────────── */
+function renderIdentitas() {
+  $("identitas").innerHTML = F.text("identitas.nama", "Nama") + F.text("identitas.nim", "NIM") + F.text("identitas.kelas", "Kelas", { ph: "Misalnya kelas A" });
+}
+
+/* ── Langkah tugas dan kemajuan ───────────────────────────────────── */
+function kemajuan(no) {
+  const t = LK.tugas[no - 1], a = S.asesmen["t" + no] || {};
+  const sudah = t.asesmen.filter((_, i) => a[i] === "sudah").length;
+  const sebagian = t.asesmen.filter((_, i) => a[i] === "sebagian").length;
+  return { sudah, sebagian, total: t.asesmen.length };
+}
+let aktif = 1;
+function renderSteps() {
+  $("steps").innerHTML = LK.tugas.map(t => {
+    const k = kemajuan(t.no);
+    return `<button class="step" type="button" role="tab" id="tab-${t.no}" aria-controls="panel" aria-selected="${t.no === aktif}" data-tugas="${t.no}">
+      <span class="step-no">Tugas ${t.no}</span>
+      <span class="step-title">${esc(t.judul)}</span>
+      <span class="step-meta">${esc(t.pekan)} · <span data-live="prog-${t.no}">${k.sudah}/${k.total} terpenuhi</span></span>
+      <span class="bar"><span data-live="bar-${t.no}" style="width:${k.total ? Math.round(k.sudah / k.total * 100) : 0}%"></span></span>
+    </button>`;
+  }).join("");
+}
+function segarkanKemajuan() {
+  LK.tugas.forEach(t => {
+    const k = kemajuan(t.no);
+    const p = document.querySelector(`[data-live="prog-${t.no}"]`), b = document.querySelector(`[data-live="bar-${t.no}"]`);
+    if (p) p.textContent = `${k.sudah}/${k.total} terpenuhi`;
+    if (b) b.style.width = (k.total ? Math.round(k.sudah / k.total * 100) : 0) + "%";
+  });
+  const sum = document.querySelector('[data-live="as-sum"]');
+  if (sum) sum.innerHTML = ringkasAsesmen(aktif);
+}
+
+/* ── Bagian bersama setiap panel ──────────────────────────────────── */
+function kepalaPanel(t) {
+  return `<div>
+      <div class="panel-head">
+        <div><p class="eyebrow">Tugas ${t.no} · ${esc(t.pekan)}</p><h2>${esc(t.judul)}</h2></div>
+        <div class="panel-tags"><span class="tag">${esc(t.sub)}</span><span class="tag tag-accent">Formatif, tidak dinilai</span></div>
+      </div>
+      <p class="capaian">${esc(t.capaian)}</p>
+    </div>
+    <details class="acc" open>
+      <summary>Panduan</summary>
+      <div class="acc-body">
+        <p class="luaran"><b>Luaran:</b> ${esc(t.luaran)}</p>
+        <ol>${t.langkah.map(l => `<li>${esc(l)}</li>`).join("")}</ol>
+        ${t.catatan ? `<p class="note">${esc(t.catatan)}</p>` : ""}
+      </div>
+    </details>`;
+}
+function ringkasAsesmen(no) {
+  const k = kemajuan(no);
+  return `<span class="count${k.sudah === k.total ? " ok" : ""}">${k.sudah} dari ${k.total} sudah terpenuhi</span>${k.sebagian ? `<span class="count">${k.sebagian} sebagian</span>` : ""}`;
+}
+function bagianAsesmen(t) {
+  const key = "asesmen.t" + t.no;
+  const rows = t.asesmen.map((teks, i) => {
+    const v = (S.asesmen["t" + t.no] || {})[i] || "";
+    const opsi = [["belum", "Belum"], ["sebagian", "Sebagian"], ["sudah", "Sudah"]].map(([val, lb]) =>
+      `<label><input type="radio" name="as-${t.no}-${i}" value="${val}" data-k="${key}.${i}"${v === val ? " checked" : ""}><span>${lb}</span></label>`).join("");
+    return `<div class="as-row"><span>${esc(teks)}</span><span class="seg" role="radiogroup" aria-label="${esc(teks)}">${opsi}</span></div>`;
+  }).join("");
+  return `<section class="box sec">
+      <h3><i data-lucide="list-checks"></i>Asesmen diri</h3>
+      <p class="hint">Nilai sendiri hasil kerja Anda dengan jujur. Hasil ini tidak dinilai dan tidak dikirim ke dosen.</p>
+      <div class="as-sum" data-live="as-sum">${ringkasAsesmen(t.no)}</div>
+      <div class="as-list">${rows}</div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="message-circle-question"></i>Refleksi dan konsultasi</h3>
+      <p class="hint">Opsional. Catatan ini ikut tercetak sehingga bisa Anda bawa saat berkonsultasi dengan dosen.</p>
+      <div class="grid">
+        ${F.area(`refleksi.t${t.no}.catatan`, "Yang perlu saya perbaiki", { rows: 3 })}
+        ${F.area(`refleksi.t${t.no}.tanya`, "Pertanyaan untuk dosen", { rows: 3 })}
+      </div>
+    </section>`;
+}
+function navBawah(no) {
+  const prev = no > 1 ? `<a class="btn" href="#tugas-${no - 1}"><i data-lucide="arrow-left"></i>Tugas ${no - 1}</a>` : "<span></span>";
+  const next = no < 5 ? `<a class="btn btn-primary" href="#tugas-${no + 1}">Tugas ${no + 1}<i data-lucide="arrow-right"></i></a>` : `<a class="btn btn-primary" href="index.html">Kembali ke portal<i data-lucide="arrow-right"></i></a>`;
+  return `<div class="nav-bottom">${prev}${next}</div>`;
+}
+
+/* ── Tugas 1 ──────────────────────────────────────────────────────── */
+const artikelLengkap = a => a.judul.trim() && (a.penulis.trim() || a.doi.trim());
+function hitungArtikel(i) {
+  const ar = S.t1.topik[i].artikel;
+  const n = ar.filter(artikelLengkap).length, z = ar.filter(a => artikelLengkap(a) && a.zotero).length;
+  return `<span class="count${n >= LK.minArtikel ? " ok" : ""}">${n} artikel tercatat</span> <span class="count${n && z === n ? " ok" : ""}">${z} di Zotero</span>`;
+}
+function panel1(t) {
+  const topik = S.t1.topik.map((tp, i) => {
+    const base = `t1.topik.${i}`;
+    const art = tp.artikel.map((a, j) => {
+      const b = `${base}.artikel.${j}`;
+      return `<div class="art">
+        <span class="art-no">${j + 1}</span>
+        ${F.text(b + ".penulis", "Penulis dan tahun", { ph: "Santoso dkk., 2023" })}
+        ${F.text(b + ".judul", "Judul artikel")}
+        ${F.text(b + ".jurnal", "Nama jurnal")}
+        ${F.text(b + ".doi", "DOI atau tautan", { tip: "DOI adalah kode unik artikel, misalnya 10.1016/j.prevetmed.2023.105901. Biasanya tercantum di halaman pertama artikel." })}
+        <div class="art-foot">
+          ${F.text(b + ".catatan", "Relevansi dengan calon topik", { ph: "Satu kalimat" })}
+          ${F.check(b + ".zotero", "Ada di Zotero")}
+          ${tombolHapus(base + ".artikel", j)}
+        </div>
+      </div>`;
+    }).join("");
+    return `<div class="item">
+      <div class="item-head"><h4>Calon topik ${i + 1}</h4>${S.t1.topik.length > 1 ? tombolHapus("t1.topik", i, "Hapus calon topik") : ""}</div>
+      <div class="grid">
+        ${F.select(base + ".bidang", "Bidang", LK.bidang)}
+        ${F.text(base + ".judul", "Calon topik", { ph: "Gambaran singkat topik" })}
+        ${F.area(base + ".alasan", "Alasan memilih topik ini", { rows: 2, cls: "span-all" })}
+        ${F.text(base + ".kataKunci", "Kata kunci penelusuran", { ph: "(\"Salmonella\" OR \"salmonellosis\") AND \"laying hens\"", tip: "Gabungkan kata kunci dengan operator Boolean: AND mempersempit, OR memperluas sinonim, NOT mengecualikan. Tanda kutip mencari frasa utuh." })}
+        ${F.text(base + ".pangkalan", "Pangkalan data yang dipakai", { ph: "Misalnya PubMed, Google Scholar" })}
+      </div>
+      <div class="sub-head"><h4>Artikel acuan (minimal ${LK.minArtikel})</h4><span data-live="art-${i}">${hitungArtikel(i)}</span></div>
+      <div>${art}</div>
+      ${tombolTambah(base + ".artikel", "artikel", "Tambah artikel")}
+    </div>`;
+  }).join("");
+  return `${kepalaPanel(t)}
+    <section class="box sec">
+      <h3><i data-lucide="search"></i>Calon topik dan artikel acuan</h3>
+      <p class="hint">Isi dua atau tiga calon topik. Artikel dianggap tercatat jika judul dan penulis atau DOI-nya terisi.</p>
+      <div class="items">${topik}</div>
+      ${S.t1.topik.length < 3 ? tombolTambah("t1.topik", "topik", "Tambah calon topik") : ""}
+    </section>
+    ${bagianAsesmen(t)}${navBawah(1)}`;
+}
+
+/* ── Tugas 2 ──────────────────────────────────────────────────────── */
+function panel2(t) {
+  const calon = S.t1.topik.map((tp, i) => [String(i), `Calon topik ${i + 1}: ${tp.judul || "(belum diberi judul)"}`]);
+  const sikola = LK.sikolaUrl ? ` <a href="${esc(LK.sikolaUrl)}" target="_blank" rel="noopener">Buka Sikola</a>` : "";
+  const kunci = S.t2.artikel.map((a, i) => {
+    const b = `t2.artikel.${i}`;
+    return `<div class="item"><div class="item-head"><h4>Artikel kunci ${i + 1}</h4></div>
+      <div class="grid">
+        ${F.text(b + ".sitasi", "Sitasi singkat", { cls: "span-all", ph: "Penulis, tahun, judul, jurnal" })}
+        ${F.text(b + ".desain", "Desain riset", { ph: "Misalnya potong lintang" })}
+        ${F.text(b + ".temuan", "Temuan utama")}
+        ${F.area(b + ".keterbatasan", "Keterbatasan atau hal yang belum dijawab", { rows: 2, cls: "span-all", tip: "Biasanya ada di bagian akhir pembahasan artikel, sering diawali kalimat seperti \"keterbatasan studi ini\" atau \"riset lanjutan diperlukan\"." })}
+      </div></div>`;
+  }).join("");
+  return `${kepalaPanel(t)}
+    <section class="box sec">
+      <h3><i data-lucide="target"></i>Topik final</h3>
+      <p class="hint">Anda bisa menyalin bidang dan judul dari salah satu calon topik di Tugas 1, lalu menyempurnakannya.</p>
+      <div class="pick">
+        <div class="f"><span class="lb"><label for="salin-calon">Salin dari Tugas 1</label></span>
+          <select id="salin-calon"><option value="">Pilih calon topik</option>${calon.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join("")}</select></div>
+        <button class="btn" type="button" data-act="salin-calon"><i data-lucide="copy"></i>Salin</button>
+      </div>
+      <div class="grid">
+        ${F.select("t2.bidang", "Bidang", LK.bidang, { tip: "Bidang ini menjadi dasar penetapan dosen penguji. Pilih bidang yang sama ketika mengisi activity choice di Sikola." })}
+        ${F.text("t2.judul", "Judul sementara")}
+        ${F.area("t2.alasan", "Mengapa topik ini dipilih dibanding calon topik lain", { rows: 2, cls: "span-all" })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="grid-2x2"></i>Kerangka PICO atau PECO</h3>
+      <p class="hint">Gunakan I (intervensi) untuk riset eksperimental dan E (exposure atau paparan) untuk riset observasional.</p>
+      <div class="grid">
+        ${F.text("t2.p", "P · Populasi atau hewan", { ph: "Ayam petelur di Kabupaten Maros" })}
+        ${F.text("t2.i", "I/E · Intervensi atau paparan", { ph: "Penggunaan antibiotik dalam pakan" })}
+        ${F.text("t2.c", "C · Pembanding", { ph: "Peternakan tanpa antibiotik dalam pakan" })}
+        ${F.text("t2.o", "O · Luaran", { ph: "Resistansi Salmonella terhadap antibiotik" })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="book-open-check"></i>Telaah tiga artikel kunci</h3>
+      <p class="hint">Pilih tiga artikel paling dekat dengan topik final Anda.</p>
+      <div class="items">${kunci}</div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="scan-search"></i>Kesenjangan riset</h3>
+      <div class="grid">
+        ${F.select("t2.jenisGap", "Jenis kesenjangan", ["Bukti belum ada atau masih sedikit", "Hasil riset terdahulu saling bertentangan", "Belum diteliti pada populasi, spesies, atau lokasi ini", "Metode riset terdahulu punya kelemahan", "Lainnya"], { tip: "Kesenjangan riset adalah hal yang belum diketahui atau belum terjawab tuntas oleh riset terdahulu, dan menjadi alasan riset Anda perlu dilakukan." })}
+        <div></div>
+        ${F.area("t2.gap", "Rumusan kesenjangan riset", { rows: 3, cls: "span-all", ph: "Riset tentang ... pada ... sudah dilakukan dan menunjukkan .... Namun, ... belum diketahui, khususnya di/pada ...." })}
+      </div>
+    </section>
+    <div class="callout"><i data-lucide="bell-ring"></i><div><p><b>Langkah terakhir Tugas 2:</b> masukkan topik final melalui activity choice di Sikola.${sikola}</p><p>Dosen koordinator menetapkan dosen penguji berdasarkan bidang topik dan mengumumkannya di Sikola.</p></div></div>
+    ${bagianAsesmen(t)}${navBawah(2)}`;
+}
+
+/* ── Tugas 3 ──────────────────────────────────────────────────────── */
+function daftarTeks(list, teks, o = {}) {
+  const arr = ambil(list);
+  const rows = arr.map((_, i) => `<div class="item-head" style="margin-bottom:8px;align-items:flex-start">
+      <div class="f" style="flex:1">${label(`${list}.${i}`, `${teks} ${i + 1}`, {})}<textarea id="${idDari(`${list}.${i}`)}" data-k="${list}.${i}" rows="2" placeholder="${esc(o.ph || "")}">${esc(arr[i])}</textarea></div>
+      ${arr.length > 1 ? tombolHapus(list, i) : ""}
+    </div>`).join("");
+  return `<div class="span-all">${rows}${tombolTambah(list, "teks", "Tambah " + teks.toLowerCase())}</div>`;
+}
+function petaKeselarasan() {
+  const q = S.t3.pertanyaan, tj = S.t3.tujuanKhusus, n = Math.max(q.length, tj.length);
+  const sel = s => s.trim() ? esc(s) : `<span class="muted">(kosong)</span>`;
+  let rows = "";
+  for (let i = 0; i < n; i++) rows += `<tr><td>${i + 1}</td><td>${sel(q[i] || "")}</td><td>${sel(tj[i] || "")}</td></tr>`;
+  const beda = q.filter(s => s.trim()).length !== tj.filter(s => s.trim()).length;
+  return `<div class="tbl-wrap"><table class="view"><thead><tr><th>No.</th><th>Pertanyaan riset</th><th>Tujuan khusus</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="foot-note">${beda ? "Jumlah pertanyaan riset dan tujuan khusus belum sama. Periksa apakah setiap pertanyaan sudah punya pasangan tujuan." : "Baca setiap baris: apakah tujuan khusus menjawab pertanyaan di sebelahnya?"}</p>`;
+}
+function panel3(t) {
+  return `${kepalaPanel(t)}
+    <section class="box sec">
+      <h3><i data-lucide="filter"></i>Dari tema ke judul</h3>
+      <p class="hint">Persempit dari tema besar ke topik, lalu ke judul riset.</p>
+      <div class="grid grid-3">
+        ${F.text("t3.tema", "Tema", { ph: "Resistansi antimikroba" })}
+        ${F.text("t3.topik", "Topik", { ph: "Salmonella pada ayam petelur" })}
+        ${F.text("t3.judul", "Judul riset", { ph: S.t2.judul || "" })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="align-left"></i>Kerangka latar belakang</h3>
+      <p class="hint">Tulis poin kunci setiap paragraf beserta sitasinya, misalnya (Santoso dkk., 2023). Paragraf utuh ditulis di Word.</p>
+      <div class="grid">
+        ${F.area("t3.p1", "Paragraf 1 · Masalah dan besarnya", { rows: 4, ph: "Apa masalahnya, seberapa besar (data, angka), dan mengapa penting bagi kesehatan hewan atau masyarakat?" })}
+        ${F.area("t3.p2", "Paragraf 2 · Yang sudah diketahui", { rows: 4, ph: "Temuan riset terdahulu yang paling relevan dan mutakhir.", tip: "Bagian ini disebut state-of-the-art: ringkasan perkembangan pengetahuan terkini tentang topik Anda." })}
+        ${F.area("t3.p3", "Paragraf 3 · Kesenjangan", { rows: 4, ph: S.t2.gap ? "Dari Tugas 2: " + S.t2.gap : "Apa yang belum diketahui?" })}
+        ${F.area("t3.p4", "Paragraf 4 · Riset yang diusulkan", { rows: 4, ph: "Apa yang akan Anda lakukan untuk mengisi kesenjangan itu?" })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="help-circle"></i>Masalah, pertanyaan, dan tujuan</h3>
+      <div class="grid">
+        ${F.area("t3.rumusan", "Rumusan masalah", { rows: 3, cls: "span-all" })}
+        ${daftarTeks("t3.pertanyaan", "Pertanyaan riset", { ph: "Berapa prevalensi ... pada ... di ...?" })}
+        ${F.area("t3.hipotesis", "Hipotesis (bila riset analitik)", { rows: 2, cls: "span-all", tip: "Riset deskriptif umumnya tidak memerlukan hipotesis. Riset yang menguji hubungan atau perbedaan perlu hipotesis." })}
+        ${F.area("t3.tujuanUmum", "Tujuan umum", { rows: 2, cls: "span-all" })}
+        ${daftarTeks("t3.tujuanKhusus", "Tujuan khusus", { ph: "Menentukan/mengukur/membandingkan ..." })}
+      </div>
+      <div class="preview"><p class="preview-lb">Peta keselarasan</p><div data-live="peta">${petaKeselarasan()}</div></div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="sparkles"></i>Manfaat riset</h3>
+      <div class="grid">
+        ${F.area("t3.manfaatIlmu", "Manfaat bagi ilmu pengetahuan", { rows: 2 })}
+        ${F.area("t3.manfaatPraktis", "Manfaat praktis", { rows: 2, ph: "Bagi peternak, dokter hewan, pemerintah, atau masyarakat" })}
+      </div>
+    </section>
+    ${bagianAsesmen(t)}${navBawah(3)}`;
+}
+
+/* ── Tugas 4 ──────────────────────────────────────────────────────── */
+const DESAIN = ["Eksperimental laboratorium", "Uji klinis atau uji lapang", "Kohort", "Kasus-kontrol", "Potong lintang (cross-sectional)", "Deskriptif atau survei", "Kualitatif", "Studi data sekunder", "Lainnya"];
+const SAMPLING = ["Acak sederhana", "Acak sistematis", "Acak berstrata", "Acak klaster", "Bertingkat (multistage)", "Purposif", "Konsekutif", "Kemudahan (convenience)", "Sensus atau total sampling", "Lainnya"];
+function panel4(t) {
+  const vars = S.t4.variabel.map((v, i) => {
+    const b = `t4.variabel.${i}`;
+    return `<div class="item"><div class="item-head"><h4>Variabel ${i + 1}</h4>${S.t4.variabel.length > 1 ? tombolHapus("t4.variabel", i) : ""}</div>
+      <div class="grid">
+        ${F.text(b + ".nama", "Nama variabel")}
+        ${F.select(b + ".peran", "Peran", ["Bebas atau paparan", "Terikat atau luaran", "Perancu", "Kontrol", "Karakteristik subjek"])}
+        ${F.area(b + ".definisi", "Definisi operasional", { rows: 2, cls: "span-all", tip: "Penjelasan tentang cara variabel diukur dalam riset Anda, sampai bisa diulang orang lain. Contoh: positif Salmonella bila koloni khas tumbuh pada media XLD dan terkonfirmasi uji biokimia." })}
+        ${F.text(b + ".alat", "Cara atau alat ukur")}
+        ${F.select(b + ".skala", "Skala data", ["Nominal", "Ordinal", "Interval", "Rasio"], { tip: "Nominal: kategori tanpa urutan. Ordinal: kategori berurutan. Interval: angka tanpa nol mutlak. Rasio: angka dengan nol mutlak." })}
+      </div></div>`;
+  }).join("");
+  const opsiQ = S.t3.pertanyaan.filter(s => s.trim()).map((s, i) => [s, `Pertanyaan ${i + 1}: ${s.length > 70 ? s.slice(0, 70) + "…" : s}`]);
+  const ana = S.t4.analisis.map((a, i) => {
+    const b = `t4.analisis.${i}`;
+    const opsi = opsiQ.some(([v]) => v === a.pertanyaan) || !a.pertanyaan ? opsiQ : [...opsiQ, [a.pertanyaan, a.pertanyaan]];
+    return `<div class="item"><div class="item-head"><h4>Rencana analisis ${i + 1}</h4>${S.t4.analisis.length > 1 ? tombolHapus("t4.analisis", i) : ""}</div>
+      <div class="grid">
+        ${opsiQ.length || a.pertanyaan ? F.select(b + ".pertanyaan", "Pertanyaan riset (dari Tugas 3)", opsi, { cls: "span-all" }) : F.text(b + ".pertanyaan", "Pertanyaan riset", { cls: "span-all", ph: "Isi pertanyaan riset di Tugas 3 agar bisa dipilih di sini" })}
+        ${F.text(b + ".variabel", "Variabel yang dianalisis")}
+        ${F.text(b + ".uji", "Analisis atau uji statistik", { ph: "Misalnya statistik deskriptif, uji chi-square" })}
+        ${F.area(b + ".asumsi", "Asumsi uji dan cara memeriksanya", { rows: 2, cls: "span-all", tip: "Contoh: uji t memerlukan data numerik yang menyebar normal di setiap kelompok, diperiksa dengan uji Shapiro-Wilk atau grafik Q-Q." })}
+      </div></div>`;
+  }).join("");
+  return `${kepalaPanel(t)}
+    <section class="box sec">
+      <h3><i data-lucide="layout-template"></i>Desain riset · pekan 8</h3>
+      <div class="grid">
+        ${F.select("t4.desain", "Desain riset", DESAIN)}
+        ${F.text("t4.waktuLokasi", "Waktu dan lokasi riset")}
+        ${F.area("t4.alasanDesain", "Alasan memilih desain ini", { rows: 2, cls: "span-all", ph: "Hubungkan dengan pertanyaan riset Anda" })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="variable"></i>Variabel · pekan 8</h3>
+      <p class="hint">Cantumkan semua variabel yang akan diukur, termasuk perancu.</p>
+      <div class="items">${vars}</div>
+      ${tombolTambah("t4.variabel", "variabel", "Tambah variabel")}
+      <div class="grid" style="margin-top:16px">
+        ${F.area("t4.validitas", "Validitas dan reliabilitas pengukuran", { rows: 3, tip: "Validitas: alat benar-benar mengukur yang ingin diukur. Reliabilitas: hasil pengukuran konsisten bila diulang." })}
+        ${F.area("t4.perancu", "Pengendalian perancu", { rows: 3, tip: "Perancu adalah variabel yang berhubungan dengan paparan dan luaran sekaligus sehingga bisa menyesatkan hasil. Cara mengendalikannya antara lain randomisasi, restriksi, pencocokan (matching), atau analisis multivariabel." })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="users"></i>Populasi, sampel, dan instrumen · pekan 9</h3>
+      <div class="grid">
+        ${F.text("t4.popTarget", "Populasi target", { tip: "Populasi yang menjadi sasaran kesimpulan riset, misalnya ayam petelur di Sulawesi Selatan." })}
+        ${F.text("t4.popTerjangkau", "Populasi terjangkau", { tip: "Bagian populasi target yang bisa Anda jangkau, misalnya ayam petelur di peternakan komersial Kabupaten Maros." })}
+        ${F.area("t4.inklusi", "Kriteria inklusi", { rows: 2 })}
+        ${F.area("t4.eksklusi", "Kriteria eksklusi", { rows: 2 })}
+        ${F.area("t4.besarSampel", "Besar sampel dan dasar perhitungannya", { rows: 2, ph: "Rumus atau rujukan yang dipakai, beserta nilai yang dimasukkan" })}
+        ${F.select("t4.sampling", "Teknik penarikan sampel", SAMPLING)}
+        ${F.area("t4.instrumen", "Instrumen dan prosedur pengumpulan data", { rows: 3, cls: "span-all", ph: "Misalnya kuesioner, lembar observasi, prosedur laboratorium" })}
+      </div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="sigma"></i>Rencana analisis data · pekan 10</h3>
+      <p class="hint">Buat satu rencana analisis untuk setiap pertanyaan riset.</p>
+      <div class="items">${ana}</div>
+      ${tombolTambah("t4.analisis", "analisis", "Tambah rencana analisis")}
+      <div class="grid" style="margin-top:16px">${F.text("t4.software", "Perangkat lunak analisis", { ph: "Misalnya R, SPSS, Jamovi" })}</div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="shield-check"></i>Pertimbangan etik</h3>
+      <div class="grid">
+        ${F.select("t4.subjekEtik", "Subjek riset", ["Hewan percobaan", "Hewan milik klien atau peternak", "Manusia, misalnya responden survei", "Hewan dan manusia", "Tidak melibatkan hewan atau manusia secara langsung"])}
+        <div></div>
+        ${F.area("t4.etik", "Rencana persetujuan etik", { rows: 3, cls: "span-all", ph: "Komisi etik yang dituju, penerapan prinsip 3R, persetujuan pemilik hewan atau responden", tip: "Prinsip 3R: replacement (mengganti hewan bila mungkin), reduction (memakai jumlah hewan seminimal mungkin), refinement (mengurangi rasa sakit dan stres hewan)." })}
+      </div>
+    </section>
+    ${bagianAsesmen(t)}${navBawah(4)}`;
+}
+
+/* ── Tugas 5 ──────────────────────────────────────────────────────── */
+const baris = s => String(s || "").split("\n").map(x => x.trim()).filter(Boolean);
+function pratinjauTabel(tb, i) {
+  const kol = baris(tb.kolom), brs = baris(tb.baris);
+  if (!kol.length && !brs.length) return `<p class="muted small">Isi judul kolom dan label baris untuk melihat kerangka tabel.</p>`;
+  const head = `<tr>${kol.map(k => `<th>${esc(k)}</th>`).join("")}</tr>`;
+  const isi = kol.length > 1 ? kol.length - 1 : 1;
+  const body = (brs.length ? brs : ["…"]).map(b => `<tr><td>${esc(b)}</td>${Array.from({ length: isi }, () => `<td class="empty">…</td>`).join("")}</tr>`).join("");
+  return `<p class="cap">Tabel ${i + 1}. ${esc(tb.judul || "(judul tabel)")}</p>
+    <div class="tbl-wrap"><table class="view"><thead>${kol.length ? head : ""}</thead><tbody>${body}</tbody></table></div>
+    ${tb.catatan ? `<p class="foot-note">${esc(tb.catatan)}</p>` : ""}`;
+}
+function cakupanTujuan() {
+  const tj = S.t3.tujuanKhusus.filter(s => s.trim());
+  if (!tj.length) return `<p class="muted small">Isi tujuan khusus di Tugas 3 agar cakupan tabel dan grafik bisa diperiksa di sini.</p>`;
+  const rows = tj.map((s, i) => {
+    const n = S.t5.tabel.filter(x => x.tujuan === s).length + S.t5.grafik.filter(x => x.tujuan === s).length;
+    return `<tr><td>${i + 1}</td><td>${esc(s)}</td><td><span class="count${n ? " ok" : ""}">${n} tabel/grafik</span></td></tr>`;
+  }).join("");
+  return `<div class="tbl-wrap"><table class="view"><thead><tr><th>No.</th><th>Tujuan khusus</th><th>Penyajian</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function panel5(t) {
+  const opsiTj = S.t3.tujuanKhusus.filter(s => s.trim()).map((s, i) => [s, `Tujuan ${i + 1}: ${s.length > 70 ? s.slice(0, 70) + "…" : s}`]);
+  const pilihTujuan = (k, v) => {
+    const opsi = opsiTj.some(([x]) => x === v) || !v ? opsiTj : [...opsiTj, [v, v]];
+    return opsi.length ? F.select(k, "Tujuan khusus terkait", opsi, { cls: "span-all" }) : F.text(k, "Tujuan khusus terkait", { cls: "span-all", ph: "Isi tujuan khusus di Tugas 3 agar bisa dipilih di sini" });
+  };
+  const tabel = S.t5.tabel.map((tb, i) => {
+    const b = `t5.tabel.${i}`;
+    return `<div class="item"><div class="item-head"><h4>Tabel ${i + 1}</h4>${S.t5.tabel.length > 1 ? tombolHapus("t5.tabel", i) : ""}</div>
+      <div class="grid">
+        ${F.text(b + ".judul", "Judul tabel", { cls: "span-all", ph: "Prevalensi Salmonella pada ayam petelur berdasarkan umur di Kabupaten Maros, 2027" })}
+        ${pilihTujuan(b + ".tujuan", tb.tujuan)}
+        ${F.area(b + ".kolom", "Judul kolom (satu per baris)", { rows: 4, ph: "Kelompok umur\nJumlah sampel (n)\nPositif (n)\nPrevalensi (%)\nIK 95%", tip: "Kolom pertama biasanya berisi label baris. Kolom berikutnya berisi statistik yang akan dihitung sesuai rencana analisis, misalnya n, %, rerata ± SB, median, atau nilai p." })}
+        ${F.area(b + ".baris", "Label baris (satu per baris)", { rows: 4, ph: "< 20 minggu\n20–40 minggu\n> 40 minggu\nTotal" })}
+        ${F.text(b + ".catatan", "Catatan kaki", { cls: "span-all", ph: "Kepanjangan singkatan dan satuan, misalnya IK = interval kepercayaan" })}
+      </div>
+      <div class="preview"><p class="preview-lb">Pratinjau kerangka tabel</p><div data-live="tabel-${i}">${pratinjauTabel(tb, i)}</div></div>
+    </div>`;
+  }).join("");
+  const grafik = S.t5.grafik.map((g, i) => {
+    const b = `t5.grafik.${i}`;
+    return `<div class="item"><div class="item-head"><h4>Grafik ${i + 1}</h4>${S.t5.grafik.length > 1 ? tombolHapus("t5.grafik", i) : ""}</div>
+      <div class="grid">
+        ${F.text(b + ".judul", "Judul grafik", { cls: "span-all" })}
+        ${pilihTujuan(b + ".tujuan", g.tujuan)}
+        ${F.select(b + ".jenis", "Jenis grafik", ["Diagram batang", "Diagram batang bertumpuk", "Histogram", "Diagram kotak (boxplot)", "Diagram pencar (scatter plot)", "Diagram garis", "Peta", "Lainnya"], { tip: "Data kategoris: diagram batang. Sebaran satu variabel numerik: histogram atau boxplot. Hubungan dua variabel numerik: diagram pencar. Perubahan menurut waktu: diagram garis." })}
+        ${F.text(b + ".kelompok", "Pengelompokan atau warna", { ph: "Bila ada" })}
+        ${F.text(b + ".x", "Sumbu X")}
+        ${F.text(b + ".y", "Sumbu Y")}
+        ${F.area(b + ".alasan", "Alasan memilih jenis grafik ini", { rows: 2, cls: "span-all" })}
+      </div></div>`;
+  }).join("");
+  return `${kepalaPanel(t)}
+    <section class="box sec">
+      <h3><i data-lucide="table"></i>Kerangka tabel</h3>
+      <p class="hint">Kerangka tabel (dummy table) berisi judul, kolom, dan baris tanpa angka. Angka diisi setelah data terkumpul.</p>
+      <div class="items">${tabel}</div>
+      ${tombolTambah("t5.tabel", "tabel", "Tambah tabel")}
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="bar-chart-3"></i>Rancangan grafik</h3>
+      <div class="items">${grafik}</div>
+      ${tombolTambah("t5.grafik", "grafik", "Tambah grafik")}
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="check-square"></i>Cakupan tujuan khusus</h3>
+      <p class="hint">Setiap tujuan khusus sebaiknya punya minimal satu tabel atau grafik.</p>
+      <div data-live="cakupan">${cakupanTujuan()}</div>
+    </section>
+    <section class="box sec">
+      <h3><i data-lucide="message-square-text"></i>Hasil dan pembahasan yang direncanakan</h3>
+      <div class="grid">
+        ${F.area("t5.harapan", "Hasil yang diharapkan", { rows: 3 })}
+        ${F.area("t5.pembahasan", "Artikel pembanding untuk pembahasan", { rows: 3, ph: "Artikel mana yang akan dibandingkan dengan hasil Anda, dan mengapa" })}
+      </div>
+    </section>
+    ${bagianAsesmen(t)}${navBawah(5)}`;
+}
+
+/* ── Panel aktif ──────────────────────────────────────────────────── */
+const PANEL = [null, panel1, panel2, panel3, panel4, panel5];
+function renderPanel() {
+  const t = LK.tugas[aktif - 1];
+  $("panel").setAttribute("aria-labelledby", "tab-" + aktif);
+  $("panel").innerHTML = PANEL[aktif](t);
+  ikon($("panel"));
+}
+function bukaDariHash(gulir) {
+  const m = location.hash.match(/^#tugas-([1-5])$/);
+  const no = m ? +m[1] : 1;
+  const ganti = no !== aktif || !$("panel").innerHTML;
+  aktif = no;
+  document.querySelectorAll(".step").forEach(b => b.setAttribute("aria-selected", String(+b.dataset.tugas === aktif)));
+  if (ganti) renderPanel();
+  if (gulir) $("steps").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  const tab = $("tab-" + aktif); if (tab && tab.scrollIntoView && innerWidth < 860) tab.scrollIntoView({ block: "nearest", inline: "nearest" });
+}
+
+/* Perbarui bagian yang bergantung pada isian tanpa menggambar ulang panel */
+function segarkanTurunan(k) {
+  if (k.startsWith("asesmen.")) segarkanKemajuan();
+  if (k.startsWith("t1.topik.")) {
+    const i = +k.split(".")[2]; const el = document.querySelector(`[data-live="art-${i}"]`);
+    if (el) el.innerHTML = hitungArtikel(i);
+  }
+  if (k.startsWith("t3.pertanyaan") || k.startsWith("t3.tujuanKhusus")) {
+    const el = document.querySelector('[data-live="peta"]'); if (el) el.innerHTML = petaKeselarasan();
+  }
+  if (k.startsWith("t5.tabel.")) {
+    const i = +k.split(".")[2]; const el = document.querySelector(`[data-live="tabel-${i}"]`);
+    if (el) el.innerHTML = pratinjauTabel(S.t5.tabel[i], i);
+  }
+  if (k.startsWith("t5.tabel.") || k.startsWith("t5.grafik.")) {
+    const el = document.querySelector('[data-live="cakupan"]'); if (el) el.innerHTML = cakupanTujuan();
+  }
+}
+
+/* ── Dokumen ekspor (Word dan cetak) ──────────────────────────────── */
+const isi = s => String(s || "").trim() ? esc(s).replace(/\n/g, "<br>") : `<span class="kosong">(belum diisi)</span>`;
+const p = (lb, v) => `<p><b>${esc(lb)}:</b> ${isi(v)}</p>`;
+const ol = arr => { const a = arr.filter(s => String(s).trim()); return a.length ? `<ol>${a.map(s => `<li>${esc(s)}</li>`).join("")}</ol>` : `<p class="kosong">(belum diisi)</p>`; };
+const tabelHtml = (head, rows) => `<table><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${String(c || "").trim() ? esc(c) : ""}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+
+function buatDokumen() {
+  const I = S.identitas, t2 = S.t2, t3 = S.t3, t4 = S.t4, t5 = S.t5;
+  const judul = t3.judul || t2.judul;
+  let h = `<h1>Kerangka proposal riset</h1>
+    <p>Mata kuliah Metodologi Ilmiah · Prodi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin</p>
+    <p><b>Nama:</b> ${isi(I.nama)} &nbsp; <b>NIM:</b> ${isi(I.nim)} &nbsp; <b>Kelas:</b> ${isi(I.kelas)}</p>
+    <p><b>Dicetak:</b> ${esc(new Date().toLocaleString("id-ID", { dateStyle: "long", timeStyle: "short" }))}</p>
+    <h2>Judul dan topik</h2>
+    ${p("Judul sementara", judul)}${p("Bidang", t2.bidang)}${p("Tema", t3.tema)}${p("Topik", t3.topik)}
+    <h3>Kerangka PICO/PECO</h3>
+    ${tabelHtml(["Unsur", "Isi"], [["P · Populasi atau hewan", t2.p], ["I/E · Intervensi atau paparan", t2.i], ["C · Pembanding", t2.c], ["O · Luaran", t2.o]])}
+    ${p("Jenis kesenjangan", t2.jenisGap)}${p("Rumusan kesenjangan riset", t2.gap)}
+
+    <h2>Pendahuluan</h2>
+    <h3>Latar belakang (poin kunci)</h3>
+    ${p("Paragraf 1, masalah dan besarnya", t3.p1)}${p("Paragraf 2, yang sudah diketahui", t3.p2)}${p("Paragraf 3, kesenjangan", t3.p3)}${p("Paragraf 4, riset yang diusulkan", t3.p4)}
+    <h3>Rumusan masalah</h3><p>${isi(t3.rumusan)}</p>
+    <h3>Pertanyaan riset</h3>${ol(t3.pertanyaan)}
+    <h3>Hipotesis</h3><p>${isi(t3.hipotesis)}</p>
+    <h3>Tujuan</h3>${p("Tujuan umum", t3.tujuanUmum)}<p><b>Tujuan khusus:</b></p>${ol(t3.tujuanKhusus)}
+    <h3>Manfaat</h3>${p("Bagi ilmu pengetahuan", t3.manfaatIlmu)}${p("Praktis", t3.manfaatPraktis)}
+
+    <h2>Metode</h2>
+    ${p("Desain riset", t4.desain)}${p("Alasan memilih desain", t4.alasanDesain)}${p("Waktu dan lokasi", t4.waktuLokasi)}
+    <h3>Variabel</h3>
+    ${tabelHtml(["Variabel", "Peran", "Definisi operasional", "Cara atau alat ukur", "Skala"], t4.variabel.map(v => [v.nama, v.peran, v.definisi, v.alat, v.skala]))}
+    ${p("Validitas dan reliabilitas", t4.validitas)}${p("Pengendalian perancu", t4.perancu)}
+    <h3>Populasi dan sampel</h3>
+    ${p("Populasi target", t4.popTarget)}${p("Populasi terjangkau", t4.popTerjangkau)}${p("Kriteria inklusi", t4.inklusi)}${p("Kriteria eksklusi", t4.eksklusi)}${p("Besar sampel", t4.besarSampel)}${p("Teknik penarikan sampel", t4.sampling)}
+    <h3>Instrumen dan pengumpulan data</h3><p>${isi(t4.instrumen)}</p>
+    <h3>Rencana analisis data</h3>
+    ${tabelHtml(["Pertanyaan riset", "Variabel", "Analisis atau uji", "Asumsi dan pemeriksaannya"], t4.analisis.map(a => [a.pertanyaan, a.variabel, a.uji, a.asumsi]))}
+    ${p("Perangkat lunak", t4.software)}
+    <h3>Pertimbangan etik</h3>${p("Subjek riset", t4.subjekEtik)}${p("Rencana persetujuan etik", t4.etik)}
+
+    <h2>Rencana penyajian data</h2>`;
+  t5.tabel.forEach((tb, i) => {
+    const kol = baris(tb.kolom), brs = baris(tb.baris);
+    h += `<p><b>Tabel ${i + 1}. ${tb.judul ? esc(tb.judul) : '<span class="kosong">(judul belum diisi)</span>'}</b></p>`;
+    if (tb.tujuan) h += `<p><i>Tujuan terkait: ${esc(tb.tujuan)}</i></p>`;
+    if (kol.length) h += tabelHtml(kol, (brs.length ? brs : [""]).map(b => [b, ...Array(Math.max(kol.length - 1, 0)).fill("")]));
+    if (tb.catatan) h += `<p><small>${esc(tb.catatan)}</small></p>`;
+  });
+  h += `<h3>Rancangan grafik</h3>` + tabelHtml(["Judul", "Jenis", "Sumbu X", "Sumbu Y", "Pengelompokan", "Tujuan terkait"], t5.grafik.map(g => [g.judul, g.jenis, g.x, g.y, g.kelompok, g.tujuan]));
+  h += p("Hasil yang diharapkan", t5.harapan) + p("Artikel pembanding untuk pembahasan", t5.pembahasan);
+
+  h += `<h2>Lampiran A · Calon topik dan artikel acuan (Tugas 1)</h2>`;
+  S.t1.topik.forEach((tp, i) => {
+    h += `<h3>Calon topik ${i + 1}: ${tp.judul ? esc(tp.judul) : '<span class="kosong">(belum diisi)</span>'}</h3>${p("Bidang", tp.bidang)}${p("Alasan", tp.alasan)}${p("Kata kunci", tp.kataKunci)}${p("Pangkalan data", tp.pangkalan)}`;
+    const ar = tp.artikel.filter(a => a.judul.trim() || a.penulis.trim() || a.doi.trim());
+    h += ar.length ? tabelHtml(["Penulis dan tahun", "Judul", "Jurnal", "DOI atau tautan", "Zotero", "Relevansi"], ar.map(a => [a.penulis, a.judul, a.jurnal, a.doi, a.zotero ? "Ya" : "Belum", a.catatan])) : `<p class="kosong">(belum ada artikel)</p>`;
+  });
+  h += `<h2>Lampiran B · Telaah artikel kunci (Tugas 2)</h2>` + tabelHtml(["Sitasi", "Desain", "Temuan utama", "Keterbatasan"], t2.artikel.map(a => [a.sitasi, a.desain, a.temuan, a.keterbatasan])) + p("Alasan memilih topik final", t2.alasan);
+
+  h += `<h2>Lampiran C · Asesmen diri dan catatan konsultasi</h2>`;
+  const LB = { belum: "Belum", sebagian: "Sebagian", sudah: "Sudah" };
+  LK.tugas.forEach(t => {
+    const a = S.asesmen["t" + t.no] || {}, r = S.refleksi["t" + t.no] || {};
+    h += `<h3>Tugas ${t.no} · ${esc(t.judul)}</h3>` + tabelHtml(["Butir", "Status"], t.asesmen.map((x, i) => [x, LB[a[i]] || "Belum dinilai"]));
+    if ((r.catatan || "").trim()) h += p("Yang perlu diperbaiki", r.catatan);
+    if ((r.tanya || "").trim()) h += p("Pertanyaan untuk dosen", r.tanya);
+  });
+  return h;
+}
+
+function eksporWord() {
+  const css = `body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:1.4}h1{font-size:16pt}h2{font-size:13pt;margin-top:18pt;border-bottom:1px solid #999}h3{font-size:11.5pt;margin-top:10pt}table{border-collapse:collapse;width:100%;margin:4pt 0 8pt}th,td{border:1px solid #777;padding:3pt 5pt;vertical-align:top;font-size:10pt}th{background:#eee}.kosong{color:#888;font-style:italic}`;
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Kerangka proposal riset</title><style>${css}</style></head><body>${buatDokumen()}</body></html>`;
+  unduh(`kerangka-proposal-${namaDasar()}-${tglFile()}.doc`, "﻿" + html, "application/msword");
+  toast("Berkas Word diunduh. Jika Word menampilkan peringatan format, pilih Ya, lalu simpan ulang sebagai .docx.");
+}
+function cetak() { $("cetak").innerHTML = buatDokumen(); window.print(); }
+
+/* ── Peristiwa ────────────────────────────────────────────────────── */
+function onInput(e) {
+  const el = e.target, k = el.dataset && el.dataset.k;
+  if (!k) return;
+  const v = el.type === "checkbox" ? el.checked : el.value;
+  pasang(k, v);
+  segarkanTurunan(k);
+  simpanNanti();
+}
+document.addEventListener("input", onInput);
+document.addEventListener("change", e => { if (e.target.type === "radio" || e.target.type === "checkbox" || e.target.tagName === "SELECT") onInput(e); });
+
+let hapusSiaga = null;
+document.addEventListener("click", e => {
+  const tab = e.target.closest(".step");
+  if (tab) { location.hash = "tugas-" + tab.dataset.tugas; return; }
+  const b = e.target.closest("[data-act]");
+  if (!b) return;
+  const act = b.dataset.act;
+  if (act === "tambah") {
+    const arr = ambil(b.dataset.list); arr.push(BARU[b.dataset.jenis]());
+    simpanLokal(); renderPanel();
+    const n = arr.length - 1;
+    const baru = document.querySelector(`[data-k="${b.dataset.list}.${n}"], [data-k^="${b.dataset.list}.${n}."]`);
+    if (baru) baru.focus();
+  } else if (act === "buang") {
+    const arr = ambil(b.dataset.list); arr.splice(+b.dataset.i, 1);
+    simpanLokal(); renderPanel();
+  } else if (act === "salin-calon") {
+    const i = $("salin-calon").value;
+    if (i === "") { toast("Pilih calon topik yang akan disalin."); return; }
+    const tp = S.t1.topik[+i]; S.t2.bidang = tp.bidang; S.t2.judul = tp.judul;
+    simpanLokal(); renderPanel(); toast("Bidang dan judul disalin dari Tugas 1.");
+  } else if (act === "unduh") unduhSimpanan();
+  else if (act === "muat") $("file-muat").click();
+  else if (act === "word") eksporWord();
+  else if (act === "cetak") cetak();
+  else if (act === "hapus") {
+    const lbl = b.querySelector("span");
+    if (!hapusSiaga) {
+      b.classList.add("armed"); lbl.textContent = "Klik lagi untuk mengosongkan";
+      hapusSiaga = setTimeout(() => { b.classList.remove("armed"); lbl.textContent = "Kosongkan semua"; hapusSiaga = null; }, 4000);
+    } else {
+      clearTimeout(hapusSiaga); hapusSiaga = null; b.classList.remove("armed"); lbl.textContent = "Kosongkan semua";
+      S = kosong(); meta = { diubah: null, diunduh: null };
+      try { localStorage.removeItem(KUNCI); } catch (err) {}
+      renderIdentitas(); renderSteps(); renderPanel(); tampilStatus();
+      toast("Semua isian dikosongkan. File simpanan yang sudah Anda unduh tidak ikut terhapus.");
+    }
+  }
+});
+$("file-muat").addEventListener("change", e => { const f = e.target.files[0]; if (f) muatFile(f); e.target.value = ""; });
+addEventListener("hashchange", () => bukaDariHash(true));
+addEventListener("pagehide", () => { if (timer) { clearTimeout(timer); simpanLokal(); } });
+
+/* Tooltip: tampil saat disentuh, diarahkan tetikus, atau difokus */
+const tipEl = $("tip");
+function tampilTip(el) {
+  tipEl.textContent = el.dataset.tip; tipEl.dataset.show = "true";
+  const r = el.getBoundingClientRect(), w = tipEl.offsetWidth, hgt = tipEl.offsetHeight;
+  let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+  let y = r.top - hgt - 8; if (y < 8) y = r.bottom + 8;
+  tipEl.style.left = x + "px"; tipEl.style.top = y + "px";
+}
+const sembunyiTip = () => { tipEl.dataset.show = "false"; };
+document.addEventListener("mouseover", e => { const t = e.target.closest(".tip"); if (t) tampilTip(t); });
+document.addEventListener("mouseout", e => { if (e.target.closest(".tip")) sembunyiTip(); });
+document.addEventListener("focusin", e => { const t = e.target.closest(".tip"); if (t) tampilTip(t); });
+document.addEventListener("focusout", e => { if (e.target.closest(".tip")) sembunyiTip(); });
+addEventListener("scroll", sembunyiTip, { passive: true });
+
+/* Tema */
+function setupTheme() {
+  const btn = $("theme-toggle"), root = document.documentElement;
+  const sync = () => { const l = root.dataset.theme === "dark" ? "Ganti ke mode terang" : "Ganti ke mode gelap"; btn.setAttribute("aria-label", l); btn.title = l; };
+  btn.addEventListener("click", () => {
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem("mi-tema", root.dataset.theme); } catch (e) {}
+    sync();
+  });
+  sync();
+}
+
+/* ── Mulai ────────────────────────────────────────────────────────── */
+$("footer-teks").textContent = `© ${LK.tahun} · Prodi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin · Dibuat oleh RianHS`;
+bacaLokal();
+renderIdentitas();
+renderSteps();
+bukaDariHash(false);
+tampilStatus();
+ikon();
+setupTheme();
+})();
+</script>
+</body>
+</html>
