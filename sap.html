@@ -45,7 +45,7 @@ const RPS = {
     angkatan: "2026",
     prasyarat: ["Biostatistika"],
     tanggalPenyusunan: "2024-03-10",  // format TTTT-BB-HH
-    tanggalRevisi: "2026-11-21",
+    tanggalRevisi: "2026-11-22",
     prodi: "Program Studi Kedokteran Hewan",
     fakultas: "Fakultas Kedokteran",
     universitas: "Universitas Hasanuddin",
@@ -104,7 +104,7 @@ const RPS = {
     { kode: "AMK", nama: "drh. Anjani Marisa Kartikasari, M.Si.", peran: "" }
   ],
 
-  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan proposalnya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
+  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan secara bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan proposalnya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
 
   bahanKajian: [
     "Ilmu, riset, dan metodologi ilmiah",
@@ -113,7 +113,7 @@ const RPS = {
     "Penelusuran dan pengelolaan literatur",
     "Perangkat lunak yang mendukung riset",
     "Telaah artikel riset dan teknik sitasi",
-    "Tema, topik, state-of-the-art, rumusan masalah, dan pertanyaan riset",
+    "State-of-the-art, rumusan masalah, dan pertanyaan riset",
     "Desain riset, variabel, pengukuran, dan analisis data",
     "Penyajian data, hasil, pembahasan, dan penarikan kesimpulan",
     "Penyajian proposal riset melalui poster dan presentasi lisan"
@@ -144,7 +144,7 @@ const RPS = {
       teknik: "Tes tertulis (kuis di LMS Sikola)" },
     { kode: "Sub-CPMK-2", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
       teks: "Mahasiswa mampu menganalisis tren riset kedokteran hewan melalui penelusuran dan pengelolaan literatur ilmiah yang relevan dan mutakhir.",
-      indikator: "Ketepatan menjawab soal tentang jenis dan tren riset kedokteran hewan, strategi penelusuran literatur, pengelolaan referensi, gaya sitasi, dan interpretasi laporan kesamaan teks.",
+      indikator: "Ketepatan menjawab soal tentang jenis riset dan tingkat buktinya, tren riset kedokteran hewan, strategi penelusuran literatur, pengelolaan referensi, gaya sitasi, dan interpretasi laporan kesamaan teks.",
       teknik: "Tes tertulis (kuis di LMS Sikola)" },
     { kode: "Sub-CPMK-3", cpmk: "CPMK-2", bobot: 3,  asesmen: "kasus",   metode: ["SGD", "CBL", "PjBL"],
       teks: "Mahasiswa mampu mengidentifikasi kesenjangan riset pada topik pilihannya berdasarkan analisis artikel riset kedokteran hewan.",
@@ -175,7 +175,7 @@ const RPS = {
   /* Pengaturan bersama untuk setiap pertemuan (bisa ditimpa per pekan). */
   bawaanPertemuan: {
     bentuk: "Kuliah",
-    formatif: ["Umpan balik", "Kuis interaktif di kelas"],
+    formatif: ["Umpan balik", "kuis interaktif di kelas"],
     kriteria: "Skor kuis di LMS Sikola",
     waktu: { terbimbing: "2 × 50 menit", terstruktur: "2 × 60 menit", mandiri: "2 × 60 menit" }
   },
@@ -190,33 +190,34 @@ const RPS = {
     { pekan: 2,  sub: "Sub-CPMK-1", dosen: ["DKS"], topik: "Etika riset",
       materi: ["Prinsip dasar etika riset", "Integritas akademik dan plagiarisme", "Konflik kepentingan dalam riset", "Persetujuan etik (ethical clearance) dan etika riset yang menggunakan hewan"] },
     { pekan: 3,  sub: "Sub-CPMK-2", dosen: ["FYP"], topik: "Riset kedokteran hewan",
-      formatif: ["Umpan balik calon topik", "Kuis interaktif di kelas"],
-      materi: ["Jenis-jenis riset di bidang kedokteran hewan", "Tren riset terkini dalam ilmu kedokteran hewan", "Menu topik riset dari setiap bidang"] },
+      formatif: ["Asesmen diri Tugas 1 dengan lembar kerja", "kuis interaktif di kelas"],
+      materi: ["Kedokteran hewan berbasis bukti dan piramida bukti", "Jenis-jenis riset di bidang kedokteran hewan", "Tren riset terkini dalam ilmu kedokteran hewan", "Menu topik riset dari setiap bidang"] },
     { pekan: 4,  sub: "Sub-CPMK-2", dosen: ["FYP"], topik: "Penelusuran literatur",
-      formatif: ["Umpan balik calon topik", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 1 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Strategi penelusuran literatur ilmiah", "Pangkalan data ilmiah dan teknik penelusuran", "Identifikasi literatur yang relevan dan mutakhir", "Evaluasi kualitas penyedia sumber ilmiah"] },
     { pekan: 5,  sub: "Sub-CPMK-2", dosen: ["AWJ"], topik: "Manajemen sitasi dan deteksi kesamaan teks",
+      formatif: ["Asesmen diri Tugas 1 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Penggunaan perangkat manajemen referensi", "Konsistensi gaya sitasi", "Perangkat deteksi kesamaan teks dan interpretasi laporan similarity index"] },
     { pekan: 6,  sub: "Sub-CPMK-3", dosen: ["KDK"], topik: "Telaah artikel dan kesenjangan riset",
-      formatif: ["Umpan balik topik riset", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 2 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Struktur artikel riset", "Telaah artikel riset dengan kerangka PICO/PECO dan daftar periksa CASP", "Pedoman pelaporan riset veteriner: ARRIVE 2.0, STROBE-Vet, dan REFLECT", "Identifikasi kesenjangan riset dan penetapan topik", "Teknik sitasi dan parafrase akademik"] },
     { pekan: 7,  sub: "Sub-CPMK-4", dosen: ["AWJ"], topik: "Pendahuluan",
-      formatif: ["Umpan balik draf pendahuluan proposal", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 3 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Tema, topik, dan judul riset", "State-of-the-art dan relevansi riset", "Rumusan masalah dan pertanyaan riset", "Koherensi dan alur logis pendahuluan"] },
     { pekan: 8,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Metode: desain dan variabel",
-      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
-      materi: ["Jenis desain riset", "Identifikasi dan definisi variabel", "Validitas dan reliabilitas pengukuran", "Pengendalian perancu"] },
+      formatif: ["Asesmen diri Tugas 4 dengan lembar kerja", "kuis interaktif di kelas"],
+      materi: ["Jenis riset (deskriptif, observasional, eksperimental, kualitatif, dsb.)", "Desain riset (potong lintang, rancangan acak lengkap, uji acak terkendali, dsb.)", "Identifikasi dan definisi variabel", "Validitas dan reliabilitas pengukuran", "Pengendalian perancu"] },
     { pekan: 9,  sub: "Sub-CPMK-5", dosen: ["BY"], topik: "Metode: populasi, sampel, dan instrumen",
-      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 4 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Populasi target dan sampel dalam riset veteriner", "Teknik penarikan sampel", "Instrumen pengumpulan data"] },
     { pekan: 10, sub: "Sub-CPMK-5", dosen: ["RHS"], topik: "Metode: analisis data",
-      formatif: ["Umpan balik draf metode proposal", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 4 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Kesesuaian metode analisis dengan pertanyaan riset", "Kesesuaian uji statistik dengan jenis data", "Asumsi uji statistik dan interpretasi hasil", "Kesalahan umum dalam analisis data"] },
     { pekan: 11, sub: "Sub-CPMK-6", dosen: ["RHS"], topik: "Penyajian dan visualisasi data",
-      formatif: ["Umpan balik rencana penyajian data", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 5 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Prinsip penyajian data dalam tabel dan grafik", "Pemilihan bentuk visualisasi sesuai jenis data", "Kesalahan umum dalam visualisasi data ilmiah", "Kerangka tabel (dummy table) untuk proposal riset"] },
     { pekan: 12, sub: "Sub-CPMK-6", dosen: ["AMK"], topik: "Hasil, pembahasan, dan kesimpulan",
-      formatif: ["Umpan balik rencana penyajian data", "Kuis interaktif di kelas"],
+      formatif: ["Asesmen diri Tugas 5 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Perbedaan hasil dan pembahasan", "Struktur penulisan hasil", "Strategi pembahasan berbasis literatur", "Keselarasan tujuan dan kesimpulan riset", "Penarikan kesimpulan ilmiah"] },
     { pekan: 13, sub: "Sub-CPMK-7", dosen: ["KDK"], topik: "Poster proposal riset", kriteria: "Unjuk kerja dinilai dengan rubrik",
       materi: ["Struktur poster proposal riset (work in progress)", "Prinsip desain grafis akademik", "Penyajian metode dalam diagram alur dan kerangka tabel", "Standar presentasi poster ilmiah"] },
@@ -231,30 +232,32 @@ const RPS = {
   ],
 
   /* Rencana penugasan terstruktur: tahapan proyek proposal riset sepanjang semester.
-     Draf pekan 3–12 bersifat formatif (umpan balik, tanpa bobot). Nilai sumatif proyek
-     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8). */
+     Tugas pekan 3–12 bersifat formatif: mahasiswa menilai diri dengan lembar kerja (lembar-kerja.html),
+     tanpa bobot, dan berkonsultasi dengan dosen sesuai kebutuhan. Nilai sumatif proyek
+     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8).
+     sifat: "formatif" | "sumatif". Bobot tugas sumatif diambil otomatis dari bobot Sub-CPMK-nya. */
   penugasan: [
-    { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2",
+    { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2", sifat: "formatif",
       luaran: "Dua atau tiga calon topik, masing-masing dengan minimal lima artikel acuan yang tersimpan di perangkat manajemen referensi.",
-      deskripsi: "Mahasiswa memilih calon topik dari menu topik setiap bidang, lalu menelusuri literatur untuk setiap calon topik. Formatif, tanpa bobot nilai." },
-    { judul: "Topik final dan kesenjangan riset", pekan: [6], sub: "Sub-CPMK-3",
+      deskripsi: "Mahasiswa memilih calon topik dari menu topik setiap bidang, lalu menelusuri literatur untuk setiap calon topik." },
+    { judul: "Topik final dan kesenjangan riset", pekan: [6], sub: "Sub-CPMK-3", sifat: "formatif",
       luaran: "Lembar topik berisi judul sementara, bidang, rumusan kesenjangan riset, dan tiga artikel kunci.",
-      deskripsi: "Mahasiswa menetapkan satu topik berdasarkan kesenjangan riset yang ditemukan. Lembar topik menjadi dasar penetapan dosen penguji sesuai bidang. Formatif, tanpa bobot nilai." },
-    { judul: "Draf pendahuluan proposal", pekan: [7], sub: "Sub-CPMK-4",
+      deskripsi: "Mahasiswa menetapkan satu topik berdasarkan kesenjangan riset yang ditemukan. Mahasiswa memasukkan topik final melalui activity choice di LMS Sikola. Dosen koordinator menetapkan dosen penguji berdasarkan bidang topik." },
+    { judul: "Draf pendahuluan proposal", pekan: [7], sub: "Sub-CPMK-4", sifat: "formatif",
       luaran: "Draf pendahuluan berisi state-of-the-art, rumusan masalah, pertanyaan riset, tujuan, dan manfaat riset.",
-      deskripsi: "Mahasiswa menerapkan hasil telaah pendahuluan artikel pada topiknya sendiri. Formatif, tanpa bobot nilai." },
-    { judul: "Draf metode proposal", pekan: [8, 9, 10], sub: "Sub-CPMK-5",
+      deskripsi: "Mahasiswa menerapkan hasil telaah pendahuluan artikel pada topiknya sendiri." },
+    { judul: "Draf metode proposal", pekan: [8, 9, 10], sub: "Sub-CPMK-5", sifat: "formatif",
       luaran: "Draf metode berisi desain, variabel, populasi dan sampel, instrumen, rencana analisis data, dan rencana persetujuan etik.",
-      deskripsi: "Mahasiswa menyusun draf metode secara bertahap mengikuti materi pekan 8–10. Formatif, tanpa bobot nilai." },
-    { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6",
+      deskripsi: "Mahasiswa menyusun draf metode secara bertahap mengikuti materi pekan 8–10." },
+    { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6", sifat: "formatif",
       luaran: "Kerangka tabel dan rancangan grafik untuk data yang akan dikumpulkan.",
-      deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset. Formatif, tanpa bobot nilai." },
-    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7",
+      deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset." },
+    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7", sifat: "sumatif",
       luaran: "Poster proposal riset yang dipresentasikan pada pekan 14.",
-      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14. Sumatif, bobot 10%." },
-    { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8",
+      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14." },
+    { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8", sifat: "sumatif",
       luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
-      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset. Sumatif, bobot 70%." }
+      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset." }
   ],
 
   /* Pustaka. Gaya Harvard (Cite Them Right): Nama belakang, Inisial. (Tahun) *Judul buku*.
@@ -299,7 +302,7 @@ const RPS = {
     "Peta analisis pembelajaran pada RPS 2026 berupa gambar dan perlu dibuat ulang mengikuti struktur Sub-CPMK yang baru.",
     "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) dan rubrik poster proposal (Sub-CPMK-7) belum tersedia.",
     "Tentukan mekanisme penilaian poster pekan 14: semua dosen menilai semua poster, atau setiap dosen menilai poster mahasiswa yang juga diujinya pada pekan 16.",
-    "Bagian penugasan di RPS memuat ringkasan. Instruksi, kriteria, dan rubrik setiap tugas disusun di dokumen RTM.",
+    "Bagian penugasan di RPS memuat ringkasan. Tugas 1–5 dipandu lembar kerja asesmen diri (lembar-kerja.html); instruksi, kriteria, dan rubrik Tugas 6 dan 7 disusun di dokumen RTM.",
     "Rubrik presentasi proposal perlu diselaraskan: istilah \"penelitian\" menjadi \"riset\" dan unsur pertimbangan etik ditambahkan ke butir C.7.",
     "Teks CPL, visi, misi, dan profil lulusan sengaja tidak diubah karena mengikuti dokumen kurikulum prodi.",
     "Periksa kembali nama Ketua Prodi dan tanggal penyusunan sebelum RPS disahkan."
@@ -328,7 +331,7 @@ const SAP = {
         inti: [
           [25, "Menjelaskan ilmu pengetahuan, riset, metodologi ilmiah, dan hakikat riset di bidang kedokteran hewan", "Menyimak, mencatat, dan menjawab pertanyaan pemantik"],
           [20, "Membagikan contoh proposal riset dan memandu diskusi kelompok kecil", "Mengidentifikasi bagian-bagian proposal riset dan alur logisnya"],
-          [15, "Menjelaskan proyek proposal riset sepanjang semester beserta tahapan Tugas 01 sampai Tugas 07", "Menyimak dan mencatat tenggat setiap tahapan"],
+          [15, "Menjelaskan proyek proposal riset sepanjang semester beserta tahapan Tugas 1 sampai Tugas 7: Tugas 1–5 formatif dengan asesmen diri, Tugas 6 dan 7 dinilai dosen", "Menyimak dan mencatat tenggat setiap tahapan"],
           [15, "Menyajikan kasus penggunaan kecerdasan buatan generatif dalam penulisan ilmiah", "Mendiskusikan batas penggunaan yang dapat diterima dan yang tidak"]
         ],
         penutup: [
@@ -362,96 +365,98 @@ const SAP = {
     },
 
     3: {
-      media: ["Slide presentasi", "Menu topik riset dari setiap bidang", "Contoh judul artikel riset terbaru"],
+      media: ["Slide presentasi", "Menu topik riset dari setiap bidang", "Contoh judul artikel riset terbaru", "Diagram piramida bukti", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan mengaitkan materi dengan proyek proposal semester", "Menyebutkan bidang kedokteran hewan yang diminati"]
         ],
         inti: [
-          [25, "Menjelaskan jenis-jenis riset di bidang kedokteran hewan (eksperimental, observasional, survei, kualitatif, dan tinjauan sistematis)", "Mengelompokkan contoh judul artikel menurut jenis riset"],
-          [20, "Memaparkan tren riset terkini dalam ilmu kedokteran hewan", "Berdiskusi dalam kelompok untuk memetakan tren dari judul artikel terbaru per bidang"],
-          [20, "Memaparkan menu topik riset dari setiap bidang", "Memilih dua atau tiga calon topik awal"]
+          [15, "Menjelaskan kedokteran hewan berbasis bukti dan piramida bukti", "Menyimak dan menjawab pertanyaan pemantik tentang keputusan klinis yang didasarkan pada bukti"],
+          [20, "Menjelaskan jenis-jenis riset di bidang kedokteran hewan (deskriptif, observasional analitis, eksperimental, kualitatif, dan lainnya) beserta posisinya pada piramida bukti", "Mengelompokkan contoh judul artikel menurut jenis riset dan tingkat buktinya"],
+          [15, "Memaparkan tren riset terkini dalam ilmu kedokteran hewan", "Berdiskusi dalam kelompok untuk memetakan tren dari judul artikel terbaru per bidang"],
+          [15, "Memaparkan menu topik riset dari setiap bidang", "Memilih dua atau tiga calon topik awal"]
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan instruksi Tugas 01 (calon topik riset)", "Mencatat instruksi dan bertanya bila belum jelas"],
+          [10, "Memperkenalkan lembar kerja proposal riset dan menjelaskan Tugas 1 (calon topik riset) beserta asesmen dirinya", "Membuka lembar kerja, mencatat instruksi, dan bertanya bila belum jelas"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menelusuri tiga artikel terbaru untuk setiap calon topik.",
+      mandiri: "Mengisi calon topik di lembar kerja Tugas 1 dan mulai menelusuri artikel terbaru untuk setiap calon topik.",
       bacaan: ["Dohoo dkk. (2009)", "Kothari (2004)"]
     },
 
     4: {
-      media: ["Laptop dan akses internet", "Pangkalan data ilmiah yang tersedia melalui perpustakaan", "Lembar kerja strategi penelusuran"],
+      media: ["Laptop dan akses internet", "Pangkalan data ilmiah (misalnya PubMed, Scopus, DOAJ, dan Garuda)", "Mesin pencari akademik (Google Scholar)", "Perangkat penelusuran berbasis AI (misalnya Research Rabbit dan Elicit)", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan meninjau calon topik mahasiswa", "Menyebutkan calon topik masing-masing"]
         ],
         inti: [
-          [20, "Menjelaskan strategi penelusuran literatur: kata kunci, sinonim, operator Boolean, dan filter", "Menyimak dan mencatat"],
-          [30, "Membimbing praktik penelusuran pada calon topik mahasiswa", "Menyusun string pencarian dan mencatat hasil penelusuran"],
-          [15, "Menjelaskan kriteria relevansi, kemutakhiran, dan kualitas penyedia sumber ilmiah, termasuk ciri jurnal predator", "Menilai tiga sumber hasil penelusuran sendiri"]
+          [15, "Memperkenalkan sumber penelusuran literatur: pangkalan data ilmiah (PubMed, Scopus, DOAJ, Garuda), mesin pencari akademik (Google Scholar), dan perangkat berbasis AI (Research Rabbit, Elicit) beserta kelebihan dan keterbatasannya", "Membandingkan hasil satu kata kunci di dua sumber penelusuran yang berbeda"],
+          [15, "Menjelaskan strategi penelusuran literatur: kata kunci, sinonim, operator Boolean, dan filter", "Menyimak dan mencatat"],
+          [25, "Membimbing praktik penelusuran pada calon topik mahasiswa", "Menyusun string pencarian dan mencatat kata kunci serta pangkalan data di lembar kerja Tugas 1"],
+          [10, "Menjelaskan kriteria relevansi, kemutakhiran, dan kualitas penyedia sumber ilmiah, termasuk ciri jurnal predator", "Menilai tiga sumber hasil penelusuran sendiri"]
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Memberi umpan balik atas calon topik mahasiswa", "Menyimak umpan balik untuk calon topiknya"],
+          [10, "Memandu asesmen diri hasil penelusuran dengan daftar periksa Tugas 1 dan menjawab pertanyaan konsultasi", "Menilai sendiri hasil penelusuran dengan daftar periksa Tugas 1"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Melanjutkan penelusuran literatur untuk Tugas 01.",
+      mandiri: "Melanjutkan penelusuran literatur untuk Tugas 1. Hasil dari perangkat berbasis AI diperiksa ulang pada artikel aslinya sebelum dicatat.",
       bacaan: ["Kumar (2011)", "Hardani dkk. (2020)"]
     },
 
     5: {
-      media: ["Laptop dan akses internet", "Perangkat manajemen referensi (misalnya Zotero atau Mendeley)", "Contoh laporan pemeriksaan kesamaan teks"],
+      media: ["Laptop dan akses internet", "Zotero sebagai perangkat manajemen referensi (Mendeley sebagai pilihan tambahan)", "Contoh laporan pemeriksaan kesamaan teks"],
       langkah: {
         pendahuluan: [
-          [10, "Membuka kuliah dan memastikan perangkat manajemen referensi sudah terpasang", "Menyiapkan laptop dan perangkat manajemen referensi"]
+          [10, "Membuka kuliah dan memastikan Zotero sudah terpasang", "Menyiapkan laptop dan Zotero"]
         ],
         inti: [
           [20, "Menjelaskan konsep manajemen referensi dan konsistensi gaya sitasi", "Menyimak dan mencatat"],
-          [25, "Membimbing praktik memasukkan artikel dan menyisipkan sitasi ke dalam dokumen", "Memasukkan artikel Tugas 01 ke perangkat manajemen referensi dan menyisipkan sitasi"],
+          [25, "Membimbing praktik memasukkan artikel dan menyisipkan sitasi ke dalam dokumen", "Memasukkan artikel Tugas 1 ke Zotero, satu koleksi untuk setiap calon topik, lalu menyisipkan sitasi"],
           [20, "Menjelaskan cara membaca laporan similarity index, termasuk kesamaan yang wajar dan yang bermasalah", "Menafsirkan contoh laporan kesamaan teks"]
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menyampaikan jadwal kuis Sub-CPMK-2 dan tenggat Tugas 01", "Mencatat jadwal kuis dan tenggat tugas"],
+          [10, "Menyampaikan jadwal kuis Sub-CPMK-2 dan tenggat Tugas 1", "Mencatat jadwal kuis dan tenggat tugas"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Merapikan pustaka Tugas 01 di perangkat manajemen referensi dan mengerjakan kuis Sub-CPMK-2 di Sikola.",
+      mandiri: "Merapikan pustaka Tugas 1 di Zotero, menilai sendiri Tugas 1 di lembar kerja, dan mengerjakan kuis Sub-CPMK-2 di Sikola.",
       bacaan: []
     },
 
     6: {
-      media: ["Slide presentasi", "Artikel riset contoh", "Daftar periksa CASP", "Pedoman ARRIVE 2.0, STROBE-Vet, dan REFLECT", "Lembar kerja PICO/PECO"],
+      media: ["Slide presentasi", "Artikel riset contoh", "Daftar periksa CASP", "Pedoman ARRIVE 2.0, STROBE-Vet, dan REFLECT", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan menanyakan calon topik yang paling diminati mahasiswa", "Menyebutkan calon topik yang paling diminati"]
         ],
         inti: [
           [20, "Menjelaskan struktur artikel riset, kerangka PICO/PECO, daftar periksa CASP, dan pedoman pelaporan riset veteriner", "Menyimak dan mencatat"],
-          [25, "Memandu telaah artikel contoh dalam kelompok kecil", "Menelaah artikel contoh dengan lembar kerja PICO/PECO dan daftar periksa CASP"],
+          [25, "Memandu telaah artikel contoh dalam kelompok kecil", "Menelaah artikel contoh dengan kerangka PICO/PECO dan daftar periksa CASP"],
           [15, "Mencontohkan cara merumuskan kesenjangan riset dari beberapa artikel", "Merumuskan kesenjangan riset pada calon topik dan memilih topik final"],
           [10, "Mencontohkan teknik parafrase akademik yang disertai sitasi", "Berlatih memparafrasakan satu paragraf artikel"]
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [7, "Menjelaskan Tugas 02 (lembar topik) dan jadwal kuis Sub-CPMK-3", "Mencatat instruksi tugas dan jadwal kuis"],
+          [7, "Menjelaskan Tugas 2 (topik final dan kesenjangan riset), pengisian topik final melalui activity choice di Sikola, dan jadwal kuis Sub-CPMK-3", "Mencatat instruksi tugas dan jadwal kuis"],
           [5, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyelesaikan lembar topik (Tugas 02) dan mengerjakan kuis Sub-CPMK-3 di Sikola.",
+      mandiri: "Menyelesaikan Tugas 2 di lembar kerja, memasukkan topik final melalui activity choice di Sikola, dan mengerjakan kuis Sub-CPMK-3 di Sikola.",
       bacaan: ["Percie du Sert dkk. (2020)", "Petrie dan Watson (2013)"],
-      catatan: "Lembar topik Tugas 02 menjadi dasar koordinator menetapkan dosen penguji sesuai bidang topik riset."
+      catatan: "Topik final yang dimasukkan mahasiswa melalui activity choice di Sikola menjadi dasar koordinator menetapkan dosen penguji sesuai bidang topik riset. Pembagian dosen penguji ditampilkan di Sikola."
     },
 
     7: {
-      media: ["Slide presentasi", "Artikel riset contoh", "Lembar telaah pendahuluan"],
+      media: ["Slide presentasi", "Artikel riset contoh", "Lembar telaah pendahuluan", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
-          [10, "Membuka kuliah dan mengumumkan pembagian dosen penguji", "Mencatat dosen penguji masing-masing"]
+          [10, "Membuka kuliah dan mengumumkan pembagian dosen penguji yang ditampilkan di Sikola", "Memeriksa dosen penguji masing-masing di Sikola"]
         ],
         inti: [
           [20, "Menjelaskan tema, topik, judul, state-of-the-art, rumusan masalah, pertanyaan riset, dan alur logis pendahuluan", "Menyimak dan mencatat"],
@@ -460,32 +465,32 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 03 (draf pendahuluan) dan jadwal kuis Sub-CPMK-4", "Mencatat instruksi tugas dan jadwal kuis"],
+          [10, "Menjelaskan Tugas 3 (draf pendahuluan) dan jadwal kuis Sub-CPMK-4", "Mencatat instruksi tugas dan jadwal kuis"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyusun draf pendahuluan proposal (Tugas 03) dan mengerjakan kuis Sub-CPMK-4 di Sikola.",
+      mandiri: "Menyusun draf pendahuluan proposal (Tugas 3) di lembar kerja, menilai sendiri hasilnya, dan mengerjakan kuis Sub-CPMK-4 di Sikola.",
       bacaan: ["Kumar (2011)", "Hikmawati (2017)"]
     },
 
     8: {
-      media: ["Slide presentasi", "Artikel riset contoh dengan berbagai desain", "Bagan alir pemilihan desain riset"],
+      media: ["Slide presentasi", "Artikel riset contoh dengan berbagai jenis dan desain riset", "Bagan alir pemilihan jenis dan desain riset", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
-          [10, "Membuka kuliah dan menyampaikan umpan balik umum atas draf pendahuluan", "Menyimak umpan balik umum"]
+          [10, "Membuka kuliah dan mengaitkan pertanyaan riset di Tugas 3 dengan pemilihan desain riset", "Menyebutkan pertanyaan riset masing-masing"]
         ],
         inti: [
-          [20, "Menjelaskan jenis desain riset (eksperimental, kohort, kasus-kontrol, potong lintang) dan kesesuaiannya dengan pertanyaan riset", "Menyimak dan mencatat"],
+          [20, "Menjelaskan jenis riset dan desain riset, serta kesesuaiannya dengan pertanyaan riset", "Menyimak dan mencatat"],
           [20, "Menjelaskan identifikasi dan definisi variabel, validitas dan reliabilitas pengukuran, serta pengendalian perancu", "Menyimak dan menjawab pertanyaan pemantik"],
-          [25, "Memandu diskusi kelompok kecil tentang desain dan variabel artikel contoh", "Menilai desain dan variabel artikel contoh, lalu menentukan desain dan variabel proposal sendiri"]
+          [25, "Memandu diskusi kelompok kecil tentang desain dan variabel artikel contoh", "Menilai jenis, desain, dan variabel artikel contoh, lalu menentukan jenis dan desain riset serta variabel proposal sendiri"]
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 04 (draf metode)", "Mencatat instruksi tugas"],
+          [10, "Menjelaskan Tugas 4 (draf metode) di lembar kerja yang dikerjakan bertahap pada pekan 8–10", "Mencatat instruksi tugas"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyusun bagian desain dan variabel pada draf metode (Tugas 04).",
+      mandiri: "Menyusun bagian jenis dan desain riset serta variabel pada draf metode (Tugas 4).",
       bacaan: ["Dohoo dkk. (2009)", "Kothari (2004)"]
     },
 
@@ -503,11 +508,11 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Memberi umpan balik atas rancangan sampel proposal mahasiswa", "Menyimak umpan balik"],
+          [10, "Memandu asesmen diri bagian sampel dan instrumen dengan daftar periksa Tugas 4 serta menjawab pertanyaan konsultasi", "Menilai sendiri rancangan sampel dan instrumen dengan daftar periksa Tugas 4"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyusun bagian populasi, sampel, dan instrumen pada draf metode (Tugas 04).",
+      mandiri: "Menyusun bagian populasi, sampel, dan instrumen pada draf metode (Tugas 4).",
       bacaan: ["Dohoo dkk. (2009)", "Kumar (2011)"]
     },
 
@@ -525,16 +530,16 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menyampaikan jadwal kuis Sub-CPMK-5 dan tenggat Tugas 04", "Mencatat jadwal kuis dan tenggat tugas"],
+          [10, "Menyampaikan jadwal kuis Sub-CPMK-5 dan tenggat Tugas 4", "Mencatat jadwal kuis dan tenggat tugas"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Melengkapi rencana analisis data dan rencana persetujuan etik pada draf metode (Tugas 04), lalu mengerjakan kuis Sub-CPMK-5 di Sikola.",
+      mandiri: "Melengkapi rencana analisis data dan rencana persetujuan etik pada draf metode (Tugas 4), menilai sendiri Tugas 4 di lembar kerja, lalu mengerjakan kuis Sub-CPMK-5 di Sikola.",
       bacaan: ["Petrie dan Watson (2013)"]
     },
 
     11: {
-      media: ["Slide presentasi", "Contoh tabel dan grafik dari artikel riset", "Contoh grafik yang menyesatkan", "Contoh kerangka tabel"],
+      media: ["Slide presentasi", "Contoh tabel dan grafik dari artikel riset", "Contoh grafik yang menyesatkan", "Contoh kerangka tabel", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan menampilkan satu grafik yang menyesatkan", "Menebak masalah pada grafik tersebut"]
@@ -546,11 +551,11 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 05 (rencana penyajian data)", "Mencatat instruksi tugas"],
+          [10, "Menjelaskan Tugas 5 (rencana penyajian data) di lembar kerja", "Mencatat instruksi tugas"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyusun kerangka tabel dan rancangan grafik (Tugas 05).",
+      mandiri: "Menyusun kerangka tabel dan rancangan grafik di lembar kerja (Tugas 5).",
       bacaan: ["Petrie dan Watson (2013)"]
     },
 
@@ -567,11 +572,11 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menyampaikan jadwal kuis Sub-CPMK-6 dan tenggat Tugas 05", "Mencatat jadwal kuis dan tenggat tugas"],
+          [10, "Menyampaikan jadwal kuis Sub-CPMK-6 dan tenggat Tugas 5", "Mencatat jadwal kuis dan tenggat tugas"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyelesaikan Tugas 05 dan mengerjakan kuis Sub-CPMK-6 di Sikola.",
+      mandiri: "Menyelesaikan Tugas 5, menilai sendiri hasilnya di lembar kerja, dan mengerjakan kuis Sub-CPMK-6 di Sikola.",
       bacaan: ["Kothari (2004)", "Kumar (2011)"]
     },
 
@@ -588,11 +593,11 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 06, ukuran cetak, dan alur sesi poster pekan 14", "Mencatat ketentuan poster dan alur sesi"],
+          [10, "Menjelaskan Tugas 6, ukuran cetak, dan alur sesi poster pekan 14", "Mencatat ketentuan poster dan alur sesi"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyelesaikan dan mencetak poster proposal riset (Tugas 06).",
+      mandiri: "Menyelesaikan dan mencetak poster proposal riset (Tugas 6) dengan bahan dari lembar kerja Tugas 1–5.",
       bacaan: []
     },
 
@@ -630,11 +635,11 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 07, jadwal presentasi, dan ketentuan pengumpulan naskah final", "Mencatat jadwal dan ketentuan"],
+          [10, "Menjelaskan Tugas 7, jadwal presentasi, dan ketentuan pengumpulan naskah final", "Mencatat jadwal dan ketentuan"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
-      mandiri: "Menyelesaikan naskah proposal final (Tugas 07) dan berlatih presentasi sesuai batas waktu.",
+      mandiri: "Menyelesaikan naskah proposal final (Tugas 7) dan berlatih presentasi sesuai batas waktu.",
       bacaan: []
     },
 
@@ -1063,7 +1068,6 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
         <li><a href="#pertemuan">Pertemuan</a></li>
         <li><a href="#pustaka">Pustaka</a></li>
         <li><a href="#lampiran">Lampiran</a></li>
-        <li><a href="rps.html" data-external>RPS ↗</a></li>
       </ol>
     </nav>
   </aside>
@@ -1090,7 +1094,7 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
     <section id="pertemuan" aria-labelledby="h-pertemuan">
       <div class="sec-head">
         <h2 id="h-pertemuan">Pertemuan</h2>
-        <p>Buka satu pekan untuk melihat langkah pembelajaran, media, asesmen, dan tugasnya. Pilih kode dosen untuk menampilkan pekan yang diampu.</p>
+        <p>Buka satu pekan untuk melihat langkah pembelajaran, rincian pembelajaran, asesmen, dan tugasnya. Pilih kode dosen untuk menampilkan pekan yang diampu.</p>
       </div>
       <div class="sched-head"><div class="sched-when" id="sched-when"></div></div>
       <div class="toolbar">
@@ -1137,6 +1141,7 @@ const TAHAP = {
 };
 
 const REF53 = "Permendikbudristek No. 53 Tahun 2023";
+const REF3 = "Permendikbud No. 3 Tahun 2020";
 const GLOSARIUM = {
   "CPMK": { t: "Capaian Pembelajaran Mata Kuliah: kemampuan yang dijabarkan secara spesifik dari CPL yang dibebankan pada mata kuliah." },
   "Sub-CPMK": { t: "Kemampuan yang dijabarkan dari CPMK, dapat diukur, dan merupakan kemampuan akhir yang direncanakan pada setiap tahap pembelajaran." },
@@ -1152,6 +1157,8 @@ const GLOSARIUM = {
   "dummy table": { t: "Kerangka tabel: tabel kosong yang kepala kolom dan barisnya berisi variabel serta kategorinya. Sel diisi setelah data terkumpul." },
   "Formatif": { t: "Evaluasi berkelanjutan selama pembelajaran untuk memantau perkembangan belajar, memberi umpan balik, dan memperbaiki proses pembelajaran.", r: REF53 + " Pasal 27 ayat (2)" },
   "Sumatif": { t: "Asesmen pencapaian hasil belajar sebagai dasar kelulusan mata kuliah, mengacu pada pemenuhan CPL.", r: REF53 + " Pasal 27 ayat (4) dan (5)" },
+  "Bentuk pembelajaran": { t: "Wadah kegiatan belajar, misalnya kuliah, seminar, praktikum, atau tutorial.", r: REF53 + " Pasal 16 ayat (1)" },
+  "Metode pembelajaran": { t: "Cara memfasilitasi belajar di dalam bentuk pembelajaran, misalnya SGD, CBL, PjBL, atau PBL.", r: REF3 + " Pasal 14 ayat (3)" },
   "Penugasan terstruktur": { t: "Tugas yang dirancang dosen dan dikerjakan mahasiswa di luar jam kuliah.", r: REF53 + " Pasal 16" },
   "Belajar mandiri": { t: "Kegiatan belajar yang dilakukan mahasiswa secara mandiri.", r: REF53 + " Pasal 16" }
 };
@@ -1337,7 +1344,7 @@ function renderNow() {
 /* ── Render: ringkasan ───────────────────────────────────────────── */
 function renderRingkasan() {
   $("#sap-intro").innerHTML = `<p>SAP ini menjabarkan RPS ${esc(M.namaMK)} menjadi skenario setiap pertemuan: apa yang dilakukan dosen, apa yang dikerjakan mahasiswa, berapa lama, dengan media apa, dan bagaimana kemampuan akhir diukur. Kemampuan akhir, indikator, materi, dan bobot diambil langsung dari RPS, sehingga keduanya selalu sejalan.</p>
-    <p>Setiap pertemuan berlangsung ${SAP.durasi} menit (${esc(jam)}). Langkah pembelajaran adalah rancangan awal; dosen pengampu dapat menyesuaikan urutan dan alokasi waktu selama total menit tetap sama. Rincian instruksi tugas ada di dokumen Rencana Tugas Mahasiswa (RTM).</p>`;
+    <p>Setiap pertemuan berlangsung ${SAP.durasi} menit (${esc(jam)}). Langkah pembelajaran adalah rancangan awal; dosen pengampu dapat menyesuaikan urutan dan alokasi waktu selama total menit tetap sama. Tugas 1–5 bersifat formatif dan dikerjakan di <a href="lembar-kerja.html">lembar kerja proposal riset</a> dengan asesmen diri. Instruksi, kriteria, dan rubrik Tugas 6 dan 7 ada di dokumen Rencana Tugas Mahasiswa (RTM).</p>`;
   const reguler = pertemuan.map(p => SAP.pekan[p.pekan]).filter(s => s && !s.perMahasiswa && menitTotal(s) > 0);
   const avg = {};
   Object.keys(TAHAP).forEach(k => { avg[k] = Math.round(reguler.reduce((a, s) => a + menitTahap(s, k), 0) / (reguler.length || 1)); });
@@ -1371,7 +1378,7 @@ function renderWeeks() {
     const gaps = SCHED.gaps.filter(g => g.beforePekan === p.pekan).map(g =>
       `<div class="week-gap"><span>Pekan jeda</span><span><b>${esc(D.range(g.monday, D.add(g.monday, 4)))}</b> · ${esc(g.reason)}</span></div>`).join("");
     const tugas = tugasPekan(p.pekan);
-    const tugasHtml = tugas.length ? `<ul class="task-list">${tugas.map(t => `<li><span class="tag">${esc(t.st)}</span><span>Tugas ${String(t.no).padStart(2, "0")} · ${esc(t.judul)}</span><span class="t-luaran">${esc(t.luaran || "")}</span></li>`).join("")}</ul>` : "";
+    const tugasHtml = tugas.length ? `<ul class="task-list">${tugas.map(t => `<li><span class="tag">${esc(t.st)}</span><span>Tugas ${t.no} · ${esc(t.judul)}</span><span class="t-luaran">${esc(t.luaran || "")}</span></li>`).join("")}</ul>` : "";
     const bacaan = (sap.bacaan || []).length ? `<ul>${sap.bacaan.map(b => `<li>${esc(b)}</li>`).join("")}</ul>` : `<p class="muted">Materi dari dosen pengampu.</p>`;
     return gaps + `<details class="week" id="pekan-${p.pekan}" data-dosen="${esc(p.dosenList.join(" "))}">
       <summary>
@@ -1384,9 +1391,10 @@ function renderWeeks() {
           <p class="muted small" style="margin:0">Indikator: ${withTerms(sub.indikator || "")}</p></div>
         <div><h4>Materi pokok</h4><ul>${p.materi.map(m => `<li>${withTerms(m)}</li>`).join("")}</ul></div>
         <div class="wk-wide"><h4>Langkah pembelajaran</h4>${stepsTable(sap)}</div>
-        <div><h4>Metode dan media</h4>
+        <div><h4>Rincian pembelajaran</h4>
           <dl class="kv">
-            <dt>Bentuk</dt><dd>${esc(p.bentuk)}${metode ? ` · ${metode}` : ""}</dd>
+            <dt>${term("Bentuk pembelajaran", "Bentuk")}</dt><dd>${esc(p.bentuk)}</dd>
+            <dt>${term("Metode pembelajaran", "Metode")}</dt><dd>${metode || "–"}</dd>
             <dt>Media</dt><dd>${esc((sap.media || []).join("; ") || "–")}</dd>
             <dt>Dosen</dt><dd>${esc(p.dosenList.length === RPS.dosen.length ? "Semua dosen tim pengajar" : dosenNames(p.dosenList))}</dd>
           </dl></div>
