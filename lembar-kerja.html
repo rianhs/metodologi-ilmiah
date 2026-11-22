@@ -80,7 +80,7 @@ const LK = {
       luaran: "Lembar topik berisi judul sementara, bidang, rumusan kesenjangan riset, dan tiga artikel kunci.",
       langkah: [
         "Bandingkan calon topik di Tugas 1, lalu pilih satu yang kesenjangan risetnya paling jelas dan bisa Anda kerjakan.",
-        "Uraikan topik dengan kerangka PICO atau PECO.",
+        "Tentukan jenis riset, lalu uraikan topik dengan kerangka yang sesuai: PICO untuk eksperimental, PECO untuk observasional, atau isian khusus untuk riset deskriptif dan kualitatif.",
         "Telaah tiga artikel kunci dengan daftar periksa CASP yang dibahas di pekan 6.",
         "Rumuskan kesenjangan riset dalam satu atau dua kalimat.",
         "Masukkan topik final melalui activity choice di Sikola. Dosen koordinator menetapkan dosen penguji berdasarkan bidang topik."
@@ -89,7 +89,7 @@ const LK = {
       asesmen: [
         "Saya memilih topik final berdasarkan kesenjangan riset yang saya temukan.",
         "Judul sementara memuat variabel utama, hewan atau populasi, dan lokasi bila relevan.",
-        "Unsur PICO atau PECO terisi dan sejalan dengan judul sementara.",
+        "Jenis riset sudah dipilih, dan unsur kerangkanya terisi serta sejalan dengan judul sementara.",
         "Tiga artikel kunci sudah saya telaah, termasuk desain dan keterbatasannya.",
         "Rumusan kesenjangan menyebut apa yang sudah diketahui dan apa yang belum.",
         "Kesenjangan itu bisa dijawab dengan riset skala mahasiswa dari segi waktu, biaya, dan sampel.",
@@ -122,14 +122,14 @@ const LK = {
       capaian: "Mahasiswa mampu mengevaluasi metode riset yang mencakup desain, variabel, penarikan sampel, instrumen, dan analisis data sebagai dasar penyusunan metode proposal riset.",
       luaran: "Draf metode berisi desain, variabel, populasi dan sampel, instrumen, rencana analisis data, dan rencana persetujuan etik.",
       langkah: [
-        "Pekan 8: tentukan desain riset dan variabel beserta definisi operasionalnya.",
+        "Pekan 8: tentukan jenis dan desain riset, serta variabel beserta definisi operasionalnya.",
         "Pekan 9: tentukan populasi, sampel, teknik penarikan sampel, dan instrumen.",
         "Pekan 10: susun rencana analisis untuk setiap pertanyaan riset.",
         "Lengkapi rencana persetujuan etik. Riset yang memakai hewan memerlukan persetujuan komisi etik sebelum data dikumpulkan."
       ],
       catatan: "Cocokkan metode Anda dengan pedoman pelaporan yang sesuai: ARRIVE 2.0, STROBE-Vet, atau REFLECT.",
       asesmen: [
-        "Desain riset sesuai dengan pertanyaan riset.",
+        "Jenis dan desain riset sesuai dengan pertanyaan riset.",
         "Setiap variabel punya definisi operasional dan cara ukur yang jelas.",
         "Skala data setiap variabel sudah ditentukan.",
         "Perancu potensial sudah diidentifikasi beserta cara pengendaliannya.",
@@ -318,6 +318,11 @@ textarea{resize:vertical;min-height:72px}
 .seg input:checked + span{background:var(--sunk);color:var(--ink)}
 .seg input[value="sebagian"]:checked + span{background:var(--mid-tint);color:var(--mid)}
 .seg input[value="sudah"]:checked + span{background:var(--ok-tint);color:var(--ok)}
+.seg-tabs{display:flex;flex-wrap:wrap;margin-bottom:14px}
+.seg-tabs label{flex:1 1 150px}
+.seg-tabs span{padding:8px 12px;font-size:.85rem;text-align:center;height:100%}
+.seg-tabs input:checked + span{background:var(--accent);color:var(--on-accent)}
+.note-sm{color:var(--ink-3);font-size:.82rem;margin-bottom:12px}
 .seg input:focus-visible + span{outline:2px solid var(--accent);outline-offset:-2px}
 .as-sum{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 
@@ -497,9 +502,9 @@ const BARU = {
 const kosong = () => ({
   identitas: { nama: "", nim: "", kelas: "" },
   t1: { topik: [BARU.topik(), BARU.topik()] },
-  t2: { bidang: "", tema: "", judul: "", alasan: "", p: "", i: "", c: "", o: "", artikel: [BARU.kunci(), BARU.kunci(), BARU.kunci()], jenisGap: "", gap: "" },
+  t2: { bidang: "", tema: "", judul: "", alasan: "", jenis: "", p: "", i: "", c: "", o: "", konteks: "", fenomena: "", artikel: [BARU.kunci(), BARU.kunci(), BARU.kunci()], jenisGap: "", gap: "" },
   t3: { tema: "", topik: "", judul: "", p1: "", p2: "", p3: "", p4: "", rumusan: "", pertanyaan: [""], hipotesis: "", tujuanUmum: "", tujuanKhusus: [""], manfaatIlmu: "", manfaatPraktis: "" },
-  t4: { desain: "", alasanDesain: "", waktuLokasi: "", variabel: [BARU.variabel()], validitas: "", perancu: "", popTarget: "", popTerjangkau: "", inklusi: "", eksklusi: "", besarSampel: "", sampling: "", instrumen: "", analisis: [BARU.analisis()], software: "", subjekEtik: "", etik: "" },
+  t4: { desain: "", desainRinci: "", alasanDesain: "", waktuLokasi: "", variabel: [BARU.variabel()], validitas: "", perancu: "", popTarget: "", popTerjangkau: "", inklusi: "", eksklusi: "", besarSampel: "", sampling: "", instrumen: "", analisis: [BARU.analisis()], software: "", subjekEtik: "", etik: "" },
   t5: { tabel: [BARU.tabel()], grafik: [BARU.grafik()], harapan: "", pembahasan: "" },
   asesmen: { t1: {}, t2: {}, t3: {}, t4: {}, t5: {} },
   refleksi: { t1: { catatan: "", tanya: "" }, t2: { catatan: "", tanya: "" }, t3: { catatan: "", tanya: "" }, t4: { catatan: "", tanya: "" }, t5: { catatan: "", tanya: "" } }
@@ -718,6 +723,12 @@ function navBawah(no) {
   return `<div class="nav-bottom">${prev}${next}</div>`;
 }
 
+/* Contoh placeholder calon topik: topik 1 menjadi contoh utama hingga Tugas 5, topik 2 contoh yang tidak terpilih. */
+const CONTOH_T1 = [
+  { tema: "Contoh: Pakan dan gangguan metabolik pada hewan model", judul: "Contoh: Pengaruh pakan tinggi lemak terhadap berat badan dan kadar kolesterol total tikus Wistar", kata: "Contoh: (\"high-fat diet\" OR \"HFD\") AND (\"body weight\" OR \"cholesterol\") AND \"Wistar rats\"" },
+  { tema: "Contoh: Penyakit parasit pada kucing", judul: "Contoh: Prevalensi infeksi Toxocara cati pada kucing domestik di Kota Makassar", kata: "Contoh: (\"Toxocara cati\" OR \"feline roundworm\") AND \"prevalence\" AND \"cats\"" }
+];
+
 /* ── Tugas 1 ──────────────────────────────────────────────────────── */
 const artikelLengkap = a => a.judul.trim() && (a.penulis.trim() || a.doi.trim());
 function hitungArtikel(i) {
@@ -747,10 +758,10 @@ function panel1(t) {
       <div class="item-head"><h4>Calon topik ${i + 1}</h4>${S.t1.topik.length > 1 ? tombolHapus("t1.topik", i, "Hapus calon topik") : ""}</div>
       <div class="grid">
         ${F.select(base + ".bidang", "Bidang", LK.bidang)}
-        ${F.text(base + ".tema", "Tema", { ph: "Contoh: Penyakit parasit pada kucing", tip: "Tema adalah bidang besar yang menaungi topik Anda. Topik lebih sempit dan menjadi dasar judul riset." })}
-        ${F.text(base + ".judul", "Calon topik", { cls: "span-all", ph: "Contoh: Prevalensi infeksi Toxocara cati pada kucing domestik di Kota Makassar" })}
+        ${F.text(base + ".tema", "Tema", { ph: (CONTOH_T1[i] || {}).tema || "", tip: "Tema adalah bidang besar yang menaungi topik Anda. Topik lebih sempit dan menjadi dasar judul riset." })}
+        ${F.text(base + ".judul", "Calon topik", { cls: "span-all", ph: (CONTOH_T1[i] || {}).judul || "" })}
         ${F.area(base + ".alasan", "Alasan memilih topik ini", { rows: 2, cls: "span-all" })}
-        ${F.text(base + ".kataKunci", "Kata kunci penelusuran", { ph: "Contoh: (\"Toxocara cati\" OR \"feline roundworm\") AND \"prevalence\" AND \"cats\"", tip: "Gabungkan kata kunci dengan operator Boolean: AND mempersempit, OR memperluas sinonim, NOT mengecualikan. Tanda kutip mencari frasa utuh." })}
+        ${F.text(base + ".kataKunci", "Kata kunci penelusuran", { ph: (CONTOH_T1[i] || {}).kata || "", tip: "Gabungkan kata kunci dengan operator Boolean: AND mempersempit, OR memperluas sinonim, NOT mengecualikan. Tanda kutip mencari frasa utuh." })}
         ${F.text(base + ".pangkalan", "Pangkalan data yang dipakai", { ph: "Contoh: PubMed, Google Scholar" })}
       </div>
       <div class="sub-head"><h4>Artikel acuan (minimal ${LK.minArtikel})</h4><span data-live="art-${i}">${hitungArtikel(i)}</span></div>
@@ -766,6 +777,29 @@ function panel1(t) {
       ${S.t1.topik.length < 3 ? tombolTambah("t1.topik", "topik", "Tambah calon topik") : ""}
     </section>
     ${bagianAsesmen(t)}${navBawah(1)}`;
+}
+
+/* Kerangka pertanyaan riset per jenis riset (Tugas 2) */
+const KERANGKA = {
+  "Riset deskriptif": { tab: "Deskriptif", nama: "P-O-Konteks", catatan: "Riset deskriptif tidak punya intervensi atau pembanding. Cukup tentukan siapa yang diamati, apa yang diukur, serta tempat dan waktunya.",
+    isian: [["p", "P · Populasi atau hewan", "Contoh: Kucing yang dibawa ke klinik hewan di Kota Makassar"], ["o", "O · Kondisi atau karakteristik yang diukur", "Contoh: Proporsi kucing dengan berat badan berlebih"], ["konteks", "Konteks · Tempat dan waktu", "Contoh: Tiga klinik hewan di Kota Makassar, Januari sampai Maret 2027"]] },
+  "Riset observasional analitis": { tab: "Observasional analitis · PECO", nama: "PECO", catatan: "Peneliti mengamati paparan yang sudah terjadi, tanpa memberi perlakuan. Kosongkan C bila paparan diukur sebagai skor atau skala, misalnya pada riset KAP atau pemodelan SEM.",
+    isian: [["p", "P · Populasi atau hewan", "Contoh: Kucing domestik dewasa di Kota Makassar"], ["i", "E · Paparan", "Contoh: Pakan komersial kering saja"], ["c", "C · Pembanding (opsional)", "Contoh: Kucing yang diberi pakan kering dan basah"], ["o", "O · Luaran", "Contoh: Kejadian berat badan berlebih"]] },
+  "Riset eksperimental": { tab: "Eksperimental · PICO", nama: "PICO", catatan: "Peneliti memberi perlakuan dan membandingkannya dengan kelompok kontrol.",
+    isian: [["p", "P · Populasi atau hewan", "Contoh: Tikus putih jantan galur Wistar usia 8 minggu"], ["i", "I · Intervensi", "Contoh: Pakan tinggi lemak selama 8 minggu"], ["c", "C · Pembanding", "Contoh: Tikus yang diberi pakan standar"], ["o", "O · Luaran", "Contoh: Berat badan dan kadar kolesterol total"]] },
+  "Riset kualitatif": { tab: "Kualitatif · PICo", nama: "PICo", catatan: "PICo: population, phenomenon of interest, context. Riset kualitatif menggali pengalaman atau pandangan partisipan.",
+    isian: [["p", "P · Partisipan", "Contoh: Pemilik kucing di Kota Makassar"], ["fenomena", "I · Fenomena yang digali", "Contoh: Alasan dan cara pemilik memilih pakan kucing"], ["konteks", "Co · Konteks", "Contoh: Pemilik yang berkunjung ke klinik hewan"]] }
+};
+function kartuKerangka() {
+  const j = S.t2.jenis, k = KERANGKA[j];
+  const tabs = Object.entries(KERANGKA).map(([val, x]) =>
+    `<label><input type="radio" name="t2-jenis" value="${esc(val)}" data-k="t2.jenis"${val === j ? " checked" : ""}><span>${esc(x.tab)}</span></label>`).join("");
+  const isi = k
+    ? `<p class="note-sm">${esc(k.catatan)}</p><div class="grid">${k.isian.map(([key, lb, ph]) => F.text("t2." + key, lb, { ph })).join("")}</div>`
+    : `<p class="muted small">Pilih jenis riset untuk menampilkan isian kerangka.</p>`;
+  return `<div class="lb" style="margin-bottom:8px"><span>Jenis riset</span>${tip(TIP_DESAIN)}</div>
+    <div class="seg seg-tabs" role="radiogroup" aria-label="Jenis riset">${tabs}</div>
+    <div class="kerangka">${isi}</div>`;
 }
 
 /* ── Tugas 2 ──────────────────────────────────────────────────────── */
@@ -793,20 +827,15 @@ function panel2(t) {
       </div>
       <div class="grid">
         ${F.select("t2.bidang", "Bidang", LK.bidang, { tip: "Bidang ini menjadi dasar penetapan dosen penguji. Pilih bidang yang sama ketika mengisi activity choice di Sikola." })}
-        ${F.text("t2.tema", "Tema", { ph: "Contoh: Penyakit parasit pada kucing" })}
-        ${F.text("t2.judul", "Judul sementara", { cls: "span-all" })}
+        ${F.text("t2.tema", "Tema", { ph: "Contoh: Pakan dan gangguan metabolik pada hewan model" })}
+        ${F.text("t2.judul", "Judul sementara", { cls: "span-all", ph: "Contoh: Pengaruh pakan tinggi lemak terhadap berat badan dan kadar kolesterol total tikus putih jantan galur Wistar" })}
         ${F.area("t2.alasan", "Mengapa topik ini dipilih dibanding calon topik lain", { rows: 2, cls: "span-all" })}
       </div>
     </section>
     <section class="box sec">
-      <h3><i data-lucide="grid-2x2"></i>Kerangka PICO atau PECO</h3>
-      <p class="hint">Gunakan I (intervensi) untuk riset eksperimental dan E (exposure atau paparan) untuk riset observasional.</p>
-      <div class="grid">
-        ${F.text("t2.p", "P · Populasi atau hewan", { ph: "Contoh: Tikus putih jantan galur Wistar usia 8 minggu" })}
-        ${F.text("t2.i", "I/E · Intervensi atau paparan", { ph: "Contoh: Pakan tinggi lemak selama 8 minggu" })}
-        ${F.text("t2.c", "C · Pembanding", { ph: "Contoh: Tikus yang diberi pakan standar" })}
-        ${F.text("t2.o", "O · Luaran", { ph: "Contoh: Berat badan dan kadar kolesterol total" })}
-      </div>
+      <h3><i data-lucide="grid-2x2"></i>Jenis riset dan kerangka pertanyaan</h3>
+      <p class="hint">Pilih jenis riset. Isian kerangka menyesuaikan pilihan Anda. Desain riset, misalnya potong lintang atau rancangan acak lengkap, ditentukan di Tugas 4.</p>
+      ${kartuKerangka()}
     </section>
     <section class="box sec">
       <h3><i data-lucide="book-open-check"></i>Telaah tiga artikel kunci</h3>
@@ -849,9 +878,9 @@ function panel3(t) {
       <h3><i data-lucide="filter"></i>Dari tema ke judul</h3>
       <p class="hint">Persempit dari tema besar ke topik, lalu ke judul riset.</p>
       <div class="grid grid-3">
-        ${F.text("t3.tema", "Tema", { ph: S.t2.tema ? "Dari Tugas 2: " + S.t2.tema : "Contoh: Penyakit parasit pada kucing" })}
-        ${F.text("t3.topik", "Topik", { ph: "Contoh: Infeksi Toxocara cati pada kucing domestik" })}
-        ${F.text("t3.judul", "Judul riset", { ph: S.t2.judul ? "Dari Tugas 2: " + S.t2.judul : "Contoh: Prevalensi infeksi Toxocara cati pada kucing domestik di Kota Makassar" })}
+        ${F.text("t3.tema", "Tema", { ph: S.t2.tema ? "Dari Tugas 2: " + S.t2.tema : "Contoh: Pakan dan gangguan metabolik pada hewan model" })}
+        ${F.text("t3.topik", "Topik", { ph: "Contoh: Pakan tinggi lemak pada tikus Wistar" })}
+        ${F.text("t3.judul", "Judul riset", { ph: S.t2.judul ? "Dari Tugas 2: " + S.t2.judul : "Contoh: Pengaruh pakan tinggi lemak terhadap berat badan dan kadar kolesterol total tikus putih jantan galur Wistar" })}
       </div>
     </section>
     <section class="box sec">
@@ -868,10 +897,10 @@ function panel3(t) {
       <h3><i data-lucide="help-circle"></i>Masalah, pertanyaan, dan tujuan</h3>
       <div class="grid">
         ${F.area("t3.rumusan", "Rumusan masalah", { rows: 3, cls: "span-all" })}
-        ${daftarTeks("t3.pertanyaan", "Pertanyaan riset", { ph: "Contoh: Berapa prevalensi infeksi Toxocara cati pada kucing domestik di Kota Makassar?" })}
-        ${F.area("t3.hipotesis", "Hipotesis (bila riset analitik)", { rows: 2, cls: "span-all", tip: "Riset deskriptif umumnya tidak memerlukan hipotesis. Riset yang menguji hubungan atau perbedaan perlu hipotesis." })}
+        ${daftarTeks("t3.pertanyaan", "Pertanyaan riset", { ph: "Contoh: Apakah pakan tinggi lemak selama 8 minggu meningkatkan berat badan dan kadar kolesterol total tikus Wistar jantan dibandingkan pakan standar?" })}
+        ${F.area("t3.hipotesis", "Hipotesis (bila riset analitis)", { rows: 2, cls: "span-all", tip: "Riset deskriptif umumnya tidak memerlukan hipotesis. Riset yang menguji hubungan atau perbedaan perlu hipotesis." })}
         ${F.area("t3.tujuanUmum", "Tujuan umum", { rows: 2, cls: "span-all" })}
-        ${daftarTeks("t3.tujuanKhusus", "Tujuan khusus", { ph: "Contoh: Menentukan prevalensi infeksi Toxocara cati pada kucing domestik di Kota Makassar" })}
+        ${daftarTeks("t3.tujuanKhusus", "Tujuan khusus", { ph: "Contoh: Membandingkan berat badan dan kadar kolesterol total tikus Wistar jantan yang diberi pakan tinggi lemak dan pakan standar selama 8 minggu" })}
       </div>
       <div class="preview"><p class="preview-lb">Peta keselarasan</p><div data-live="peta">${petaKeselarasan()}</div></div>
     </section>
@@ -886,8 +915,8 @@ function panel3(t) {
 }
 
 /* ── Tugas 4 ──────────────────────────────────────────────────────── */
-const DESAIN = ["Riset deskriptif", "Riset observasional", "Riset eksperimental", "Riset kualitatif", "Lainnya"];
-const TIP_DESAIN = "Riset deskriptif: menggambarkan keadaan, misalnya prevalensi atau karakteristik, tanpa membandingkan kelompok untuk menguji hubungan.\nRiset observasional: peneliti mengamati tanpa memberi perlakuan, lalu membandingkan kelompok atau mencari hubungan paparan dengan luaran (kohort, kasus-kontrol, potong lintang analitik).\nRiset eksperimental: peneliti memberi perlakuan dan membandingkannya dengan kelompok kontrol (percobaan laboratorium, uji klinis, uji lapang).\nRiset kualitatif: menggali pengalaman, persepsi, atau alasan melalui wawancara atau diskusi kelompok.\nLainnya: misalnya studi data sekunder atau tinjauan sistematis.";
+const DESAIN = ["Riset deskriptif", "Riset observasional analitis", "Riset eksperimental", "Riset kualitatif", "Lainnya"];
+const TIP_DESAIN = "Riset deskriptif: menggambarkan keadaan, misalnya prevalensi atau karakteristik, tanpa menguji hubungan. Contoh: survei KAP yang melaporkan tingkat pengetahuan responden.\nRiset observasional analitis: peneliti mengamati tanpa memberi perlakuan, lalu menguji hubungan paparan dengan luaran. Desainnya antara lain kohort, kasus-kontrol, dan potong lintang analitis. Survei KAP yang menguji hubungan dan pemodelan SEM-PLS termasuk di sini.\nRiset eksperimental: peneliti memberi perlakuan dan membandingkannya dengan kelompok kontrol. Desainnya antara lain rancangan acak lengkap (RAL), rancangan acak kelompok (RAK), dan uji klinis teracak.\nRiset kualitatif: menggali pengalaman, persepsi, atau alasan melalui wawancara mendalam atau diskusi kelompok terarah. Hasilnya berupa tema, tanpa skor.\nLainnya: misalnya studi data sekunder atau tinjauan sistematis.";
 const SAMPLING = ["Acak sederhana", "Acak sistematis", "Acak berstrata", "Acak klaster", "Bertingkat (multistage)", "Purposif", "Konsekutif", "Kemudahan (convenience)", "Sensus atau total sampling", "Lainnya"];
 function panel4(t) {
   const vars = S.t4.variabel.map((v, i) => {
@@ -915,12 +944,13 @@ function panel4(t) {
   }).join("");
   return `${kepalaPanel(t)}
     <section class="box sec">
-      <h3><i data-lucide="layout-template"></i>Desain riset · pekan 8</h3>
-      <p class="hint">Pilih jenis riset, lalu tuliskan rancangan rincinya pada kotak alasan, misalnya kohort, kasus-kontrol, atau rancangan acak lengkap.</p>
+      <h3><i data-lucide="layout-template"></i>Jenis dan desain riset · pekan 8</h3>
+      <p class="hint">Jenis riset adalah kelompok besar, sedangkan desain riset adalah rancangan spesifiknya, misalnya potong lintang, kohort, atau rancangan acak lengkap.${S.t2.jenis ? ` Jenis riset yang Anda pilih di Tugas 2: ${esc(S.t2.jenis)}.` : ""}</p>
       <div class="grid">
-        ${F.select("t4.desain", "Desain riset", DESAIN, { tip: TIP_DESAIN })}
-        ${F.text("t4.waktuLokasi", "Waktu dan lokasi riset")}
-        ${F.area("t4.alasanDesain", "Alasan memilih desain ini", { rows: 2, cls: "span-all", ph: "Contoh: Rancangan acak lengkap, karena tikus relatif seragam dan dibagi acak ke kelompok kontrol dan perlakuan" })}
+        ${F.select("t4.desain", "Jenis riset", DESAIN, { tip: TIP_DESAIN })}
+        ${F.text("t4.desainRinci", "Desain riset", { ph: "Contoh: Rancangan acak lengkap (RAL)" })}
+        ${F.text("t4.waktuLokasi", "Waktu dan lokasi riset", { cls: "span-all", ph: "Contoh: Maret sampai Mei 2027, kandang hewan percobaan Fakultas Kedokteran Unhas" })}
+        ${F.area("t4.alasanDesain", "Alasan memilih desain ini", { rows: 2, cls: "span-all", ph: "Contoh: Tikus relatif seragam dan dibagi acak ke kelompok kontrol dan kelompok perlakuan sehingga RAL sudah memadai" })}
       </div>
     </section>
     <section class="box sec">
@@ -1096,8 +1126,9 @@ function buatDokumen() {
     <p><b>Dicetak:</b> ${esc(new Date().toLocaleString("id-ID", { dateStyle: "long", timeStyle: "short" }))}</p>
     <h2>Judul dan topik</h2>
     ${p("Judul sementara", judul)}${p("Bidang", t2.bidang)}${p("Tema", t3.tema || t2.tema)}${p("Topik", t3.topik)}
-    <h3>Kerangka PICO/PECO</h3>
-    ${tabelHtml(["Unsur", "Isi"], [["P · Populasi atau hewan", t2.p], ["I/E · Intervensi atau paparan", t2.i], ["C · Pembanding", t2.c], ["O · Luaran", t2.o]])}
+    ${p("Jenis riset", t2.jenis)}
+    <h3>Kerangka pertanyaan riset${KERANGKA[t2.jenis] ? " (" + KERANGKA[t2.jenis].nama + ")" : ""}</h3>
+    ${KERANGKA[t2.jenis] ? tabelHtml(["Unsur", "Isi"], KERANGKA[t2.jenis].isian.map(([key, lb]) => [lb, t2[key]])) : `<p class="kosong">(jenis riset belum dipilih)</p>`}
     ${p("Jenis kesenjangan", t2.jenisGap)}${p("Rumusan kesenjangan riset", t2.gap)}
 
     <h2>Pendahuluan</h2>
@@ -1110,7 +1141,7 @@ function buatDokumen() {
     <h3>Manfaat</h3>${p("Bagi ilmu pengetahuan", t3.manfaatIlmu)}${p("Praktis", t3.manfaatPraktis)}
 
     <h2>Metode</h2>
-    ${p("Desain riset", t4.desain)}${p("Alasan memilih desain", t4.alasanDesain)}${p("Waktu dan lokasi", t4.waktuLokasi)}
+    ${p("Jenis riset", t4.desain)}${p("Desain riset", t4.desainRinci)}${p("Alasan memilih desain", t4.alasanDesain)}${p("Waktu dan lokasi", t4.waktuLokasi)}
     <h3>Variabel</h3>
     ${tabelHtml(["Variabel", "Peran", "Definisi operasional", "Cara atau alat ukur", "Skala"], t4.variabel.map(v => [v.nama, v.peran, v.definisi, v.alat, v.skala]))}
     ${p("Validitas dan reliabilitas", t4.validitas)}${p("Pengendalian perancu", t4.perancu)}
@@ -1165,6 +1196,14 @@ function onInput(e) {
   const el = e.target, k = el.dataset && el.dataset.k;
   if (!k) return;
   const v = el.type === "checkbox" ? el.checked : el.value;
+  if (k === "t2.jenis") {
+    if (S.t2.jenis === v) return;
+    pasang(k, v);
+    if (!S.t4.desain) S.t4.desain = v;
+    simpanLokal(); renderPanel();
+    const r = document.querySelector('[data-k="t2.jenis"]:checked'); if (r) r.focus();
+    return;
+  }
   pasang(k, v);
   segarkanTurunan(k);
   simpanNanti();
