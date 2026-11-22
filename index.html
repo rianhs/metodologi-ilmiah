@@ -68,7 +68,7 @@ const MI = {
   ],
 
   /* Tugas mengikuti penomoran RPS.
-     Formatif (Tugas 1–5): dikerjakan di lembar kerja, dinilai sendiri oleh mahasiswa.
+     Formatif (Tugas 1–5): dikerjakan di lembar kerja, asesmen mandiri oleh mahasiswa.
      Sumatif (Tugas 6–7): setiap tugas punya satu RTM dan satu rubrik. */
   lembarKerja: "lembar-kerja.html",
   tugas: [
@@ -311,18 +311,18 @@ footer{border-top:1px solid var(--rule);padding:28px 0;text-align:center;font-si
   </section>
 
   <section id="tugas">
-    <div class="sec-head"><div><p class="eyebrow">Asesmen proyek</p><h2>Tugas dan penilaian</h2></div></div>
+    <div class="sec-head"><div><p class="eyebrow">Proyek riset</p><h2>Tugas dan asesmen</h2></div></div>
     <div class="stage">
       <div class="stage-head">
-        <div><h3>Tahap formatif <span class="tag">Tidak dinilai</span></h3>
-          <p>Tugas 1 sampai 5 dikerjakan bertahap di lembar kerja dan dinilai sendiri oleh mahasiswa. Dosen dapat menjadi tempat konsultasi bila dibutuhkan.</p></div>
+        <div><h3>Tahap formatif <span class="tag">Tanpa nilai</span></h3>
+          <p>Tugas 1 sampai 5 dikerjakan bertahap di lembar kerja dan menjadi bahan asesmen mandiri oleh mahasiswa. Dosen dapat menjadi tempat konsultasi bila dibutuhkan.</p></div>
         <a id="tombol-lembar" class="btn btn-primary" href="#">Buka lembar kerja <i data-lucide="arrow-right"></i></a>
       </div>
       <div id="daftar-formatif" class="grid-5"></div>
     </div>
     <div class="stage">
-      <div class="stage-head"><div><h3>Tahap sumatif <span class="tag tag-accent">Dinilai dosen</span></h3>
-        <p>Tugas 6 dan 7 dinilai dengan rubrik dan menyumbang nilai akhir.</p></div></div>
+      <div class="stage-head"><div><h3>Tahap sumatif <span class="tag tag-accent">Asesmen oleh dosen</span></h3>
+        <p>Tugas 6 dan 7 memakai rubrik asesmen dan menentukan nilai akhir.</p></div></div>
       <div id="daftar-tugas" class="grid-2"></div>
     </div>
   </section>
@@ -435,7 +435,7 @@ function kartuPerencanaan(d) {
     </a>`;
 }
 
-/* Tugas dan penilaian */
+/* Tugas dan asesmen */
 function barisTautan(label, ikon, href) {
   const kiri = `<span><i data-lucide="${ikon}"></i>${esc(label)}</span>`;
   if (!href) return `<div class="link off">${kiri}<small>Segera hadir</small></div>`;
@@ -462,7 +462,7 @@ function kartuTugas(t) {
     <p>${esc(t.deskripsi)}</p>
     <div class="card-foot links">
       ${barisTautan("Rencana tugas mahasiswa", "clipboard-list", t.rtm)}
-      ${barisTautan("Rubrik penilaian", "clipboard-check", t.rubrik)}
+      ${barisTautan("Rubrik asesmen", "clipboard-check", t.rubrik)}
     </div>
   </div>`;
 }
