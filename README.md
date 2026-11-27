@@ -67,4 +67,6 @@ Program Studi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin
 
 ## Lisensi
 
-Ketentuan lisensi tercantum dalam file [`LICENSE`](LICENSE). Logo Universitas Hasanuddin dan foto dosen tetap menjadi milik pemegang haknya.
+- Kode program (HTML, CSS, dan JavaScript) berlisensi MIT. Lihat file [`LICENSE`](LICENSE).
+- Materi pembelajaran (teks, rubrik, dan lembar kerja) berlisensi [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.id).
+- Logo Universitas Hasanuddin, foto dosen, rumusan visi, misi, profil lulusan, dan CPL dari dokumen kurikulum program studi berada di luar kedua lisensi tersebut.
