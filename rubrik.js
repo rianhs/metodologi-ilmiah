@@ -70,8 +70,8 @@ function bangun() {
   <details class="kartu lipat" id="panel-daftar">
     <summary>Daftar mahasiswa (opsional)<span id="info-ringkas"></span></summary>
     <div class="isi-lipat">
-      <p id="bantuan-daftar">Tempel daftar di bawah ini <b>satu kali</b>. Setelah itu, ketuk kotak <b>Nama mahasiswa</b> atau <b>NIM</b> untuk memilih dari menu dropdown. Nama dan NIM terisi berpasangan.</p>
-      <p class="redup">Satu baris untuk satu mahasiswa, dengan urutan NIM lalu nama. Dua kolom dari Excel bisa langsung ditempel.</p>
+      <p id="bantuan-daftar">Tulis NIM dan nama mahasiswa pada kotak di bawah ini (NIM dan nama dipisahkan tanda koma). Jika berhasil, pada kartu identitas, Anda dapat memilih Nama atau NIM mahasiswa dengan menu dropdown.</p>
+      <p class="redup">Catatan: Anda bisa langsung melakukan salin-tempel kolom NIM dan Nama mahasiswa dari Excel.</p>
       <textarea id="daftar" aria-describedby="bantuan-daftar" placeholder="C031231001, Nama Mahasiswa Pertama&#10;C031231002, Nama Mahasiswa Kedua"></textarea>
       <div id="info-daftar" role="status"></div>
     </div>
@@ -111,21 +111,21 @@ function bangun() {
   </div>
   <section class="kartu" id="rekap">
     <h2 id="judul-rekap">Rekap nilai</h2>
-    <p class="redup">Nilai tersimpan di peramban pada perangkat ini. Unduh cadangan setiap selesai satu sesi ujian.</p>
+    <p class="redup">Nilai tersimpan di peramban pada perangkat ini. Unduh data setiap selesai satu sesi ujian.</p>
     <div class="alat">
       <input id="cari" type="search" placeholder="Cari nama atau NIM" aria-label="Cari nama atau NIM">
       <button type="button" id="csv" class="utama">Ekspor CSV</button>
       <button type="button" id="cetak-semua">Cetak semua</button>
-      <button type="button" id="cadang">Unduh cadangan</button>
+      <button type="button" id="cadang">Unduh data</button>
     </div>
     <div class="gulir"><table><thead><tr id="kepala"></tr></thead><tbody id="isi"></tbody></table></div>
     <details class="lanjutan">
       <summary>Gabung nilai antardosen dan kelola data</summary>
-      <ol><li>Setiap dosen menekan <b>Unduh cadangan</b> di perangkatnya.</li>
-        <li>Di satu perangkat, tekan <b>Muat cadangan</b> untuk tiap berkas.</li>
+      <ol><li>Setiap dosen menekan <b>Unduh data</b> di perangkatnya.</li>
+        <li>Di satu perangkat, tekan <b>Muat data</b> untuk tiap berkas.</li>
         <li>Tekan <b>Ekspor rata-rata</b>. Draf tidak ikut dihitung.</li></ol>
       <div class="alat">
-        <button type="button" id="muat">Muat cadangan</button>
+        <button type="button" id="muat">Muat data</button>
         <button type="button" id="rata">Ekspor rata-rata</button>
         <button type="button" id="hapus-semua" class="bahaya">Hapus semua nilai</button>
         <input type="file" id="file" accept=".json,application/json" hidden>
@@ -178,11 +178,11 @@ function baca() {
   try {
     const o = JSON.parse(localStorage.getItem(KUNCI));
     if (o && Array.isArray(o.baris)) data = { baris: o.baris.filter(sah), daftar: o.daftar || "", penilai: o.penilai || "" };
-  } catch (e) { pesan("Penyimpanan peramban tidak bisa dibaca. Gunakan Unduh cadangan.", true); }
+  } catch (e) { pesan("Penyimpanan peramban tidak bisa dibaca. Gunakan Unduh data.", true); }
 }
 function tulis() {
   try { localStorage.setItem(KUNCI, JSON.stringify(data)); gagalTulis = false; return true; }
-  catch (e) { gagalTulis = true; pesan("Gagal menyimpan di peramban. Segera unduh cadangan.", true); return false; }
+  catch (e) { gagalTulis = true; pesan("Gagal menyimpan di peramban. Segera unduh data.", true); return false; }
 }
 function formulir() {
   const r = { skor: skor.slice() };
@@ -546,9 +546,18 @@ $("isi").addEventListener("click", async e => {
     } });
   }
 });
+$("cetak-form").onclick = () => cetak([formulir()]);
+$("cetak-semua").onclick = () => {
+  baca();
+  const d = data.baris.filter(lengkap);   // draf tidak ikut dicetak
+  if (!d.length) return pesan("Belum ada nilai lengkap untuk dicetak.", true);
+  cetak(d);
+};
+/* Setelah mencetak dari rekap, interaksi berikutnya mengembalikan area cetak ke isian aktif */
+["pointerdown", "keydown"].forEach(t => document.addEventListener(t, () => { if (cetakLain) areaCetak([formulir()]); }, true));
 $("csv").onclick = eksporCsv;
 $("rata").onclick = eksporRata;
-$("cadang").onclick = () => unduh(`cadangan-${R.jenis}-${cap()}.json`, JSON.stringify({ app: KUNCI, baris: data.baris, daftar: data.daftar }, null, 2), "application/json");
+$("cadang").onclick = () => unduh(`data-${R.jenis}-${cap()}.json`, JSON.stringify({ app: KUNCI, baris: data.baris, daftar: data.daftar }, null, 2), "application/json");
 $("muat").onclick = () => $("file").click();
 $("file").addEventListener("change", async () => {
   const f = $("file").files[0];
@@ -562,13 +571,13 @@ $("file").addEventListener("change", async () => {
     data.baris = [...peta.values()].sort((a, b) => a.waktu.localeCompare(b.waktu));
     if (!data.daftar && typeof o.daftar === "string") data.daftar = $("daftar").value = o.daftar;
     const berhasil = tulis(); tabel(); isiDaftar();
-    if (berhasil) pesan(`Cadangan dimuat. Total ${data.baris.length} baris.`);
-  } catch (e) { pesan(`File tidak dikenali. Pilih file cadangan dari rubrik ${R.jenis}.`, true); }
+    if (berhasil) pesan(`Data dimuat. Total ${data.baris.length} baris.`);
+  } catch (e) { pesan(`File tidak dikenali. Pilih file data (.json) dari rubrik ${R.jenis}.`, true); }
   $("file").value = "";
 });
 $("hapus-semua").onclick = async () => {
   if (!data.baris.length) return pesan("Belum ada nilai tersimpan.", true);
-  if (!await tanya(`Hapus semua ${data.baris.length} baris nilai? Tindakan ini tidak bisa dibatalkan. Pastikan cadangan sudah diunduh.`, "Hapus semua")) return;
+  if (!await tanya(`Hapus semua ${data.baris.length} baris nilai? Tindakan ini tidak bisa dibatalkan. Pastikan data sudah diunduh.`, "Hapus semua")) return;
   data.baris = []; tulis(); bersihkan(); tabel(); pesan("Semua nilai dihapus.");
 };
 window.addEventListener("storage", e => { if (e.key === KUNCI) { baca(); tabel(); } });
