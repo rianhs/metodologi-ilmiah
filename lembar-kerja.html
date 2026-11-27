@@ -105,7 +105,7 @@ const LK = {
         "Turunkan rumusan masalah menjadi pertanyaan riset, lalu pasangkan setiap pertanyaan dengan satu tujuan khusus.",
         "Periksa peta keselarasan di bagian bawah, lalu nilai sendiri dengan daftar periksa."
       ],
-      catatan: "Tombol Ekspor ke Word menghasilkan kerangka naskah yang bisa Anda lanjutkan menjadi naskah utuh.",
+      catatan: "Tombol Ekspor ke Word menghasilkan kerangka naskah dengan urutan bab templat skripsi. Salin isinya ke templat skripsi yang tautannya tersedia di Sikola.",
       asesmen: [
         "Paragraf pembuka menunjukkan besarnya masalah dengan data yang bersumber.",
         "State-of-the-art merangkum temuan riset terdahulu yang paling relevan dan mutakhir.",
@@ -502,7 +502,7 @@ const kosong = () => ({
   t1: { topik: [BARU.topik(), BARU.topik()] },
   t2: { bidang: "", tema: "", judul: "", alasan: "", jenis: "", p: "", i: "", c: "", o: "", konteks: "", fenomena: "", artikel: [BARU.kunci(), BARU.kunci(), BARU.kunci()], jenisGap: "", gap: "" },
   t3: { tema: "", topik: "", judul: "", p1: "", p2: "", p3: "", p4: "", rumusan: "", pertanyaan: [""], hipotesis: "", tujuanUmum: "", tujuanKhusus: [""], manfaatIlmu: "", manfaatPraktis: "" },
-  t4: { desain: "", desainRinci: "", alasanDesain: "", waktuLokasi: "", variabel: [BARU.variabel()], validitas: "", perancu: "", popTarget: "", popTerjangkau: "", inklusi: "", eksklusi: "", besarSampel: "", sampling: "", instrumen: "", analisis: [BARU.analisis()], software: "", subjekEtik: "", etik: "" },
+  t4: { desain: "", desainRinci: "", alasanDesain: "", waktuLokasi: "", variabel: [BARU.variabel()], validitas: "", perancu: "", popTarget: "", popTerjangkau: "", inklusi: "", eksklusi: "", besarSampel: "", sampling: "", alatBahan: "", instrumen: "", analisis: [BARU.analisis()], software: "", subjekEtik: "", etik: "" },
   t5: { tabel: [BARU.tabel()], grafik: [BARU.grafik()], harapan: "", pembahasan: "" },
   asesmen: { t1: {}, t2: {}, t3: {}, t4: {}, t5: {} },
   refleksi: { t1: { catatan: "", tanya: "" }, t2: { catatan: "", tanya: "" }, t3: { catatan: "", tanya: "" }, t4: { catatan: "", tanya: "" }, t5: { catatan: "", tanya: "" } }
@@ -970,6 +970,7 @@ function panel4(t) {
         ${F.area("t4.eksklusi", "Kriteria eksklusi", { rows: 2 })}
         ${F.area("t4.besarSampel", "Besar sampel dan dasar perhitungannya", { rows: 2, ph: "Rumus atau rujukan yang dipakai, beserta nilai yang dimasukkan" })}
         ${F.select("t4.sampling", "Teknik penarikan sampel", SAMPLING)}
+        ${F.area("t4.alatBahan", "Alat dan bahan", { rows: 3, cls: "span-all", ph: "Contoh: timbangan digital, kandang individu, pakan standar, pakan tinggi lemak, dan reagen uji kolesterol total", tip: "Alat dan bahan utama beserta spesifikasinya. Bagian ini masuk ke subbab 2.2 pada templat skripsi." })}
         ${F.area("t4.instrumen", "Instrumen dan prosedur pengumpulan data", { rows: 3, cls: "span-all", ph: "Contoh: kuesioner, lembar observasi, prosedur laboratorium" })}
       </div>
     </section>
@@ -1129,29 +1130,37 @@ function buatDokumen() {
     ${KERANGKA[t2.jenis] ? tabelHtml(["Unsur", "Isi"], KERANGKA[t2.jenis].isian.map(([key, lb]) => [lb, t2[key]])) : `<p class="kosong">(jenis riset belum dipilih)</p>`}
     ${p("Jenis kesenjangan", t2.jenisGap)}${p("Rumusan kesenjangan riset", t2.gap)}
 
-    <h2>Pendahuluan</h2>
-    <h3>Latar belakang (poin kunci)</h3>
-    ${p("Paragraf 1, masalah dan besarnya", t3.p1)}${p("Paragraf 2, yang sudah diketahui", t3.p2)}${p("Paragraf 3, kesenjangan", t3.p3)}${p("Paragraf 4, riset yang diusulkan", t3.p4)}
-    <h3>Rumusan masalah</h3><p>${isi(t3.rumusan)}</p>
-    <h3>Pertanyaan riset</h3>${ol(t3.pertanyaan)}
-    <h3>Hipotesis</h3><p>${isi(t3.hipotesis)}</p>
-    <h3>Tujuan</h3>${p("Tujuan umum", t3.tujuanUmum)}<p><b>Tujuan khusus:</b></p>${ol(t3.tujuanKhusus)}
-    <h3>Manfaat</h3>${p("Bagi ilmu pengetahuan", t3.manfaatIlmu)}${p("Praktis", t3.manfaatPraktis)}
+    <h2>Bab I Pendahuluan</h2>
+    <h3>1.1 Latar Belakang</h3>
+    ${p("Paragraf 1, masalah dan besarnya", t3.p1)}${p("Paragraf 2, hal yang sudah diketahui", t3.p2)}${p("Paragraf 3, kesenjangan", t3.p3)}${p("Paragraf 4, riset yang diusulkan", t3.p4)}
+    ${p("Rumusan masalah", t3.rumusan)}
+    <p><b>Pertanyaan riset:</b></p>${ol(t3.pertanyaan)}
+    ${p("Hipotesis (bila riset analitis)", t3.hipotesis)}
+    <h3>1.2 Teori</h3><p class="kosong">(ditulis di naskah bila diperlukan)</p>
+    <h3>1.3 Tujuan dan Manfaat</h3>
+    ${p("Tujuan umum", t3.tujuanUmum)}<p><b>Tujuan khusus:</b></p>${ol(t3.tujuanKhusus)}
+    ${p("Manfaat bagi ilmu pengetahuan", t3.manfaatIlmu)}${p("Manfaat praktis", t3.manfaatPraktis)}
 
-    <h2>Metode</h2>
-    ${p("Jenis riset", t4.desain)}${p("Desain riset", t4.desainRinci)}${p("Alasan memilih desain", t4.alasanDesain)}${p("Waktu dan lokasi", t4.waktuLokasi)}
-    <h3>Variabel</h3>
-    ${tabelHtml(["Variabel", "Peran", "Definisi operasional", "Cara atau alat ukur", "Skala"], t4.variabel.map(v => [v.nama, v.peran, v.definisi, v.alat, v.skala]))}
-    ${p("Validitas dan reliabilitas", t4.validitas)}${p("Pengendalian perancu", t4.perancu)}
-    <h3>Populasi dan sampel</h3>
+    <h2>Bab II Metodologi Penelitian</h2>
+    <h3>2.1 Tempat dan Waktu</h3><p>${isi(t4.waktuLokasi)}</p>
+    <h3>2.2 Alat dan Bahan</h3><p>${isi(t4.alatBahan)}</p>
+    <h3>2.3 Metode Penelitian</h3>
+    ${p("Jenis riset", t4.desain)}${p("Desain riset", t4.desainRinci)}${p("Alasan memilih desain", t4.alasanDesain)}${p("Pengendalian perancu", t4.perancu)}
     ${p("Populasi target", t4.popTarget)}${p("Populasi terjangkau", t4.popTerjangkau)}${p("Kriteria inklusi", t4.inklusi)}${p("Kriteria eksklusi", t4.eksklusi)}${p("Besar sampel", t4.besarSampel)}${p("Teknik penarikan sampel", t4.sampling)}
-    <h3>Instrumen dan pengumpulan data</h3><p>${isi(t4.instrumen)}</p>
-    <h3>Rencana analisis data</h3>
+    <p><b>Rencana analisis data:</b></p>
     ${tabelHtml(["Pertanyaan riset", "Variabel", "Analisis atau uji", "Asumsi dan pemeriksaannya"], t4.analisis.map(a => [a.pertanyaan, a.variabel, a.uji, a.asumsi]))}
     ${p("Perangkat lunak", t4.software)}
-    <h3>Pertimbangan etik</h3>${p("Subjek riset", t4.subjekEtik)}${p("Rencana persetujuan etik", t4.etik)}
+    <h3>2.4 Pelaksanaan Penelitian</h3>
+    ${p("Instrumen dan prosedur pengumpulan data", t4.instrumen)}
+    ${p("Subjek riset", t4.subjekEtik)}${p("Rencana persetujuan etik", t4.etik)}
+    <h3>2.5 Pengamatan dan Pengukuran</h3>
+    ${tabelHtml(["Variabel", "Peran", "Definisi operasional", "Cara atau alat ukur", "Skala"], t4.variabel.map(v => [v.nama, v.peran, v.definisi, v.alat, v.skala]))}
+    ${p("Validitas dan reliabilitas", t4.validitas)}
 
-    <h2>Rencana penyajian data</h2>`;
+    <h2>Daftar Pustaka</h2>
+    <p class="kosong">(susun dengan Zotero di templat skripsi dari semua sumber yang disitasi)</p>
+
+    <h2>Lampiran A · Rencana penyajian data (Tugas 5)</h2>`;
   t5.tabel.forEach((tb, i) => {
     const kol = baris(tb.kolom), brs = baris(tb.baris);
     h += `<p><b>Tabel ${i + 1}. ${tb.judul ? esc(tb.judul) : '<span class="kosong">(judul belum diisi)</span>'}</b></p>`;
@@ -1162,15 +1171,15 @@ function buatDokumen() {
   h += `<h3>Rancangan grafik</h3>` + tabelHtml(["Judul", "Jenis", "Sumbu X", "Sumbu Y", "Pengelompokan", "Tujuan terkait"], t5.grafik.map(g => [g.judul, g.jenis, g.x, g.y, g.kelompok, g.tujuan]));
   h += p("Hasil yang diharapkan", t5.harapan) + p("Artikel pembanding untuk pembahasan", t5.pembahasan);
 
-  h += `<h2>Lampiran A · Calon topik dan artikel acuan (Tugas 1)</h2>`;
+  h += `<h2>Lampiran B · Calon topik dan artikel acuan (Tugas 1)</h2>`;
   S.t1.topik.forEach((tp, i) => {
     h += `<h3>Calon topik ${i + 1}: ${tp.judul ? esc(tp.judul) : '<span class="kosong">(belum diisi)</span>'}</h3>${p("Bidang", tp.bidang)}${p("Tema", tp.tema)}${p("Alasan", tp.alasan)}${p("Kata kunci", tp.kataKunci)}${p("Pangkalan data", tp.pangkalan)}`;
     const ar = tp.artikel.filter(a => a.judul.trim() || a.penulis.trim() || a.doi.trim());
     h += ar.length ? tabelHtml(["Penulis dan tahun", "Judul", "Jurnal", "DOI atau tautan", "Zotero", "Relevansi"], ar.map(a => [a.penulis, a.judul, a.jurnal, a.doi, a.zotero ? "Ya" : "Belum", a.catatan])) : `<p class="kosong">(belum ada artikel)</p>`;
   });
-  h += `<h2>Lampiran B · Telaah artikel kunci (Tugas 2)</h2>` + tabelHtml(["Sitasi", "Desain", "Temuan utama", "Keterbatasan"], t2.artikel.map(a => [a.sitasi, a.desain, a.temuan, a.keterbatasan])) + p("Alasan memilih topik final", t2.alasan);
+  h += `<h2>Lampiran C · Telaah artikel kunci (Tugas 2)</h2>` + tabelHtml(["Sitasi", "Desain", "Temuan utama", "Keterbatasan"], t2.artikel.map(a => [a.sitasi, a.desain, a.temuan, a.keterbatasan])) + p("Alasan memilih topik final", t2.alasan);
 
-  h += `<h2>Lampiran C · Asesmen diri dan catatan konsultasi</h2>`;
+  h += `<h2>Lampiran D · Asesmen diri dan catatan konsultasi</h2>`;
   const LB = { belum: "Belum", sebagian: "Sebagian", sudah: "Sudah" };
   LK.tugas.forEach(t => {
     const a = S.asesmen["t" + t.no] || {}, r = S.refleksi["t" + t.no] || {};

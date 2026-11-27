@@ -82,7 +82,11 @@ const MI = {
       rtm: "rtm-poster.html", rubrik: "rubrik-poster.html" },
     { no: 7, sifat: "sumatif", judul: "Naskah dan presentasi proposal", ikon: "file-text", pekan: "Pekan 15–16", bobot: "70%",
       deskripsi: "Menyusun naskah proposal riset final, lalu mempresentasikannya secara lisan di hadapan dosen penguji.",
-      rtm: "rtm-proposal.html", rubrik: "rubrik-proposal.html" }
+      rtm: "rtm-proposal.html", rubrik: "rubrik-proposal.html",
+      dokumen: [
+        { label: "Templat skripsi", ikon: "file-text", href: "https://drive.google.com/file/d/1rPHkQmi_NBurq10KB8b1Gqd56aPEKDb1/view" },
+        { label: "Pedoman tugas akhir", ikon: "book-marked", href: "https://drive.google.com/file/d/1jLaoLgq83xNtqmUFr7gYslpMIJR_1rLp/view" }
+      ] }
   ],
 
   bahanAjar: {
@@ -436,10 +440,10 @@ function kartuPerencanaan(d) {
 }
 
 /* Tugas dan asesmen */
-function barisTautan(label, ikon, href) {
+function barisTautan(label, ikon, href, luar) {
   const kiri = `<span><i data-lucide="${ikon}"></i>${esc(label)}</span>`;
   if (!href) return `<div class="link off">${kiri}<small>Segera hadir</small></div>`;
-  return `<a href="${esc(href)}" class="link">${kiri}<i data-lucide="arrow-right"></i></a>`;
+  return `<a href="${esc(href)}" class="link"${luar ? ' target="_blank" rel="noopener"' : ""}>${kiri}<i data-lucide="${luar ? "external-link" : "arrow-right"}"></i></a>`;
 }
 
 function kartuFormatif(t) {
@@ -463,6 +467,7 @@ function kartuTugas(t) {
     <div class="card-foot links">
       ${barisTautan("Rencana tugas mahasiswa", "clipboard-list", t.rtm)}
       ${barisTautan("Rubrik asesmen", "clipboard-check", t.rubrik)}
+      ${(t.dokumen || []).map(d => barisTautan(d.label, d.ikon, d.href, true)).join("")}
     </div>
   </div>`;
 }

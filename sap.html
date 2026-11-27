@@ -278,7 +278,8 @@ const RPS = {
       "Direktorat Pembelajaran dan Kemahasiswaan (2024) *Panduan penggunaan generative artificial intelligence (GenAI) pada pembelajaran di perguruan tinggi*. Jakarta: Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi.",
       "Dohoo, I., Martin, W. dan Stryhn, H. (2009) *Veterinary epidemiologic research*. 2nd edn. Charlottetown: VER Inc. ISBN 978-0-919013-60-5.",
       "Percie du Sert, N. dkk. (2020) 'The ARRIVE guidelines 2.0: updated guidelines for reporting animal research', *PLoS Biology*, 18(7), e3000410. doi:10.1371/journal.pbio.3000410.",
-      "Petrie, A. dan Watson, P. (2013) *Statistics for veterinary and animal science*. 3rd edn. Chichester: Wiley-Blackwell. ISBN 978-0-470-67075-0."
+      "Petrie, A. dan Watson, P. (2013) *Statistics for veterinary and animal science*. 3rd edn. Chichester: Wiley-Blackwell. ISBN 978-0-470-67075-0.",
+      "Universitas Hasanuddin (2023) *Pedoman tugas akhir mahasiswa Universitas Hasanuddin*. Makassar: Universitas Hasanuddin."
     ]
   },
 
@@ -452,7 +453,7 @@ const SAP = {
     },
 
     7: {
-      media: ["Slide presentasi", "Artikel riset contoh", "Lembar telaah pendahuluan", "Lembar kerja proposal riset (lembar-kerja.html)"],
+      media: ["Slide presentasi", "Artikel riset contoh", "Lembar telaah pendahuluan", "Templat skripsi (Bab I Pendahuluan)", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan mengumumkan pembagian dosen penguji yang ditampilkan di Sikola", "Memeriksa dosen penguji masing-masing di Sikola"]
@@ -464,7 +465,7 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 3 (draf pendahuluan) dan jadwal kuis Sub-CPMK-4", "Mencatat instruksi tugas dan jadwal kuis"],
+          [10, "Menjelaskan Tugas 3 (draf pendahuluan), letaknya di Bab I templat skripsi, dan jadwal kuis Sub-CPMK-4", "Mencatat instruksi tugas dan jadwal kuis"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
@@ -473,7 +474,7 @@ const SAP = {
     },
 
     8: {
-      media: ["Slide presentasi", "Artikel riset contoh dengan berbagai jenis dan desain riset", "Bagan alir pemilihan jenis dan desain riset", "Lembar kerja proposal riset (lembar-kerja.html)"],
+      media: ["Slide presentasi", "Artikel riset contoh dengan berbagai jenis dan desain riset", "Bagan alir pemilihan jenis dan desain riset", "Templat skripsi (Bab II Metodologi Penelitian)", "Lembar kerja proposal riset (lembar-kerja.html)"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan mengaitkan pertanyaan riset di Tugas 3 dengan pemilihan desain riset", "Menyebutkan pertanyaan riset masing-masing"]
@@ -613,7 +614,7 @@ const SAP = {
     },
 
     15: {
-      media: ["Slide presentasi", "Contoh rekaman atau slide presentasi proposal", "Pengatur waktu"],
+      media: ["Slide presentasi", "Contoh rekaman atau slide presentasi proposal", "Templat skripsi", "Pedoman Tugas Akhir Mahasiswa Unhas", "Pengatur waktu"],
       langkah: {
         pendahuluan: [
           [10, "Membuka kuliah dan menanyakan kekhawatiran mahasiswa menjelang presentasi", "Menyampaikan kekhawatiran dan pertanyaan"]
@@ -626,7 +627,7 @@ const SAP = {
         ],
         penutup: [
           [8, "Memandu kuis interaktif di kelas", "Mengerjakan kuis interaktif"],
-          [10, "Menjelaskan Tugas 7 sesuai RTM: panduan penyusunan tugas akhir Unhas, jadwal presentasi, dan pengumpulan PDF naskah final di LMS Sikola", "Mencatat jadwal dan ketentuan"],
+          [10, "Menjelaskan Tugas 7 sesuai RTM: templat skripsi dan Pedoman Tugas Akhir Mahasiswa Unhas, jadwal presentasi, dan pengumpulan PDF naskah final di LMS Sikola", "Mencatat jadwal dan ketentuan"],
           [7, "Merangkum materi", "Mengajukan pertanyaan penutup"]
         ]
       },
@@ -795,7 +796,10 @@ h3{font-size:1.15rem;margin:0 0 10px}
 .wk-topic{font:600 var(--fs-title)/1.35 var(--sans);transition:color .12s}
 .wk-date{display:block;font:400 var(--fs-xs)/1.4 var(--sans);color:var(--ink-3);margin-top:2px}
 .wk-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-.wk-body{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule);margin:0 18px}
+.wk-body{margin:0 18px}
+.wk-sec{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule)}
+.wk-body .wk-span{grid-column:1/-1;margin:0 0 -8px;font-size:var(--fs-xs);color:var(--ink-3)}
+.wk-span b{color:var(--ink)}
 .wk-body h4{margin:0 0 6px;font-size:var(--fs-label);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .wk-body p,.wk-body li{font-size:var(--fs-sm);line-height:1.55}
 .wk-body ul{padding-left:1.1em}
@@ -908,7 +912,8 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   .week > summary{grid-template-columns:14px 44px minmax(0,1fr);gap:10px;padding:12px 14px}
   .wk-right{grid-column:3;justify-content:flex-start}
   .wk-no b{font-size:1.15rem}
-  .wk-body{grid-template-columns:1fr;margin:0 14px}
+  .wk-body{margin:0 14px}
+  .wk-sec{grid-template-columns:1fr}
   .week-gap{grid-template-columns:1fr;gap:2px;padding:10px 14px}
   .holidays ul{grid-template-columns:1fr}
   .matrix td,.matrix th{padding:8px 3px}
@@ -1134,7 +1139,7 @@ const TAHAP = {
 const REF53 = "Permendikbudristek No. 53 Tahun 2023";
 const REF3 = "Permendikbud No. 3 Tahun 2020";
 const GLOSARIUM = {
-  "CPMK": { t: "Capaian Pembelajaran Mata Kuliah: kemampuan yang dijabarkan secara spesifik dari CPL yang dibebankan pada mata kuliah." },
+  "CPMK": { t: "Capaian Pembelajaran Mata Kuliah: kemampuan yang dijabarkan secara spesifik dari CPL yang dibebankan pada mata kuliah, sesuai bahan kajian mata kuliah tersebut." },
   "Sub-CPMK": { t: "Kemampuan yang dijabarkan dari CPMK, dapat diukur, dan merupakan kemampuan akhir yang direncanakan pada setiap tahap pembelajaran." },
   "SGD": { t: "Small group discussion (diskusi kelompok kecil)." },
   "CBL": { t: "Case-based learning (pembelajaran berbasis kasus)." },
@@ -1150,6 +1155,7 @@ const GLOSARIUM = {
   "Sumatif": { t: "Asesmen pencapaian hasil belajar sebagai dasar kelulusan mata kuliah, mengacu pada pemenuhan CPL.", r: REF53 + " Pasal 27 ayat (4) dan (5)" },
   "Bentuk pembelajaran": { t: "Wadah kegiatan belajar, misalnya kuliah, seminar, praktikum, atau tutorial.", r: REF53 + " Pasal 16 ayat (1)" },
   "Metode pembelajaran": { t: "Cara memfasilitasi belajar di dalam bentuk pembelajaran, misalnya SGD, CBL, PjBL, atau PBL.", r: REF3 + " Pasal 14 ayat (3)" },
+  "Belajar terbimbing": { t: "Kegiatan belajar bersama dosen, misalnya kuliah atau seminar.", r: REF53 + " Pasal 16" },
   "Penugasan terstruktur": { t: "Tugas yang dirancang dosen dan dikerjakan mahasiswa di luar jam kuliah.", r: REF53 + " Pasal 16" },
   "Belajar mandiri": { t: "Kegiatan belajar yang dilakukan mahasiswa secara mandiri.", r: REF53 + " Pasal 16" }
 };
@@ -1257,16 +1263,12 @@ const sessionDateLabel = (s, style = "long") => {
 function dosenNames(list) { return list.map(k => dosenByKode[k]?.nama || k).join("; "); }
 function dosenCodes(list) { return list.length === RPS.dosen.length ? "Semua dosen" : list.join(", "); }
 
-/* Keterangan sumatif otomatis dari data RPS */
-function sumatifNote(p, sub) {
-  const pk = pekanOf(p.sub), akhir = Math.max(...pk);
+/* Sumatif satu Sub-CPMK: teknik, bobot, dan waktu asesmen dari data RPS */
+function sumatifSub(sub) {
   if (!sub.kode) return "";
-  if (sub.asesmen === "proyek") {
-    if (p.bentuk === "Seminar") return `${sub.teknik} dengan rubrik · bobot ${sub.bobot}%`;
-    return `Belum ada; ${sub.kode} dinilai pada pekan ${akhir}`;
-  }
-  if (p.pekan === akhir) return `${sub.teknik}: kuis ${sub.kode} dibuka setelah pertemuan ini · bobot ${sub.bobot}%`;
-  return `Belum ada; kuis ${sub.kode} dibuka setelah pekan ${akhir}`;
+  const akhir = Math.max(...pekanOf(sub.kode));
+  if (sub.asesmen === "proyek") return `${sub.teknik} dengan rubrik pada pekan ${akhir} · bobot ${sub.bobot}%`;
+  return `${sub.teknik}, dibuka setelah pertemuan pekan ${akhir} · bobot ${sub.bobot}%`;
 }
 
 /* Status tugas pada pekan tertentu */
@@ -1303,27 +1305,28 @@ function renderNow() {
   if (!SCHED.sessions.length) { el.hidden = true; return; }
   const cur = SCHED.sessions.find(s => today >= s.monday && today < D.add(s.monday, 7));
   const gap = SCHED.gaps.find(g => today >= g.monday && today < D.add(g.monday, 7));
-  const link = s => `<a class="week-link" href="#pekan-${s.pekan}" data-open="${s.pekan}">Buka SAP pekan ${s.pekan}</a>`;
+  const line = s => `Pekan ${s.pekan} · ${esc(s.topik)} · ${esc(dosenCodes(s.dosenList))}`;
+  const holidayNote = s => s.libur && !s.pengganti ? ` <span class="tag tag-warn">${esc(HARI[D.dow(s.date)])} libur, jadwal pengganti menyusul</span>` : "";
   let html = "";
   if (today < SCHED.sessions[0].monday) {
     const s = SCHED.sessions[0], n = Math.round((s.date - today) / DAY);
     html = `<div><div class="now-label">Kuliah pertama</div>
-      <div class="now-title">${esc(s.topik)}</div>
-      <div class="now-meta">${esc(sessionDateLabel(s))}, ${esc(RPS.jadwal.jamMulai)} ${esc(RPS.jadwal.zonaWaktu)} · ${link(s)}</div></div>
+      <div class="now-title">${esc(sessionDateLabel(s))}, ${esc(RPS.jadwal.jamMulai)} ${esc(RPS.jadwal.zonaWaktu)}</div>
+      <div class="now-meta">${line(s)}</div></div>
       <div class="now-side"><div class="now-big">${n}</div><div class="muted small">hari lagi</div></div>`;
   } else if (cur) {
     const next = SCHED.sessions.find(s => s.pekan > cur.pekan);
     html = `<div><div class="now-label">Pekan ini</div>
       <div class="now-title">Pekan ${cur.pekan}: ${esc(cur.topik)}</div>
-      <div class="now-meta">${esc(sessionDateLabel(cur))} · ${esc(dosenCodes(cur.dosenList))} · ${link(cur)}</div></div>
+      <div class="now-meta">${esc(sessionDateLabel(cur))}${cur.sepekan ? "" : `, ${esc(jam)}`} · ${esc(dosenNames(cur.dosenList.length === RPS.dosen.length ? [] : cur.dosenList) || "Semua dosen")}${holidayNote(cur)}</div></div>
       <div class="now-side"><div class="now-big">${cur.pekan}<span class="muted" style="font-size:1rem"> / ${pertemuan.length}</span></div></div>
-      ${next ? `<div class="now-next">Berikutnya: Pekan ${next.pekan} · ${esc(next.topik)}, ${esc(sessionDateLabel(next, "short"))}</div>` : ""}`;
+      ${next ? `<div class="now-next">Berikutnya: ${line(next)}, ${esc(sessionDateLabel(next, "short"))}</div>` : ""}`;
   } else if (gap) {
     const next = SCHED.sessions.find(s => s.monday > gap.monday);
     html = `<div><div class="now-label">Pekan jeda</div>
       <div class="now-title">Tidak ada perkuliahan pekan ini</div>
       <div class="now-meta">${esc(gap.reason)}</div></div>
-      ${next ? `<div class="now-next">Berikutnya: Pekan ${next.pekan} · ${esc(next.topik)}, ${esc(sessionDateLabel(next, "short"))}</div>` : ""}`;
+      ${next ? `<div class="now-next">Berikutnya: ${line(next)}, ${esc(sessionDateLabel(next, "short"))}</div>` : ""}`;
   } else if (today > lastDate) {
     html = `<div><div class="now-label">Semester selesai</div>
       <div class="now-title">Perkuliahan berakhir ${esc(D.mid(lastDate))}</div>
@@ -1346,6 +1349,30 @@ function renderRingkasan() {
 }
 
 /* ── Render: pertemuan ───────────────────────────────────────────── */
+/* Keterangan pekan yang berbagi Sub-CPMK; pekan yang sedang dibuka dicetak tebal. */
+function spanPekan(p) {
+  const daftar = pekanOf(p.sub).map(n => n === p.pekan ? `<b>${n}</b>` : String(n));
+  const akhir = daftar.pop();
+  const teks = !daftar.length ? akhir : daftar.join(", ") + (daftar.length > 1 ? "," : "") + " dan " + akhir;
+  return `<p class="wk-span">${esc(p.sub)} dan asesmennya berlaku untuk pekan ${teks}.</p>`;
+}
+/* Formatif satu Sub-CPMK: jika berbeda antarpekan, tampilkan rincian per pekan. */
+function formatifSub(kode) {
+  const grup = new Map();
+  pertemuan.filter(p => p.sub === kode).forEach(p => {
+    const teks = p.formatif.join(", ");
+    grup.set(teks, [...(grup.get(teks) || []), p.pekan]);
+  });
+  if (grup.size === 1) return esc([...grup.keys()][0]);
+  return [...grup].map(([teks, pk]) => `${esc(fmtPekan(pk))}: ${esc(teks)}`).join("<br>");
+}
+/* Kriteria satu Sub-CPMK, dengan aturan yang sama seperti formatif. */
+function kriteriaSub(kode) {
+  const grup = new Map();
+  pertemuan.filter(p => p.sub === kode).forEach(p => grup.set(p.kriteria, [...(grup.get(p.kriteria) || []), p.pekan]));
+  if (grup.size === 1) return esc([...grup.keys()][0]);
+  return [...grup].map(([teks, pk]) => `${esc(fmtPekan(pk))}: ${esc(teks)}`).join("<br>");
+}
 function stepsTable(sap) {
   const rows = Object.keys(TAHAP).map(k => ((sap.langkah || {})[k] || []).map((r, i) =>
     `<tr${i === 0 ? ' class="stage-first"' : ""}><td class="stage">${i === 0 ? esc(TAHAP[k].label) : ""}</td><td class="d">${withTerms(r[1])}</td><td class="m">${withTerms(r[2])}</td><td class="min">${+r[0] || 0}′</td></tr>`).join("")).join("");
@@ -1368,8 +1395,13 @@ function renderWeeks() {
     else if (s?.libur && s.pengganti) libur = ` · pengganti hari libur ${esc(D.shortDay(s.date))}`;
     const gaps = SCHED.gaps.filter(g => g.beforePekan === p.pekan).map(g =>
       `<div class="week-gap"><span>Pekan jeda</span><span><b>${esc(D.range(g.monday, D.add(g.monday, 4)))}</b> · ${esc(g.reason)}</span></div>`).join("");
+    /* Tugas yang seluruh pekannya berada dalam satu Sub-CPMK tampil di bagian Sub-CPMK. */
     const tugas = tugasPekan(p.pekan);
-    const tugasHtml = tugas.length ? `<ul class="task-list">${tugas.map(t => `<li><span class="tag">${esc(t.st)}</span><span>Tugas ${t.no} · ${esc(t.judul)}</span><span class="t-luaran">${esc(t.luaran || "")}</span></li>`).join("")}</ul>` : "";
+    const pekanSub = pekanOf(p.sub);
+    const tugasSub = tugas.filter(t => t.pk.every(n => pekanSub.includes(n)));
+    const tugasLain = tugas.filter(t => !tugasSub.includes(t));
+    const daftarTugas = list => `<ul class="task-list">${list.map(t => `<li><span class="tag">Tugas ${t.no}</span><span>${esc(t.judul)} · ${esc(fmtPekan(t.pk))}</span><span class="t-luaran">${esc(t.luaran || "")}</span></li>`).join("")}</ul>`;
+    const statusTugas = tugas.map(t => `<dt>Status Tugas ${t.no}</dt><dd>${esc(t.st)}</dd>`).join("");
     const bacaan = (sap.bacaan || []).length ? `<ul>${sap.bacaan.map(b => `<li>${esc(b)}</li>`).join("")}</ul>` : `<p class="muted">Materi dari dosen pengampu.</p>`;
     return gaps + `<details class="week" id="pekan-${p.pekan}" data-dosen="${esc(p.dosenList.join(" "))}">
       <summary>
@@ -1378,31 +1410,39 @@ function renderWeeks() {
         <span class="wk-right"><span class="tag">${esc(p.sub)}</span><span class="tag tag-accent">${esc(dosenCodes(p.dosenList))}</span></span>
       </summary>
       <div class="wk-body">
-        <div><h4>Kemampuan akhir</h4><p>${esc(sub.teks || "")}</p>
-          <p class="muted small" style="margin:0">Indikator: ${withTerms(sub.indikator || "")}</p></div>
-        <div><h4>Materi pokok</h4><ul>${p.materi.map(m => `<li>${withTerms(m)}</li>`).join("")}</ul></div>
-        <div class="wk-wide"><h4>Langkah pembelajaran</h4>${stepsTable(sap)}</div>
-        <div><h4>Rincian pembelajaran</h4>
+        <div class="wk-sec">
+        ${spanPekan(p)}
+        <div><h4>Sub-CPMK (Kemampuan akhir)</h4><p style="margin:0"><b>${esc(p.sub)}:</b> ${esc(sub.teks || "")}</p></div>
+        <div><h4>Asesmen</h4>
+          <dl class="kv">
+            <dt>Indikator</dt><dd>${withTerms(sub.indikator || "")}</dd>
+            <dt>${term("Formatif")}</dt><dd>${formatifSub(p.sub)}</dd>
+            <dt>${term("Sumatif")}</dt><dd>${esc(sap.sumatif || sumatifSub(sub))}</dd>
+            <dt>Kriteria</dt><dd>${kriteriaSub(p.sub)}</dd>
+          </dl></div>
+        ${tugasSub.length ? `<div class="wk-wide"><h4>Tugas</h4>${daftarTugas(tugasSub)}</div>` : ""}
+        </div>
+        <div class="wk-sec">
+        <p class="wk-span">Rincian berikut khusus untuk pekan <b>${p.pekan}</b>.</p>
+        <div><h4>Bentuk dan metode pembelajaran</h4>
           <dl class="kv">
             <dt>${term("Bentuk pembelajaran", "Bentuk")}</dt><dd>${esc(p.bentuk)}</dd>
+            <dt>${term("Belajar terbimbing")}</dt><dd>${esc(w.terbimbing)}</dd>
+            <dt>${term("Penugasan terstruktur")}</dt><dd>${esc(w.terstruktur)}</dd>
+            <dt>${term("Belajar mandiri")}</dt><dd>${esc(w.mandiri)}</dd>
             <dt>${term("Metode pembelajaran", "Metode")}</dt><dd>${metode || "–"}</dd>
             <dt>Media</dt><dd>${esc((sap.media || []).join("; ") || "–")}</dd>
             <dt>Dosen</dt><dd>${esc(p.dosenList.length === RPS.dosen.length ? "Semua dosen tim pengajar" : dosenNames(p.dosenList))}</dd>
           </dl></div>
-        <div><h4>Asesmen</h4>
-          <dl class="kv">
-            <dt>${term("Formatif")}</dt><dd>${esc(p.formatif.join(", "))}</dd>
-            <dt>${term("Sumatif")}</dt><dd>${esc(sap.sumatif || sumatifNote(p, sub))}</dd>
-            <dt>Kriteria</dt><dd>${esc(p.kriteria)}</dd>
-          </dl></div>
-        <div><h4>Tugas dan belajar mandiri</h4>${tugasHtml}
-          <dl class="kv">
-            <dt>${term("Penugasan terstruktur")}</dt><dd>${esc(w.terstruktur)}</dd>
-            <dt>${term("Belajar mandiri")}</dt><dd>${esc(w.mandiri)}</dd>
-          </dl>
-          <p class="small" style="margin:8px 0 0">${esc(sap.mandiri || "")}</p></div>
+        <div><h4>Materi pembelajaran</h4><ul>${p.materi.map(m => `<li>${withTerms(m)}</li>`).join("")}</ul></div>
+        <div class="wk-wide"><h4>Langkah pembelajaran</h4>${stepsTable(sap)}</div>
+        <div><h4>Kegiatan mandiri</h4>
+          <p style="margin:0">${esc(sap.mandiri || "–")}</p>
+          ${tugasLain.length ? daftarTugas(tugasLain) : ""}
+          ${statusTugas ? `<dl class="kv" style="margin-top:8px">${statusTugas}</dl>` : ""}</div>
         <div><h4>Bacaan</h4>${bacaan}</div>
         ${sap.catatan ? `<div class="wk-wide"><p class="wk-note">${esc(sap.catatan)}</p></div>` : ""}
+        </div>
       </div>
     </details>`;
   }).join("");
