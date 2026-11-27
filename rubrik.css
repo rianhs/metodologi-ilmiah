@@ -1,5 +1,5 @@
 /* Desain bersama rubrik asesmen: layar (ramah ponsel) dan cetak (dokumen mutu, A4 lanskap) */
-:root{--red:#980101;--tint:#fdd5d5;--bg:#f4f4f9;--ink:#222;--ink2:#555;--rule:#d5d5da}
+:root{--red:#980101;--tint:#fdd5d5;--bg:#f4f4f9;--ink:#222;--ink2:#555;--rule:#d5d5da;--pink:#f0e8e8;--pink-muda:#fff8f8;--abu:#d9d9d9;--abu-muda:#ececec}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-serif}
@@ -36,10 +36,16 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .identitas>div{grid-column:span 2}
 .identitas>div.lebar{grid-column:span 4}
 
+.petunjuk{background:var(--pink-muda);border:1px solid #e3bcbc;border-radius:6px;padding:12px 14px}
+.petunjuk b{color:var(--red)}
+.tempat-tanggal{display:flex;align-items:stretch}
+.tempat-tanggal span{display:flex;align-items:center;padding:0 10px;background:var(--abu-muda);border:1px solid #bbb;border-right:0;border-radius:4px 0 0 4px}
+.tempat-tanggal input{flex:1;min-width:0;min-height:40px;border-radius:0 4px 4px 0}
+
 /* Aspek dan skor */
 .daftar-aspek{display:flex;flex-direction:column;gap:6px}
 .aspek{display:grid;grid-template-columns:190px repeat(4,minmax(0,1fr));gap:6px;padding:8px;border:1px solid var(--rule);border-radius:6px;background:#fff;scroll-margin:12px}
-.aspek>div{align-self:center}
+.aspek>div{padding:8px 10px;background:var(--abu-muda);border-radius:4px;display:flex;flex-direction:column;justify-content:center}
 .aspek small{display:block;color:var(--ink2);font-size:12px}
 .skor{display:flex;gap:8px;align-items:flex-start;text-align:left;font-weight:400;line-height:1.35;padding:8px 10px}
 .skor b{color:var(--red)}
@@ -50,26 +56,31 @@ summary{cursor:pointer;font-weight:600;list-style:none}
 summary::-webkit-details-marker{display:none}
 summary::before{content:"▶";font-size:10px;margin-right:8px}
 details[open]>summary::before{content:"▼"}
-.bagian>summary{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:11px 14px}
-.bagian>summary span{display:block;margin-left:18px;font-weight:400;font-size:12px;color:var(--ink2)}
+.bagian>summary,.label-bagian{background:var(--pink);color:var(--red);border:1px solid #d9b8b8;border-radius:6px;padding:11px 14px}
+.bagian>summary span{display:block;margin-left:18px;font-weight:400;font-size:12px;color:var(--ink)}
+.label-bagian{font-weight:600}
+.label-bagian span{display:block;font-weight:400;font-size:12px;color:var(--ink)}
 .bagian[open]>summary{margin-bottom:6px}
 
 /* Bilah nilai */
-.bilah{position:sticky;bottom:0;z-index:2;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:8px 12px;box-shadow:0 -4px 14px rgba(0,0,0,.08)}
+.box.bilah{background:var(--abu);border-color:#b5b5b5;position:sticky;bottom:0;z-index:2;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:8px 12px;box-shadow:0 -4px 14px rgba(0,0,0,.08)}
 .nilai{font-size:22px;font-weight:700;min-width:62px;line-height:1.1}
-.nilai-kotak small{display:block;font-size:11px;color:var(--ink2)}
+.nilai-kotak small{display:block;font-size:11px;color:var(--ink)}
 .kanan{margin-left:auto;display:flex;gap:8px}
-#pesan{flex-basis:100%;font-size:12.5px;color:var(--ink2)}
+#pesan{flex-basis:100%;font-size:12.5px;color:var(--ink)}
 #pesan:empty{display:none}
 #pesan.galat{color:var(--red);font-weight:600}
 
 /* Rekap */
+main>.box>h2,main>details.box>summary{margin:-12px -14px 0;padding:10px 14px;background:var(--abu-muda);border-radius:5px 5px 0 0}
+main>details.box:not([open])>summary{margin-bottom:-12px;border-radius:5px}
+main>details.box[open]>summary{margin-bottom:8px}
 .alat{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
 .alat input{max-width:240px}
 .gulir{overflow:auto;max-height:480px;border:1px solid var(--rule);border-radius:4px}
 .gulir table{width:100%;border-collapse:collapse;font-size:13px}
 .gulir th,.gulir td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;white-space:nowrap}
-.gulir th{position:sticky;top:0;background:#eee}
+.gulir th{position:sticky;top:0;background:var(--abu)}
 .gulir td button{padding:5px 8px;font-size:12px}
 details.box textarea{margin:8px 0;min-height:110px}
 #cetak{display:none}
@@ -91,7 +102,7 @@ details.box textarea{margin:8px 0;min-height:110px}
   .kop dl{grid-column:1/-1;border-left:0;border-top:1px solid #000;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:1px 4px;font-size:10px}
   .kop dd{margin-right:8px}
   .identitas>div,.identitas>div.lebar{grid-column:1/-1}
-  .bilah{flex-wrap:wrap;padding:8px;column-gap:8px}
+  .box.bilah{padding:8px;column-gap:8px}
   .nilai{font-size:19px;min-width:46px}
   .nilai-kotak small{font-size:10.5px}
   .kanan{gap:6px}

@@ -4,8 +4,9 @@ const R = window.RUBRIK;
 const ASPEK = R.bagian.flatMap((b, bi) => b.aspek.map((a, ai) =>
   ({ ...a, bi, no: ai + 1, kode: (b.kode || "A") + (ai + 1) })));
 const N = ASPEK.length;
+const TEMPAT = "Makassar";
 const KUNCI = R.kunci, KUNCI_KERJA = R.kunci + "-kerja";
-const ISIAN = ["penilai", "nama", "nim", "judul", "tempat", "catatan"];
+const ISIAN = ["penilai", "nama", "nim", "judul", "tanggal", "catatan"];
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const rapi = s => String(s || "").trim().replace(/\s+/g, " ");
@@ -13,6 +14,8 @@ const idBaris = r => (r.nim + "|" + r.penilai).toLowerCase();
 const lengkap = r => r.skor.every(Boolean);
 const terisi = r => r.skor.filter(Boolean).length;
 const hitung = skor => skor.reduce((a, s, i) => a + s / 4 * ASPEK[i].bobot, 0);
+const tanggalPanjang = t => /^\d{4}-\d{2}-\d{2}$/.test(t || "")
+  ? new Date(t + "T00:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "";
 const teks = d => Array.isArray(d)
   ? (d.length > 1 ? `<ul>${d.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : esc(d[0]))
   : esc(d);
@@ -48,20 +51,25 @@ function htmlAspek(a, i) {
 function bangun() {
   const kelompok = R.bagian.map((b, bi) => {
     const isi = `<div class="daftar-aspek">${ASPEK.map((a, i) => a.bi === bi ? htmlAspek(a, i) : "").join("")}</div>`;
-    return b.judul ? `<details class="bagian" data-b="${bi}"><summary>${esc(b.kode)}. ${esc(b.judul)}<span></span></summary>${isi}</details>` : isi;
+    const label = `<div class="label-bagian">Aspek asesmen<span>Bobot total 100%</span></div>`;
+    return b.judul ? `<details class="bagian" data-b="${bi}"><summary>${esc(b.kode)}. ${esc(b.judul)}<span></span></summary>${isi}</details>` : label + isi;
   }).join("");
   const aturan = R.draf
     ? "Penilaian yang belum lengkap dapat disimpan sebagai draf, lalu dilanjutkan lewat tombol Ubah pada rekap. Draf tidak ikut dalam rata-rata."
     : "Tombol Selesai aktif setelah semua aspek terisi.";
+  const petunjuk = "Isi identitas, lalu pilih satu skor (1 sampai 4) pada setiap aspek. Nilai akhir muncul di bagian bawah setelah semua aspek terisi. " +
+    (R.draf ? "Tekan <b>Simpan draf</b> jika penilaian belum lengkap atau <b>Selesai</b> jika sudah lengkap. " : "Tekan <b>Selesai</b> untuk menyimpan nilai. ") +
+    "Untuk mencetak nilai tersimpan, tekan <b>Cetak</b> pada rekap. Gunakan kertas A4 lanskap.";
   document.body.innerHTML = `<main>
   ${kop()}
   <div class="form">
+    <section class="petunjuk"><b>Petunjuk:</b> ${petunjuk}</section>
     <section class="box identitas">
       <div><label for="penilai">${esc(R.penilai)}</label><input id="penilai" placeholder="Nama dosen" autocomplete="off"></div>
       <div><label for="nama">Nama mahasiswa</label><input id="nama" list="daftar-nama" placeholder="Ketik nama" autocomplete="off"><datalist id="daftar-nama"></datalist></div>
       <div><label for="nim">NIM</label><input id="nim" list="daftar-nim" placeholder="Ketik NIM" autocomplete="off"><datalist id="daftar-nim"></datalist></div>
       <div class="lebar"><label for="judul">${esc(R.labelJudul)}</label><input id="judul" placeholder="Tulis judul" autocomplete="off"></div>
-      <div><label for="tempat">Tempat dan tanggal ujian</label><input id="tempat" placeholder="Makassar, ..." autocomplete="off"></div>
+      <div><label for="tanggal">Tempat dan tanggal ujian</label><div class="tempat-tanggal"><span>${TEMPAT},</span><input id="tanggal" type="date"></div></div>
     </section>
     ${kelompok}
     <section class="box"><label for="catatan">Catatan untuk mahasiswa</label><textarea id="catatan" placeholder="Tulis catatan atau komentar"></textarea></section>
@@ -231,7 +239,7 @@ function lembar(r) {
         <tr class="total"><td colspan="7">Nilai akhir mahasiswa${!penuh && terisi(r) ? " (draf, belum lengkap)" : ""}</td><td class="tengah">${penuh ? hitung(r.skor).toFixed(2) : ""}</td></tr>
       </tbody></table>
     <div class="penutup"><div class="kotak-catatan"><b>Catatan:</b> ${isi(r.catatan)}</div>
-      <div class="ttd"><div>${isi(r.tempat, "........................................")}</div><div>${esc(R.penilai)},</div><div class="ruang"></div>
+      <div class="ttd"><div>${TEMPAT}, ${tanggalPanjang(r.tanggal) || "...................................."}</div><div>${esc(R.penilai)},</div><div class="ruang"></div>
       <b>${isi(r.penilai, "(........................................)")}</b></div></div>
   </section>`;
 }
@@ -280,9 +288,9 @@ function sel(v) {
 const keCsv = tab => "﻿" + tab.map(r => r.map(sel).join(";")).join("\r\n");
 function eksporCsv() {
   if (!data.baris.length) return pesan("Belum ada data untuk diekspor.", true);
-  const tab = [["NIM", "Nama", R.labelJudul, ...ASPEK.map(a => `${a.kode} ${a.judul}`), "Status", "Nilai", "Catatan", "Penilai", "Tempat dan tanggal", "Waktu simpan"]];
+  const tab = [["NIM", "Nama", R.labelJudul, ...ASPEK.map(a => `${a.kode} ${a.judul}`), "Status", "Nilai", "Catatan", "Penilai", "Tempat", "Tanggal ujian", "Waktu simpan"]];
   data.baris.forEach(r => tab.push([r.nim, r.nama, r.judul || "", ...r.skor.map(s => s || ""), lengkap(r) ? "Lengkap" : "Draf",
-    lengkap(r) ? +hitung(r.skor).toFixed(2) : "", r.catatan || "", r.penilai, r.tempat || "", new Date(r.waktu).toLocaleString("id-ID")]));
+    lengkap(r) ? +hitung(r.skor).toFixed(2) : "", r.catatan || "", r.penilai, TEMPAT, tanggalPanjang(r.tanggal), new Date(r.waktu).toLocaleString("id-ID")]));
   unduh(`nilai-${R.jenis}-${cap()}.csv`, keCsv(tab), "text/csv;charset=utf-8");
 }
 function eksporRata() {
