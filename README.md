@@ -24,6 +24,8 @@ Mahasiswa belajar menelaah karya ilmiah secara sistematis, menyusun proposal ris
 | [`rps.html`](rps.html) | Rencana Pembelajaran Semester (RPS) |
 | [`sap.html`](sap.html) | Satuan Acara Perkuliahan (SAP) pekan 1 sampai 16 |
 | [`lembar-kerja.html`](lembar-kerja.html) | Lembar kerja dan asesmen diri Tugas 1 sampai 5 |
+| [`rtm-poster.html`](rtm-poster.html) | Rencana Tugas Mahasiswa (RTM) Tugas 6: poster artikel ilmiah |
+| [`rtm-proposal.html`](rtm-proposal.html) | RTM Tugas 7: naskah dan presentasi proposal |
 | [`rubrik-poster.html`](rubrik-poster.html) | Rubrik asesmen poster artikel ilmiah dan rekap nilai |
 | [`rubrik-proposal.html`](rubrik-proposal.html) | Rubrik asesmen naskah dan presentasi proposal riset |
 | [`rubrik.css`](rubrik.css) | Desain bersama kedua rubrik (layar dan cetak) |
@@ -57,6 +59,7 @@ Setiap halaman berupa satu file HTML tanpa proses *build*. Font dan ikon dimuat 
 - Data portal berada di objek `MI` dalam `index.html`.
 - Data RPS berada di objek `RPS` dalam `rps.html`. Setelah mengubahnya, salin seluruh blok `const RPS` ke `sap.html`.
 - Data khusus SAP berada di objek `SAP` dalam `sap.html`.
+- Kedua RTM memuat salinan objek `RPS`. Ketentuan tugas dan salinan indikator rubrik berada di objek `RTM`.
 - Perubahan jadwal, judul tugas, atau tim pengajar perlu disamakan di semua halaman terkait.
 - Foto dosen disimpan di `img/dosen/` dengan rasio 4:5.
 - Tambahkan `?periksa` di akhir alamat SAP untuk memeriksa total menit pembelajaran.
