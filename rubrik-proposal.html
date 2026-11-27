@@ -1,1101 +1,312 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rubrik Asesmen Naskah dan Presentasi Proposal Riset – Metodologi Ilmiah Unhas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --unhas-red: #980101;
-            --bg-light: #f4f4f9;
-            --text-dark: #333;
-            --border-color: #000;
-            --highlight: #fdd5d5;
-        }
-
-        * { box-sizing: border-box; }
-
-        html {
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        /* ─── HEADER ─── */
-        .header-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            table-layout: fixed;
-            color: #000;
-        }
-
-        .header-table td {
-            border: 1px solid #000;
-            padding: 10px;
-            vertical-align: middle;
-        }
-
-        .header-logo {
-            width: 11%;
-            text-align: center;
-        }
-
-        .header-title {
-            width: 73%;
-            text-align: center;
-        }
-
-        .header-title .inst-name {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 0 0 1px 0;
-            color: #000;
-            line-height: 1.3;
-        }
-
-        .header-title .fakultas {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 0 0 0 0;
-            color: #000;
-        }
-
-        .header-title .unhas {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 0 0 6px 0;
-            color: #000;
-        }
-
-        .header-title .alamat {
-            font-size: 10px;
-            font-weight: 400;
-            margin: 0 0 6px 0;
-            color: #000;
-        }
-
-        .header-title .form-title-divider {
-            border-top: 1px solid #000;
-            padding-top: 6px;
-            margin-top: 4px;
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #000;
-            line-height: 1.4;
-        }
-
-        .form-title-main { font-size: 17px; }
-        .form-title-sub  { font-size: 11px; font-weight: 600; }
-
-        .header-meta {
-            width: 16%;
-            font-size: 10px;
-            vertical-align: middle;
-        }
-
-        .header-meta table {
-            width: 100%;
-            border: none;
-        }
-
-        .header-meta td {
-            border: none;
-            padding: 2px 0;
-            text-align: left !important;
-            color: #000;
-            font-size: 10px;
-        }
-
-        /* ─── INSTRUCTION BOX ─── */
-        .instruction-box {
-            background: #fff8f8;
-            border-left: 5px solid var(--unhas-red);
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        /* ─── TOOLBAR ─── */
-        .toolbar {
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn-print {
-            background: var(--unhas-red);
-            color: white;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: inherit;
-            font-size: 14px;
-            transition: opacity 0.2s, transform 0.2s;
-        }
-
-        .btn-print:hover { opacity: 0.88; transform: translateY(-1px); }
-
-        /* ─── INFO SECTION ─── */
-        .info-section {
-            margin-bottom: 20px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .info-box {
-            display: flex;
-            align-items: center;
-        }
-
-        .info-box label {
-            font-weight: 600;
-            font-size: 13px;
-            margin-right: 10px;
-            white-space: nowrap;
-            min-width: 200px;
-        }
-
-        .info-box input {
-            flex-grow: 1;
-            padding: 8px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 13px;
-            transition: border-color 0.2s;
-        }
-
-        .info-box input:focus {
-            outline: none;
-            border-color: var(--unhas-red);
-        }
-
-        /* ─── TABLE ─── */
-        .excel-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            table-layout: fixed;
-        }
-
-        .excel-table th, .excel-table td {
-            border: 1px solid var(--border-color);
-            padding: 0;
-            vertical-align: top;
-            font-size: 12.5px;
-        }
-
-        .table-header {
-            background-color: #d9d9d9;
-            color: #000;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 13px;
-        }
-
-        .table-header th { padding: 10px 5px; }
-
-        .col-num   { text-align: center; width: 38px; padding: 10px !important; font-weight: bold; }
-        .col-unsur { width: 160px; font-weight: bold; padding: 10px !important; }
-        .col-bobot { width: 60px; text-align: center; padding: 10px !important; font-weight: bold; }
-        .col-skor-input { width: 75px; text-align: center; vertical-align: middle; padding: 10px !important; }
-
-        /* ─── SECTION ROW ─── */
-        .section-row td {
-            background-color: #f0e8e8;
-            font-weight: bold;
-            font-size: 13px;
-            padding: 8px 10px !important;
-            color: var(--unhas-red);
-        }
-
-        /* ─── SKOR GRID ─── */
-        .skor-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            height: auto;
-            overflow: hidden;
-        }
-
-        .skor-item {
-            padding: 8px 6px;
-            border-right: 1px solid #ddd;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .skor-item:last-child { border-right: none; }
-        .skor-item:hover { background-color: #f0f0f0; }
-
-        .skor-item.selected {
-            background-color: var(--highlight);
-            box-shadow: inset 0 0 0 2px #c0444444;
-        }
-
-        .skor-title {
-            font-weight: bold;
-            color: var(--unhas-red);
-            display: block;
-            margin-bottom: 4px;
-            border-bottom: 1px solid #eee;
-            font-size: 10px;
-            padding-bottom: 2px;
-        }
-
-        .skor-item ul {
-            margin: 0;
-            padding-left: 16px;
-            list-style-type: disc;
-        }
-
-        .skor-item li { margin-bottom: 2px; }
-
-        .score-display {
-            font-size: 15px;
-            font-weight: bold;
-            color: #000;
-        }
-
-        /* ─── TOTAL ROW ─── */
-        .total-row { background-color: #d9d9d9; font-weight: bold; }
-        .total-row td { padding: 6px 10px !important; font-size: 13px; }
-
-        /* ─── CATATAN ─── */
-        .catatan-area {
-            margin-top: 16px;
-        }
-        .catatan-area label {
-            font-weight: 600;
-            font-size: 13px;
-            display: block;
-            margin-bottom: 6px;
-        }
-        .catatan-area textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 13px;
-            resize: vertical;
-            min-height: 80px;
-            transition: border-color 0.2s;
-        }
-        .catatan-area textarea:focus {
-            outline: none;
-            border-color: var(--unhas-red);
-        }
-
-        /* ─── SIGNATURE ─── */
-        .signature-area {
-            margin-top: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .signature-box p { margin: 5px 0; }
-
-        .signature-box input {
-            padding: 5px;
-            border: none;
-            border-bottom: 1px solid #ccc;
-            text-align: center;
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-            background: transparent;
-            width: 240px;
-            max-width: 100%;
-            transition: border-color 0.2s;
-        }
-
-        .signature-box input:focus { border-bottom-color: var(--unhas-red); }
-
-        /* ─── PRINT ─── */
-        @media print {
-            body { padding: 0; background: white; }
-            .container { box-shadow: none; max-width: 100%; padding: 0; border: none; }
-            .toolbar { display: none !important; }
-            .instruction-box { display: none !important; }
-            input::placeholder { color: transparent; }
-            textarea::placeholder { color: transparent; }
-            .table-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #d9d9d9 !important; }
-            .total-row { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #d9d9d9 !important; }
-            .section-row td { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #f0e8e8 !important; }
-            .skor-item.selected { -webkit-print-color-adjust: exact; print-color-adjust: exact; background-color: #fdd5d5 !important; box-shadow: none !important; }
-            tr { page-break-inside: avoid; }
-            .info-box input { border: none; border-bottom: 1px solid #000; border-radius: 0; }
-            .catatan-area textarea { border: 1px solid #000; }
-        }
-
-        /* ─── MOBILE ─── */
-        @media (max-width: 700px) {
-            body { padding: 10px; }
-
-            .container { padding: 16px; border-radius: 0; }
-
-            .header-table,
-            .header-table tbody,
-            .header-table tr,
-            .header-table td { display: block; width: 100% !important; }
-
-            .header-logo { text-align: center; padding: 12px 0 4px; }
-            .header-title { padding: 4px 12px 10px; }
-            .header-title .inst-name { font-size: 13px; }
-            .header-title .form-title-divider { font-size: 12px; }
-            .header-meta {
-                display: block;
-                width: 100% !important;
-                text-align: center;
-                border-top: 1px solid #000;
-                padding: 6px 12px !important;
-            }
-            .header-meta table { display: inline-table !important; margin: 0 auto; }
-            .header-meta table tbody { display: table-row-group; }
-            .header-meta table tr { display: table-row; }
-            .header-meta table td {
-                display: table-cell !important;
-                width: auto !important;
-                border: none;
-                text-align: left !important;
-                padding: 1px 4px !important;
-                font-size: 10px;
-            }
-
-            .info-section { grid-template-columns: 1fr; gap: 12px; }
-
-            /* Ukuran huruf tabel diseragamkan agar konsisten di semua sel */
-            .excel-table,
-            .excel-table th,
-            .excel-table td,
-            .table-header th,
-            .col-num,
-            .col-unsur,
-            .col-bobot,
-            .col-skor-input,
-            .skor-grid,
-            .skor-item,
-            .skor-item ul,
-            .skor-item li,
-            .skor-title,
-            .score-display,
-            .section-row td,
-            .total-row td {
-                font-size: 12px !important;
-            }
-
-            .col-unsur {
-                width: 95px;
-                overflow-wrap: break-word;
-            }
-            .col-bobot { width: 40px; }
-            .col-skor-input { width: 58px; }
-
-            .skor-grid {
-                display: flex;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scroll-snap-type: x mandatory;
-                position: relative;
-            }
-
-            .skor-item {
-                min-width: 180px;
-                flex-shrink: 0;
-                scroll-snap-align: start;
-                border-right: 1px solid #ddd;
-                border-bottom: none;
-            }
-
-            .skor-scroll-hint {
-                display: block;
-                font-size: 11px;
-                color: #888;
-                text-align: right;
-                margin-bottom: 6px;
-            }
-
-            /* Petunjuk visual: ujung kanan skor-grid memudar agar terlihat masih ada konten */
-            td:has(.skor-grid) {
-                position: relative;
-            }
-            td:has(.skor-grid)::after {
-                content: "";
-                position: sticky;
-                right: 0;
-                top: 0;
-                height: 100%;
-                width: 18px;
-                float: right;
-                margin-left: -18px;
-                background: linear-gradient(to right, transparent, rgba(255,255,255,0.95));
-                pointer-events: none;
-            }
-
-            .toolbar { justify-content: stretch; }
-            .btn-print { width: 100%; text-align: center; }
-
-            .signature-area { grid-template-columns: 1fr; }
-            .signature-box { margin-bottom: 20px; }
-        }
-
-        @media (min-width: 701px) {
-            .skor-scroll-hint { display: none; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rubrik Asesmen Naskah dan Presentasi Proposal Riset – Metodologi Ilmiah Unhas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="rubrik.css?v=3">
 </head>
 <body>
-
-<div class="container">
-
-    <!-- ══════════════ HEADER ══════════════ -->
-    <table class="header-table">
-        <tr>
-            <td class="header-logo">
-                <img src="img/Logo-Unhas-200px.png" alt="Logo Unhas" style="width: 70px;">
-            </td>
-            <td class="header-title">
-                <p class="inst-name">Program Studi Kedokteran Hewan</p>
-                <p class="fakultas">Fakultas Kedokteran • Universitas Hasanuddin</p>
-                <p class="alamat">Jl. Perintis Kemerdekaan km. 10 Tamalanrea, Makassar, Sulawesi Selatan</p>
-                <div class="form-title-divider">
-                    <span class="form-title-main">Rubrik Asesmen Naskah dan Presentasi Proposal Riset</span><br>
-                    <span class="form-title-sub">Mata Kuliah Metodologi Ilmiah</span>
-                </div>
-            </td>
-            <td class="header-meta">
-                <table>
-                    <tr><td>No.</td><td>: –</td></tr>
-                    <tr><td>Versi</td><td>: 1.01</td></tr>
-                    <tr><td>Tgl. Rev</td><td>: 26-06-2026</td></tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-
-    <!-- ══════════════ INSTRUCTION BOX ══════════════ -->
-    <div class="instruction-box">
-        <strong>Petunjuk</strong>: Klik pada kolom kriteria skor yang sesuai dengan performa mahasiswa. Skor tiap unsur akan otomatis dikalkulasi dan nilai akhir ditampilkan di bagian bawah tabel. Refresh halaman untuk mengatur ulang asesmen Cetak dengan layout kertas landscape.
-    </div>
-
-    <!-- ══════════════ INFO MAHASISWA ══════════════ -->
-    <div class="info-section">
-        <div class="info-box">
-            <label>Nama Mahasiswa:</label>
-            <input type="text" placeholder="Tulis nama lengkap mahasiswa">
-        </div>
-        <div class="info-box">
-            <label>Judul Proposal Riset:</label>
-            <input type="text" placeholder="Tulis judul proposal di sini">
-        </div>
-    </div>
-
-    <!-- ══════════════ HINT MOBILE ══════════════ -->
-    <span class="skor-scroll-hint">← Geser kiri/kanan untuk melihat semua skor →</span>
-
-    <!-- ══════════════ TABEL RUBRIK ══════════════ -->
-    <table class="excel-table">
-        <thead>
-            <tr class="table-header">
-                <th class="col-num">No</th>
-                <th class="col-unsur">Aspek Asesmen</th>
-                <th class="col-bobot">Bobot (%)</th>
-                <th>Kriteria Skor (1–4)</th>
-                <th class="col-skor-input">Skor</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <!-- ══ SEKSI A ══ -->
-            <tr class="section-row">
-                <td colspan="5">A. Berkas Proposal (Aspek Tulisan) – Total: 20%</td>
-            </tr>
-
-            <!-- A.1 -->
-            <tr id="row-1">
-                <td class="col-num">1</td>
-                <td class="col-unsur">Pemformatan, tata bahasa, ejaan, dan kejelasan penulisan</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">10</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(1, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            <ul>
-                                <li>Format proposal tidak sesuai pedoman.</li>
-                                <li>Sangat banyak kesalahan tata bahasa dan kesalahan ketik.</li>
-                                <li>Kalimat tidak jelas dan tulisan tidak koheren.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(1, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            <ul>
-                                <li>Format proposal sesuai pedoman pada beberapa bagian.</li>
-                                <li>Banyak kesalahan tata bahasa dan kesalahan ketik.</li>
-                                <li>Struktur kalimat tidak konsisten.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(1, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            <ul>
-                                <li>Format proposal sebagian besar mengikuti pedoman.</li>
-                                <li>Ada beberapa kesalahan ketik dan kalimat yang janggal.</li>
-                                <li>Sebagian besar tulisan disusun dengan baik dan logis.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(1, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            <ul>
-                                <li>Format seluruh proposal mematuhi pedoman.</li>
-                                <li>Tulisan sesuai tata bahasa dan bebas dari kesalahan ketik.</li>
-                                <li>Tulisan mengalir secara logis antarkalimat dan antarparagraf.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-1" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-1" value="0">
-                </td>
-            </tr>
-
-            <!-- A.2 -->
-            <tr id="row-2">
-                <td class="col-num">2</td>
-                <td class="col-unsur">Teknik sitasi (kutipan) dan penulisan referensi</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">10</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(2, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            <ul>
-                                <li>Tidak ada sitasi atau jika ada disalin-tempel tanpa parafrasa.</li>
-                                <li>Format daftar pustaka salah.</li>
-                                <li>Pustaka/referensi tidak ada atau tidak relevan.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(2, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            <ul>
-                                <li>Sitasi ditulis dengan inkonsisten dan parafrasanya buruk.</li>
-                                <li>Banyak kesalahan format dalam daftar pustaka.</li>
-                                <li>Banyak pustaka/referensi yang hilang.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(2, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            <ul>
-                                <li>Sebagian besar sitasi ditulis dengan konsisten dan parafrasanya baik.</li>
-                                <li>Daftar pustaka disusun sesuai format, tetapi ada kesalahan.</li>
-                                <li>Pustaka/referensi kurang lengkap.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(2, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            <ul>
-                                <li>Sitasi ditulis dengan benar dan dengan parafrasa yang baik.</li>
-                                <li>Daftar pustaka sepenuhnya disusun sesuai format.</li>
-                                <li>Pustaka/referensi lengkap.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-2" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-2" value="0">
-                </td>
-            </tr>
-
-            <!-- ══ SEKSI B ══ -->
-            <tr class="section-row">
-                <td colspan="5">B. Penyampaian Presentasi – Total: 30%</td>
-            </tr>
-
-            <!-- B.1 -->
-            <tr id="row-3">
-                <td class="col-num">1</td>
-                <td class="col-unsur">Kepercayaan diri, teknik komunikasi, dan profesionalisme</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">15</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(3, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            <ul>
-                                <li>Mahasiswa terlihat sangat gugup dan tidak siap.</li>
-                                <li>Presentasi tidak jelas, tidak teratur, dan sulit diikuti.</li>
-                                <li>Mahasiswa tidak menunjukkan profesionalisme.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(3, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            <ul>
-                                <li>Mahasiswa terlihat percaya diri, tetapi masih sering gugup.</li>
-                                <li>Presentasi kurang teratur dan agak sulit diikuti.</li>
-                                <li>Mahasiswa terlihat kurang profesional.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(3, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            <ul>
-                                <li>Mahasiswa terlihat percaya diri pada sebagian besar durasi.</li>
-                                <li>Sebagian besar presentasi dapat diikuti, jelas, dan terstruktur.</li>
-                                <li>Mahasiswa menunjukkan sikap profesional dengan beberapa kesalahan.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(3, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            <ul>
-                                <li>Mahasiswa sepenuhnya percaya diri.</li>
-                                <li>Presentasi sangat jelas, terstruktur dengan baik, dan menarik.</li>
-                                <li>Mahasiswa sepenuhnya menunjukkan sikap profesional.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-3" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-3" value="0">
-                </td>
-            </tr>
-
-            <!-- B.2 -->
-            <tr id="row-4">
-                <td class="col-num">2</td>
-                <td class="col-unsur">Kemampuan dalam menjawab pertanyaan</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">15</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(4, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            Mahasiswa tidak dapat menjawab pertanyaan dan tidak memahami topik riset
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(4, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            Mahasiswa kesulitan menjawab pertanyaan dan memberi jawaban seadanya.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(4, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            Mahasiswa mampu menjawab sebagian besar pertanyaan dengan baik, tetapi beberapa jawabannya salah.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(4, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            Mahasiswa mampu menjawab semua pertanyaan dengan penalaran dan pemahaman yang baik.
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-4" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-4" value="0">
-                </td>
-            </tr>
-
-            <!-- ══ SEKSI C ══ -->
-            <tr class="section-row">
-                <td colspan="5">C. Unsur Proposal Riset – Total: 50%</td>
-            </tr>
-
-            <!-- C.1 -->
-            <tr id="row-5">
-                <td class="col-num">1</td>
-                <td class="col-unsur">Masalah, pertanyaan riset, dan hipotesis riset (jika relevan)</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">10</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(5, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            <ul>
-                                <li>Perumusan masalah tidak jelas.</li>
-                                <li>Pertanyaan riset tidak ada.</li>
-                                <li>(Jika relevan) Hipotesis tidak ada.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(5, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            <ul>
-                                <li>Perumusan masalah ada tetapi tidak tepat.</li>
-                                <li>Pertanyaan riset ada tetapi tidak tepat.</li>
-                                <li>(Jika relevan) Hipotesis ada tetapi salah.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(5, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            <ul>
-                                <li>Masalah dijelaskan secara memadai.</li>
-                                <li>Pertanyaan riset ada tetapi kurang relevan.</li>
-                                <li>(Jika relevan) Hipotesis benar, tetapi tidak dijustifikasi.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(5, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            <ul>
-                                <li>Masalah dijelaskan secara mendalam.</li>
-                                <li>Pertanyaan riset disusun dengan kuat.</li>
-                                <li>(Jika relevan) Hipotesis benar dan dijustifikasi dengan baik.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-5" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-5" value="0">
-                </td>
-            </tr>
-
-            <!-- C.2 -->
-            <tr id="row-6">
-                <td class="col-num">2</td>
-                <td class="col-unsur">Perkembangan terkini (state-of-the-art), kesenjangan (gap), dan urgensi riset</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(6, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            <ul>
-                                <li>Perkembangan terkini tidak dijelaskan.</li>
-                                <li>Kesenjangan riset tidak dijelaskan.</li>
-                                <li>Urgensi riset tidak dijelaskan.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(6, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            <ul>
-                                <li>Perkembangan terkini diuraikan secara buruk.</li>
-                                <li>Kesenjangan riset dijelaskan secara buruk.</li>
-                                <li>Urgensi riset dijelaskan secara buruk.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(6, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            <ul>
-                                <li>Perkembangan terkini diuraikan secara memadai.</li>
-                                <li>Kesenjangan riset dijelaskan secara memadai.</li>
-                                <li>Urgensi riset dijelaskan secara memadai.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(6, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            <ul>
-                                <li>Perkembangan terkini diuraikan secara mendalam.</li>
-                                <li>Kesenjangan riset dijelaskan secara mendalam.</li>
-                                <li>Urgensi riset dijelaskan secara kuat.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-6" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-6" value="0">
-                </td>
-            </tr>
-
-            <!-- C.3 -->
-            <tr id="row-7">
-                <td class="col-num">3</td>
-                <td class="col-unsur">Tujuan riset</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(7, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            Tujuan riset tidak dijelaskan.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(7, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            Tujuan riset ada tetapi tidak jelas atau tidak selaras dengan masalah.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(7, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            Tujuan riset sebagian besar jelas dan relevan tetapi perlu diperbaiki.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(7, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            Tujuan riset tepat, didefinisikan dengan baik, dan sangat selaras dengan masalah.
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-7" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-7" value="0">
-                </td>
-            </tr>
-
-            <!-- C.4 -->
-            <tr id="row-8">
-                <td class="col-num">4</td>
-                <td class="col-unsur">Manfaat riset dan kontribusi yang diharapkan</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(8, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            Manfaat dan kontribusi riset tidak dijelaskan.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(8, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            Manfaat dan kontribusi riset dijelaskan secara buruk.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(8, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            Manfaat dan kontribusi riset dijelaskan secara memadai, tetapi masih perlu diperbaiki.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(8, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            Manfaat dan kontribusi riset dijelaskan secara mendalam.
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-8" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-8" value="0">
-                </td>
-            </tr>
-
-            <!-- C.5 -->
-            <tr id="row-9">
-                <td class="col-num">5</td>
-                <td class="col-unsur">Tinjauan pustaka dan/atau kerangka teori</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(9, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            Tinjauan pustaka dan/atau kerangka teori tidak ada.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(9, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            Tinjauan pustaka dan/atau kerangka teori lemah.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(9, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            Tinjauan pustaka dan/atau kerangka teori ada tetapi kurang lengkap.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(9, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            Tinjauan pustaka dan/atau kerangka teori dijelaskan secara mendalam.
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-9" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-9" value="0">
-                </td>
-            </tr>
-
-            <!-- C.6 -->
-            <tr id="row-10">
-                <td class="col-num">6</td>
-                <td class="col-unsur">Desain riset dan penentuan sampel (unit pengamatan dalam riset)</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">10</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(10, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            Desain riset dan metode penentuan sampel tidak ada atau salah.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(10, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            Desain riset dan metode penentuan sampel ada, tetapi tidak ada detail atau justifikasinya.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(10, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            Desain riset dan metode penentuan sampel sebagian besar sesuai, tetapi masih perlu diperbaiki.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(10, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            Desain riset terstruktur dengan baik dan logis. Metode penentuan sampel dijustifikasi dengan kuat.
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-10" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-10" value="0">
-                </td>
-            </tr>
-
-            <!-- C.7 -->
-            <tr id="row-11">
-                <td class="col-num">7</td>
-                <td class="col-unsur">Metode pengumpulan (pengamatan dan pengukuran) data</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(11, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            Metode pengumpulan data tidak ada atau salah.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(11, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            Metode pengumpulan data ada, tetapi tidak ada detail atau justifikasinya.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(11, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            Metode pengumpulan data sebagian besar sesuai, tetapi masih perlu diperbaiki.
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(11, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            Metode pengumpulan data dirancang, dijustifikasi, dan diuraikan dengan tepat.
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-11" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-11" value="0">
-                </td>
-            </tr>
-
-            <!-- C.8 -->
-            <tr id="row-12">
-                <td class="col-num">8</td>
-                <td class="col-unsur">Rencana analisis data, penyajian data, interpretasi, dan penarikan kesimpulan</td>
-                <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
-                <td>
-                    <div class="skor-grid">
-                        <div class="skor-item" onclick="pilihSkor(12, 1)">
-                            <span class="skor-title">Skor 1</span>
-                            <ul>
-                                <li>Rencana analisis dan penyajian data tidak ada atau salah.</li>
-                                <li>Rencana interpretasi dan penarikan kesimpulan tidak ada.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(12, 2)">
-                            <span class="skor-title">Skor 2</span>
-                            <ul>
-                                <li>Rencana analisis dan penyajian data banyak yang tidak sesuai dengan tujuan riset.</li>
-                                <li>Rencana interpretasi dan penarikan kesimpulan tidak logis.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(12, 3)">
-                            <span class="skor-title">Skor 3</span>
-                            <ul>
-                                <li>Rencana analisis dan penyajian data sebagian besar sesuai dengan tujuan riset.</li>
-                                <li>Rencana interpretasi dan penarikan kesimpulan memadai, tetapi masih perlu diperbaiki.</li>
-                            </ul>
-                        </div>
-                        <div class="skor-item" onclick="pilihSkor(12, 4)">
-                            <span class="skor-title">Skor 4</span>
-                            <ul>
-                                <li>Rencana analisis dan penyajian data lengkap, dijustifikasi, dan selaras dengan tujuan riset.</li>
-                                <li>Rencana interpretasi dan penarikan kesimpulan dijustifikasi dengan baik.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-                <td class="col-skor-input">
-                    <span id="display-skor-12" class="score-display">0</span>
-                    <input type="hidden" id="input-skor-12" value="0">
-                </td>
-            </tr>
-
-            <!-- Total & Nilai -->
-            <tr class="total-row">
-                <td colspan="4" style="text-align: right; padding-right: 20px !important;">Total skor</td>
-                <td id="total-skor" style="text-align: center; padding: 6px !important;">0</td>
-            </tr>
-            <tr class="total-row">
-                <td colspan="4" style="text-align: right; padding-right: 20px !important;">Nilai akhir mahasiswa</td>
-                <td id="nilai-akhir" style="text-align: center; padding: 6px !important;">0</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <!-- ══════════════ CATATAN ══════════════ -->
-    <div class="catatan-area" style="margin-top: 20px;">
-        <label>Catatan / Komentar Penguji:</label>
-        <textarea placeholder="Tulis catatan atau komentar untuk mahasiswa di sini…"></textarea>
-    </div>
-
-    <!-- ══════════════ TANDA TANGAN ══════════════ -->
-    <div class="signature-area">
-        <div class="signature-box"></div>
-        <div class="signature-box">
-            <p><input type="text" placeholder="Tulis tempat dan tanggal ujian"></p>
-            <p>Dosen penguji,</p>
-            <br><br><br><br>
-            <p><b><input type="text" placeholder="Tulis nama dosen penguji" style="font-weight: bold;"></b></p>
-        </div>
-    </div>
-
-    <!-- ══════════════ TOOLBAR (bawah) ══════════════ -->
-    <div class="toolbar" style="margin-top: 24px;">
-        <button class="btn-print" onclick="window.print()">🖨️ Simpan sebagai PDF/Cetak</button>
-    </div>
-
-</div><!-- /.container -->
-
+<noscript>Halaman ini memerlukan JavaScript.</noscript>
 <script>
-    /*
-     * Bobot tiap aspek (%) — sesuai rubrik xlsx
-     * Aspek 1–2   : Seksi A (masing-masing bobot 10)
-     * Aspek 3–4   : Seksi B (masing-masing bobot 15)
-     * Aspek 5–12  : Seksi C (bobot 10,5,5,5,5,10,5,5)
-     *
-     * Nilai akhir = Σ (skor_i / 4 × bobot_i)
-     * Sehingga nilai maksimal = 100
-     */
-    var bobot = {
-        1: 10, 2: 10,
-        3: 15, 4: 15,
-        5: 10, 6: 5, 7: 5, 8: 5, 9: 5, 10: 10, 11: 5, 12: 5
-    };
-
-    var totalAspek = 12;
-
-    function pilihSkor(unsurId, nilai) {
-        document.getElementById('display-skor-' + unsurId).innerText = nilai;
-        document.getElementById('input-skor-' + unsurId).value = nilai;
-
-        var row = document.getElementById('row-' + unsurId);
-        row.querySelectorAll('.skor-item').forEach(function(item) {
-            item.classList.remove('selected');
-        });
-        row.querySelectorAll('.skor-item')[nilai - 1].classList.add('selected');
-
-        hitungTotal();
-    }
-
-    function hitungTotal() {
-        var totalSkor = 0;
-        var nilaiAkhir = 0;
-
-        for (var i = 1; i <= totalAspek; i++) {
-            var skor = parseInt(document.getElementById('input-skor-' + i).value) || 0;
-            totalSkor += skor;
-            nilaiAkhir += (skor / 4) * bobot[i];
+/* Isi rubrik. Desain dan fungsi ada di rubrik.css dan rubrik.js. */
+window.RUBRIK = {
+  "kunci": "mi-rubrik-proposal-v1",
+  "jenis": "proposal",
+  "draf": true,
+  "penilai": "Dosen penguji",
+  "labelJudul": "Judul proposal riset",
+  "dokumen": {
+    "judul": "Rubrik Asesmen Naskah dan Presentasi Proposal Riset",
+    "sub": "Mata Kuliah Metodologi Ilmiah",
+    "no": "–",
+    "versi": "1.02",
+    "terbit": "09/03/2026",
+    "revisi": "27/11/2026"
+  },
+  "bagian": [
+    {
+      "kode": "A",
+      "judul": "Berkas Proposal (Aspek Tulisan)",
+      "aspek": [
+        {
+          "judul": "Pemformatan, tata bahasa, ejaan, dan kejelasan penulisan",
+          "bobot": 10,
+          "d": [
+            [
+              "Format proposal tidak sesuai pedoman.",
+              "Sangat banyak kesalahan tata bahasa dan kesalahan ketik.",
+              "Kalimat tidak jelas dan tulisan tidak koheren."
+            ],
+            [
+              "Format proposal sesuai pedoman pada beberapa bagian.",
+              "Banyak kesalahan tata bahasa dan kesalahan ketik.",
+              "Struktur kalimat tidak konsisten."
+            ],
+            [
+              "Format proposal sebagian besar mengikuti pedoman.",
+              "Ada beberapa kesalahan ketik dan kalimat yang janggal.",
+              "Sebagian besar tulisan disusun dengan baik dan logis."
+            ],
+            [
+              "Format seluruh proposal mematuhi pedoman.",
+              "Tulisan sesuai tata bahasa dan bebas dari kesalahan ketik.",
+              "Tulisan mengalir secara logis antarkalimat dan antarparagraf."
+            ]
+          ]
+        },
+        {
+          "judul": "Teknik sitasi (kutipan) dan penulisan referensi",
+          "bobot": 10,
+          "d": [
+            [
+              "Tidak ada sitasi atau jika ada disalin-tempel tanpa parafrasa.",
+              "Format daftar pustaka salah.",
+              "Pustaka/referensi tidak ada atau tidak relevan."
+            ],
+            [
+              "Sitasi ditulis dengan inkonsisten dan parafrasanya buruk.",
+              "Banyak kesalahan format dalam daftar pustaka.",
+              "Banyak pustaka/referensi yang hilang."
+            ],
+            [
+              "Sebagian besar sitasi ditulis dengan konsisten dan parafrasanya baik.",
+              "Daftar pustaka disusun sesuai format, tetapi ada kesalahan.",
+              "Pustaka/referensi kurang lengkap."
+            ],
+            [
+              "Sitasi ditulis dengan benar dan dengan parafrasa yang baik.",
+              "Daftar pustaka sepenuhnya disusun sesuai format.",
+              "Pustaka/referensi lengkap."
+            ]
+          ]
         }
-
-        document.getElementById('total-skor').innerText = totalSkor;
-        document.getElementById('nilai-akhir').innerText = nilaiAkhir.toFixed(2);
+      ]
+    },
+    {
+      "kode": "B",
+      "judul": "Penyampaian Presentasi",
+      "aspek": [
+        {
+          "judul": "Kepercayaan diri, teknik komunikasi, dan profesionalisme",
+          "bobot": 15,
+          "d": [
+            [
+              "Mahasiswa terlihat sangat gugup dan tidak siap.",
+              "Presentasi tidak jelas, tidak teratur, dan sulit diikuti.",
+              "Mahasiswa tidak menunjukkan profesionalisme."
+            ],
+            [
+              "Mahasiswa terlihat percaya diri, tetapi masih sering gugup.",
+              "Presentasi kurang teratur dan agak sulit diikuti.",
+              "Mahasiswa terlihat kurang profesional."
+            ],
+            [
+              "Mahasiswa terlihat percaya diri pada sebagian besar durasi.",
+              "Sebagian besar presentasi dapat diikuti, jelas, dan terstruktur.",
+              "Mahasiswa menunjukkan sikap profesional dengan beberapa kesalahan."
+            ],
+            [
+              "Mahasiswa sepenuhnya percaya diri.",
+              "Presentasi sangat jelas, terstruktur dengan baik, dan menarik.",
+              "Mahasiswa sepenuhnya menunjukkan sikap profesional."
+            ]
+          ]
+        },
+        {
+          "judul": "Kemampuan dalam menjawab pertanyaan",
+          "bobot": 15,
+          "d": [
+            [
+              "Mahasiswa tidak dapat menjawab pertanyaan dan tidak memahami topik riset"
+            ],
+            [
+              "Mahasiswa kesulitan menjawab pertanyaan dan memberi jawaban seadanya."
+            ],
+            [
+              "Mahasiswa mampu menjawab sebagian besar pertanyaan dengan baik, tetapi beberapa jawabannya salah."
+            ],
+            [
+              "Mahasiswa mampu menjawab semua pertanyaan dengan penalaran dan pemahaman yang baik."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "kode": "C",
+      "judul": "Unsur Proposal Riset",
+      "aspek": [
+        {
+          "judul": "Masalah, pertanyaan riset, dan hipotesis riset (jika relevan)",
+          "bobot": 10,
+          "d": [
+            [
+              "Perumusan masalah tidak jelas.",
+              "Pertanyaan riset tidak ada.",
+              "(Jika relevan) Hipotesis tidak ada."
+            ],
+            [
+              "Perumusan masalah ada tetapi tidak tepat.",
+              "Pertanyaan riset ada tetapi tidak tepat.",
+              "(Jika relevan) Hipotesis ada tetapi salah."
+            ],
+            [
+              "Masalah dijelaskan secara memadai.",
+              "Pertanyaan riset ada tetapi kurang relevan.",
+              "(Jika relevan) Hipotesis benar, tetapi tidak dijustifikasi."
+            ],
+            [
+              "Masalah dijelaskan secara mendalam.",
+              "Pertanyaan riset disusun dengan kuat.",
+              "(Jika relevan) Hipotesis benar dan dijustifikasi dengan baik."
+            ]
+          ]
+        },
+        {
+          "judul": "Perkembangan terkini (state-of-the-art), kesenjangan (gap), dan urgensi riset",
+          "bobot": 5,
+          "d": [
+            [
+              "Perkembangan terkini tidak dijelaskan.",
+              "Kesenjangan riset tidak dijelaskan.",
+              "Urgensi riset tidak dijelaskan."
+            ],
+            [
+              "Perkembangan terkini diuraikan secara buruk.",
+              "Kesenjangan riset dijelaskan secara buruk.",
+              "Urgensi riset dijelaskan secara buruk."
+            ],
+            [
+              "Perkembangan terkini diuraikan secara memadai.",
+              "Kesenjangan riset dijelaskan secara memadai.",
+              "Urgensi riset dijelaskan secara memadai."
+            ],
+            [
+              "Perkembangan terkini diuraikan secara mendalam.",
+              "Kesenjangan riset dijelaskan secara mendalam.",
+              "Urgensi riset dijelaskan secara kuat."
+            ]
+          ]
+        },
+        {
+          "judul": "Tujuan riset",
+          "bobot": 5,
+          "d": [
+            [
+              "Tujuan riset tidak dijelaskan."
+            ],
+            [
+              "Tujuan riset ada tetapi tidak jelas atau tidak selaras dengan masalah."
+            ],
+            [
+              "Tujuan riset sebagian besar jelas dan relevan tetapi perlu diperbaiki."
+            ],
+            [
+              "Tujuan riset tepat, didefinisikan dengan baik, dan sangat selaras dengan masalah."
+            ]
+          ]
+        },
+        {
+          "judul": "Manfaat riset dan kontribusi yang diharapkan",
+          "bobot": 5,
+          "d": [
+            [
+              "Manfaat dan kontribusi riset tidak dijelaskan."
+            ],
+            [
+              "Manfaat dan kontribusi riset dijelaskan secara buruk."
+            ],
+            [
+              "Manfaat dan kontribusi riset dijelaskan secara memadai, tetapi masih perlu diperbaiki."
+            ],
+            [
+              "Manfaat dan kontribusi riset dijelaskan secara mendalam."
+            ]
+          ]
+        },
+        {
+          "judul": "Tinjauan pustaka dan/atau kerangka teori",
+          "bobot": 5,
+          "d": [
+            [
+              "Tinjauan pustaka dan/atau kerangka teori tidak ada."
+            ],
+            [
+              "Tinjauan pustaka dan/atau kerangka teori lemah."
+            ],
+            [
+              "Tinjauan pustaka dan/atau kerangka teori ada tetapi kurang lengkap."
+            ],
+            [
+              "Tinjauan pustaka dan/atau kerangka teori dijelaskan secara mendalam."
+            ]
+          ]
+        },
+        {
+          "judul": "Desain riset dan penentuan sampel (unit pengamatan dalam riset)",
+          "bobot": 10,
+          "d": [
+            [
+              "Desain riset dan metode penentuan sampel tidak ada atau salah."
+            ],
+            [
+              "Desain riset dan metode penentuan sampel ada, tetapi tidak ada detail atau justifikasinya."
+            ],
+            [
+              "Desain riset dan metode penentuan sampel sebagian besar sesuai, tetapi masih perlu diperbaiki."
+            ],
+            [
+              "Desain riset terstruktur dengan baik dan logis. Metode penentuan sampel dijustifikasi dengan kuat."
+            ]
+          ]
+        },
+        {
+          "judul": "Metode pengumpulan (pengamatan dan pengukuran) data",
+          "bobot": 5,
+          "d": [
+            [
+              "Metode pengumpulan data tidak ada atau salah."
+            ],
+            [
+              "Metode pengumpulan data ada, tetapi tidak ada detail atau justifikasinya."
+            ],
+            [
+              "Metode pengumpulan data sebagian besar sesuai, tetapi masih perlu diperbaiki."
+            ],
+            [
+              "Metode pengumpulan data dirancang, dijustifikasi, dan diuraikan dengan tepat."
+            ]
+          ]
+        },
+        {
+          "judul": "Rencana analisis data, penyajian data, interpretasi, dan penarikan kesimpulan",
+          "bobot": 5,
+          "d": [
+            [
+              "Rencana analisis dan penyajian data tidak ada atau salah.",
+              "Rencana interpretasi dan penarikan kesimpulan tidak ada."
+            ],
+            [
+              "Rencana analisis dan penyajian data banyak yang tidak sesuai dengan tujuan riset.",
+              "Rencana interpretasi dan penarikan kesimpulan tidak logis."
+            ],
+            [
+              "Rencana analisis dan penyajian data sebagian besar sesuai dengan tujuan riset.",
+              "Rencana interpretasi dan penarikan kesimpulan memadai, tetapi masih perlu diperbaiki."
+            ],
+            [
+              "Rencana analisis dan penyajian data lengkap, dijustifikasi, dan selaras dengan tujuan riset.",
+              "Rencana interpretasi dan penarikan kesimpulan dijustifikasi dengan baik."
+            ]
+          ]
+        }
+      ]
     }
+  ]
+};
 </script>
-
+<script src="rubrik.js?v=3"></script>
 </body>
 </html>

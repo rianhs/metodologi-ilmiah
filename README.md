@@ -26,6 +26,8 @@ Mahasiswa belajar menelaah karya ilmiah secara sistematis, menyusun proposal ris
 | [`lembar-kerja.html`](lembar-kerja.html) | Lembar kerja dan asesmen diri Tugas 1 sampai 5 |
 | [`rubrik-poster.html`](rubrik-poster.html) | Rubrik asesmen poster artikel ilmiah dan rekap nilai |
 | [`rubrik-proposal.html`](rubrik-proposal.html) | Rubrik asesmen naskah dan presentasi proposal riset |
+| [`rubrik.css`](rubrik.css) | Desain bersama kedua rubrik (layar dan cetak) |
+| [`rubrik.js`](rubrik.js) | Fungsi bersama kedua rubrik (nilai, simpan, rekap, ekspor) |
 
 ## Alur tugas
 
