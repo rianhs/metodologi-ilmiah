@@ -5,7 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rubrik Asesmen Poster Artikel Ilmiah – Metodologi Ilmiah Unhas</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="rubrik.css?v=8">
+<link rel="stylesheet" href="rubrik.css?v=9">
+<script>
+/* Tema: dibaca sebelum halaman digambar agar tidak berkedip. Kunci sama dengan halaman lain. */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("mi-tema"); } catch (e) {}
+  document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+})();
+</script>
 </head>
 <body>
 <noscript>Halaman ini memerlukan JavaScript.</noscript>
@@ -31,6 +39,7 @@ window.RUBRIK = {
         {
           "judul": "Kaitan artikel dengan proposal",
           "bobot": 25,
+          "ketLabel": "Unsur diperiksa",
           "ket": "Periksa kotak “Kaitan dengan proposal saya”: judul sementara, pertanyaan riset, bagian artikel yang diadopsi, dan satu perbedaan.",
           "d": [
             "Kotak kaitan tidak ada, atau topik artikel berbeda dari proposal.",
@@ -40,8 +49,9 @@ window.RUBRIK = {
           ]
         },
         {
-          "judul": "Kelengkapan dan keselarasan rangkuman",
+          "judul": "Kelengkapan dan keselarasan isi artikel",
           "bobot": 25,
+          "ketLabel": "Bagian wajib",
           "ket": "Bagian wajib: latar belakang, tujuan, metode, hasil, dan kesimpulan.",
           "d": [
             "Dua bagian atau lebih tidak ada.",
@@ -63,6 +73,7 @@ window.RUBRIK = {
         {
           "judul": "Penjelasan lisan",
           "bobot": 20,
+          "ketLabel": "Pertanyaan lisan",
           "ket": "Tanyakan: (1) Apa temuan utama artikel ini? (2) Apa manfaatnya bagi proposal Anda?",
           "d": [
             "Kedua pertanyaan tidak terjawab.",
@@ -74,6 +85,7 @@ window.RUBRIK = {
         {
           "judul": "Sumber dan izin gambar",
           "bobot": 10,
+          "ketLabel": "Unsur diperiksa",
           "ket": "Unsur yang diperiksa: sitasi artikel, DOI, sumber gambar, dan lisensi atau izin.",
           "d": [
             "Sitasi artikel tidak ada.",
@@ -87,6 +99,6 @@ window.RUBRIK = {
   ]
 };
 </script>
-<script src="rubrik.js?v=8"></script>
+<script src="rubrik.js?v=9"></script>
 </body>
 </html>

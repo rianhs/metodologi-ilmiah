@@ -20,6 +20,13 @@ const teks = d => Array.isArray(d)
   ? (d.length > 1 ? `<ul>${d.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : esc(d[0]))
   : esc(d);
 
+/* Label pendek untuk letak di templat atau petunjuk periksa; rinciannya ada di tooltip */
+const labelInfo = a => a.letak ? (/^\d/.test(a.letak[0]) ? "Subbab " : "") + a.letak[0] : a.ketLabel || "Petunjuk";
+const info = (a, i) => {
+  const isi = [a.letak && a.letak[1], a.ket].filter(Boolean).join(" ");
+  return isi ? `<span class="info"><button type="button" class="info-btn" aria-expanded="false" aria-describedby="info-${i}">${esc(labelInfo(a))} <i aria-hidden="true">i</i></button><span class="info-tip" role="tooltip" id="info-${i}">${esc(isi)}</span></span>` : "";
+};
+
 let data = { baris: [], daftar: "", penilai: "" };
 let skor = ASPEK.map(() => 0);
 let ubah = null;          // kunci baris yang sedang diubah
@@ -43,24 +50,24 @@ function kop() {
 
 function htmlAspek(a, i) {
   return `<div class="aspek" id="aspek-${i}" role="group" aria-label="${esc(a.judul)}">
-    <div><h3>${a.no}. ${esc(a.judul)}</h3><small>Bobot ${a.bobot}%</small>${a.ket ? `<small class="ket">${esc(a.ket)}</small>` : ""}${a.letak ? `<span class="letak"><button type="button" class="letak-btn" aria-expanded="false" aria-describedby="letak-${i}">Templat: ${esc(a.letak[0])} <i aria-hidden="true">?</i></button><span class="letak-tip" role="tooltip" id="letak-${i}">${esc(a.letak[1])}</span></span>` : ""}</div>
+    <div><h3>${a.no}. ${esc(a.judul)}</h3><small>Bobot ${a.bobot}%</small>${info(a, i)}</div>
     ${a.d.map((t, j) => `<button type="button" class="skor" data-a="${i}" data-s="${j + 1}" aria-pressed="false"><b>${j + 1}</b><span>${teks(t)}</span></button>`).join("")}
   </div>`;
 }
 
-/* Tooltip letak di templat: muncul saat diarahkan, difokus, atau diketuk */
+/* Tooltip letak dan petunjuk: muncul saat diarahkan, difokus, atau diketuk */
 document.addEventListener("click", e => {
-  const b = e.target.closest(".letak-btn");
+  const b = e.target.closest(".info-btn");
   const buka = b && b.getAttribute("aria-expanded") !== "true";
-  document.querySelectorAll(".letak-btn").forEach(x => { x.setAttribute("aria-expanded", "false"); x.parentNode.classList.remove("tutup"); });
+  document.querySelectorAll(".info-btn").forEach(x => { x.setAttribute("aria-expanded", "false"); x.parentNode.classList.remove("tutup"); });
   if (b) { b.setAttribute("aria-expanded", String(buka)); b.parentNode.classList.toggle("tutup", !buka); }
 });
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
-  document.querySelectorAll(".letak-btn").forEach(x => { x.setAttribute("aria-expanded", "false"); x.parentNode.classList.add("tutup"); });
+  document.querySelectorAll(".info-btn").forEach(x => { x.setAttribute("aria-expanded", "false"); x.parentNode.classList.add("tutup"); });
 });
-document.addEventListener("mouseout", e => { const w = e.target.closest(".letak"); if (w && !w.contains(e.relatedTarget)) w.classList.remove("tutup"); });
-document.addEventListener("focusout", e => { const w = e.target.closest(".letak"); if (w) { w.classList.remove("tutup"); w.firstChild.setAttribute("aria-expanded", "false"); } });
+document.addEventListener("mouseout", e => { const w = e.target.closest(".info"); if (w && !w.contains(e.relatedTarget)) w.classList.remove("tutup"); });
+document.addEventListener("focusout", e => { const w = e.target.closest(".info"); if (w) { w.classList.remove("tutup"); w.firstChild.setAttribute("aria-expanded", "false"); } });
 
 function bangun() {
   const kelompok = R.bagian.map((b, bi) => {
@@ -70,7 +77,7 @@ function bangun() {
   }).join("");
   const langkah = [
     "Isi identitas. Nama dan NIM bisa dipilih dari daftar mahasiswa.",
-    "Ketuk satu skor (1 sampai 4) pada setiap aspek.",
+    "Ketuk satu skor (1 sampai 4) pada setiap aspek. Label berikon <b>i</b> memuat petunjuk periksa.",
     R.draf ? "Tekan <b>Simpan nilai</b>. Jika belum lengkap, tekan <b>Simpan draf</b> lalu lanjutkan dari rekap."
       : "Tekan <b>Simpan nilai</b>. Hasilnya masuk ke rekap dan formulir siap untuk mahasiswa berikutnya."
   ];
@@ -78,7 +85,12 @@ function bangun() {
   const isianNama = (id, label, contoh) => `<div class="combo"><label for="${id}">${label} <em>wajib</em></label>
       <input id="${id}" placeholder="${contoh}" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="menu-${id}" aria-autocomplete="list"${id === "nim" ? ' inputmode="text" autocapitalize="characters"' : ""}>
       <div class="menu" id="menu-${id}" role="listbox" aria-label="Daftar mahasiswa" hidden></div></div>`;
-  document.body.innerHTML = `<main>
+  const ikon = (kelas, isi) => `<svg${kelas ? ` class="${kelas}"` : ""} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${isi}</svg>`;
+  document.body.innerHTML = `<div class="theme-ctl">
+  <a class="ctl" href="index.html" aria-label="Kembali ke portal mata kuliah" title="Portal mata kuliah">${ikon("", '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>')}</a>
+  <button class="ctl" type="button" id="theme-toggle">${ikon("ic-sun", '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>')}${ikon("ic-moon", '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>')}</button>
+</div>
+<main>
   ${kop()}
   <section class="petunjuk"><b>Petunjuk untuk ${esc(R.penilai.toLowerCase())}</b><ol>${langkah.map(x => `<li>${x}</li>`).join("")}</ol></section>
   <details class="kartu lipat" id="panel-daftar">
@@ -311,7 +323,7 @@ function tabel() {
 /* Cetak */
 function lembar(r) {
   const penuh = lengkap(r), isi = (v, ganti = "") => esc(v || ganti);
-  const barisAspek = (a, i) => `<tr><td class="tengah">${a.no}</td><td><b>${esc(a.judul)}</b>${a.ket ? `<div class="ket">${esc(a.ket)}</div>` : ""}${a.letak ? `<div class="ket">Templat: ${esc(a.letak[0])}</div>` : ""}</td><td class="tengah">${a.bobot}</td>
+  const barisAspek = (a, i) => `<tr><td class="tengah">${a.no}</td><td><b>${esc(a.judul)}</b>${a.ket ? `<div class="ket">${esc(a.ket)}</div>` : ""}${a.letak ? `<div class="ket">${esc(labelInfo(a))}</div>` : ""}</td><td class="tengah">${a.bobot}</td>
       ${a.d.map((d, j) => `<td${r.skor[i] === j + 1 ? ' class="pilih"' : ""}>${teks(d)}</td>`).join("")}
       <td class="tengah"><b>${r.skor[i] || ""}</b></td></tr>`;
   /* Judul bagian disatukan dengan aspek pertamanya agar tidak tertinggal di bawah halaman */
@@ -499,8 +511,24 @@ function eksporRata() {
   unduh(`rata-rata-${R.jenis}-${cap()}.csv`, keCsv(tab), "text/csv;charset=utf-8");
 }
 
+/* Tema terang/gelap, disimpan dengan kunci yang sama dengan halaman lain */
+function pasangTema() {
+  const tombol = $("theme-toggle"), akar = document.documentElement;
+  const sinkron = () => {
+    const label = akar.dataset.theme === "dark" ? "Ganti ke mode terang" : "Ganti ke mode gelap";
+    tombol.setAttribute("aria-label", label); tombol.title = label;
+  };
+  tombol.onclick = () => {
+    akar.dataset.theme = akar.dataset.theme === "dark" ? "light" : "dark";
+    try { localStorage.setItem("mi-tema", akar.dataset.theme); } catch (e) {}
+    sinkron();
+  };
+  sinkron();
+}
+
 /* Mulai */
 bangun();
+pasangTema();
 baca();
 $("penilai").value = data.penilai;
 $("daftar").value = data.daftar;

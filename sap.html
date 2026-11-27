@@ -104,7 +104,7 @@ const RPS = {
     { kode: "AMK", nama: "drh. Anjani Marisa Kartikasari, M.Si.", peran: "" }
   ],
 
-  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan secara bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan artikel riset terpublikasi yang relevan dengan topiknya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
+  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan secara bertahap. Mahasiswa menetapkan topik, menyusun draf pendahuluan dan metode, lalu menyajikan artikel riset terpublikasi yang relevan dengan topiknya sebagai poster. Pada akhir semester, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
 
   bahanKajian: [
     "Ilmu, riset, dan metodologi ilmiah",
@@ -254,7 +254,7 @@ const RPS = {
       deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset." },
     { judul: "Poster artikel ilmiah", pekan: [13, 14], sub: "Sub-CPMK-7", sifat: "sumatif",
       luaran: "Poster artikel riset terpublikasi yang dipresentasikan pada pekan 14.",
-      deskripsi: "Mahasiswa memilih artikel riset asli yang telah melalui telaah sejawat, memuat gambar atau diagram, dan relevan dengan topik proposalnya. Mahasiswa menyusun poster yang memuat isi utama artikel dan manfaatnya bagi proposal, lalu mempresentasikannya pada pekan 14. Poster mencantumkan sumber dan DOI artikel. Gambar asli digunakan sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit." },
+      deskripsi: "Mahasiswa memilih artikel riset asli dari jurnal nasional terakreditasi SINTA atau jurnal internasional bereputasi yang terindeks Scopus atau Web of Science. Artikel memuat gambar atau diagram dan relevan dengan topik proposalnya. Mahasiswa menyusun poster yang memuat isi utama artikel dan manfaatnya bagi proposal, lalu mempresentasikannya pada pekan 14. Poster mencantumkan sumber dan DOI artikel. Gambar asli digunakan sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit." },
     { judul: "Naskah dan presentasi proposal", pekan: [15, 16], sub: "Sub-CPMK-8", sifat: "sumatif",
       luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
       deskripsi: "Mahasiswa memperbaiki naskah proposal berdasarkan hasil asesmen diri dan konsultasi, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik asesmen naskah dan presentasi proposal riset." }
@@ -1017,6 +1017,13 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 .task-list .t-luaran{grid-column:2;color:var(--ink-3);font-size:var(--fs-xs)}
 .wk-note{font-size:var(--fs-sm);color:var(--ink-2);background:var(--sunk);border-radius:6px;padding:10px 12px;margin:0}
 .pattern{margin-top:20px}
+.pola{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pola li{display:grid;grid-template-columns:190px minmax(0,1fr);gap:6px 14px;align-items:center}
+.pola .stack{height:34px}
+.pola .stack span{justify-content:center;padding:0 4px}
+.pola-label{font-size:var(--fs-sm);line-height:1.35}
+.pola-label span{display:block;font-size:var(--fs-xs);color:var(--ink-3)}
+@media (max-width:720px){.pola li{grid-template-columns:minmax(0,1fr)}}
 .pattern-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
 .link-rps{font-weight:600;text-decoration:none}
 .link-rps:hover{text-decoration:underline}
@@ -1081,8 +1088,8 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <div class="sec-head"><h2 id="h-ringkasan">Ringkasan</h2></div>
       <div class="prose" id="sap-intro"></div>
       <div class="pattern">
-        <div class="pattern-head"><h3 style="margin:0">Pola pertemuan</h3><span class="muted small" id="pattern-note"></span></div>
-        <div class="stack" id="pattern-stack" role="img"></div>
+        <div class="pattern-head"><h3 style="margin:0">Pola pertemuan</h3><span class="muted small">Menit per tahap</span></div>
+        <ul class="pola" id="pattern-rows"></ul>
         <ul class="legend" id="pattern-legend"></ul>
       </div>
     </section>
@@ -1338,14 +1345,26 @@ function renderNow() {
 /* ── Render: ringkasan ───────────────────────────────────────────── */
 function renderRingkasan() {
   $("#sap-intro").innerHTML = `<p>SAP ini menjabarkan RPS ${esc(M.namaMK)} menjadi skenario setiap pertemuan: apa yang dilakukan dosen, apa yang dikerjakan mahasiswa, berapa lama, dengan media apa, dan bagaimana kemampuan akhir diukur. Kemampuan akhir, indikator, materi, dan bobot diambil langsung dari RPS, sehingga keduanya selalu sejalan.</p>
-    <p>Setiap pertemuan berlangsung ${SAP.durasi} menit (${esc(jam)}). Langkah pembelajaran adalah rancangan awal; dosen pengampu dapat menyesuaikan urutan dan alokasi waktu selama total menit tetap sama. Tugas 1–5 bersifat formatif dan dikerjakan di <a href="lembar-kerja.html">lembar kerja proposal riset</a> dengan asesmen diri. Instruksi, kriteria, dan rubrik Tugas 6 dan 7 ada di dokumen Rencana Tugas Mahasiswa (RTM).</p>`;
-  const reguler = pertemuan.map(p => SAP.pekan[p.pekan]).filter(s => s && !s.perMahasiswa && menitTotal(s) > 0);
-  const avg = {};
-  Object.keys(TAHAP).forEach(k => { avg[k] = Math.round(reguler.reduce((a, s) => a + menitTahap(s, k), 0) / (reguler.length || 1)); });
-  $("#pattern-note").textContent = `Rata-rata ${reguler.length} pertemuan kelas`;
-  $("#pattern-stack").setAttribute("aria-label", Object.keys(TAHAP).map(k => `${TAHAP[k].label} ${avg[k]} menit`).join(", "));
-  $("#pattern-stack").innerHTML = Object.keys(TAHAP).map(k => `<span style="flex:${avg[k]};background:${TAHAP[k].warna};color:${TAHAP[k].teks}">${avg[k]}′</span>`).join("");
-  $("#pattern-legend").innerHTML = Object.keys(TAHAP).map(k => `<li><i class="sw" style="background:${TAHAP[k].warna}"></i><span><b class="num">${avg[k]} menit</b> ${esc(TAHAP[k].label)}</span></li>`).join("");
+    <p>Setiap pertemuan berlangsung ${SAP.durasi} menit (${esc(jam)}). Langkah pembelajaran adalah rancangan awal; dosen pengampu dapat menyesuaikan urutan dan alokasi waktu selama total menit tetap sama.</p>`;
+  /* Pekan dengan susunan menit yang sama digabung dalam satu baris. Angka dibaca langsung dari SAP.pekan. */
+  const pola = new Map();
+  pertemuan.forEach(p => {
+    const sap = SAP.pekan[p.pekan];
+    if (!sap || !menitTotal(sap)) return;
+    const menit = Object.keys(TAHAP).map(k => menitTahap(sap, k));
+    const kunci = menit.join("-") + (sap.perMahasiswa ? "-m" : "");
+    if (!pola.has(kunci)) pola.set(kunci, { menit, perMahasiswa: !!sap.perMahasiswa, total: menitTotal(sap), pekan: [] });
+    pola.get(kunci).pekan.push(p.pekan);
+  });
+  const rentang = a => a.reduce((r, n) => { const x = r[r.length - 1]; if (x && n === x[1] + 1) x[1] = n; else r.push([n, n]); return r; }, [])
+    .map(([x, y]) => x === y ? `${x}` : `${x}–${y}`).join(", ");
+  $("#pattern-rows").innerHTML = [...pola.values()].map(g => {
+    const tahap = Object.keys(TAHAP).map((k, i) => ({ ...TAHAP[k], n: g.menit[i] })).filter(t => t.n);
+    const catatan = g.perMahasiswa ? `${g.total} menit per mahasiswa` : "";
+    return `<li><div class="pola-label"><b>Pekan ${rentang(g.pekan)}</b>${catatan ? `<span>${catatan}</span>` : ""}</div>
+      <div class="stack" role="img" aria-label="${tahap.map(t => `${t.label} ${t.n} menit`).join(", ")}">${tahap.map(t => `<span style="flex:${t.n} 0 34px;background:${t.warna};color:${t.teks}">${t.n}′</span>`).join("")}</div></li>`;
+  }).join("");
+  $("#pattern-legend").innerHTML = Object.keys(TAHAP).map(k => `<li><i class="sw" style="background:${TAHAP[k].warna}"></i><span>${esc(TAHAP[k].label)}</span></li>`).join("");
 }
 
 /* ── Render: pertemuan ───────────────────────────────────────────── */
