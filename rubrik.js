@@ -51,70 +51,125 @@ function htmlAspek(a, i) {
 function bangun() {
   const kelompok = R.bagian.map((b, bi) => {
     const isi = `<div class="daftar-aspek">${ASPEK.map((a, i) => a.bi === bi ? htmlAspek(a, i) : "").join("")}</div>`;
-    const label = `<div class="label-bagian">Aspek asesmen<span>Bobot total 100%</span></div>`;
-    return b.judul ? `<details class="bagian" data-b="${bi}"><summary>${esc(b.kode)}. ${esc(b.judul)}<span></span></summary>${isi}</details>` : label + isi;
+    return b.judul ? `<details class="bagian" data-b="${bi}"><summary>${esc(b.kode)}. ${esc(b.judul)}<span></span></summary>${isi}</details>`
+      : `<div class="label-bagian">Aspek asesmen<span>Bobot total 100%</span></div>${isi}`;
   }).join("");
-  const aturan = R.draf
-    ? "Penilaian yang belum lengkap dapat disimpan sebagai draf, lalu dilanjutkan lewat tombol Ubah pada rekap. Draf tidak ikut dalam rata-rata."
-    : "Tombol Selesai aktif setelah semua aspek terisi.";
-  const petunjuk = "Isi identitas, lalu pilih satu skor (1 sampai 4) pada setiap aspek. Nilai akhir muncul di bagian bawah setelah semua aspek terisi. " +
-    (R.draf ? "Tekan <b>Simpan draf</b> jika penilaian belum lengkap atau <b>Selesai</b> jika sudah lengkap. " : "Tekan <b>Selesai</b> untuk menyimpan nilai. ") +
-    "Untuk mencetak nilai tersimpan, tekan <b>Cetak</b> pada rekap. Gunakan kertas A4 lanskap.";
+  const langkah = [
+    "Isi identitas. Nama dan NIM bisa dipilih dari daftar mahasiswa.",
+    "Ketuk satu skor (1 sampai 4) pada setiap aspek.",
+    R.draf ? "Tekan <b>Simpan nilai</b>. Jika belum lengkap, tekan <b>Simpan draf</b> lalu lanjutkan dari rekap."
+      : "Tekan <b>Simpan nilai</b>. Hasilnya masuk ke rekap dan formulir siap untuk mahasiswa berikutnya."
+  ];
+  const judulLangkah = (n, t) => `<h2 class="langkah"><span>${n}</span>${t}</h2>`;
+  const isianNama = (id, label, contoh) => `<div class="combo"><label for="${id}">${label} <em>wajib</em></label>
+      <input id="${id}" placeholder="${contoh}" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="menu-${id}" aria-autocomplete="list"${id === "nim" ? ' inputmode="text" autocapitalize="characters"' : ""}>
+      <div class="menu" id="menu-${id}" role="listbox" aria-label="Daftar mahasiswa" hidden></div></div>`;
   document.body.innerHTML = `<main>
   ${kop()}
+  <section class="petunjuk"><b>Petunjuk untuk ${esc(R.penilai.toLowerCase())}</b><ol>${langkah.map(x => `<li>${x}</li>`).join("")}</ol></section>
+  <details class="kartu lipat" id="panel-daftar">
+    <summary>Daftar mahasiswa (opsional)<span id="info-ringkas"></span></summary>
+    <div class="isi-lipat">
+      <p id="bantuan-daftar">Tempel daftar di bawah ini <b>satu kali</b>. Setelah itu, ketuk kotak <b>Nama mahasiswa</b> atau <b>NIM</b> untuk memilih dari menu dropdown. Nama dan NIM terisi berpasangan.</p>
+      <p class="redup">Satu baris untuk satu mahasiswa, dengan urutan NIM lalu nama. Dua kolom dari Excel bisa langsung ditempel.</p>
+      <textarea id="daftar" aria-describedby="bantuan-daftar" placeholder="C031231001, Nama Mahasiswa Pertama&#10;C031231002, Nama Mahasiswa Kedua"></textarea>
+      <div id="info-daftar" role="status"></div>
+    </div>
+  </details>
   <div class="form">
-    <section class="petunjuk"><b>Petunjuk:</b> ${petunjuk}</section>
-    <section class="box identitas">
-      <div><label for="penilai">${esc(R.penilai)}</label><input id="penilai" placeholder="Nama dosen" autocomplete="off"></div>
-      <div><label for="nama">Nama mahasiswa</label><input id="nama" list="daftar-nama" placeholder="Ketik nama" autocomplete="off"><datalist id="daftar-nama"></datalist></div>
-      <div><label for="nim">NIM</label><input id="nim" list="daftar-nim" placeholder="Ketik NIM" autocomplete="off"><datalist id="daftar-nim"></datalist></div>
-      <div class="lebar"><label for="judul">${esc(R.labelJudul)}</label><input id="judul" placeholder="Tulis judul" autocomplete="off"></div>
-      <div><label for="tanggal">Tempat dan tanggal ujian</label><div class="tempat-tanggal"><span>${TEMPAT},</span><input id="tanggal" type="date"></div></div>
-    </section>
-    ${kelompok}
-    <section class="box"><label for="catatan">Catatan untuk mahasiswa</label><textarea id="catatan" placeholder="Tulis catatan atau komentar"></textarea></section>
-    <section class="box bilah">
-      <div class="nilai-kotak"><div class="nilai" id="nilai">–</div><small id="status"></small></div>
-      <div class="kanan">
-        <button type="button" id="kosongkan">Kosongkan</button>
-        <button type="button" id="cetak-form">Cetak/PDF</button>
-        <button type="button" id="selesai" class="utama">Selesai</button>
+    <div class="spanduk" id="spanduk" hidden><span></span><button type="button" id="batal">Batal ubah</button></div>
+    <section class="kartu">
+      ${judulLangkah(1, "Identitas")}
+      <div class="identitas">
+        <div><label for="penilai">${esc(R.penilai)} <em>wajib</em></label><input id="penilai" placeholder="Nama dosen" autocomplete="name"></div>
+        ${isianNama("nama", "Nama mahasiswa", "Ketik atau pilih nama")}
+        ${isianNama("nim", "NIM", "Ketik atau pilih NIM")}
+        <div class="lebar"><label for="judul">${esc(R.labelJudul)}</label><input id="judul" placeholder="Tulis judul" autocomplete="off"></div>
+        <div class="tanggal"><label for="tanggal">Tempat dan tanggal ujian</label>
+          <div class="tempat-tanggal"><span>${TEMPAT},</span><input id="tanggal" placeholder="dd/mm/yyyy" inputmode="numeric" maxlength="10" autocomplete="off">
+          <button type="button" id="buka-kalender" aria-label="Buka kalender" aria-expanded="false" aria-controls="kalender"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button></div>
+          <div class="kalender" id="kalender" role="dialog" aria-label="Pilih tanggal ujian" hidden></div></div>
       </div>
-      <div id="pesan" role="status" aria-live="polite"></div>
+    </section>
+    <section class="penilaian">
+      <div class="kartu">${judulLangkah(2, "Penilaian")}</div>
+      ${kelompok}
+    </section>
+    <section class="kartu">
+      ${judulLangkah(3, "Catatan dan simpan")}
+      <label for="catatan">Catatan untuk mahasiswa</label><textarea id="catatan" placeholder="Tulis catatan atau komentar"></textarea>
+      <div class="kaki"><button type="button" id="kosongkan" class="teks">Kosongkan formulir</button></div>
+    </section>
+    <section class="bilah" aria-label="Nilai dan simpan">
+      <div class="progres" aria-hidden="true"><i></i></div>
+      <div class="nilai-kotak"><div class="nilai" id="nilai">–</div><button type="button" id="status" class="teks"></button></div>
+      <div class="kanan">
+        <button type="button" id="cetak-form">Cetak/PDF</button>
+        <button type="button" id="selesai" class="utama">Simpan nilai</button>
+      </div>
     </section>
   </div>
-  <section class="box">
+  <section class="kartu" id="rekap">
     <h2 id="judul-rekap">Rekap nilai</h2>
+    <p class="redup">Nilai tersimpan di peramban pada perangkat ini. Unduh cadangan setiap selesai satu sesi ujian.</p>
     <div class="alat">
-      <input id="cari" type="search" placeholder="Cari nama atau NIM">
+      <input id="cari" type="search" placeholder="Cari nama atau NIM" aria-label="Cari nama atau NIM">
       <button type="button" id="csv" class="utama">Ekspor CSV</button>
-      <button type="button" id="rata" title="Satu baris per mahasiswa, berisi rata-rata nilai lengkap dari semua dosen yang datanya ada di halaman ini.">Ekspor rata-rata</button>
-      <button type="button" id="cetak-semua" title="Mencetak semua penilaian yang sudah lengkap, satu mahasiswa per lembar.">Cetak semua</button>
+      <button type="button" id="cetak-semua">Cetak semua</button>
       <button type="button" id="cadang">Unduh cadangan</button>
-      <button type="button" id="muat" title="Memuat file cadangan. Data digabung dengan data yang sudah ada.">Muat cadangan</button>
-      <input type="file" id="file" accept=".json,application/json" hidden>
-      <button type="button" id="hapus-semua">Hapus semua</button>
     </div>
     <div class="gulir"><table><thead><tr id="kepala"></tr></thead><tbody id="isi"></tbody></table></div>
+    <details class="lanjutan">
+      <summary>Gabung nilai antardosen dan kelola data</summary>
+      <ol><li>Setiap dosen menekan <b>Unduh cadangan</b> di perangkatnya.</li>
+        <li>Di satu perangkat, tekan <b>Muat cadangan</b> untuk tiap berkas.</li>
+        <li>Tekan <b>Ekspor rata-rata</b>. Draf tidak ikut dihitung.</li></ol>
+      <div class="alat">
+        <button type="button" id="muat">Muat cadangan</button>
+        <button type="button" id="rata">Ekspor rata-rata</button>
+        <button type="button" id="hapus-semua" class="bahaya">Hapus semua nilai</button>
+        <input type="file" id="file" accept=".json,application/json" hidden>
+      </div>
+    </details>
   </section>
-  <details class="box">
-    <summary>Daftar mahasiswa (opsional)</summary>
-    <textarea id="daftar" placeholder="Satu mahasiswa per baris: NIM, Nama. Bisa ditempel langsung dari dua kolom Excel."></textarea>
-    <div id="info-daftar"></div>
-  </details>
-  <details class="box">
-    <summary>Catatan metode</summary>
-    <p>Nilai = Σ (skor ÷ 4 × bobot). Rentang nilai 25 sampai 100.</p>
-    <p>Isian yang sedang dikerjakan tersimpan otomatis. Rekap bertambah setelah tombol simpan ditekan. ${aturan}</p>
-    <p>Data tersimpan di peramban pada perangkat ini. Data dapat hilang jika data peramban dihapus atau memakai mode penyamaran. Unduh cadangan setiap selesai satu sesi.</p>
-    <p>Penggabungan antardosen: muat file cadangan tiap dosen pada satu perangkat, lalu pilih Ekspor rata-rata. Data dibedakan menurut NIM dan nama dosen.</p>
-    <p>Hasil cetak memakai kertas A4 lanskap.</p>
-  </details>
-</main><div id="cetak"></div>`;
+</main>
+<div class="roti" id="roti" role="status" aria-live="polite" hidden><span></span><button type="button" hidden></button></div>
+<dialog id="dialog"><form method="dialog"><p></p><div><button value="tidak">Batal</button><button value="ya" class="utama"></button></div></form></dialog>
+<div id="cetak"></div>`;
 }
 
 /* Penyimpanan */
-function pesan(t, galat) { $("pesan").textContent = t; $("pesan").className = galat ? "galat" : ""; }
+let jeda;
+function pesan(t, galat, aksi) {
+  const el = $("roti"), tombol = el.querySelector("button");
+  clearTimeout(jeda);
+  el.hidden = !t;
+  el.className = "roti" + (galat ? " galat" : "");
+  el.querySelector("span").textContent = t;
+  tombol.hidden = !aksi;
+  if (aksi) { tombol.textContent = aksi.label; tombol.onclick = () => { pesan(""); aksi.jalan(); }; }
+  if (t) jeda = setTimeout(() => el.hidden = true, aksi || galat ? 8000 : 4500);
+}
+const hapusGalat = () => { if ($("roti").classList.contains("galat")) pesan(""); };
+function tanya(teksTanya, labelYa) {
+  const d = $("dialog");
+  d.querySelector("p").textContent = teksTanya;
+  d.querySelector('[value="ya"]').textContent = labelYa;
+  d.returnValue = "";
+  d.showModal();
+  return new Promise(ok => d.addEventListener("close", () => ok(d.returnValue === "ya"), { once: true }));
+}
+/* Tanggal: disimpan sebagai yyyy-mm-dd, ditampilkan sebagai dd/mm/yyyy */
+const dua = n => String(n).padStart(2, "0");
+const keIso = d => `${d.getFullYear()}-${dua(d.getMonth() + 1)}-${dua(d.getDate())}`;
+const keTampil = iso => /^\d{4}-\d{2}-\d{2}$/.test(iso || "") ? iso.split("-").reverse().join("/") : "";
+function dariTampil(t) {
+  const m = String(t).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!m) return "";
+  const d = new Date(+m[3], m[2] - 1, +m[1]);
+  return +m[3] >= 2000 && d.getDate() === +m[1] && d.getMonth() === m[2] - 1 ? keIso(d) : "";
+}
+function isiKolom(k, v) { $(k).value = k === "tanggal" ? keTampil(v) : v; }
 const sah = r => r && typeof r.nim === "string" && typeof r.nama === "string" && typeof r.penilai === "string" &&
   Array.isArray(r.skor) && r.skor.length === N && r.skor.every(s => [1, 2, 3, 4].includes(s) || (R.draf && s === 0)) &&
   typeof r.waktu === "string";
@@ -132,6 +187,7 @@ function tulis() {
 function formulir() {
   const r = { skor: skor.slice() };
   ISIAN.forEach(k => r[k] = k === "catatan" ? $(k).value.trim() : rapi($(k).value));
+  r.tanggal = dariTampil(r.tanggal);
   return r;
 }
 function simpanKerja() {
@@ -142,7 +198,7 @@ function muatKerja() {
   try {
     const o = JSON.parse(localStorage.getItem(KUNCI_KERJA));
     if (!o) return;
-    ISIAN.forEach(k => { if (typeof o[k] === "string") $(k).value = o[k]; });
+    ISIAN.forEach(k => { if (typeof o[k] === "string") isiKolom(k, o[k]); });
     if (Array.isArray(o.skor) && o.skor.length === N) skor = o.skor.map(s => [1, 2, 3, 4].includes(s) ? s : 0);
     ubah = typeof o.ubah === "string" ? o.ubah : null;
   } catch (e) { /* isian lama diabaikan */ }
@@ -156,16 +212,33 @@ function segarkan() {
     const bobot = idx.reduce((t, i) => t + ASPEK[i].bobot, 0);
     el.querySelector("summary span").textContent = `Bobot ${bobot}% · ${idx.filter(i => skor[i]).length} dari ${idx.length} aspek terisi`;
   });
+  document.querySelectorAll(".aspek").forEach((el, i) => el.classList.toggle("terisi", !!skor[i]));
   const n = skor.filter(Boolean).length;
-  $("status").textContent = `${n}/${N} aspek`;
+  $("status").textContent = n === N ? "Semua aspek terisi" : `${n}/${N} · ke yang kosong`;
+  $("status").disabled = n === N;
   $("nilai").textContent = n === N ? hitung(skor).toFixed(2) : "–";
-  $("selesai").disabled = !R.draf && n !== N;
-  $("selesai").textContent = n < N && R.draf ? "Simpan draf" : ubah ? "Simpan" : "Selesai";
+  document.querySelector(".progres i").style.width = `${n / N * 100}%`;
+  $("selesai").textContent = n < N && R.draf ? "Simpan draf" : "Simpan nilai";
+  const lama = data.baris.find(x => idBaris(x) === ubah);
+  $("spanduk").hidden = !lama;
+  if (lama) $("spanduk").querySelector("span").textContent = `Sedang mengubah nilai ${lama.nama}`;
   areaCetak([formulir()]);
 }
 function bukaBagian() {
   const i = Math.max(skor.indexOf(0), 0);
   document.querySelectorAll(".bagian").forEach(el => el.open = +el.dataset.b === ASPEK[i].bi);
+}
+function keAspek(i) {
+  const el = $("aspek-" + i), bagian = el.closest("details");
+  if (bagian) bagian.open = true;
+  el.scrollIntoView({ block: "start", behavior: "smooth" });
+  el.querySelector(".skor").focus({ preventScroll: true });
+}
+function salah(id, teksSalah) {
+  $(id).setAttribute("aria-invalid", "true");
+  $(id).scrollIntoView({ block: "center" });
+  $(id).focus({ preventScroll: true });
+  pesan(teksSalah, true);
 }
 const adaIsian = () => skor.some(Boolean) || ["nama", "nim", "judul", "catatan"].some(k => rapi($(k).value));
 /* Isian dianggap aman bila sama dengan baris yang sudah tersimpan */
@@ -178,23 +251,26 @@ function bersihkan() {
   skor = ASPEK.map(() => 0);
   ubah = null;
   ["nama", "nim", "judul", "catatan"].forEach(k => $(k).value = "");
+  document.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
   segarkan(); bukaBagian(); simpanKerja();
 }
-function simpan() {
+async function simpan() {
   const r = { ...formulir(), waktu: new Date().toISOString() };
-  const kosong = ["penilai", "nama", "nim"].find(k => !r[k]);
-  if (kosong) { pesan("Isi nama dosen, nama mahasiswa, dan NIM.", true); $(kosong).focus(); return; }
-  if (!R.draf && !lengkap(r)) return;
+  const kosong = [["penilai", `Isi nama ${R.penilai.toLowerCase()}.`], ["nama", "Isi nama mahasiswa."], ["nim", "Isi NIM."]].find(([k]) => !r[k]);
+  if (kosong) return salah(...kosong);
+  if (rapi($("tanggal").value) && !r.tanggal) return salah("tanggal", "Tanggal belum benar. Gunakan format dd/mm/yyyy.");
+  if (!R.draf && !lengkap(r)) { pesan(`Masih ada ${N - terisi(r)} aspek yang kosong.`, true); return keAspek(r.skor.indexOf(0)); }
   baca();
   const k = idBaris(r);
   const ada = data.baris.find(x => idBaris(x) === k);
-  if (ada && k !== ubah && !confirm(`NIM ${r.nim} sudah dinilai (${ada.nama}). Ganti nilainya?`)) return;
+  if (ada && k !== ubah && !await tanya(`NIM ${r.nim} sudah dinilai (${ada.nama}). Ganti nilai yang tersimpan?`, "Ganti nilai")) return;
+  baca();
   data.baris = data.baris.filter(x => idBaris(x) !== k && idBaris(x) !== ubah);
   data.baris.push(r);
   data.penilai = r.penilai;
   const berhasil = tulis();
   if (!berhasil) { ubah = k; tabel(); return; }   // pertahankan isian
-  bersihkan(); tabel();
+  bersihkan(); tabel(); isiDaftar();
   pesan(lengkap(r) ? `Tersimpan: ${r.nama}, nilai ${hitung(r.skor).toFixed(2)}.` : `Draf tersimpan: ${r.nama}, ${terisi(r)}/${N} aspek.`);
   window.scrollTo({ top: 0 });
 }
@@ -204,12 +280,15 @@ function tabel() {
   const q = $("cari").value.trim().toLowerCase();
   const baris = data.baris.map((r, i) => ({ r, no: i + 1 })).reverse()
     .filter(x => !q || (x.r.nim + " " + x.r.nama).toLowerCase().includes(q));
-  $("isi").innerHTML = baris.map(({ r, no }) => `<tr><td>${no}</td><td>${esc(r.nim)}</td><td>${esc(r.nama)}</td>
+  $("isi").innerHTML = baris.map(({ r, no }) => {
+    const tombol = (aksi, label) => `<button type="button" data-aksi="${aksi}" data-id="${esc(idBaris(r))}">${label}</button>`;
+    return `<tr><td class="k-no">${no}</td><td class="k-nim">${esc(r.nim)}</td><td class="k-nama">${esc(r.nama)}</td>
     ${r.skor.map(s => `<td class="kol-a">${s || "–"}</td>`).join("")}
-    <td><b>${lengkap(r) ? hitung(r.skor).toFixed(2) : `Draf ${terisi(r)}/${N}`}</b></td>
-    <td>${["ubah", "cetak", "hapus"].map(x => `<button type="button" data-aksi="${x}" data-id="${esc(idBaris(r))}">${x[0].toUpperCase() + x.slice(1)}</button>`).join(" ")}</td>
-    <td>${esc(r.penilai)}</td></tr>`).join("")
-    || `<tr><td colspan="${N + 6}">Belum ada data.</td></tr>`;
+    <td class="k-nilai">${lengkap(r) ? `<b>${hitung(r.skor).toFixed(2)}</b>` : `<mark>Draf ${terisi(r)}/${N}</mark>`}</td>
+    <td class="k-aksi">${tombol("ubah", lengkap(r) ? "Ubah" : "Lanjutkan")}${tombol("cetak", "Cetak")}${tombol("hapus", "Hapus")}</td>
+    <td class="k-penilai">${esc(r.penilai)}</td></tr>`;
+  }).join("")
+    || `<tr class="hampa"><td colspan="${N + 6}">${q ? "Tidak ada yang cocok dengan pencarian." : "Belum ada nilai tersimpan. Nilai muncul di sini setelah tombol Simpan ditekan."}</td></tr>`;
   const unik = new Set(data.baris.map(r => r.nim.toLowerCase())).size;
   const draf = data.baris.filter(r => !lengkap(r)).length;
   $("judul-rekap").textContent = `Rekap nilai: ${data.baris.length} baris, ${unik} mahasiswa${draf ? `, ${draf} draf` : ""}`;
@@ -254,15 +333,115 @@ function mahasiswa() {
   }).filter(m => m && /\d/.test(m.nim));
 }
 function isiDaftar() {
-  const m = mahasiswa();
-  $("daftar-nama").innerHTML = m.map(x => `<option value="${esc(x.nama)}">${esc(x.nim)}</option>`).join("");
-  $("daftar-nim").innerHTML = m.map(x => `<option value="${esc(x.nim)}">${esc(x.nama)}</option>`).join("");
-  $("info-daftar").textContent = `${m.length} mahasiswa terbaca.`;
+  const m = mahasiswa(), baris = data.daftar.split(/\r?\n/).filter(l => l.trim()).length;
+  $("info-ringkas").textContent = m.length ? `${m.length} mahasiswa siap dipilih` : "Isi agar nama dan NIM bisa dipilih dari menu";
+  $("info-daftar").textContent = !baris ? "" : `${m.length} mahasiswa terbaca.` +
+    (baris > m.length ? ` ${baris - m.length} baris dilewati. Pisahkan NIM dan nama dengan koma atau tab.` : "");
+  $("info-daftar").className = baris > m.length ? "galat" : "";
 }
 function pasangkan(dari, ke) {
   const v = rapi($(dari).value).toLowerCase();
   const cocok = mahasiswa().filter(x => x[dari].toLowerCase() === v);
   if (cocok.length === 1) { $(ke).value = cocok[0][ke]; segarkan(); simpanKerja(); }
+}
+function pasangDropdown(id) {
+  const input = $(id), menu = $("menu-" + id);
+  let hasil = [], sorot = -1;
+  const tutup = () => { menu.hidden = true; input.setAttribute("aria-expanded", "false"); input.removeAttribute("aria-activedescendant"); sorot = -1; };
+  function buka() {
+    const semua = mahasiswa();
+    if (!semua.length) return tutup();
+    if (input.getAttribute("aria-invalid") !== "true") hapusGalat();
+    const v = rapi(input.value).toLowerCase();
+    const pas = semua.some(x => x[id].toLowerCase() === v);   // sudah terpilih: tampilkan semua
+    hasil = semua.filter(x => !v || pas || (x.nama + " " + x.nim).toLowerCase().includes(v));
+    const saya = rapi($("penilai").value).toLowerCase();
+    menu.innerHTML = hasil.map((x, i) => {
+      const r = data.baris.find(b => b.nim.toLowerCase() === x.nim.toLowerCase() && b.penilai.toLowerCase() === saya);
+      return `<div class="opsi" role="option" id="${id}-opsi-${i}" data-i="${i}" aria-selected="false"><span><b>${esc(x[id])}</b><small>${esc(x[id === "nama" ? "nim" : "nama"])}</small></span>${r ? `<mark>${lengkap(r) ? "Sudah dinilai" : "Draf"}</mark>` : ""}</div>`;
+    }).join("") || `<div class="kosong">Tidak ada di daftar. Isian manual tetap bisa disimpan.</div>`;
+    menu.hidden = false; sorot = -1; input.setAttribute("aria-expanded", "true");
+  }
+  function pilih(i) {
+    const x = hasil[i];
+    if (!x) return;
+    ["nama", "nim"].forEach(k => { $(k).value = x[k]; $(k).removeAttribute("aria-invalid"); });
+    tutup(); segarkan(); simpanKerja();
+  }
+  input.addEventListener("focus", buka);
+  input.addEventListener("click", buka);
+  input.addEventListener("input", buka);
+  input.addEventListener("keydown", e => {
+    if (e.key === "Escape" || e.key === "Tab") return tutup();
+    if (menu.hidden) { if (e.key === "ArrowDown") buka(); return; }
+    if ((e.key === "ArrowDown" || e.key === "ArrowUp") && hasil.length) {
+      e.preventDefault();
+      sorot = (sorot + (e.key === "ArrowDown" ? 1 : sorot < 0 ? 0 : -1) + hasil.length) % hasil.length;
+      menu.querySelectorAll(".opsi").forEach((el, i) => el.setAttribute("aria-selected", String(i === sorot)));
+      input.setAttribute("aria-activedescendant", `${id}-opsi-${sorot}`);
+      $(`${id}-opsi-${sorot}`).scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter" && sorot >= 0) { e.preventDefault(); pilih(sorot); }
+  });
+  menu.addEventListener("mousedown", e => e.preventDefault());
+  menu.addEventListener("click", e => { const o = e.target.closest(".opsi"); if (o) { pilih(+o.dataset.i); input.blur(); } });
+  document.addEventListener("pointerdown", e => { if (!input.parentElement.contains(e.target)) tutup(); });
+}
+
+/* Kalender dd/mm/yyyy, pekan dimulai hari Senin */
+function pasangKalender() {
+  const kal = $("kalender"), pemicu = $("buka-kalender"), input = $("tanggal");
+  let fokus = new Date();
+  const tutup = () => { kal.hidden = true; pemicu.setAttribute("aria-expanded", "false"); };
+  function gambar(arahkan) {
+    const th = fokus.getFullYear(), bl = fokus.getMonth(), awal = (new Date(th, bl, 1).getDay() + 6) % 7;
+    const pilihan = dariTampil(input.value), kini = keIso(new Date());
+    let sel = "<span></span>".repeat(awal);
+    for (let h = 1; h <= new Date(th, bl + 1, 0).getDate(); h++) {
+      const iso = keIso(new Date(th, bl, h));
+      sel += `<button type="button" data-tgl="${iso}" aria-label="${tanggalPanjang(iso)}" aria-pressed="${iso === pilihan}" class="${iso === kini ? "kini" : ""}" tabindex="${h === fokus.getDate() ? 0 : -1}">${h}</button>`;
+    }
+    kal.innerHTML = `<div class="kal-kepala"><button type="button" data-geser="-1" aria-label="Bulan sebelumnya">◀</button>
+      <b aria-live="polite">${fokus.toLocaleDateString("id-ID", { month: "long", year: "numeric" })}</b>
+      <button type="button" data-geser="1" aria-label="Bulan berikutnya">▶</button></div>
+      <div class="kal-grid">${["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"].map(h => `<i>${h}</i>`).join("")}${sel}</div>
+      <div class="kal-kaki"><button type="button" data-hapus>Kosongkan</button><button type="button" data-tgl="${kini}" class="utama">Hari ini</button></div>`;
+    if (arahkan) kal.querySelector('.kal-grid [tabindex="0"]').focus({ preventScroll: true });
+  }
+  function atur(v) { input.value = keTampil(v); input.removeAttribute("aria-invalid"); tutup(); segarkan(); simpanKerja(); pemicu.focus({ preventScroll: true }); }
+  pemicu.onclick = () => {
+    if (!kal.hidden) return tutup();
+    hapusGalat();
+    const v = dariTampil(input.value);
+    fokus = v ? new Date(v + "T00:00:00") : new Date();
+    kal.hidden = false; pemicu.setAttribute("aria-expanded", "true"); gambar(true);
+    kal.scrollIntoView({ block: "nearest" });
+  };
+  kal.addEventListener("click", e => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    e.stopPropagation();
+    if (b.dataset.tgl) return atur(b.dataset.tgl);
+    if ("hapus" in b.dataset) return atur("");
+    const g = +b.dataset.geser;
+    fokus = new Date(fokus.getFullYear(), fokus.getMonth() + g, 1); gambar(false);
+    kal.querySelector(`[data-geser="${g}"]`).focus({ preventScroll: true });
+  });
+  kal.addEventListener("keydown", e => {
+    if (e.key === "Escape") { tutup(); return pemicu.focus(); }
+    const langkah = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+    if (!langkah || !e.target.closest(".kal-grid")) return;
+    e.preventDefault();
+    fokus = new Date(fokus.getFullYear(), fokus.getMonth(), fokus.getDate() + langkah); gambar(true);
+  });
+  /* Garis miring ditambahkan otomatis saat tanggal diketik */
+  input.addEventListener("input", e => {
+    if (e.inputType && e.inputType.startsWith("delete")) return;
+    if (/^\d{2}$|^\d{2}\/\d{2}$/.test(input.value)) input.value += "/";
+    else if (/^\d{8}$/.test(input.value)) input.value = input.value.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+    segarkan(); simpanKerja();
+  });
+  input.addEventListener("change", () => { if (input.value && !dariTampil(input.value)) { input.setAttribute("aria-invalid", "true"); pesan("Tanggal belum benar. Gunakan format dd/mm/yyyy.", true); } });
+  document.addEventListener("pointerdown", e => { if (!input.closest(".tanggal").contains(e.target)) tutup(); });
 }
 
 /* Ekspor */
@@ -314,48 +493,57 @@ $("daftar").value = data.daftar;
 muatKerja();
 isiDaftar(); tabel(); segarkan(); bukaBagian();
 
+pasangDropdown("nama"); pasangDropdown("nim"); pasangKalender();
+
 document.querySelector(".form").addEventListener("click", e => {
   const b = e.target.closest(".skor");
   if (!b) return;
-  const a = +b.dataset.a;
+  const a = +b.dataset.a, bi = ASPEK[a].bi, baru = !skor[a];
   skor[a] = +b.dataset.s;
   pesan(""); segarkan(); simpanKerja();
+  /* Bagian selesai diisi: buka bagian berikutnya yang masih kosong */
+  const lanjut = skor.indexOf(0);
+  if (baru && R.bagian[bi].judul && lanjut >= 0 && ASPEK.every((x, i) => x.bi !== bi || skor[i])) {
+    document.querySelectorAll(".bagian").forEach(el => el.open = +el.dataset.b === ASPEK[lanjut].bi);
+    document.querySelector(`.bagian[data-b="${ASPEK[lanjut].bi}"]`).scrollIntoView({ block: "start", behavior: "smooth" });
+  }
 });
-ISIAN.forEach(k => $(k).addEventListener("input", () => { segarkan(); simpanKerja(); }));
+ISIAN.forEach(k => $(k).addEventListener("input", () => { $(k).removeAttribute("aria-invalid"); hapusGalat(); segarkan(); simpanKerja(); }));
 $("selesai").onclick = simpan;
-$("kosongkan").onclick = () => {
-  if (belumTersimpan() && !confirm("Kosongkan isian yang belum disimpan?")) return;
-  bersihkan(); pesan("");
+$("status").onclick = () => keAspek(skor.indexOf(0));
+$("kosongkan").onclick = async () => {
+  if (belumTersimpan() && !await tanya("Kosongkan isian yang belum disimpan?", "Kosongkan")) return;
+  bersihkan(); pesan(""); window.scrollTo({ top: 0 });
 };
-$("cetak-form").onclick = () => cetak([formulir()]);
-$("cetak-semua").onclick = () => {
-  const d = data.baris.filter(lengkap);
-  if (d.length) cetak(d); else pesan("Belum ada penilaian lengkap untuk dicetak.", true);
-};
-/* Setelah mencetak dari rekap, interaksi berikutnya mengembalikan area cetak ke isian aktif */
-["pointerdown", "keydown"].forEach(t => document.addEventListener(t, () => { if (cetakLain) areaCetak([formulir()]); }, true));
+$("batal").onclick = $("kosongkan").onclick;
 $("nama").addEventListener("change", () => pasangkan("nama", "nim"));
 $("nim").addEventListener("change", () => pasangkan("nim", "nama"));
 $("penilai").addEventListener("change", () => { baca(); data.penilai = rapi($("penilai").value); tulis(); });
 $("daftar").addEventListener("input", () => { const v = $("daftar").value; baca(); data.daftar = v; tulis(); isiDaftar(); });
 $("cari").addEventListener("input", tabel);
-$("isi").addEventListener("click", e => {
+$("isi").addEventListener("click", async e => {
   const { aksi, id } = e.target.dataset;
   const r = data.baris.find(x => idBaris(x) === id);
   if (!r) return;
   if (aksi === "cetak") return cetak([r]);
   if (aksi === "ubah") {
-    if (belumTersimpan() && !confirm("Isian yang belum disimpan akan diganti. Lanjutkan?")) return;
+    if (belumTersimpan() && !await tanya("Isian yang belum disimpan akan diganti.", "Lanjutkan")) return;
     ubah = id; skor = r.skor.slice();
-    ISIAN.forEach(k => $(k).value = r[k] || "");
+    ISIAN.forEach(k => isiKolom(k, r[k] || ""));
     segarkan(); bukaBagian(); simpanKerja();
-    pesan(`Mengubah nilai ${r.nama}.`); window.scrollTo({ top: 0 });
-  } else if (confirm(`Hapus nilai ${r.nama}?`)) {
+    window.scrollTo({ top: 0 });
+  } else {
     baca();
     data.baris = data.baris.filter(x => idBaris(x) !== id);
     tulis();
-    if (ubah === id) bersihkan();
+    if (ubah === id) { ubah = null; segarkan(); simpanKerja(); }
     tabel();
+    pesan(`Nilai ${r.nama} dihapus.`, false, { label: "Urungkan", jalan: () => {
+      baca();
+      if (!data.baris.some(x => idBaris(x) === id)) data.baris.push(r);
+      data.baris.sort((a, b) => a.waktu.localeCompare(b.waktu));
+      tulis(); tabel();
+    } });
   }
 });
 $("csv").onclick = eksporCsv;
@@ -378,8 +566,9 @@ $("file").addEventListener("change", async () => {
   } catch (e) { pesan(`File tidak dikenali. Pilih file cadangan dari rubrik ${R.jenis}.`, true); }
   $("file").value = "";
 });
-$("hapus-semua").onclick = () => {
-  if (!data.baris.length || !confirm(`Hapus semua ${data.baris.length} baris nilai? Tindakan ini tidak bisa dibatalkan. Pastikan cadangan sudah diunduh.`)) return;
+$("hapus-semua").onclick = async () => {
+  if (!data.baris.length) return pesan("Belum ada nilai tersimpan.", true);
+  if (!await tanya(`Hapus semua ${data.baris.length} baris nilai? Tindakan ini tidak bisa dibatalkan. Pastikan cadangan sudah diunduh.`, "Hapus semua")) return;
   data.baris = []; tulis(); bersihkan(); tabel(); pesan("Semua nilai dihapus.");
 };
 window.addEventListener("storage", e => { if (e.key === KUNCI) { baca(); tabel(); } });
