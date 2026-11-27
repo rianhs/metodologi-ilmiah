@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rubrik Penilaian Presentasi Proposal Riset – Metodologi Ilmiah Unhas</title>
+    <title>Rubrik Asesmen Naskah dan Presentasi Proposal Riset – Metodologi Ilmiah Unhas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -488,7 +488,7 @@
                 <p class="fakultas">Fakultas Kedokteran • Universitas Hasanuddin</p>
                 <p class="alamat">Jl. Perintis Kemerdekaan km. 10 Tamalanrea, Makassar, Sulawesi Selatan</p>
                 <div class="form-title-divider">
-                    <span class="form-title-main">Rubrik Penilaian Presentasi Proposal Riset</span><br>
+                    <span class="form-title-main">Rubrik Asesmen Naskah dan Presentasi Proposal Riset</span><br>
                     <span class="form-title-sub">Mata Kuliah Metodologi Ilmiah</span>
                 </div>
             </td>
@@ -504,7 +504,7 @@
 
     <!-- ══════════════ INSTRUCTION BOX ══════════════ -->
     <div class="instruction-box">
-        <strong>Petunjuk</strong>: Klik pada kolom kriteria skor yang sesuai dengan performa mahasiswa. Skor tiap unsur akan otomatis dikalkulasi dan nilai akhir ditampilkan di bagian bawah tabel. Refresh halaman untuk mengatur ulang penilaian. Cetak dengan layout kertas landscape.
+        <strong>Petunjuk</strong>: Klik pada kolom kriteria skor yang sesuai dengan performa mahasiswa. Skor tiap unsur akan otomatis dikalkulasi dan nilai akhir ditampilkan di bagian bawah tabel. Refresh halaman untuk mengatur ulang asesmen Cetak dengan layout kertas landscape.
     </div>
 
     <!-- ══════════════ INFO MAHASISWA ══════════════ -->
@@ -514,7 +514,7 @@
             <input type="text" placeholder="Tulis nama lengkap mahasiswa">
         </div>
         <div class="info-box">
-            <label>Judul Proposal Penelitian:</label>
+            <label>Judul Proposal Riset:</label>
             <input type="text" placeholder="Tulis judul proposal di sini">
         </div>
     </div>
@@ -527,7 +527,7 @@
         <thead>
             <tr class="table-header">
                 <th class="col-num">No</th>
-                <th class="col-unsur">Aspek Penilaian</th>
+                <th class="col-unsur">Aspek Asesmen</th>
                 <th class="col-bobot">Bobot (%)</th>
                 <th>Kriteria Skor (1–4)</th>
                 <th class="col-skor-input">Skor</th>
@@ -695,7 +695,7 @@
                     <div class="skor-grid">
                         <div class="skor-item" onclick="pilihSkor(4, 1)">
                             <span class="skor-title">Skor 1</span>
-                            Mahasiswa tidak dapat menjawab pertanyaan dan tidak memahami topik penelitian.
+                            Mahasiswa tidak dapat menjawab pertanyaan dan tidak memahami topik riset
                         </div>
                         <div class="skor-item" onclick="pilihSkor(4, 2)">
                             <span class="skor-title">Skor 2</span>
@@ -719,45 +719,45 @@
 
             <!-- ══ SEKSI C ══ -->
             <tr class="section-row">
-                <td colspan="5">C. Unsur Proposal Penelitian – Total: 50%</td>
+                <td colspan="5">C. Unsur Proposal Riset – Total: 50%</td>
             </tr>
 
             <!-- C.1 -->
             <tr id="row-5">
                 <td class="col-num">1</td>
-                <td class="col-unsur">Masalah penelitian, pertanyaan penelitian, dan hipotesis penelitian (jika relevan)</td>
+                <td class="col-unsur">Masalah, pertanyaan riset, dan hipotesis riset (jika relevan)</td>
                 <td class="col-bobot" style="text-align:center; vertical-align:middle;">10</td>
                 <td>
                     <div class="skor-grid">
                         <div class="skor-item" onclick="pilihSkor(5, 1)">
                             <span class="skor-title">Skor 1</span>
                             <ul>
-                                <li>Masalah penelitian tidak jelas.</li>
-                                <li>Pertanyaan penelitian tidak ada.</li>
+                                <li>Perumusan masalah tidak jelas.</li>
+                                <li>Pertanyaan riset tidak ada.</li>
                                 <li>(Jika relevan) Hipotesis tidak ada.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(5, 2)">
                             <span class="skor-title">Skor 2</span>
                             <ul>
-                                <li>Masalah penelitian ada tetapi tidak tepat.</li>
-                                <li>Pertanyaan penelitian ada tetapi tidak tepat.</li>
+                                <li>Perumusan masalah ada tetapi tidak tepat.</li>
+                                <li>Pertanyaan riset ada tetapi tidak tepat.</li>
                                 <li>(Jika relevan) Hipotesis ada tetapi salah.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(5, 3)">
                             <span class="skor-title">Skor 3</span>
                             <ul>
-                                <li>Masalah penelitian dijelaskan secara memadai.</li>
-                                <li>Pertanyaan penelitian ada tetapi kurang relevan.</li>
+                                <li>Masalah dijelaskan secara memadai.</li>
+                                <li>Pertanyaan riset ada tetapi kurang relevan.</li>
                                 <li>(Jika relevan) Hipotesis benar, tetapi tidak dijustifikasi.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(5, 4)">
                             <span class="skor-title">Skor 4</span>
                             <ul>
-                                <li>Masalah penelitian dijelaskan secara mendalam.</li>
-                                <li>Pertanyaan penelitian disusun dengan kuat.</li>
+                                <li>Masalah dijelaskan secara mendalam.</li>
+                                <li>Pertanyaan riset disusun dengan kuat.</li>
                                 <li>(Jika relevan) Hipotesis benar dan dijustifikasi dengan baik.</li>
                             </ul>
                         </div>
@@ -772,7 +772,7 @@
             <!-- C.2 -->
             <tr id="row-6">
                 <td class="col-num">2</td>
-                <td class="col-unsur">Perkembangan terkini (state-of-the-art), kesenjangan (gap), dan urgensi penelitian</td>
+                <td class="col-unsur">Perkembangan terkini (state-of-the-art), kesenjangan (gap), dan urgensi riset</td>
                 <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
                 <td>
                     <div class="skor-grid">
@@ -780,32 +780,32 @@
                             <span class="skor-title">Skor 1</span>
                             <ul>
                                 <li>Perkembangan terkini tidak dijelaskan.</li>
-                                <li>Kesenjangan penelitian tidak dijelaskan.</li>
-                                <li>Urgensi penelitian tidak dijelaskan.</li>
+                                <li>Kesenjangan riset tidak dijelaskan.</li>
+                                <li>Urgensi riset tidak dijelaskan.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(6, 2)">
                             <span class="skor-title">Skor 2</span>
                             <ul>
                                 <li>Perkembangan terkini diuraikan secara buruk.</li>
-                                <li>Kesenjangan penelitian dijelaskan secara buruk.</li>
-                                <li>Urgensi penelitian dijelaskan secara buruk.</li>
+                                <li>Kesenjangan riset dijelaskan secara buruk.</li>
+                                <li>Urgensi riset dijelaskan secara buruk.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(6, 3)">
                             <span class="skor-title">Skor 3</span>
                             <ul>
                                 <li>Perkembangan terkini diuraikan secara memadai.</li>
-                                <li>Kesenjangan penelitian dijelaskan secara memadai.</li>
-                                <li>Urgensi penelitian dijelaskan secara memadai.</li>
+                                <li>Kesenjangan riset dijelaskan secara memadai.</li>
+                                <li>Urgensi riset dijelaskan secara memadai.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(6, 4)">
                             <span class="skor-title">Skor 4</span>
                             <ul>
                                 <li>Perkembangan terkini diuraikan secara mendalam.</li>
-                                <li>Kesenjangan penelitian dijelaskan secara mendalam.</li>
-                                <li>Urgensi penelitian dijelaskan secara kuat.</li>
+                                <li>Kesenjangan riset dijelaskan secara mendalam.</li>
+                                <li>Urgensi riset dijelaskan secara kuat.</li>
                             </ul>
                         </div>
                     </div>
@@ -819,25 +819,25 @@
             <!-- C.3 -->
             <tr id="row-7">
                 <td class="col-num">3</td>
-                <td class="col-unsur">Tujuan penelitian</td>
+                <td class="col-unsur">Tujuan riset</td>
                 <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
                 <td>
                     <div class="skor-grid">
                         <div class="skor-item" onclick="pilihSkor(7, 1)">
                             <span class="skor-title">Skor 1</span>
-                            Tujuan penelitian tidak dijelaskan.
+                            Tujuan riset tidak dijelaskan.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(7, 2)">
                             <span class="skor-title">Skor 2</span>
-                            Tujuan penelitian ada tetapi tidak jelas atau tidak selaras dengan masalah penelitian.
+                            Tujuan riset ada tetapi tidak jelas atau tidak selaras dengan masalah.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(7, 3)">
                             <span class="skor-title">Skor 3</span>
-                            Tujuan penelitian sebagian besar jelas dan relevan tetapi perlu diperbaiki.
+                            Tujuan riset sebagian besar jelas dan relevan tetapi perlu diperbaiki.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(7, 4)">
                             <span class="skor-title">Skor 4</span>
-                            Tujuan penelitian tepat, didefinisikan dengan baik, dan sangat selaras dengan masalah penelitian.
+                            Tujuan riset tepat, didefinisikan dengan baik, dan sangat selaras dengan masalah.
                         </div>
                     </div>
                 </td>
@@ -850,25 +850,25 @@
             <!-- C.4 -->
             <tr id="row-8">
                 <td class="col-num">4</td>
-                <td class="col-unsur">Manfaat penelitian dan kontribusi yang diharapkan</td>
+                <td class="col-unsur">Manfaat riset dan kontribusi yang diharapkan</td>
                 <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
                 <td>
                     <div class="skor-grid">
                         <div class="skor-item" onclick="pilihSkor(8, 1)">
                             <span class="skor-title">Skor 1</span>
-                            Manfaat dan kontribusi penelitian tidak dijelaskan.
+                            Manfaat dan kontribusi riset tidak dijelaskan.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(8, 2)">
                             <span class="skor-title">Skor 2</span>
-                            Manfaat dan kontribusi penelitian dijelaskan secara buruk.
+                            Manfaat dan kontribusi riset dijelaskan secara buruk.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(8, 3)">
                             <span class="skor-title">Skor 3</span>
-                            Manfaat dan kontribusi penelitian dijelaskan secara memadai, tetapi masih perlu diperbaiki.
+                            Manfaat dan kontribusi riset dijelaskan secara memadai, tetapi masih perlu diperbaiki.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(8, 4)">
                             <span class="skor-title">Skor 4</span>
-                            Manfaat dan kontribusi penelitian dijelaskan secara mendalam.
+                            Manfaat dan kontribusi riset dijelaskan secara mendalam.
                         </div>
                     </div>
                 </td>
@@ -912,25 +912,25 @@
             <!-- C.6 -->
             <tr id="row-10">
                 <td class="col-num">6</td>
-                <td class="col-unsur">Desain penelitian dan penentuan sampel (unit individu dalam penelitian)</td>
+                <td class="col-unsur">Desain riset dan penentuan sampel (unit pengamatan dalam riset)</td>
                 <td class="col-bobot" style="text-align:center; vertical-align:middle;">10</td>
                 <td>
                     <div class="skor-grid">
                         <div class="skor-item" onclick="pilihSkor(10, 1)">
                             <span class="skor-title">Skor 1</span>
-                            Desain penelitian dan metode penentuan sampel tidak ada atau salah.
+                            Desain riset dan metode penentuan sampel tidak ada atau salah.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(10, 2)">
                             <span class="skor-title">Skor 2</span>
-                            Desain penelitian dan metode penentuan sampel ada, tetapi tidak ada detail atau justifikasinya.
+                            Desain riset dan metode penentuan sampel ada, tetapi tidak ada detail atau justifikasinya.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(10, 3)">
                             <span class="skor-title">Skor 3</span>
-                            Desain penelitian dan metode penentuan sampel sebagian besar sesuai, tetapi masih perlu diperbaiki.
+                            Desain riset dan metode penentuan sampel sebagian besar sesuai, tetapi masih perlu diperbaiki.
                         </div>
                         <div class="skor-item" onclick="pilihSkor(10, 4)">
                             <span class="skor-title">Skor 4</span>
-                            Desain penelitian terstruktur dengan baik dan logis. Metode penentuan sampel dijustifikasi dengan kuat.
+                            Desain riset terstruktur dengan baik dan logis. Metode penentuan sampel dijustifikasi dengan kuat.
                         </div>
                     </div>
                 </td>
@@ -974,36 +974,36 @@
             <!-- C.8 -->
             <tr id="row-12">
                 <td class="col-num">8</td>
-                <td class="col-unsur">Teknik analisis data, interpretasi data, dan rencana penarikan kesimpulan</td>
+                <td class="col-unsur">Rencana analisis data, penyajian data, interpretasi, dan penarikan kesimpulan</td>
                 <td class="col-bobot" style="text-align:center; vertical-align:middle;">5</td>
                 <td>
                     <div class="skor-grid">
                         <div class="skor-item" onclick="pilihSkor(12, 1)">
                             <span class="skor-title">Skor 1</span>
                             <ul>
-                                <li>Teknik analisis dan interpretasi data tidak ada atau salah.</li>
-                                <li>Rencana penarikan kesimpulan tidak ada.</li>
+                                <li>Rencana analisis dan penyajian data tidak ada atau salah.</li>
+                                <li>Rencana interpretasi dan penarikan kesimpulan tidak ada.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(12, 2)">
                             <span class="skor-title">Skor 2</span>
                             <ul>
-                                <li>Teknik analisis dan interpretasi data dijelaskan secara buruk.</li>
-                                <li>Rencana penarikan kesimpulan ada, tetapi tidak logis.</li>
+                                <li>Rencana analisis dan penyajian data banyak yang tidak sesuai dengan tujuan riset.</li>
+                                <li>Rencana interpretasi dan penarikan kesimpulan tidak logis.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(12, 3)">
                             <span class="skor-title">Skor 3</span>
                             <ul>
-                                <li>Teknik analisis dan interpretasi data dijelaskan secara memadai.</li>
-                                <li>Rencana penarikan kesimpulan dijelaskan secara memadai.</li>
+                                <li>Rencana analisis dan penyajian data sebagian besar sesuai dengan tujuan riset.</li>
+                                <li>Rencana interpretasi dan penarikan kesimpulan memadai, tetapi masih perlu diperbaiki.</li>
                             </ul>
                         </div>
                         <div class="skor-item" onclick="pilihSkor(12, 4)">
                             <span class="skor-title">Skor 4</span>
                             <ul>
-                                <li>Teknik analisis dan interpretasi data dijustifikasi secara mendalam.</li>
-                                <li>Rencana penarikan kesimpulan dijustifikasi secara mendalam.</li>
+                                <li>Rencana analisis dan penyajian data lengkap, dijustifikasi, dan selaras dengan tujuan riset.</li>
+                                <li>Rencana interpretasi dan penarikan kesimpulan dijustifikasi dengan baik.</li>
                             </ul>
                         </div>
                     </div>
@@ -1016,7 +1016,7 @@
 
             <!-- Total & Nilai -->
             <tr class="total-row">
-                <td colspan="4" style="text-align: right; padding-right: 20px !important;">Total skor tertimbang</td>
+                <td colspan="4" style="text-align: right; padding-right: 20px !important;">Total skor</td>
                 <td id="total-skor" style="text-align: center; padding: 6px !important;">0</td>
             </tr>
             <tr class="total-row">
