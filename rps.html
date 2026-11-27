@@ -44,7 +44,7 @@ const RPS = {
     sifat: "Mata Kuliah Wajib",
     periode: "Semester Genap",
     tahunAkademik: "2026/2027",
-    angkatan: "2026",
+    angkatan: "2025",
     prasyarat: ["Biostatistika"],
     tanggalPenyusunan: "2024-03-10",  // format TTTT-BB-HH
     tanggalRevisi: "2026-11-22",
@@ -106,7 +106,7 @@ const RPS = {
     { kode: "AMK", nama: "drh. Anjani Marisa Kartikasari, M.Si.", peran: "" }
   ],
 
-  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan secara bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan proposalnya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
+  deskripsi: "Metodologi Ilmiah adalah mata kuliah wajib 2 sks pada semester IV Program Studi S1 Kedokteran Hewan. Mata kuliah ini melatih mahasiswa menelaah karya ilmiah kedokteran hewan secara sistematis, lalu menerapkan hasil telaah itu untuk menyusun dan mengomunikasikan proposal riset. Bahan kajian meliputi etika riset dan integritas akademik, termasuk penggunaan kecerdasan buatan generatif secara bertanggung jawab; penelusuran dan pengelolaan literatur; serta telaah bagian pendahuluan, metode, hasil, pembahasan, dan kesimpulan artikel riset. Pembelajaran memakai pendekatan berbasis kasus dan berbasis proyek. Proyek semester berupa proposal riset yang dikembangkan secara bertahap. Mahasiswa menetapkan topik paling lambat pada pekan 6, menyusun draf pendahuluan dan metode pada pekan 7–12, dan menyajikan artikel riset terpublikasi yang relevan dengan topiknya sebagai poster pada pekan 14. Pada pekan 16, setiap mahasiswa mempertahankan proposal risetnya di hadapan dosen penguji yang ditetapkan sesuai bidang topik riset.",
 
   bahanKajian: [
     "Ilmu, riset, dan metodologi ilmiah",
@@ -118,7 +118,7 @@ const RPS = {
     "State-of-the-art, rumusan masalah, dan pertanyaan riset",
     "Desain riset, variabel, pengukuran, dan analisis data",
     "Penyajian data, hasil, pembahasan, dan penarikan kesimpulan",
-    "Penyajian proposal riset melalui poster dan presentasi lisan"
+    "Penyajian artikel riset melalui poster dan proposal riset melalui presentasi lisan"
   ],
 
   /* Teks CPL mengikuti dokumen kurikulum prodi. Jangan diubah di RPS. */
@@ -134,7 +134,7 @@ const RPS = {
     { kode: "CPMK-1", cpl: "CPL-1", teks: "Mahasiswa mampu menerapkan prinsip etika riset dan integritas akademik dalam penyusunan proposal riset." },
     { kode: "CPMK-2", cpl: "CPL-5", teks: "Mahasiswa mampu menganalisis literatur ilmiah sebagai landasan riset kedokteran hewan." },
     { kode: "CPMK-3", cpl: "CPL-7", teks: "Mahasiswa mampu mengevaluasi komponen karya ilmiah kedokteran hewan secara sistematis sebagai dasar penyusunan proposal riset." },
-    { kode: "CPMK-4", cpl: "CPL-9", teks: "Mahasiswa mampu mengomunikasikan proposal riset kedokteran hewan secara tertulis dan lisan melalui poster ilmiah dan presentasi." }
+    { kode: "CPMK-4", cpl: "CPL-9", teks: "Mahasiswa mampu mengomunikasikan karya ilmiah kedokteran hewan secara tertulis dan lisan sesuai kaidah akademik." }
   ],
 
   /* asesmen: "kasus" | "masalah" | "proyek" (lihat JENIS_ASESMEN di bawah)
@@ -165,8 +165,8 @@ const RPS = {
       indikator: "Ketepatan menilai penyajian tabel dan grafik, hasil, pembahasan, dan keselarasan kesimpulan dengan tujuan pada soal kasus artikel riset.",
       teknik: "Tes tertulis (kuis di LMS Sikola)" },
     { kode: "Sub-CPMK-7", cpmk: "CPMK-4", bobot: 10, asesmen: "proyek",  metode: ["PjBL"],
-      teks: "Mahasiswa mampu menyajikan proposal riset dalam bentuk poster ilmiah sesuai standar akademik.",
-      indikator: "Kelengkapan isi poster proposal (latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, rencana etik), keterbacaan tata letak, dan ketepatan penjelasan saat sesi poster.",
+      teks: "Mahasiswa mampu menyajikan artikel riset terpublikasi yang relevan dengan topik proposal dalam bentuk poster ilmiah sesuai standar akademik.",
+      indikator: "Relevansi artikel dengan topik proposal, ketepatan merangkum latar belakang, tujuan, metode, hasil, dan kesimpulan, ketepatan menjelaskan manfaat artikel bagi proposal, kualitas gambar dan diagram, kelengkapan sitasi sumber, keterbacaan tata letak, serta ketepatan penjelasan saat sesi poster.",
       teknik: "Unjuk kerja" },
     { kode: "Sub-CPMK-8", cpmk: "CPMK-4", bobot: 70, asesmen: "proyek",  metode: ["PjBL"],
       teks: "Mahasiswa mampu mempertahankan proposal riset dalam presentasi lisan sesuai kaidah ilmiah.",
@@ -221,11 +221,11 @@ const RPS = {
     { pekan: 12, sub: "Sub-CPMK-6", dosen: ["AMK"], topik: "Hasil, pembahasan, dan kesimpulan",
       formatif: ["Asesmen diri Tugas 5 dengan lembar kerja", "kuis interaktif di kelas"],
       materi: ["Perbedaan hasil dan pembahasan", "Struktur penulisan hasil", "Strategi pembahasan berbasis literatur", "Keselarasan tujuan dan kesimpulan riset", "Penarikan kesimpulan ilmiah"] },
-    { pekan: 13, sub: "Sub-CPMK-7", dosen: ["KDK"], topik: "Poster proposal riset", kriteria: "Unjuk kerja dinilai dengan rubrik",
-      materi: ["Struktur poster proposal riset (work in progress)", "Prinsip desain grafis akademik", "Penyajian metode dalam diagram alur dan kerangka tabel", "Standar presentasi poster ilmiah"] },
-    { pekan: 14, sub: "Sub-CPMK-7", dosen: "semua", topik: "Presentasi poster proposal riset", bentuk: "Seminar", kriteria: "Unjuk kerja dinilai dengan rubrik",
+    { pekan: 13, sub: "Sub-CPMK-7", dosen: ["KDK"], topik: "Poster artikel ilmiah", kriteria: "Unjuk kerja dinilai dengan rubrik",
+      materi: ["Kriteria pemilihan artikel riset", "Struktur poster artikel riset", "Prinsip desain grafis akademik", "Penyajian metode dan hasil dalam diagram alur, tabel, dan grafik", "Sitasi sumber dan izin penggunaan gambar", "Standar presentasi poster ilmiah"] },
+    { pekan: 14, sub: "Sub-CPMK-7", dosen: "semua", topik: "Presentasi poster artikel ilmiah", bentuk: "Seminar", kriteria: "Unjuk kerja dinilai dengan rubrik",
       formatif: ["Umpan balik dosen tim pengajar"],
-      materi: ["Presentasi poster proposal riset di hadapan dosen tim pengajar", "Asesmen poster oleh dosen tim pengajar", "Umpan balik sebelum presentasi akhir"] },
+      materi: ["Presentasi poster artikel riset di hadapan dosen tim pengajar", "Asesmen poster oleh dosen tim pengajar", "Umpan balik tentang keterkaitan artikel dengan proposal"] },
     { pekan: 15, sub: "Sub-CPMK-8", dosen: ["AMK"], topik: "Strategi presentasi ilmiah", kriteria: "Unjuk kerja dinilai dengan rubrik",
       materi: ["Struktur presentasi proposal", "Teknik komunikasi akademik", "Manajemen waktu presentasi", "Teknik menjawab pertanyaan ilmiah"] },
     { pekan: 16, sub: "Sub-CPMK-8", dosen: "semua", topik: "Presentasi proposal riset", bentuk: "Seminar", sepekan: true, kriteria: "Unjuk kerja dinilai dengan rubrik",
@@ -236,7 +236,7 @@ const RPS = {
   /* Rencana penugasan terstruktur: tahapan proyek proposal riset sepanjang semester.
      Tugas pekan 3–12 bersifat formatif: mahasiswa menilai diri dengan lembar kerja (lembar-kerja.html),
      tanpa bobot, dan berkonsultasi dengan dosen sesuai kebutuhan. Nilai sumatif proyek
-     diberikan pada poster (Sub-CPMK-7) dan naskah serta presentasi final (Sub-CPMK-8).
+     diberikan pada poster artikel (Sub-CPMK-7) dan naskah serta presentasi proposal final (Sub-CPMK-8).
      sifat: "formatif" | "sumatif". Bobot tugas sumatif diambil otomatis dari bobot Sub-CPMK-nya. */
   penugasan: [
     { judul: "Calon topik riset", pekan: [3, 4, 5], sub: "Sub-CPMK-2", sifat: "formatif",
@@ -254,12 +254,12 @@ const RPS = {
     { judul: "Rencana penyajian data", pekan: [11, 12], sub: "Sub-CPMK-6", sifat: "formatif",
       luaran: "Kerangka tabel dan rancangan grafik untuk data yang akan dikumpulkan.",
       deskripsi: "Mahasiswa merancang cara data riset akan disajikan dan dihubungkan dengan tujuan riset." },
-    { judul: "Poster proposal riset", pekan: [13, 14], sub: "Sub-CPMK-7", sifat: "sumatif",
-      luaran: "Poster proposal riset yang dipresentasikan pada pekan 14.",
-      deskripsi: "Mahasiswa menyusun poster yang memuat latar belakang, kesenjangan riset, pertanyaan riset, metode, hasil yang diharapkan, dan rencana etik, lalu mempresentasikannya pada pekan 14." },
+    { judul: "Poster artikel ilmiah", pekan: [13, 14], sub: "Sub-CPMK-7", sifat: "sumatif",
+      luaran: "Poster artikel riset terpublikasi yang dipresentasikan pada pekan 14.",
+      deskripsi: "Mahasiswa memilih artikel riset asli yang telah melalui telaah sejawat, memuat gambar atau diagram, dan relevan dengan topik proposalnya. Mahasiswa menyusun poster yang memuat isi utama artikel dan manfaatnya bagi proposal, lalu mempresentasikannya pada pekan 14. Poster mencantumkan sumber dan DOI artikel. Gambar asli digunakan sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit." },
     { judul: "Naskah proposal final", pekan: [15, 16], sub: "Sub-CPMK-8", sifat: "sumatif",
       luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
-      deskripsi: "Mahasiswa memperbaiki naskah berdasarkan umpan balik sesi poster, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset." }
+      deskripsi: "Mahasiswa memperbaiki naskah proposal berdasarkan hasil asesmen diri dan konsultasi, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset." }
   ],
 
   /* Pustaka. Gaya Harvard (Cite Them Right): Nama belakang, Inisial. (Tahun) *Judul buku*.
@@ -302,7 +302,7 @@ const RPS = {
   /* Catatan untuk penyusun. Tampil di panel ?periksa, tidak terlihat oleh pembaca biasa. */
   catatanPenyusun: [
     "Peta analisis pembelajaran pada RPS 2026 berupa gambar dan perlu dibuat ulang mengikuti struktur Sub-CPMK yang baru.",
-    "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) dan rubrik poster proposal (Sub-CPMK-7) belum tersedia.",
+    "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) dan rubrik poster artikel ilmiah (Sub-CPMK-7) belum tersedia.",
     "Tentukan mekanisme penilaian poster pekan 14: semua dosen menilai semua poster, atau setiap dosen menilai poster mahasiswa yang juga diujinya pada pekan 16.",
     "Bagian penugasan di RPS memuat ringkasan. Tugas 1–5 dipandu lembar kerja asesmen diri (lembar-kerja.html); instruksi, kriteria, dan rubrik Tugas 6 dan 7 disusun di dokumen RTM.",
     "Rubrik presentasi proposal perlu diselaraskan: istilah \"penelitian\" menjadi \"riset\" dan unsur pertimbangan etik ditambahkan ke butir C.7.",
@@ -462,7 +462,10 @@ h3{font-size:1.15rem;margin:0 0 10px}
 .wk-topic{font:600 var(--fs-title)/1.35 var(--sans);transition:color .12s}
 .wk-date{display:block;font:400 var(--fs-xs)/1.4 var(--sans);color:var(--ink-3);margin-top:2px}
 .wk-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-.wk-body{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule);margin:0 18px}
+.wk-body{margin:0 18px}
+.wk-sec{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 32px;border-top:1px solid var(--rule)}
+.wk-body .wk-span{grid-column:1/-1;margin:0 0 -8px;font-size:var(--fs-xs);color:var(--ink-3)}
+.wk-span b{color:var(--ink)}
 .wk-body h4{margin:0 0 6px;font-size:var(--fs-label);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .wk-body p,.wk-body li{font-size:var(--fs-sm);line-height:1.55}
 .wk-body ul{padding-left:1.1em}
@@ -583,7 +586,8 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
   .week > summary{grid-template-columns:14px 44px minmax(0,1fr);gap:10px;padding:12px 14px}
   .wk-right{grid-column:3;justify-content:flex-start}
   .wk-no b{font-size:1.15rem}
-  .wk-body{grid-template-columns:1fr;margin:0 14px}
+  .wk-body{margin:0 14px}
+  .wk-sec{grid-template-columns:1fr}
   .week-gap{grid-template-columns:1fr;gap:2px;padding:10px 14px}
   .holidays ul{grid-template-columns:1fr}
   .matrix td,.matrix th{padding:8px 3px}
@@ -1065,6 +1069,30 @@ function renderCapaian() {
 }
 
 /* ── Render: jadwal per pekan ────────────────────────────────────── */
+/* Keterangan pekan yang berbagi Sub-CPMK; pekan yang sedang dibuka dicetak tebal. */
+function spanPekan(p) {
+  const daftar = pekanOf(p.sub).map(n => n === p.pekan ? `<b>${n}</b>` : String(n));
+  const akhir = daftar.pop();
+  const teks = !daftar.length ? akhir : daftar.join(", ") + (daftar.length > 1 ? "," : "") + " dan " + akhir;
+  return `<p class="wk-span">${esc(p.sub)} dan asesmennya berlaku untuk pekan ${teks}.</p>`;
+}
+/* Formatif satu Sub-CPMK: jika berbeda antarpekan, tampilkan rincian per pekan. */
+function formatifSub(kode) {
+  const grup = new Map();
+  pertemuan.filter(p => p.sub === kode).forEach(p => {
+    const teks = p.formatif.join(", ");
+    grup.set(teks, [...(grup.get(teks) || []), p.pekan]);
+  });
+  if (grup.size === 1) return esc([...grup.keys()][0]);
+  return [...grup].map(([teks, pk]) => `${esc(fmtPekan(pk))}: ${esc(teks)}`).join("<br>");
+}
+/* Kriteria satu Sub-CPMK, dengan aturan yang sama seperti formatif. */
+function kriteriaSub(kode) {
+  const grup = new Map();
+  pertemuan.filter(p => p.sub === kode).forEach(p => grup.set(p.kriteria, [...(grup.get(p.kriteria) || []), p.pekan]));
+  if (grup.size === 1) return esc([...grup.keys()][0]);
+  return [...grup].map(([teks, pk]) => `${esc(fmtPekan(pk))}: ${esc(teks)}`).join("<br>");
+}
 function renderWeeks() {
   const W = RPS.bawaanPertemuan.waktu;
   $("#weeks").innerHTML = pertemuan.map(p => {
@@ -1084,14 +1112,18 @@ function renderWeeks() {
         <span class="wk-right"><span class="tag">${esc(p.sub)}</span><span class="tag tag-accent">${esc(dosenCodes(p.dosenList))}</span></span>
       </summary>
       <div class="wk-body">
+        <div class="wk-sec">
+        ${spanPekan(p)}
         <div><h4>Sub-CPMK (Kemampuan akhir)</h4><p style="margin:0"><b>${esc(p.sub)}:</b> ${esc(sub.teks || "")}</p></div>
         <div><h4>Asesmen</h4>
           <dl class="kv">
             <dt>Indikator</dt><dd>${esc(sub.indikator || "")}</dd>
-            <dt>${term("Formatif")}</dt><dd>${esc(p.formatif.join(", "))}</dd>
+            <dt>${term("Formatif")}</dt><dd>${formatifSub(p.sub)}</dd>
             <dt>${term("Sumatif")}</dt><dd>${esc(sub.teknik || "")}</dd>
-            <dt>Kriteria</dt><dd>${esc(p.kriteria)}</dd>
+            <dt>Kriteria</dt><dd>${kriteriaSub(p.sub)}</dd>
           </dl></div>
+        </div>
+        <div class="wk-sec">
         <div><h4>Bentuk dan metode pembelajaran</h4>
           <dl class="kv">
             <dt>${term("Bentuk pembelajaran", "Bentuk")}</dt><dd>${esc(p.bentuk)}</dd>
@@ -1102,6 +1134,7 @@ function renderWeeks() {
             <dt>Dosen</dt><dd>${esc(p.dosenList.length === RPS.dosen.length ? "Semua dosen tim pengajar" : dosenNames(p.dosenList))}</dd>
           </dl></div>
         <div><h4>Materi pembelajaran</h4><ul>${materi}</ul></div>
+        </div>
       </div>
     </details>`;
   }).join("");
@@ -1133,7 +1166,7 @@ function renderAsesmen() {
   const per = {};
   RPS.subcpmk.forEach(s => { per[s.asesmen] = (per[s.asesmen] || 0) + s.bobot; });
   const keys = Object.keys(JENIS_ASESMEN).filter(k => per[k]);
-  $("#asesmen-lede").innerHTML = `Nilai akhir berasal dari asesmen ${term("Sumatif", "sumatif")} setiap Sub-CPMK. Sumatif Sub-CPMK-1 sampai Sub-CPMK-6 berupa kuis di LMS Sikola, sedangkan poster dan presentasi proposal dinilai dengan rubrik. Asesmen ${term("Formatif", "formatif")} berupa asesmen diri dengan lembar kerja, kuis interaktif di kelas, dan umpan balik tidak menambah bobot. Mahasiswa dapat berkonsultasi dengan dosen sesuai kebutuhan.`;
+  $("#asesmen-lede").innerHTML = `Nilai akhir berasal dari asesmen ${term("Sumatif", "sumatif")} setiap Sub-CPMK. Sumatif Sub-CPMK-1 sampai Sub-CPMK-6 berupa kuis di LMS Sikola, sedangkan poster artikel dan presentasi proposal dinilai dengan rubrik. Asesmen ${term("Formatif", "formatif")} berupa asesmen diri dengan lembar kerja, kuis interaktif di kelas, dan umpan balik tidak menambah bobot. Mahasiswa dapat berkonsultasi dengan dosen sesuai kebutuhan.`;
   $("#stack").setAttribute("aria-label", keys.map(k => `${JENIS_ASESMEN[k].id} ${per[k]}%`).join(", "));
   $("#stack").innerHTML = keys.map(k => `<span style="flex:${per[k]};background:${JENIS_ASESMEN[k].warna};color:${JENIS_ASESMEN[k].teks}">${per[k] >= 8 ? per[k] + "%" : ""}</span>`).join("");
   $("#legend").innerHTML = keys.map(k => `<li><i class="sw" style="background:${JENIS_ASESMEN[k].warna}"></i><span><b class="num">${per[k]}%</b> ${esc(JENIS_ASESMEN[k].id)}</span></li>`).join("");
