@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rubrik Asesmen Poster Artikel Ilmiah – Metodologi Ilmiah Unhas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#980101;--tint:#fdd5d5;--bg:#f4f4f9;--ink:#222;--ink2:#555;--rule:#d5d5da}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.box{background:#fff;border:1px solid var(--rule);border-radius:6px;padding:12px 14px}
+h1{margin:0;font-size:17px;text-transform:uppercase}
+h2{margin:0;font-size:14px}
+header{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;text-align:center}
+header img{width:62px}
+header p{margin:2px 0;font-size:12px}
+header dl{display:grid;grid-template-columns:auto auto;gap:2px 10px;margin:0;font-size:11px;text-align:left}
+header dd{margin:0}
+label{display:block;font-weight:600;font-size:12px;margin-bottom:3px}
+input,textarea{width:100%;font:inherit;padding:7px 9px;border:1px solid #bbb;border-radius:4px;background:#fff}
+button,.btn{font:600 13px Inter,system-ui,sans-serif;padding:8px 14px;border:1px solid var(--rule);border-radius:4px;background:#fff;color:var(--ink);cursor:pointer}
+button.utama{background:var(--red);border-color:var(--red);color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+.identitas{display:grid;grid-template-columns:1fr 2fr 1fr;gap:10px}
+.aspek{display:grid;grid-template-columns:190px repeat(4,1fr);gap:6px;padding:8px;border:1px solid var(--rule);border-radius:6px;background:#fff}
+.aspek.aktif{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.aspek h2{align-self:center}
+.aspek h2 small{display:block;font-weight:400;color:var(--ink2)}
+.skor{text-align:left;font-weight:400;display:flex;gap:8px;align-items:flex-start;line-height:1.35}
+.skor b{color:var(--red)}
+.skor[aria-pressed="true"]{background:var(--tint);border-color:var(--red)}
+#rubrik{display:flex;flex-direction:column;gap:6px}
+.bilah{position:sticky;bottom:0;z-index:2;display:flex;gap:12px;align-items:center;flex-wrap:wrap;box-shadow:0 -4px 14px rgba(0,0,0,.08)}
+.nilai{font-size:22px;font-weight:700;min-width:70px}
+.kanan{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+#pesan{font-size:13px;color:var(--ink2)}
+#pesan.galat{color:var(--red);font-weight:600}
+.alat{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.alat input{max-width:240px}
+.gulir{overflow:auto;max-height:480px;border:1px solid var(--rule);border-radius:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;white-space:nowrap}
+th{position:sticky;top:0;background:#eee}
+td button{padding:3px 8px;font-size:12px}
+summary{cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▶ ";font-size:10px}
+details[open] summary::before{content:"▼ "}
+details textarea{margin:8px 0;min-height:110px}
+.tip{border-bottom:1px dotted var(--ink2);cursor:help}
+@media (max-width:860px){
+  header{grid-template-columns:1fr;justify-items:center}
+  .identitas{grid-template-columns:1fr}
+  .aspek{grid-template-columns:1fr 1fr}
+  .aspek h2{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="box">
+  <img src="img/Logo-Unhas-200px.png" alt="Logo Unhas">
+  <div>
+    <p><b>Program Studi Kedokteran Hewan, Fakultas Kedokteran, Universitas Hasanuddin</b></p>
+    <h1>Rubrik Asesmen Poster Artikel Ilmiah</h1>
+    <p>Metodologi Ilmiah · CPMK-4 · Sub-CPMK-7 · Bobot 10% dari nilai mata kuliah</p>
+  </div>
+  <dl>
+    <dt>No.</dt><dd>: –</dd>
+    <dt>Versi</dt><dd>: 1.00</dd>
+    <dt>Tgl. Terbit</dt><dd>: 27/11/2026</dd>
+    <dt>Tgl. Revisi</dt><dd>: –</dd>
+  </dl>
+</header>
+
+<section class="box identitas">
+  <div><label for="penilai">Dosen penilai</label><input id="penilai" placeholder="Nama atau kode dosen" autocomplete="off"></div>
+  <div><label for="nama">Nama mahasiswa</label><input id="nama" list="daftar-nama" placeholder="Ketik nama" autocomplete="off"><datalist id="daftar-nama"></datalist></div>
+  <div><label for="nim">NIM</label><input id="nim" list="daftar-nim" placeholder="Ketik NIM" autocomplete="off"><datalist id="daftar-nim"></datalist></div>
+</section>
+
+<div id="rubrik"></div>
+
+<section class="box bilah">
+  <div><label>Nilai</label><div class="nilai" id="nilai">–</div></div>
+  <div><div id="status">0 dari 5 aspek terisi</div><div id="pesan" role="status" aria-live="polite"></div></div>
+  <div class="kanan">
+    <span class="tip" title="Tekan angka 1 sampai 4 untuk mengisi aspek berbingkai merah, lalu Enter untuk menyimpan.">Pintasan papan ketik</span>
+    <button type="button" id="kosongkan">Kosongkan</button>
+    <button type="button" id="selesai" class="utama" disabled>Selesai</button>
+  </div>
+</section>
+
+<section class="box">
+  <h2 id="judul-rekap">Rekap nilai</h2>
+  <div class="alat">
+    <input id="cari" type="search" placeholder="Cari nama atau NIM">
+    <button type="button" id="csv" class="utama">Ekspor CSV</button>
+    <button type="button" id="rata" title="Satu baris per mahasiswa, berisi rata-rata nilai dari semua dosen yang datanya ada di halaman ini.">Ekspor rata-rata</button>
+    <button type="button" id="cadang">Unduh cadangan</button>
+    <button type="button" id="muat" title="Memuat file cadangan. Data digabung dengan data yang sudah ada.">Muat cadangan</button>
+    <input type="file" id="file" accept=".json,application/json" hidden>
+    <button type="button" id="hapus-semua">Hapus semua</button>
+  </div>
+  <div class="gulir">
+    <table>
+      <thead><tr id="kepala"></tr></thead>
+      <tbody id="isi"></tbody>
+    </table>
+  </div>
+</section>
+
+<details class="box">
+  <summary>Daftar mahasiswa (opsional)</summary>
+  <textarea id="daftar" placeholder="Satu mahasiswa per baris: NIM, Nama. Bisa ditempel langsung dari dua kolom Excel."></textarea>
+  <div id="info-daftar"></div>
+</details>
+
+<details class="box">
+  <summary>Catatan metode</summary>
+  <p>Nilai = Σ (skor ÷ 4 × bobot). Rentang nilai 25 sampai 100.</p>
+  <p>Data tersimpan di peramban pada perangkat ini. Data dapat hilang jika data peramban dihapus atau memakai mode penyamaran. Unduh cadangan setiap selesai satu sesi.</p>
+  <p>Penggabungan antardosen: muat file cadangan tiap dosen pada satu perangkat, lalu pilih Ekspor rata-rata. Data dibedakan menurut NIM dan nama dosen penilai.</p>
+</details>
+
+</main>
+
+<script>
+const ASPEK = [
+  { judul: "Relevansi dan manfaat artikel", bobot: 20, d: [
+    "Artikel tidak relevan dengan topik proposal.",
+    "Relevansi lemah, manfaat bagi proposal tidak jelas.",
+    "Relevan, manfaat bagi proposal dijelaskan secara umum.",
+    "Sangat relevan, manfaat bagi proposal spesifik." ] },
+  { judul: "Ketepatan isi ringkasan", bobot: 30, d: [
+    "Banyak bagian utama hilang atau keliru.",
+    "Satu bagian hilang atau beberapa isi keliru.",
+    "Semua bagian ada, dengan sedikit ketidaktepatan.",
+    "Latar belakang, tujuan, metode, hasil, dan kesimpulan tepat serta selaras." ] },
+  { judul: "Visual dan keterbacaan", bobot: 20, d: [
+    "Sulit dibaca, tanpa gambar atau diagram bermakna.",
+    "Teks padat, alur atau visual membingungkan.",
+    "Terbaca dan runtut, ada visual yang kurang jelas.",
+    "Ringkas, alur jelas, visual terbaca dan mendukung isi." ] },
+  { judul: "Sumber dan izin gambar", bobot: 10, d: [
+    "Sumber artikel tidak dicantumkan.",
+    "Sumber tidak lengkap, tanpa DOI atau atribusi gambar.",
+    "Sumber dan DOI ada, atribusi atau izin gambar kurang lengkap.",
+    "Sumber, DOI, atribusi, dan lisensi atau izin gambar lengkap." ] },
+  { judul: "Penjelasan lisan dan tanya jawab", bobot: 20, d: [
+    "Tidak mampu menjelaskan atau menjawab.",
+    "Banyak membaca poster, jawaban sering keliru.",
+    "Penjelasan jelas, sebagian besar jawaban tepat.",
+    "Penjelasan runtut, jawaban tepat dan beralasan." ] }
+];
+
+const KUNCI = "mi-rubrik-poster-v1";
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const rapi = s => String(s).trim().replace(/\s+/g, " ");
+const idBaris = r => (r.nim + "|" + r.penilai).toLowerCase();
+const hitung = skor => skor.reduce((a, s, i) => a + s / 4 * ASPEK[i].bobot, 0);
+
+let data = { baris: [], daftar: "", penilai: "" };
+let skor = ASPEK.map(() => 0);
+let ubah = null;   // kunci baris yang sedang diubah
+
+function pesan(teks, galat) {
+  $("pesan").textContent = teks;
+  $("pesan").className = galat ? "galat" : "";
+}
+
+const sah = r => r && typeof r.nim === "string" && typeof r.nama === "string" && typeof r.penilai === "string" &&
+  Array.isArray(r.skor) && r.skor.length === ASPEK.length && r.skor.every(s => [1, 2, 3, 4].includes(s)) && typeof r.waktu === "string";
+
+function baca() {
+  try {
+    const o = JSON.parse(localStorage.getItem(KUNCI));
+    if (o && Array.isArray(o.baris)) data = { baris: o.baris.filter(sah), daftar: o.daftar || "", penilai: o.penilai || "" };
+  } catch (e) { pesan("Penyimpanan peramban tidak bisa dibaca. Gunakan Unduh cadangan.", true); }
+}
+function tulis() {
+  try { localStorage.setItem(KUNCI, JSON.stringify(data)); return true; }
+  catch (e) { pesan("Gagal menyimpan di peramban. Segera unduh cadangan.", true); return false; }
+}
+
+function gambarRubrik() {
+  $("rubrik").innerHTML = ASPEK.map((a, i) => `<div class="aspek" role="group" aria-label="${esc(a.judul)}">
+    <h2>${i + 1}. ${esc(a.judul)}<small>Bobot ${a.bobot}%</small></h2>
+    ${a.d.map((t, j) => `<button type="button" class="skor" data-a="${i}" data-s="${j + 1}" aria-pressed="false"><b>${j + 1}</b><span>${esc(t)}</span></button>`).join("")}
+  </div>`).join("");
+}
+
+function segarkan() {
+  document.querySelectorAll(".skor").forEach(b => b.setAttribute("aria-pressed", String(skor[b.dataset.a] === +b.dataset.s)));
+  const aktif = skor.indexOf(0);
+  document.querySelectorAll(".aspek").forEach((el, i) => el.classList.toggle("aktif", i === aktif));
+  const n = skor.filter(Boolean).length;
+  $("status").textContent = `${n} dari ${ASPEK.length} aspek terisi`;
+  $("nilai").textContent = n === ASPEK.length ? hitung(skor).toFixed(2) : "–";
+  $("selesai").disabled = n !== ASPEK.length;
+  $("selesai").textContent = ubah ? "Simpan perubahan" : "Selesai";
+}
+
+function bersihkan() {
+  skor = ASPEK.map(() => 0);
+  ubah = null;
+  $("nama").value = $("nim").value = "";
+  segarkan();
+}
+
+function simpan() {
+  const r = { nim: rapi($("nim").value), nama: rapi($("nama").value), penilai: rapi($("penilai").value), skor: skor.slice(), waktu: new Date().toISOString() };
+  const kosong = ["penilai", "nama", "nim"].find(k => !r[k]);
+  if (kosong) { pesan("Isi dosen penilai, nama, dan NIM.", true); $(kosong).focus(); return; }
+  if (skor.includes(0)) return;
+  baca();   // ambil data terbaru bila halaman dibuka di dua tab
+  const k = idBaris(r);
+  const ada = data.baris.find(x => idBaris(x) === k);
+  if (ada && k !== ubah && !confirm(`NIM ${r.nim} sudah dinilai (${ada.nama}). Ganti nilainya?`)) return;
+  data.baris = data.baris.filter(x => idBaris(x) !== k && idBaris(x) !== ubah);
+  data.baris.push(r);
+  data.penilai = r.penilai;
+  const berhasil = tulis();
+  bersihkan();
+  tabel();
+  if (berhasil) pesan(`Tersimpan: ${r.nama}, nilai ${hitung(r.skor).toFixed(2)}.`);
+  window.scrollTo({ top: 0 });
+  $("nama").focus({ preventScroll: true });
+}
+
+function tabel() {
+  $("kepala").innerHTML = "<th>No</th><th>NIM</th><th>Nama</th>" +
+    ASPEK.map((a, i) => `<th title="${esc(a.judul)}">A${i + 1}</th>`).join("") + "<th>Nilai</th><th>Penilai</th><th>Aksi</th>";
+  const q = $("cari").value.trim().toLowerCase();
+  const baris = data.baris.map((r, i) => ({ r, no: i + 1 })).reverse()
+    .filter(x => !q || (x.r.nim + " " + x.r.nama).toLowerCase().includes(q));
+  $("isi").innerHTML = baris.map(({ r, no }) => `<tr><td>${no}</td><td>${esc(r.nim)}</td><td>${esc(r.nama)}</td>
+    ${r.skor.map(s => `<td>${s}</td>`).join("")}<td><b>${hitung(r.skor).toFixed(2)}</b></td><td>${esc(r.penilai)}</td>
+    <td><button type="button" data-ubah="${esc(idBaris(r))}">Ubah</button> <button type="button" data-hapus="${esc(idBaris(r))}">Hapus</button></td></tr>`).join("")
+    || `<tr><td colspan="${ASPEK.length + 6}">Belum ada data.</td></tr>`;
+  const unik = new Set(data.baris.map(r => r.nim.toLowerCase())).size;
+  $("judul-rekap").textContent = `Rekap nilai: ${data.baris.length} baris, ${unik} mahasiswa`;
+}
+
+/* Daftar mahasiswa */
+function mahasiswa() {
+  return data.daftar.split(/\r?\n/).map(l => {
+    const m = l.match(/^\s*([^\t,;]+)[\t,;]\s*(.+?)\s*$/);
+    return m ? { nim: rapi(m[1]), nama: rapi(m[2]) } : null;
+  }).filter(m => m && /\d/.test(m.nim));
+}
+function isiDaftar() {
+  const m = mahasiswa();
+  $("daftar-nama").innerHTML = m.map(x => `<option value="${esc(x.nama)}">${esc(x.nim)}</option>`).join("");
+  $("daftar-nim").innerHTML = m.map(x => `<option value="${esc(x.nim)}">${esc(x.nama)}</option>`).join("");
+  $("info-daftar").textContent = `${m.length} mahasiswa terbaca.`;
+}
+function pasangkan(dari, ke) {
+  const v = rapi($(dari).value).toLowerCase();
+  const cocok = mahasiswa().filter(x => x[dari].toLowerCase() === v);
+  if (cocok.length === 1) $(ke).value = cocok[0][ke];
+}
+
+/* Ekspor */
+function unduh(nama, isi, jenis) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([isi], { type: jenis }));
+  a.download = nama;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function cap() {
+  const d = new Date(), p = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+}
+/* Pemisah titik koma dan desimal koma, sesuai Excel berlokal Indonesia */
+function sel(v) {
+  let s = typeof v === "number" ? String(v).replace(".", ",") : String(v);
+  if (typeof v !== "number" && /^[=+\-@]/.test(s)) s = "'" + s;
+  return `"${s.replace(/"/g, '""')}"`;
+}
+const keCsv = tab => "﻿" + tab.map(r => r.map(sel).join(";")).join("\r\n");
+const adaData = () => data.baris.length || (pesan("Belum ada data untuk diekspor.", true), false);
+
+function eksporCsv() {
+  if (!adaData()) return;
+  const tab = [["NIM", "Nama", ...ASPEK.map(a => a.judul), "Nilai", "Penilai", "Waktu"]];
+  data.baris.forEach(r => tab.push([r.nim, r.nama, ...r.skor, +hitung(r.skor).toFixed(2), r.penilai, new Date(r.waktu).toLocaleString("id-ID")]));
+  unduh(`nilai-poster-${cap()}.csv`, keCsv(tab), "text/csv;charset=utf-8");
+}
+function eksporRata() {
+  if (!adaData()) return;
+  const g = new Map();
+  data.baris.forEach(r => { const k = r.nim.toLowerCase(); if (!g.has(k)) g.set(k, []); g.get(k).push(r); });
+  const tab = [["NIM", "Nama", "Nilai rata-rata", "Jumlah penilai", "Selisih nilai tertinggi dan terendah", "Penilai"]];
+  g.forEach(rs => {
+    const n = rs.map(r => hitung(r.skor));
+    tab.push([rs[0].nim, rs[0].nama, +(n.reduce((a, b) => a + b, 0) / n.length).toFixed(2), n.length,
+      +(Math.max(...n) - Math.min(...n)).toFixed(2), rs.map(r => r.penilai).join(", ")]);
+  });
+  unduh(`rata-rata-poster-${cap()}.csv`, keCsv(tab), "text/csv;charset=utf-8");
+}
+
+/* Peristiwa */
+function pilih(a, s) { skor[a] = s; pesan(""); segarkan(); }
+$("rubrik").addEventListener("click", e => { const b = e.target.closest(".skor"); if (b) pilih(+b.dataset.a, +b.dataset.s); });
+document.addEventListener("keydown", e => {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.target.matches("input,textarea,summary")) return;
+  const a = skor.indexOf(0);
+  if (/^[1-4]$/.test(e.key) && a >= 0) { e.preventDefault(); pilih(a, +e.key); }
+  else if (e.key === "Enter" && !skor.includes(0) && (!e.target.matches("button") || e.target.matches(".skor"))) { e.preventDefault(); simpan(); }
+});
+$("selesai").onclick = simpan;
+$("kosongkan").onclick = () => { bersihkan(); pesan(""); };
+$("nama").addEventListener("change", () => pasangkan("nama", "nim"));
+$("nim").addEventListener("change", () => pasangkan("nim", "nama"));
+$("penilai").addEventListener("change", () => { data.penilai = rapi($("penilai").value); tulis(); });
+$("daftar").addEventListener("input", () => { data.daftar = $("daftar").value; tulis(); isiDaftar(); });
+$("cari").addEventListener("input", tabel);
+$("isi").addEventListener("click", e => {
+  const u = e.target.dataset.ubah, h = e.target.dataset.hapus;
+  const r = data.baris.find(x => idBaris(x) === (u || h));
+  if (!r) return;
+  if (u) {
+    ubah = u; skor = r.skor.slice();
+    ["nim", "nama", "penilai"].forEach(k => $(k).value = r[k]);
+    segarkan(); pesan(`Mengubah nilai ${r.nama}.`); window.scrollTo({ top: 0 });
+  } else if (confirm(`Hapus nilai ${r.nama}?`)) {
+    data.baris = data.baris.filter(x => x !== r);
+    if (ubah === h) bersihkan();
+    tulis(); tabel();
+  }
+});
+$("csv").onclick = eksporCsv;
+$("rata").onclick = eksporRata;
+$("cadang").onclick = () => unduh(`cadangan-poster-${cap()}.json`, JSON.stringify({ app: KUNCI, baris: data.baris, daftar: data.daftar }, null, 2), "application/json");
+$("muat").onclick = () => $("file").click();
+$("file").addEventListener("change", async () => {
+  const f = $("file").files[0];
+  if (!f) return;
+  try {
+    const o = JSON.parse(await f.text());
+    if (o.app !== KUNCI || !Array.isArray(o.baris)) throw 0;
+    baca();
+    const peta = new Map(data.baris.map(r => [idBaris(r), r]));
+    o.baris.filter(sah).forEach(r => { const lama = peta.get(idBaris(r)); if (!lama || r.waktu > lama.waktu) peta.set(idBaris(r), r); });
+    data.baris = [...peta.values()].sort((a, b) => a.waktu.localeCompare(b.waktu));
+    if (!data.daftar && typeof o.daftar === "string") data.daftar = $("daftar").value = o.daftar;
+    const berhasil = tulis(); tabel(); isiDaftar();
+    if (berhasil) pesan(`Cadangan dimuat. Total ${data.baris.length} baris.`);
+  } catch (e) { pesan("File tidak dikenali. Pilih file cadangan dari rubrik poster.", true); }
+  $("file").value = "";
+});
+$("hapus-semua").onclick = () => {
+  if (!data.baris.length || !confirm(`Hapus semua ${data.baris.length} baris nilai? Tindakan ini tidak bisa dibatalkan. Pastikan cadangan sudah diunduh.`)) return;
+  data.baris = []; tulis(); bersihkan(); tabel(); pesan("Semua nilai dihapus.");
+};
+window.addEventListener("storage", e => { if (e.key === KUNCI) { baca(); tabel(); } });
+
+gambarRubrik();
+baca();
+$("penilai").value = data.penilai;
+$("daftar").value = data.daftar;
+isiDaftar();
+tabel();
+segarkan();
+</script>
+</body>
+</html>

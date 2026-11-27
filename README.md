@@ -24,7 +24,8 @@ Mahasiswa belajar menelaah karya ilmiah secara sistematis, menyusun proposal ris
 | [`rps.html`](rps.html) | Rencana Pembelajaran Semester (RPS) |
 | [`sap.html`](sap.html) | Satuan Acara Perkuliahan (SAP) pekan 1 sampai 16 |
 | [`lembar-kerja.html`](lembar-kerja.html) | Lembar kerja dan asesmen diri Tugas 1 sampai 5 |
-| [`rubrik-proposal.html`](rubrik-proposal.html) | Rubrik penilaian presentasi proposal riset |
+| [`rubrik-poster.html`](rubrik-poster.html) | Rubrik asesmen poster artikel ilmiah dan rekap nilai |
+| [`rubrik-proposal.html`](rubrik-proposal.html) | Rubrik asesmen naskah dan presentasi proposal riset |
 
 ## Alur tugas
 

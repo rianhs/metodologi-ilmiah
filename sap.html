@@ -168,7 +168,7 @@ const RPS = {
       teknik: "Unjuk kerja" },
     { kode: "Sub-CPMK-8", cpmk: "CPMK-4", bobot: 70, asesmen: "proyek",  metode: ["PjBL"],
       teks: "Mahasiswa mampu mempertahankan proposal riset dalam presentasi lisan sesuai kaidah ilmiah.",
-      indikator: "Kualitas naskah proposal, kelengkapan dan ketepatan unsur proposal riset, penyampaian presentasi, dan ketepatan jawaban atas pertanyaan penguji sesuai rubrik presentasi proposal riset.",
+      indikator: "Kualitas naskah proposal, kelengkapan dan ketepatan unsur proposal riset, penyampaian presentasi, dan ketepatan jawaban atas pertanyaan penguji sesuai rubrik asesmen naskah dan presentasi proposal riset.",
       teknik: "Unjuk kerja" }
   ],
 
@@ -257,7 +257,7 @@ const RPS = {
       deskripsi: "Mahasiswa memilih artikel riset asli yang telah melalui telaah sejawat, memuat gambar atau diagram, dan relevan dengan topik proposalnya. Mahasiswa menyusun poster yang memuat isi utama artikel dan manfaatnya bagi proposal, lalu mempresentasikannya pada pekan 14. Poster mencantumkan sumber dan DOI artikel. Gambar asli digunakan sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit." },
     { judul: "Naskah dan presentasi proposal", pekan: [15, 16], sub: "Sub-CPMK-8", sifat: "sumatif",
       luaran: "Naskah proposal riset final yang dikumpulkan sebelum presentasi.",
-      deskripsi: "Mahasiswa memperbaiki naskah proposal berdasarkan hasil asesmen diri dan konsultasi, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik presentasi proposal riset." }
+      deskripsi: "Mahasiswa memperbaiki naskah proposal berdasarkan hasil asesmen diri dan konsultasi, lalu mempertahankannya dalam presentasi lisan yang dinilai dengan rubrik asesmen naskah dan presentasi proposal riset." }
   ],
 
   /* Pustaka. Gaya Harvard (Cite Them Right): Nama belakang, Inisial. (Tahun) *Judul buku*.
@@ -300,10 +300,9 @@ const RPS = {
   /* Catatan untuk penyusun. Tampil di panel ?periksa, tidak terlihat oleh pembaca biasa. */
   catatanPenyusun: [
     "Peta analisis pembelajaran pada RPS 2026 berupa gambar dan perlu dibuat ulang mengikuti struktur Sub-CPMK yang baru.",
-    "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) dan rubrik poster artikel ilmiah (Sub-CPMK-7) belum tersedia.",
+    "Bank soal kuis LMS Sikola (Sub-CPMK-1 sampai Sub-CPMK-6) belum tersedia.",
     "Tentukan mekanisme penilaian poster pekan 14: semua dosen menilai semua poster, atau setiap dosen menilai poster mahasiswa yang juga diujinya pada pekan 16.",
     "Bagian penugasan di RPS memuat ringkasan. Tugas 1–5 dipandu lembar kerja asesmen diri (lembar-kerja.html); instruksi, kriteria, dan rubrik Tugas 6 dan 7 disusun di dokumen RTM.",
-    "Rubrik presentasi proposal perlu diselaraskan: istilah \"penelitian\" menjadi \"riset\" dan unsur pertimbangan etik ditambahkan ke butir C.7.",
     "Teks CPL, visi, misi, dan profil lulusan sengaja tidak diubah karena mengikuti dokumen kurikulum prodi.",
     "Periksa kembali nama Ketua Prodi dan tanggal penyusunan sebelum RPS disahkan."
   ]
@@ -602,7 +601,7 @@ const SAP = {
     },
 
     14: {
-      media: ["Poster cetak mahasiswa", "Rubrik penilaian poster", "Papan atau dinding poster"],
+      media: ["Poster cetak mahasiswa", "Rubrik asesmen poster artikel ilmiah", "Papan atau dinding poster"],
       langkah: {
         pendahuluan: [
           [10, "Koordinator membuka sesi, menjelaskan alur, dan menyampaikan pembagian penilai", "Memasang poster di tempat yang ditentukan"]
@@ -645,7 +644,7 @@ const SAP = {
 
     16: {
       perMahasiswa: true,
-      media: ["Slide presentasi mahasiswa", "Naskah proposal final", "Rubrik penilaian presentasi proposal riset", "Pengatur waktu"],
+      media: ["Slide presentasi mahasiswa", "Naskah proposal final", "Rubrik asesmen naskah dan presentasi proposal riset", "Pengatur waktu"],
       langkah: {
         pendahuluan: [
           [2, "Penguji membuka sesi dan memeriksa naskah proposal final", "Menyiapkan slide presentasi"]
