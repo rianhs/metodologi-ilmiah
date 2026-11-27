@@ -43,10 +43,24 @@ function kop() {
 
 function htmlAspek(a, i) {
   return `<div class="aspek" id="aspek-${i}" role="group" aria-label="${esc(a.judul)}">
-    <div><h3>${a.no}. ${esc(a.judul)}</h3><small>Bobot ${a.bobot}%</small>${a.ket ? `<small class="ket">${esc(a.ket)}</small>` : ""}</div>
+    <div><h3>${a.no}. ${esc(a.judul)}</h3><small>Bobot ${a.bobot}%</small>${a.ket ? `<small class="ket">${esc(a.ket)}</small>` : ""}${a.letak ? `<span class="letak"><button type="button" class="letak-btn" aria-expanded="false" aria-describedby="letak-${i}">Templat: ${esc(a.letak[0])} <i aria-hidden="true">?</i></button><span class="letak-tip" role="tooltip" id="letak-${i}">${esc(a.letak[1])}</span></span>` : ""}</div>
     ${a.d.map((t, j) => `<button type="button" class="skor" data-a="${i}" data-s="${j + 1}" aria-pressed="false"><b>${j + 1}</b><span>${teks(t)}</span></button>`).join("")}
   </div>`;
 }
+
+/* Tooltip letak di templat: muncul saat diarahkan, difokus, atau diketuk */
+document.addEventListener("click", e => {
+  const b = e.target.closest(".letak-btn");
+  const buka = b && b.getAttribute("aria-expanded") !== "true";
+  document.querySelectorAll(".letak-btn").forEach(x => { x.setAttribute("aria-expanded", "false"); x.parentNode.classList.remove("tutup"); });
+  if (b) { b.setAttribute("aria-expanded", String(buka)); b.parentNode.classList.toggle("tutup", !buka); }
+});
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  document.querySelectorAll(".letak-btn").forEach(x => { x.setAttribute("aria-expanded", "false"); x.parentNode.classList.add("tutup"); });
+});
+document.addEventListener("mouseout", e => { const w = e.target.closest(".letak"); if (w && !w.contains(e.relatedTarget)) w.classList.remove("tutup"); });
+document.addEventListener("focusout", e => { const w = e.target.closest(".letak"); if (w) { w.classList.remove("tutup"); w.firstChild.setAttribute("aria-expanded", "false"); } });
 
 function bangun() {
   const kelompok = R.bagian.map((b, bi) => {
@@ -297,7 +311,7 @@ function tabel() {
 /* Cetak */
 function lembar(r) {
   const penuh = lengkap(r), isi = (v, ganti = "") => esc(v || ganti);
-  const barisAspek = (a, i) => `<tr><td class="tengah">${a.no}</td><td><b>${esc(a.judul)}</b>${a.ket ? `<div class="ket">${esc(a.ket)}</div>` : ""}</td><td class="tengah">${a.bobot}</td>
+  const barisAspek = (a, i) => `<tr><td class="tengah">${a.no}</td><td><b>${esc(a.judul)}</b>${a.ket ? `<div class="ket">${esc(a.ket)}</div>` : ""}${a.letak ? `<div class="ket">Templat: ${esc(a.letak[0])}</div>` : ""}</td><td class="tengah">${a.bobot}</td>
       ${a.d.map((d, j) => `<td${r.skor[i] === j + 1 ? ' class="pilih"' : ""}>${teks(d)}</td>`).join("")}
       <td class="tengah"><b>${r.skor[i] || ""}</b></td></tr>`;
   /* Judul bagian disatukan dengan aspek pertamanya agar tidak tertinggal di bawah halaman */

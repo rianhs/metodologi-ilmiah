@@ -318,14 +318,11 @@ const RTM = {
   "rubrik": "rubrik-poster.html",
   "labelTenggat": "Pameran poster",
   "ringkas": "Setiap mahasiswa memilih satu artikel riset terpublikasi yang relevan dengan topik proposalnya, merangkumnya dalam poster A3, lalu menjelaskannya pada pameran poster pekan 14.",
-  "luaran": [
-    "Satu file PDF poster di LMS Sikola",
-    "Satu poster cetak untuk dipamerkan"
-  ],
+  "dokumen": [],
   "bagian": [
     {
       "id": "artikel",
-      "judul": "Artikel",
+      "judul": "Syarat artikel",
       "pengantar": "Pilih artikel yang memenuhi semua syarat berikut.",
       "butir": [
         [
@@ -353,50 +350,47 @@ const RTM = {
       "butir": [
         [
           "Identitas",
-          "Judul artikel, nama mahasiswa, dan NIM."
+          "Judul artikel, nama mahasiswa, dan NIM.",
+          "",
+          []
         ],
         [
           "Rangkuman",
-          "Latar belakang, tujuan, metode, hasil, dan kesimpulan. Temuan utama dibuat langsung terlihat."
+          "Latar belakang, tujuan, metode, hasil, dan kesimpulan. Temuan utama dibuat langsung terlihat.",
+          "",
+          [
+            "2"
+          ]
         ],
         [
           "Visual",
-          "Gambar, tabel, atau diagram yang memperjelas metode atau hasil."
+          "Gambar, tabel, atau diagram yang memperjelas metode atau hasil.",
+          "",
+          [
+            "3"
+          ]
         ],
         [
           "Kaitan dengan proposal saya",
-          "Kotak berisi judul sementara proposal, pertanyaan riset, bagian artikel yang diadopsi beserta alasannya (minimal dua untuk skor tertinggi), dan satu perbedaan antara artikel dan proposal."
+          "Kotak berisi judul sementara proposal, pertanyaan riset, bagian artikel yang diadopsi beserta alasannya (minimal dua untuk skor tertinggi), dan satu perbedaan antara artikel dan proposal.",
+          "",
+          [
+            "1"
+          ]
         ],
         [
           "Sumber",
-          "Sitasi artikel, DOI, sumber gambar, serta lisensi atau izin penggunaan gambar. Gambar asli dipakai sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit."
+          "Sitasi artikel, DOI, sumber gambar, serta lisensi atau izin penggunaan gambar. Gambar asli dipakai sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit.",
+          "",
+          [
+            "5"
+          ]
         ],
         [
           "Kode QR",
-          "Kode QR menuju artikel."
-        ]
-      ]
-    },
-    {
-      "id": "format",
-      "judul": "Format dan pengumpulan",
-      "pengantar": "",
-      "butir": [
-        [
-          "Ukuran",
-          "A3 (297 × 420 mm), orientasi vertikal, satu halaman."
-        ],
-        [
-          "File",
-          "PDF, maksimum 10 MB."
-        ],
-        [
-          "Unggah",
-          "LMS Sikola, paling lambat pada hari pameran."
-        ],
-        [
-          "Cetak",
-          "Poster fisik dicetak dan sudah terpasang sebelum sesi pameran dimulai."
+          "Kode QR menuju artikel.",
+          "",
+          []
         ]
       ]
     }
@@ -427,8 +421,40 @@ const RTM = {
       "Ekspor ke PDF, periksa ukuran file, unggah di Sikola, lalu cetak poster."
     ]
   ],
+  "objek": "Satu artikel riset terpublikasi yang telah melalui telaah sejawat dan relevan dengan topik proposal Anda.",
+  "luaran": [
+    "Satu file PDF poster di LMS Sikola",
+    "Satu poster cetak untuk dipamerkan"
+  ],
+  "format": [
+    [
+      "Ukuran",
+      "A3 (297 × 420 mm), orientasi vertikal, satu halaman."
+    ],
+    [
+      "File",
+      "PDF, maksimum 10 MB."
+    ],
+    [
+      "Unggah",
+      "LMS Sikola, paling lambat pada hari pameran."
+    ],
+    [
+      "Cetak",
+      "Poster fisik dicetak dan sudah terpasang sebelum sesi pameran dimulai."
+    ]
+  ],
+  "jadwal": [
+    [
+      13,
+      "Tugas dijelaskan di kelas dan sketsa tata letak poster mendapat umpan balik."
+    ],
+    [
+      14,
+      "Unggah PDF paling lambat hari ini, pasang poster cetak sebelum sesi dimulai, lalu ikuti pameran."
+    ]
+  ],
   "pelaksanaan": {
-    "id": "pameran",
     "judul": "Pameran poster",
     "butir": [
       [
@@ -436,19 +462,33 @@ const RTM = {
         "100 menit, seluruhnya untuk pameran."
       ],
       [
-        "Peran mahasiswa",
-        "Dampingi poster Anda selama sesi berlangsung."
-      ],
-      [
         "Penilai",
         "Dosen tim pengajar yang hadir. Setiap poster dinilai satu dosen."
       ],
       [
-        "Pertanyaan baku",
-        "Apa temuan utama artikel ini? Apa manfaatnya bagi proposal Anda?"
+        "Peran mahasiswa",
+        "Dampingi poster Anda selama sesi berlangsung."
+      ],
+      [
+        "Tanya jawab",
+        "Dua pertanyaan baku: Apa temuan utama artikel ini? Apa manfaatnya bagi proposal Anda?"
+      ],
+      [
+        "Sesudah sesi",
+        "Gunakan temuan artikel dan masukan sesi poster untuk memperbaiki naskah proposal."
       ]
     ]
   },
+  "lain": [
+    [
+      "Penulisan",
+      "Rangkuman ditulis dengan kalimat sendiri."
+    ],
+    [
+      "Gambar",
+      "Gambar asli dipakai sesuai lisensinya (misalnya CC BY) atau dengan izin penerbit."
+    ]
+  ],
   "rubrik_isi": [
     {
       "judul": "",
@@ -891,6 +931,28 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 .aksi{margin-top:20px}
 @media (max-width:720px){.rinci>div{grid-template-columns:minmax(0,1fr)}}
 @media print{.grup{break-after:avoid}#lampiran,#pustaka{break-before:auto;padding-top:28px}#bagian-tugas section,#tujuan,#pelaksanaan{break-inside:avoid}.box,.appx details,.rinci>div{break-inside:avoid}.aksi{display:none}}
+.hero .now{margin-top:0}
+.docs-wrap{margin:20px 0 32px}
+.hero .docs-title{font-size:var(--fs-label);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.doc{display:flex;flex-direction:column;gap:6px;padding:16px 18px;background:var(--surface);border:2px solid var(--accent);border-radius:var(--radius);text-decoration:none;color:var(--ink)}
+.doc:hover{background:var(--tint)}
+.doc b{font-size:var(--fs-title);line-height:1.3}
+.doc span{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.45}
+.doc em{margin-top:auto;padding-top:6px;font-style:normal;font-weight:600;font-size:var(--fs-sm);color:var(--accent)}
+.aksi-atas{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.btn-isi{height:44px;background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+.btn-isi:hover{border-color:var(--accent);filter:brightness(1.08)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:4px;min-height:28px;padding:2px 10px;border:1px solid var(--rule);border-radius:6px;background:var(--sunk);font-size:var(--fs-xs);line-height:1.35;color:var(--ink-2);text-decoration:none}
+.chip b{color:var(--ink)}
+.chip-link{color:var(--accent);background:var(--tint);border-color:transparent;font-weight:600}
+.chip-link:hover{border-color:var(--accent)}
+.dt-sub{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--ink-3)}
+.k-kode{color:var(--ink-3);margin-right:4px}
+.appx details{scroll-margin-top:72px}
+@media (max-width:720px){.hero .now-side{display:flex;align-items:baseline;gap:6px}.hero .now-big{font-size:1.35rem}.hero .lede{margin-bottom:20px}}
+@media print{.docs-wrap,.aksi-atas{display:none}}
 </style>
 </head>
 <body>
@@ -913,12 +975,13 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
     <nav>
       <ol id="toc-list">
         <li><a href="#tujuan">Tujuan</a></li>
-        <li><a href="#artikel">Artikel</a></li>
+        <li><a href="#artikel">Syarat artikel</a></li>
         <li><a href="#isi">Isi poster</a></li>
-        <li><a href="#format">Format dan pengumpulan</a></li>
         <li><a href="#langkah">Langkah pengerjaan</a></li>
-        <li><a href="#pelaksanaan">Pameran poster</a></li>
+        <li><a href="#luaran">Luaran dan format</a></li>
         <li><a href="#asesmen">Asesmen</a></li>
+        <li><a href="#jadwal">Jadwal dan pelaksanaan</a></li>
+        <li><a href="#lain">Ketentuan lain</a></li>
         <li><a href="#pustaka">Pustaka</a></li>
       </ol>
     </nav>
@@ -929,8 +992,9 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <div class="eyebrow" id="hero-eyebrow"></div>
       <h1 id="hero-title"></h1>
       <p class="lede" id="hero-lede"></p>
-      <dl class="facts" id="facts"></dl>
       <div class="box now" id="now"></div>
+      <div class="docs-wrap"><h2 class="docs-title">Dokumen tugas</h2><div class="docs" id="docs"></div></div>
+      <dl class="facts" id="facts"></dl>
     </header>
 
     <section id="tujuan" aria-labelledby="h-tujuan">
@@ -944,21 +1008,28 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
       <div class="sec-head"><h2 id="h-langkah">Langkah pengerjaan</h2></div>
       <ol class="list-rule list-plain small" id="langkah-isi"></ol>
     </section>
-
-    <section id="pelaksanaan" aria-labelledby="h-pelaksanaan">
-      <div class="sec-head"><h2 id="h-pelaksanaan"></h2></div>
-      <div id="pelaksanaan-isi"></div>
+    <section id="luaran" aria-labelledby="h-luaran">
+      <div class="sec-head"><h2 id="h-luaran">Luaran dan format</h2></div>
+      <div id="luaran-isi"></div>
     </section>
-
     <section id="asesmen" aria-labelledby="h-asesmen">
-      <div class="sec-head"><h2 id="h-asesmen">Asesmen</h2><p>Setiap indikator diberi skor 1 sampai 4. Nilai tugas adalah jumlah dari (skor ÷ 4) × bobot indikator. Buka indikator untuk melihat ciri skor tertinggi.</p></div>
+      <div class="sec-head"><h2 id="h-asesmen">Asesmen</h2><p>Setiap aspek diberi skor 1 sampai 4. Nilai tugas adalah jumlah dari (skor ÷ 4) × bobot aspek. Buka aspek untuk melihat ciri skor tertinggi.</p></div>
       <div id="kriteria"></div>
       <p class="aksi"><a class="btn" id="link-rubrik">Buka rubrik lengkap</a></p>
     </section>
-
+    <section id="jadwal" aria-labelledby="h-jadwal">
+      <div class="sec-head"><h2 id="h-jadwal">Jadwal dan pelaksanaan</h2></div>
+      <div id="jadwal-isi"></div>
+      <h3 class="grup" id="h-pelaksanaan"></h3>
+      <div id="pelaksanaan-isi"></div>
+    </section>
+    <section id="lain" aria-labelledby="h-lain">
+      <div class="sec-head"><h2 id="h-lain">Ketentuan lain</h2></div>
+      <div id="lain-isi"></div>
+    </section>
     <section id="pustaka" aria-labelledby="h-pustaka">
       <div class="sec-head"><h2 id="h-pustaka">Pustaka</h2></div>
-      <ol class="list-rule list-plain small" id="pustaka-isi"></ol>
+      <div class="appx"><details><summary><span class="k-judul" id="pustaka-judul"></span></summary><div class="appx-body"><ol class="list-rule list-plain small" id="pustaka-isi"></ol></div></details></div>
     </section>
 
     <footer>
@@ -1102,8 +1173,14 @@ function dosenNames(list) { return list.map(k => dosenByKode[k]?.nama || k).join
 function dosenCodes(list) { return list.length === RPS.dosen.length ? "Semua dosen" : list.join(", "); }
 
 
+const ASPEK = Object.fromEntries(RTM.rubrik_isi.flatMap(g => g.aspek.map((x, i) => [(g.kode || "") + (i + 1), x])));
+const namaAspek = k => /^\d/.test(k) ? "Aspek " + k : "Rubrik " + k;
 function daftar(butir) {
-  return `<dl class="rinci">${butir.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${withTerms(v)}</dd></div>`).join("")}</dl>`;
+  return `<dl class="rinci">${butir.map(([k, v, letak, kode]) => {
+    const chips = (letak ? `<span class="chip">Templat: <b>${esc(letak)}</b></span>` : "") +
+      (kode || []).map(c => `<a class="chip chip-link" href="#aspek-${c}" title="${esc(ASPEK[c].judul)}">${namaAspek(c)} · ${ASPEK[c].bobot}%</a>`).join("");
+    return `<div><dt>${esc(k)}</dt><dd>${withTerms(v)}${chips ? `<span class="chips">${chips}</span>` : ""}</dd></div>`;
+  }).join("")}</dl>`;
 }
 const sesi = sessionByPekan[RTM.pekan];
 const tanggal = sesi ? sessionDateLabel(sesi) : "Menyusul";
@@ -1137,31 +1214,51 @@ function render() {
       <div class="now-meta">Pekan ${RTM.pekan} · <a class="week-link" href="sap.html#pekan-${RTM.pekan}">Buka SAP pekan ${RTM.pekan}</a></div></div>
     <div class="now-side">${status}</div>`;
 
+  const dok = [...RTM.dokumen, ["Rubrik asesmen", "Lihat cara tugas ini dinilai.", RTM.rubrik]];
+  $("#docs").innerHTML = dok.map(([t, k, u]) => {
+    const luar = /^https?:/.test(u);
+    return `<a class="doc" href="${esc(u)}"${luar ? ' target="_blank" rel="noopener"' : ""}><b>${esc(t)}</b><span>${esc(k)}</span><em>${luar ? "Buka di tab baru ↗" : "Buka →"}</em></a>`;
+  }).join("");
+
+  const kotak = rows => `<div class="box">${daftar(rows)}</div>`;
   $("#tujuan-isi").innerHTML = `<div class="box"><dl class="rinci">
       <div><dt>${term("CPMK", cpmk.kode)}</dt><dd>${esc(cpmk.teks)}</dd></div>
       <div><dt>${term("Sub-CPMK", sub.kode)}</dt><dd>${esc(sub.teks)}</dd></div>
+      <div><dt>Metode penugasan</dt><dd>${sub.metode.map(m => term(m)).join(", ")}</dd></div>
+      <div><dt>Deskripsi</dt><dd>${withTerms(tugas.deskripsi)}</dd></div>
       <div><dt>Indikator</dt><dd>${withTerms(sub.indikator)}</dd></div>
-      <div><dt>Luaran</dt><dd><ul>${RTM.luaran.map(x => `<li>${esc(x)}</li>`).join("")}</ul></dd></div>
     </dl></div>`;
 
   $("#bagian-tugas").innerHTML = RTM.bagian.map(b => `<section id="${b.id}" aria-labelledby="h-${b.id}">
       <div class="sec-head"><h2 id="h-${b.id}">${esc(b.judul)}</h2>${b.pengantar ? `<p>${esc(b.pengantar)}</p>` : ""}</div>
-      <div class="box">${daftar(b.butir)}</div></section>`).join("");
+      ${b.id === "isi" && RTM.dokumen.length ? `<p class="aksi-atas">${RTM.dokumen.map(([t, , u]) => `<a class="btn btn-isi" href="${esc(u)}" target="_blank" rel="noopener">Buka ${esc(t.toLowerCase())} ↗</a>`).join("")}</p>` : ""}
+      ${kotak(b.butir)}</section>`).join("");
 
   $("#langkah-isi").innerHTML = RTM.langkah.map(([k, v], i) => `<li><span class="muted num">${i + 1}.</span><span><b>${esc(k)}</b><br>${esc(v)}</span></li>`).join("");
 
-  const P = RTM.pelaksanaan;
-  $("#h-pelaksanaan").textContent = P.judul;
-  $("#pelaksanaan-isi").innerHTML = `<div class="box">${daftar([["Waktu", tanggal], ...P.butir])}</div>`;
+  $("#luaran-isi").innerHTML = `<div class="box"><dl class="rinci">
+      <div><dt>Objek garapan</dt><dd>${esc(RTM.objek)}</dd></div>
+      <div><dt>Luaran</dt><dd><ul>${RTM.luaran.map(x => `<li>${esc(x)}</li>`).join("")}</ul></dd></div>
+      ${RTM.format.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${withTerms(v)}</dd></div>`).join("")}
+    </dl></div>`;
 
   $("#kriteria").innerHTML = RTM.rubrik_isi.map(g => {
     const bobot = g.aspek.reduce((a, x) => a + x.bobot, 0);
     return `${g.judul ? `<h3 class="grup">${esc(g.kode)}. ${esc(g.judul)} <span class="tag">${bobot}%</span></h3>` : ""}
-      <div class="appx">${g.aspek.map(x => `<details><summary><span class="k-judul">${esc(x.judul)}</span><span class="tag tag-accent">${x.bobot}%</span></summary>
-        <div class="appx-body">${x.ket ? `<p>${esc(x.ket)}</p>` : ""}<p class="muted" style="margin-bottom:4px">Ciri skor 4 (tertinggi)</p>
-        <ul>${x.empat.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div></details>`).join("")}</div>`;
+      <div class="appx">${g.aspek.map((x, i) => { const k = (g.kode || "") + (i + 1); return `<details id="aspek-${k}"><summary><span class="k-judul"><span class="k-kode">${k}.</span> ${esc(x.judul)}</span><span class="tag tag-accent">${x.bobot}%</span></summary>
+        <div class="appx-body">${x.letak ? `<p><b>Letak di templat:</b> ${esc(x.letak[1])}</p>` : ""}${x.ket ? `<p>${esc(x.ket)}</p>` : ""}<p class="muted" style="margin-bottom:4px">Ciri skor 4 (tertinggi)</p>
+        <ul>${x.empat.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div></details>`; }).join("")}</div>`;
   }).join("");
   $("#link-rubrik").href = RTM.rubrik;
+
+  $("#jadwal-isi").innerHTML = `<div class="box"><dl class="rinci">${RTM.jadwal.map(([n, v]) => {
+    const x = sessionByPekan[n];
+    return `<div><dt>Pekan ${n}<span class="dt-sub">${esc(x ? sessionDateLabel(x) : "Menyusul")}</span></dt><dd>${esc(v)}<span class="chips"><a class="chip chip-link" href="sap.html#pekan-${n}">Buka SAP pekan ${n}</a></span></dd></div>`;
+  }).join("")}</dl></div>`;
+  $("#h-pelaksanaan").textContent = RTM.pelaksanaan.judul;
+  $("#pelaksanaan-isi").innerHTML = kotak(RTM.pelaksanaan.butir);
+  $("#lain-isi").innerHTML = kotak([["Bobot", `${sub.bobot}% dari nilai akhir.`], ["Sifat", `${RTM.sifatKerja}, asesmen sumatif.`], ...RTM.lain]);
+  $("#pustaka-judul").textContent = `Daftar rujukan mata kuliah (${RPS.pustaka.utama.length + RPS.pustaka.pendukung.length} sumber)`;
 
   const fmt = x => esc(x).replace(/\*([^*]+)\*/g, "<em>$1</em>");
   $("#pustaka-isi").innerHTML = [...RPS.pustaka.utama, ...RPS.pustaka.pendukung]
@@ -1188,6 +1285,12 @@ document.addEventListener("focusout", hideTip);
 document.addEventListener("keydown", e => { if (e.key === "Escape") hideTip(); });
 document.addEventListener("touchstart", e => { const el = e.target.closest(".term"); if (el) { if (tipFor === el) hideTip(); else showTip(el); } else if (tipFor) hideTip(); }, { passive: true });
 addEventListener("scroll", () => { if (tipFor) hideTip(); }, { passive: true });
+
+/* Label rubrik membuka akordeon aspek yang dituju */
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#aspek-"]'); if (!a) return;
+  const d = document.getElementById(a.getAttribute("href").slice(1)); if (d) d.open = true;
+});
 
 /* Penanda daftar isi */
 function scrollSpy() {
