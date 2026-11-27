@@ -43,7 +43,7 @@ function kop() {
 
 function htmlAspek(a, i) {
   return `<div class="aspek" id="aspek-${i}" role="group" aria-label="${esc(a.judul)}">
-    <div><h3>${a.no}. ${esc(a.judul)}</h3><small>Bobot ${a.bobot}%</small></div>
+    <div><h3>${a.no}. ${esc(a.judul)}</h3><small>Bobot ${a.bobot}%</small>${a.ket ? `<small class="ket">${esc(a.ket)}</small>` : ""}</div>
     ${a.d.map((t, j) => `<button type="button" class="skor" data-a="${i}" data-s="${j + 1}" aria-pressed="false"><b>${j + 1}</b><span>${teks(t)}</span></button>`).join("")}
   </div>`;
 }
@@ -297,7 +297,7 @@ function tabel() {
 /* Cetak */
 function lembar(r) {
   const penuh = lengkap(r), isi = (v, ganti = "") => esc(v || ganti);
-  const barisAspek = (a, i) => `<tr><td class="tengah">${a.no}</td><td><b>${esc(a.judul)}</b></td><td class="tengah">${a.bobot}</td>
+  const barisAspek = (a, i) => `<tr><td class="tengah">${a.no}</td><td><b>${esc(a.judul)}</b>${a.ket ? `<div class="ket">${esc(a.ket)}</div>` : ""}</td><td class="tengah">${a.bobot}</td>
       ${a.d.map((d, j) => `<td${r.skor[i] === j + 1 ? ' class="pilih"' : ""}>${teks(d)}</td>`).join("")}
       <td class="tengah"><b>${r.skor[i] || ""}</b></td></tr>`;
   /* Judul bagian disatukan dengan aspek pertamanya agar tidak tertinggal di bawah halaman */

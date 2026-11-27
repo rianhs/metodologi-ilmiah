@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rubrik Asesmen Poster Artikel Ilmiah – Metodologi Ilmiah Unhas</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="rubrik.css?v=6">
+<link rel="stylesheet" href="rubrik.css?v=7">
 </head>
 <body>
 <noscript>Halaman ini memerlukan JavaScript.</noscript>
 <script>
 /* Isi rubrik. Desain dan fungsi ada di rubrik.css dan rubrik.js. */
 window.RUBRIK = {
-  "kunci": "mi-rubrik-poster-v1",
+  "kunci": "mi-rubrik-poster-v2",
   "jenis": "poster",
   "draf": false,
   "penilai": "Dosen penilai",
@@ -29,53 +29,57 @@ window.RUBRIK = {
     {
       "aspek": [
         {
-          "judul": "Relevansi dan manfaat artikel",
-          "bobot": 20,
+          "judul": "Kaitan artikel dengan proposal",
+          "bobot": 25,
+          "ket": "Periksa kotak “Kaitan dengan proposal saya”: judul sementara, pertanyaan riset, bagian artikel yang diadopsi, dan satu perbedaan.",
           "d": [
-            "Artikel tidak relevan dengan topik proposal.",
-            "Kurang relevan, manfaat bagi proposal tidak jelas.",
-            "Relevan, manfaat bagi proposal dijelaskan secara umum.",
-            "Sangat relevan, manfaat bagi proposal dijelaskan secara rinci."
+            "Kotak kaitan tidak ada, atau topik artikel berbeda dari proposal.",
+            "Kaitan disebut secara umum, tanpa menunjuk bagian artikel yang diadopsi.",
+            "Satu bagian artikel yang diadopsi disebut beserta alasannya.",
+            "Minimal dua bagian artikel yang diadopsi disebut beserta alasannya, ditambah satu perbedaan dengan proposal."
           ]
         },
         {
-          "judul": "Ketepatan isi ringkasan",
-          "bobot": 30,
+          "judul": "Kelengkapan dan keselarasan rangkuman",
+          "bobot": 25,
+          "ket": "Bagian wajib: latar belakang, tujuan, metode, hasil, dan kesimpulan.",
           "d": [
-            "Banyak bagian utama tidak ada atau keliru.",
-            "Satu bagian tidak ada atau beberapa isi keliru.",
-            "Semua bagian ada, dengan sedikit ketidaktepatan.",
-            "Latar belakang, tujuan, metode, hasil, dan kesimpulan tepat serta selaras."
+            "Dua bagian atau lebih tidak ada.",
+            "Satu bagian tidak ada, atau kesimpulan tidak menjawab tujuan.",
+            "Semua bagian ada dan selaras, tetapi temuan utama kurang menonjol.",
+            "Semua bagian ada dan selaras, dengan temuan utama yang langsung terlihat."
           ]
         },
         {
-          "judul": "Tampilan visual dan keterbacaan",
+          "judul": "Visual dan tata letak",
           "bobot": 20,
           "d": [
-            "Sulit dibaca, tanpa gambar atau diagram pendukung.",
-            "Teks padat, alur atau visual membingungkan.",
-            "Terbaca dan runtut, ada visual yang kurang jelas.",
-            "Ringkas, alur jelas, visual terbaca dan mendukung isi."
+            "Tidak ada gambar, tabel, atau diagram, dan teks sulit dibaca.",
+            "Teks terlalu padat, atau visual sulit dibaca.",
+            "Teks terbaca dan alurnya runtut, tetapi ada visual yang kurang jelas.",
+            "Teks terbaca, alurnya runtut, dan visual memperjelas metode atau hasil."
+          ]
+        },
+        {
+          "judul": "Penjelasan lisan",
+          "bobot": 20,
+          "ket": "Tanyakan: (1) Apa temuan utama artikel ini? (2) Apa manfaatnya bagi proposal Anda?",
+          "d": [
+            "Kedua pertanyaan tidak terjawab.",
+            "Satu pertanyaan terjawab dengan benar.",
+            "Kedua pertanyaan terjawab dengan benar, tetapi masih bergantung pada teks poster.",
+            "Kedua pertanyaan terjawab dengan benar, runtut, dan tanpa membaca poster."
           ]
         },
         {
           "judul": "Sumber dan izin gambar",
           "bobot": 10,
+          "ket": "Unsur yang diperiksa: sitasi artikel, DOI, sumber gambar, dan lisensi atau izin.",
           "d": [
-            "Sumber artikel tidak dicantumkan.",
-            "Sumber tidak lengkap, tanpa DOI atau keterangan sumber gambar.",
-            "Sumber dan DOI ada, keterangan sumber atau izin gambar kurang lengkap.",
-            "Sumber, DOI, keterangan sumber gambar, dan lisensi atau izin gambar lengkap."
-          ]
-        },
-        {
-          "judul": "Penjelasan lisan dan tanya jawab",
-          "bobot": 20,
-          "d": [
-            "Tidak mampu menjelaskan atau menjawab.",
-            "Banyak membaca poster, jawaban sering keliru.",
-            "Penjelasan jelas, sebagian besar jawaban tepat.",
-            "Penjelasan runtut, jawaban tepat dan beralasan."
+            "Sitasi artikel tidak ada.",
+            "Sitasi ada, tetapi dua unsur lain atau lebih tidak ada.",
+            "Satu unsur tidak ada.",
+            "Keempat unsur lengkap."
           ]
         }
       ]
@@ -83,6 +87,6 @@ window.RUBRIK = {
   ]
 };
 </script>
-<script src="rubrik.js?v=6"></script>
+<script src="rubrik.js?v=7"></script>
 </body>
 </html>

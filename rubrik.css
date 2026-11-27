@@ -97,6 +97,7 @@ summary>span{display:block;margin-left:18px;font-weight:400;font-size:12px}
 .aspek.terisi>div{background:var(--abu)}
 .aspek.terisi h3::after{content:" ✓";color:var(--red)}
 .aspek small{display:block;color:var(--ink2);font-size:12px}
+.aspek small.ket{margin-top:6px;color:var(--ink);line-height:1.35}
 .skor{display:flex;gap:9px;align-items:flex-start;text-align:left;font-weight:400;line-height:1.35;padding:9px 10px;border-color:var(--rule)}
 .skor b{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--red);color:var(--red);font-size:12px}
 .skor>span{padding-top:2px}
@@ -201,6 +202,7 @@ dialog div{display:flex;justify-content:flex-end;gap:8px}
   .lembar .data{margin-bottom:8px;font-size:11.5px}
   .lembar .data th{width:150px;background:none;text-transform:none;text-align:left}
   .lembar .tengah{text-align:center}
+  .lembar .ket{margin-top:3px;font-size:8.5px}
   .lembar .awal{break-inside:avoid}
   .lembar .seksi td{background:#f0e8e8;font-weight:700;color:var(--red)}
   .lembar td.pilih{background:var(--tint);box-shadow:inset 0 0 0 2px #000}
