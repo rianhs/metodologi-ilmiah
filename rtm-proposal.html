@@ -325,36 +325,22 @@ const RTM = {
     {
       "id": "naskah",
       "judul": "Naskah proposal",
-      "pengantar": "Susun naskah mengikuti panduan penyusunan tugas akhir Universitas Hasanuddin. File panduan tersedia di LMS Sikola.",
+      "pengantar": "Susun naskah memakai templat skripsi dan Pedoman Tugas Akhir Mahasiswa Universitas Hasanuddin. Tautan keduanya juga tersedia di LMS Sikola. Setiap unsur ditempatkan pada bagian templat berikut tanpa menambah subbab.",
+      "tautan": [
+        ["Templat skripsi", "https://drive.google.com/file/d/1rPHkQmi_NBurq10KB8b1Gqd56aPEKDb1/view"],
+        ["Pedoman tugas akhir", "https://drive.google.com/file/d/1jLaoLgq83xNtqmUFr7gYslpMIJR_1rLp/view"]
+      ],
       "butir": [
-        [
-          "Panjang",
-          "Tidak ada batas panjang naskah."
-        ],
-        [
-          "Masalah",
-          "Rumusan masalah, pertanyaan riset, dan hipotesis (jika diperlukan)."
-        ],
-        [
-          "Landasan",
-          "Perkembangan terkini, kesenjangan, urgensi, serta tinjauan pustaka atau kerangka teori."
-        ],
-        [
-          "Arah",
-          "Tujuan, manfaat, dan kontribusi riset."
-        ],
-        [
-          "Metode",
-          "Desain riset, penentuan sampel (unit pengamatan), pengumpulan data, serta rencana analisis, penyajian, interpretasi data, dan penarikan kesimpulan."
-        ],
-        [
-          "Etika",
-          "Rencana persetujuan etik jika riset memerlukannya."
-        ],
-        [
-          "Pustaka",
-          "Sitasi dan daftar pustaka mengikuti panduan."
-        ]
+        ["Panjang", "Tidak ada batas panjang naskah."],
+        ["Masalah", "Rumusan masalah, pertanyaan riset, dan hipotesis (jika diperlukan).", "1.1 Latar Belakang"],
+        ["Landasan", "Perkembangan terkini, kesenjangan, urgensi, serta tinjauan pustaka atau kerangka teori.", "1.1 Latar Belakang; 1.2 Teori (jika diperlukan)"],
+        ["Arah", "Tujuan, manfaat, dan kontribusi riset.", "1.3 Tujuan dan Manfaat"],
+        ["Tempat dan bahan", "Lokasi, waktu, alat, dan bahan riset.", "2.1 Tempat dan Waktu; 2.2 Alat dan Bahan"],
+        ["Desain dan sampel", "Desain riset dan penentuan sampel (unit pengamatan).", "2.3 Metode Penelitian"],
+        ["Pengumpulan data", "Prosedur pengumpulan, pengamatan, dan pengukuran data.", "2.4 Pelaksanaan Penelitian; 2.5 Pengamatan dan Pengukuran"],
+        ["Analisis", "Rencana analisis, penyajian, interpretasi data, dan penarikan kesimpulan.", "2.3 Metode Penelitian"],
+        ["Etika", "Rencana persetujuan etik jika riset memerlukannya.", "2.4 Pelaksanaan Penelitian"],
+        ["Pustaka", "Sitasi dan daftar pustaka mengikuti pedoman dan templat.", "Daftar Pustaka"]
       ]
     },
     {
@@ -384,7 +370,7 @@ const RTM = {
     ],
     [
       "Sesuaikan format",
-      "Periksa kesesuaian naskah dengan panduan penyusunan tugas akhir."
+      "Periksa kesesuaian naskah dengan templat skripsi dan pedoman tugas akhir."
     ],
     [
       "Periksa mandiri",
@@ -937,6 +923,8 @@ footer{margin-top:88px;padding-top:20px;border-top:1px solid var(--rule);font-si
 .rinci>div:last-child{padding-bottom:0}
 .rinci dt{font-weight:600;color:var(--ink-2)}
 .rinci dd{margin:0}
+.rinci .letak{display:block;margin-top:4px;font-size:var(--fs-xs);color:var(--ink-3)}
+.rinci .letak b{color:var(--ink-2)}
 .grup{display:flex;align-items:center;gap:10px;margin:28px 0 10px}
 .appx summary .k-judul{flex:1;min-width:0;font-size:var(--fs-body)}
 .aksi{margin-top:20px}
@@ -1153,7 +1141,7 @@ function dosenCodes(list) { return list.length === RPS.dosen.length ? "Semua dos
 
 
 function daftar(butir) {
-  return `<dl class="rinci">${butir.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${withTerms(v)}</dd></div>`).join("")}</dl>`;
+  return `<dl class="rinci">${butir.map(([k, v, letak]) => `<div><dt>${esc(k)}</dt><dd>${withTerms(v)}${letak ? `<span class="letak">Letak di templat: <b>${esc(letak)}</b></span>` : ""}</dd></div>`).join("")}</dl>`;
 }
 const sesi = sessionByPekan[RTM.pekan];
 const tanggal = sesi ? sessionDateLabel(sesi) : "Menyusul";
@@ -1195,7 +1183,7 @@ function render() {
     </dl></div>`;
 
   $("#bagian-tugas").innerHTML = RTM.bagian.map(b => `<section id="${b.id}" aria-labelledby="h-${b.id}">
-      <div class="sec-head"><h2 id="h-${b.id}">${esc(b.judul)}</h2>${b.pengantar ? `<p>${esc(b.pengantar)}</p>` : ""}</div>
+      <div class="sec-head"><h2 id="h-${b.id}">${esc(b.judul)}</h2>${b.pengantar ? `<p>${esc(b.pengantar)}</p>` : ""}${b.tautan ? `<p>${b.tautan.map(([t, u]) => `<a class="week-link" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(" · ")}</p>` : ""}</div>
       <div class="box">${daftar(b.butir)}</div></section>`).join("");
 
   $("#langkah-isi").innerHTML = RTM.langkah.map(([k, v], i) => `<li><span class="muted num">${i + 1}.</span><span><b>${esc(k)}</b><br>${esc(v)}</span></li>`).join("");
