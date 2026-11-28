@@ -110,12 +110,17 @@ const cplOf = c => [].concat(c.cpl).join(", ");
 const jumlah = arr => arr.reduce((a, s) => a + s.bobot, 0);
 const unik = arr => [...new Set(arr)];
 
+/* Urutan dosen khusus cetak baku. Dosen yang tidak disebut mengikuti urutan di rps-data.js. */
+const URUTAN_DOSEN = ["DKS", "FYP", "AWJ", "RHS"];
+const peringkat = d => (URUTAN_DOSEN.indexOf(d.kode) + 1) || URUTAN_DOSEN.length + 1;
+const dosenCetak = [...RPS.dosen].sort((a, b) => peringkat(a) - peringkat(b));
+
 /* 1. Sampul */
 function sampul() {
   return `<section class="page cover">
     <div><h1>RENCANA PEMBELAJARAN SEMESTER (RPS)<br>MATA KULIAH ${esc(M.namaMK.toUpperCase())}<br>(${esc(M.kode)})</h1></div>
     <img src="img/Logo-Unhas-200px.png" alt="Logo Universitas Hasanuddin">
-    <table><tr><td></td><td class="b">Tim Pengajar</td></tr>${RPS.dosen.map((d, i) => `<tr><td>${i + 1}.</td><td>${esc(d.nama)}</td></tr>`).join("")}</table>
+    <table><tr><td></td><td class="b">Tim Pengajar</td></tr>${dosenCetak.map((d, i) => `<tr><td>${i + 1}.</td><td>${esc(d.nama)}</td></tr>`).join("")}</table>
     <div>${[M.prodi, M.fakultas, M.universitas, M.kota, M.tahunAkademik.split("/").pop()].map(x => esc(x.toUpperCase())).join("<br>")}</div>
   </section>`;
 }
@@ -232,7 +237,7 @@ function rpsA() {
       ${baris("Deskripsi singkat mata kuliah", esc(RPS.deskripsi))}
       ${baris("Bahan kajian atau materi pembelajaran", ol(RPS.bahanKajian))}
       ${baris("Pustaka", `<b>Utama</b>${ol(RPS.pustaka.utama, miring)}<div class="pendukung"><b>Pendukung</b>${ol(RPS.pustaka.pendukung, miring)}</div>`)}
-      ${baris("Dosen pengampu", ol(RPS.dosen.map(d => d.nama)))}
+      ${baris("Dosen pengampu", ol(dosenCetak.map(d => d.nama)))}
       ${baris("Mata kuliah syarat", esc(M.prasyarat.join(", ") || "-"))}
     </tbody></table>
   </section>`;
