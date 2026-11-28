@@ -39,7 +39,9 @@ ol,ul{margin:0;padding-left:16px}
 .peta .arrow{border:0;padding:0;font-size:8pt;line-height:1}
 .rps-a{font-size:9pt;line-height:1.22}
 .rps-a th,.rps-a td{padding:2px 5px}
-.rps-a .head img{width:18mm;display:block;margin:auto}
+.rps-a .head img{width:21mm;display:block;margin:auto}
+.rps-a .kop{font-size:14pt;line-height:1.35}
+.rps-a .judul-rps{font-size:12.5pt;padding:4px 5px}
 .sign{height:24mm;vertical-align:bottom;text-align:center}
 .rps-a td.sambung-atas{border-top:0}
 .rps-a td.sambung-bawah{border-bottom:0}
@@ -49,9 +51,14 @@ ol,ul{margin:0;padding-left:16px}
 .rps-b th,.rps-b td{padding:2px 4px}
 .rps-b ol,.rps-b ul{padding-left:12px}
 .rps-b .sec{margin-bottom:2px}
-.notes{break-before:page;margin-top:10px;font-size:9.5pt}
+.notes{break-before:page;font-size:9pt;line-height:1.22}
 .notes ol{padding-left:24px}
-.notes li{margin-bottom:2px}
+.notes li{margin-bottom:1px}
+.lampiran-rekap{break-before:page;font-size:10pt;line-height:1.3}
+.rekap{break-inside:avoid;margin-bottom:18px}
+.rekap h3{margin:0 0 6px}
+.rekap th,.rekap td{padding:3px 5px}
+.rekap table.jenis{width:60%;margin:auto}
 .error{max-width:600px;margin:40px auto;padding:16px;background:#fff}
 @media print{
   body{background:#fff}
@@ -88,6 +95,7 @@ const subs = RPS.subcpmk;
 const subsOf = k => subs.filter(s => s.cpmk === k);
 const cplOf = c => [].concat(c.cpl).join(", ");
 const jumlah = arr => arr.reduce((a, s) => a + s.bobot, 0);
+const unik = arr => [...new Set(arr)];
 
 /* 1. Sampul */
 function sampul() {
@@ -128,23 +136,44 @@ function peta() {
 }
 
 /* 4. RPS(a): identitas, capaian, hubungan CPL dan Sub-CPMK */
+/* Teknik sumatif tanpa keterangan dalam kurung, misalnya "Tes tertulis". */
+const teknikOf = s => s.teknik.replace(/\s*\(.*\)\s*$/, "");
+const daftarTeknik = () => unik(subs.map(teknikOf));
+/* Singkatan asesmen formatif. Bentuk lain ditulis lengkap. */
+const FORMATIF = [
+  { kode: "UB", pola: /^umpan balik/i, arti: "umpan balik" },
+  { kode: "AD", pola: /^asesmen diri/i, arti: "asesmen diri" },
+  { kode: "KI", pola: /^kuis interaktif/i, arti: "kuis interaktif di kelas" }
+];
+const singkat = f => FORMATIF.find(x => x.pola.test(f))?.kode || f;
+const formatifOf = kode => unik(pertemuan.filter(p => p.sub === kode).flatMap(p => p.formatif.map(singkat)));
+
 function matriks() {
+  const teknik = daftarTeknik();
   let lalu = "";
   const baris = subs.map(s => {
     const c = cpmkByKode[s.cpmk], baru = s.cpmk !== lalu; lalu = s.cpmk;
     const n = subsOf(s.cpmk).length;
     return `<tr>${baru ? `<td rowspan="${n}">${esc(cplOf(c))}</td><td rowspan="${n}">${esc(c.kode)}</td>` : ""}
-      <td>${esc(s.kode)}</td><td class="c">${s.bobot}%</td><td class="c">${pekanOf(s.kode).length}</td></tr>`;
+      <td>${esc(s.kode)}</td><td class="c">${esc(formatifOf(s.kode).join(", ") || "-")}</td>
+      ${teknik.map(t => `<td class="c">${teknikOf(s) === t ? s.bobot + "%" : "-"}</td>`).join("")}<td class="c">${s.bobot}%</td></tr>`;
   }).join("");
-  return `<table class="hub">${cols(17, 17, 26, 22, 18)}
-    <thead><tr><th>CPL</th><th>CPMK</th><th>Sub-CPMK</th><th>Bobot penilaian</th><th>Jumlah pekan</th></tr></thead>
+  const dipakai = unik(subs.flatMap(s => formatifOf(s.kode)));
+  const ket = FORMATIF.filter(f => dipakai.includes(f.kode)).map(f => `${f.kode} = ${f.arti}`).join("; ");
+  const lebarTeknik = 32 / teknik.length;
+  return `<table class="hub">${cols(11, 11, 14, 18, ...teknik.map(() => lebarTeknik), 14)}
+    <thead><tr><th rowspan="3">CPL</th><th rowspan="3">CPMK</th><th rowspan="3">Sub-CPMK</th><th colspan="${teknik.length + 1}">Bentuk asesmen</th><th rowspan="3">Bobot penilaian</th></tr>
+      <tr><th rowspan="2">Formatif</th><th colspan="${teknik.length}">Sumatif</th></tr>
+      <tr>${teknik.map(t => `<th>${esc(t)}</th>`).join("")}</tr></thead>
     <tbody>${baris}
-    <tr class="grey"><td colspan="3">Jumlah</td><td class="c">${jumlah(subs)}%</td><td class="c">${pertemuan.length}</td></tr></tbody></table>`;
+    <tr class="grey"><td colspan="3">Jumlah</td><td class="c">-</td>${teknik.map(t => `<td class="c">${jumlah(subs.filter(s => teknikOf(s) === t))}%</td>`).join("")}<td class="c">${jumlah(subs)}%</td></tr></tbody></table>
+    <p>Keterangan: ${esc(ket)}.</p>`;
 }
+
 function rpsA() {
   const O = M.otorisasi;
-  const judul = teks => `<td colspan="6" class="grey">${teks}</td>`;
-  const isiBaris = (kode, teks, span = 1) => `${kode === null ? "" : `<td${span > 1 ? ` rowspan="${span}"` : ""}>${esc(kode)}</td>`}<td colspan="5">${teks}</td>`;
+  const judul = teks => `<td colspan="9" class="grey">${teks}</td>`;
+  const isiBaris = (kode, teks, span = 1) => `${kode === null ? "" : `<td${span > 1 ? ` rowspan="${span}"` : ""}>${esc(kode)}</td>`}<td colspan="8">${teks}</td>`;
   const cp = [
     judul("CPL-Prodi yang dibebankan pada MK"),
     ...RPS.cpl.map(l => isiBaris(l.kode, esc(l.teks))),
@@ -156,21 +185,24 @@ function rpsA() {
       return isiBaris(baru ? s.cpmk : null, `<b>${esc(s.kode)}:</b> ${esc(s.teks)}`, subsOf(s.cpmk).length);
     }),
     judul("Hubungan antara CPL dan CPMK/Sub-CPMK"),
-    `<td colspan="6">${matriks()}</td>`
+    `<td colspan="9">${matriks()}</td>`
   ].map((sel, i, semua) => `<tr><td class="b ${i ? "sambung-atas" : ""} ${i < semua.length - 1 ? "sambung-bawah" : ""}">${i ? "" : "Capaian Pembelajaran (CP)"}</td>${sel}</tr>`).join("");
-  const baris = (label, isi) => `<tr><td class="b">${label}</td><td colspan="6">${isi}</td></tr>`;
+  const baris = (label, isi) => `<tr><td class="b">${label}</td><td colspan="9">${isi}</td></tr>`;
   return `<section class="page rps-a">
-    <table>${cols(14, 9, 24, 11, 11, 19, 12)}
+    <!-- Sepuluh kolom dasar agar lebar baris identitas dan baris otorisasi bisa diatur terpisah.
+         Identitas: 14 | Kode 18 | Rumpun 24 | Bobot 9+9 | Semester 11 | Tanggal 15.
+         Otorisasi: tiga kolom sama lebar (masing-masing 3 kolom dasar). -->
+    <table>${cols(14, 9, 9, 10.667, 13.333, 9, 6.333, 2.667, 11, 15)}
     <tbody>
       <tr class="blue head"><td class="m"><img src="img/Logo-Unhas-200px.png" alt="Logo Universitas Hasanuddin"></td>
-        <td colspan="5" class="c m b">${[M.universitas, M.fakultas, M.prodi].map(x => esc(x.toUpperCase())).join("<br>")}</td>
+        <td colspan="8" class="c m b kop">${[M.universitas, M.fakultas, M.prodi].map(x => esc(x.toUpperCase())).join("<br>")}</td>
         <td class="c m"><b>Kode Dokumen</b><br>${esc(M.kodeDokumen || "")}</td></tr>
-      <tr class="blue"><td colspan="7" class="c b">RENCANA PEMBELAJARAN SEMESTER</td></tr>
-      <tr class="grey identitas"><td>MATA KULIAH (MK)</td><th>KODE</th><th>RUMPUN MK</th><th colspan="2">BOBOT (sks)</th><th>SEMESTER</th><th>TGL PENYUSUNAN</th></tr>
-      <tr class="identitas"><td class="b">${esc(M.namaMK)}</td><td class="c">${esc(M.kode)}</td><td class="c">${esc(M.rumpunMK || "-")}</td><td class="c">T = ${M.sksTeori}</td><td class="c">P = ${M.sksPraktik}</td><td class="c">${esc(M.semester)}</td>
-        <td class="c">${esc(tgl(M.tanggalPenyusunan))}${M.tanggalRevisi ? `<br>Revisi: ${esc(tgl(M.tanggalRevisi))}` : ""}</td></tr>
-      <tr><td rowspan="2" class="b">OTORISASI / PENGESAHAN</td><th colspan="2">PENGEMBANG RPS</th><th colspan="2">KOORDINATOR MK</th><th colspan="2">KETUA PRODI</th></tr>
-      <tr><td colspan="2" class="sign">${esc(O.pengembang)}</td><td colspan="2" class="sign">${esc(O.koordinator)}</td><td colspan="2" class="sign">${esc(O.ketuaProdi)}</td></tr>
+      <tr class="blue"><td colspan="10" class="c b judul-rps">RENCANA PEMBELAJARAN SEMESTER</td></tr>
+      <tr class="grey identitas"><td>MATA KULIAH (MK)</td><th colspan="2">KODE</th><th colspan="2">RUMPUN MK</th><th colspan="3">BOBOT (sks)</th><th>SEMESTER</th><th>TGL PENYUSUNAN</th></tr>
+      <tr class="identitas"><td class="b">${esc(M.namaMK)}</td><td colspan="2" class="c">${esc(M.kode)}</td><td colspan="2" class="c">${esc(M.rumpunMK || "-")}</td><td class="c">T = ${M.sksTeori}</td><td colspan="2" class="c">P = ${M.sksPraktik}</td><td class="c">${esc(M.semester)}</td>
+        <td class="c">${esc(tgl(M.tanggalRevisi || M.tanggalPenyusunan))}</td></tr>
+      <tr><td rowspan="2" class="b">OTORISASI / PENGESAHAN</td><th colspan="3">PENGEMBANG RPS</th><th colspan="3">KOORDINATOR MK</th><th colspan="3">KETUA PRODI</th></tr>
+      <tr><td colspan="3" class="sign">${esc(O.pengembang)}</td><td colspan="3" class="sign">${esc(O.koordinator)}</td><td colspan="3" class="sign">${esc(O.ketuaProdi)}</td></tr>
       ${cp}
       ${baris("Deskripsi singkat mata kuliah", esc(RPS.deskripsi))}
       ${baris("Bahan kajian atau materi pembelajaran", ol(RPS.bahanKajian))}
@@ -182,7 +214,6 @@ function rpsA() {
 }
 
 /* 5. RPS(b): rencana per Sub-CPMK */
-const unik = arr => [...new Set(arr)];
 /* Satu nilai jika sama di semua pekan; jika berbeda, dirinci per pekan. */
 function perPekan(ps, ambil) {
   const grup = new Map();
@@ -240,7 +271,30 @@ function rpsB() {
       <tr>${[1,2,3,4,5,6,7,8].map(n => `<th>(${n})</th>`).join("")}</tr></thead>
       <tbody>${baris}</tbody></table>
     <div class="notes"><b>Catatan</b>${ol(catatan)}</div>
+    ${rekap()}
   </section>`;
+}
+
+/* 6. Matriks CPL–CPMK dan rekap jenis asesmen */
+/* Jenis asesmen = teknik sumatif + basisnya, misalnya "Tes tertulis berbasis kasus". */
+const jenisOf = s => `${teknikOf(s)} ${(JENIS_ASESMEN[s.asesmen]?.pendek || s.asesmen).toLowerCase()}`;
+const rekapJenis = arr => unik(arr.map(jenisOf)).map(j => [j, jumlah(arr.filter(s => jenisOf(s) === j))]);
+function rekap() {
+  const lebar = 86 / RPS.cpmk.length;
+  const sel = (l, c) => {
+    if (![].concat(c.cpl).includes(l.kode)) return "-";
+    return rekapJenis(subsOf(c.kode)).map(([j, b], i) => `${esc(i ? j.charAt(0).toLowerCase() + j.slice(1) : j)} (${b}%)`).join(", ");
+  };
+  return `<div class="lampiran-rekap"><div class="rekap"><h3>Matriks CPL, CPMK, dan bentuk asesmen</h3>
+      <table>${cols(14, ...RPS.cpmk.map(() => lebar))}
+        <thead><tr><th>CPL</th>${RPS.cpmk.map(c => `<th>${esc(c.kode)}</th>`).join("")}</tr></thead>
+        <tbody>${RPS.cpl.map(l => `<tr><td class="c b">${esc(l.kode)}</td>${RPS.cpmk.map(c => `<td class="c">${sel(l, c)}</td>`).join("")}</tr>`).join("")}
+        <tr class="grey"><td class="c">Jumlah</td>${RPS.cpmk.map(c => `<td class="c">${jumlah(subsOf(c.kode))}%</td>`).join("")}</tr></tbody></table></div>
+    <div class="rekap"><h3>Jenis Asesmen dan Bobot Penilaian</h3>
+      <table class="jenis">${cols(70, 30)}
+        <thead><tr><th>Jenis asesmen</th><th>Bobot penilaian</th></tr></thead>
+        <tbody>${rekapJenis(subs).map(([j, b]) => `<tr><td>${esc(j)}</td><td class="c">${b}%</td></tr>`).join("")}
+        <tr class="grey"><td>Total</td><td class="c">${jumlah(subs)}%</td></tr></tbody></table></div></div>`;
 }
 
 document.title = `RPS ${M.namaMK} (${M.tahunAkademik.split("/").pop()}) - angkatan ${M.angkatan}`;

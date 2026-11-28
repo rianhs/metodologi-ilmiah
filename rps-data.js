@@ -20,7 +20,7 @@ const RPS = {
     namaMK: "Metodologi Ilmiah",
     kode: "23C03112802",
     kodeDokumen: "",
-    rumpunMK: "",
+    rumpunMK: "Mata kuliah wajib prodi",
     sksTeori: 2,
     sksPraktik: 0,
     semester: "IV",
