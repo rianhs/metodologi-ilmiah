@@ -37,9 +37,18 @@ ol,ul{margin:0;padding-left:16px}
 .desc h3.judul-tabel{margin-top:1.6em}
 .desc th,.desc td{padding:2px 5px;line-height:1.22}
 .desc .blok{break-inside:avoid}
-.peta{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:9pt;line-height:1.2}
-.peta div{width:96%;max-width:170mm;border:1px solid #000;padding:2px 8px;text-align:center}
-.peta .arrow{border:0;padding:0;font-size:8pt;line-height:1}
+.peta{--sela:4mm;font-size:9.5pt;line-height:1.25;text-align:center}
+.peta .kotak{border:1px solid #000;padding:5px 6px}
+.peta .kotak b,.peta .kotak i{display:block}
+.peta .kotak i{font-size:8.5pt;margin-bottom:3px}
+.peta .induk{min-height:24mm;display:flex;flex-direction:column;justify-content:center}
+.peta .wadah{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));column-gap:var(--sela)}
+.peta .cabang{display:flex;flex-direction:column}
+.peta .arrow{font-size:8pt;line-height:14px}
+/* garis penghubung antarcabang */
+.peta .garis{height:0;margin:0 calc((100% - (var(--n) - 1) * var(--sela)) / (var(--n) * 2));border-top:1px solid #000}
+.peta .tengah,.peta .batang{width:1px;min-height:12px;margin:0 auto;border-left:1px solid #000}
+.peta .batang{flex:1}
 .rps-a{font-size:9pt;line-height:1.22}
 .rps-a th,.rps-a td{padding:2px 5px}
 .rps-a .head img{width:21mm;display:block;margin:auto}
@@ -127,16 +136,28 @@ function deskripsi() {
   </section>`;
 }
 
-/* 3. Peta analisis pembelajaran */
+/* 3. Peta analisis pembelajaran: satu kolom untuk setiap CPMK, dibaca dari bawah ke atas */
+/* Pekan berurutan ditulis sebagai rentang, misalnya "Pekan 3–5". */
+function rentangPekan(kode) {
+  const n = pertemuan.filter(p => p.sub === kode).map(p => p.pekan);
+  if (!n.length) return "";
+  const urut = n.every((x, i) => !i || x === n[i - 1] + 1);
+  return `Pekan ${urut && n.length > 1 ? `${n[0]}–${n[n.length - 1]}` : n.join(", ")}`;
+}
 function peta() {
-  const kotak = [`<div class="b">LULUS MATA KULIAH ${esc(M.namaMK.toUpperCase())}</div>`];
-  [...RPS.cpmk].reverse().forEach(c => {
-    kotak.push(`<div class="blue"><b>${esc(c.kode)}:</b> ${esc(c.teks)}</div>`);
-    [...subsOf(c.kode)].reverse().forEach(s => kotak.push(`<div><b>${esc(s.kode)}:</b> ${esc(s.teks)}</div>`));
-  });
-  kotak.push(`<div class="b">Kompetensi awal</div>`);
+  const ringkas = t => awalKapital(t.replace(/^Mahasiswa mampu\s+/i, ""));
+  const panah = '<div class="arrow">▲</div>';
+  const cabang = RPS.cpmk.map(c => {
+    const anak = [...subsOf(c.kode)].reverse().map(s =>
+      `<div class="kotak"><b>${esc(s.kode)}</b><i>${rentangPekan(s.kode)}</i>${esc(ringkas(s.teks))}</div>`).join(panah);
+    return `<div class="cabang">${panah}<div class="kotak blue induk"><b>${esc(c.kode)}</b>${esc(ringkas(c.teks))}</div>${panah}${anak}<div class="batang"></div></div>`;
+  }).join("");
   return `<section class="page"><h2>Peta Analisis Pembelajaran</h2><br>
-    <div class="peta">${kotak.join('<div class="arrow">▲</div>')}</div></section>`;
+    <div class="peta" style="--n:${RPS.cpmk.length}">
+      <div class="kotak b">LULUS MATA KULIAH ${esc(M.namaMK.toUpperCase())}</div><div class="tengah"></div><div class="garis"></div>
+      <div class="wadah">${cabang}</div>
+      <div class="garis"></div><div class="tengah"></div><div class="kotak b">Kompetensi awal</div>
+    </div></section>`;
 }
 
 /* 4. RPS(a): identitas, capaian, hubungan CPL dan Sub-CPMK */
