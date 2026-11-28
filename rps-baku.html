@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RPS Format Baku</title>
+<style>
+@page{size:A4 landscape;margin:12mm 12mm 14mm;@bottom-right{content:counter(page);font:8pt Calibri,Carlito,Arial,sans-serif}}
+@page :first{@bottom-right{content:""}}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:#d9d9d9;color:#000;font:10pt/1.3 Calibri,Carlito,Arial,sans-serif}
+.bar{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:10px;background:#222;color:#fff}
+.bar a{color:#fff}
+.bar button{font:600 11pt Calibri,Carlito,Arial,sans-serif;padding:8px 18px;border:0;border-radius:6px;background:#fff;color:#000;cursor:pointer}
+.page{width:297mm;min-height:210mm;margin:12px auto;padding:12mm;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.25)}
+h1,h2,h3{margin:0;text-align:center;font-size:12pt}
+h3{margin:12px 0 6px}
+p{margin:0}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{border:1px solid #000;padding:3px 5px;vertical-align:top;overflow-wrap:break-word}
+th{background:#e7e6e6;text-align:center;vertical-align:middle}
+thead{display:table-header-group}
+tr{break-inside:avoid}
+.c{text-align:center}
+.m{vertical-align:middle}
+.b{font-weight:700}
+.blue{background:#daeef3}
+.grey{background:#e7e6e6;font-weight:700}
+ol,ul{margin:0;padding-left:16px}
+.cover{display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;height:186mm;min-height:0;font-size:12pt;font-weight:700}
+.page.cover{height:210mm}
+.cover img{width:34mm}
+.cover h1{font-size:16pt;line-height:1.5}
+.cover table{width:auto;table-layout:auto;font-weight:400}
+.cover td{border:0;padding:1px 6px;text-align:left}
+.desc p{margin-bottom:4px}
+.peta{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:9pt;line-height:1.2}
+.peta div{width:170mm;border:1px solid #000;padding:2px 8px;text-align:center}
+.peta .arrow{border:0;padding:0;font-size:8pt;line-height:1}
+.rps-a{font-size:9pt;line-height:1.22}
+.rps-a th,.rps-a td{padding:2px 5px}
+.rps-a .head img{width:18mm;display:block;margin:auto}
+.sign{height:24mm;vertical-align:bottom;text-align:center}
+.rps-a td.sambung-atas{border-top:0}
+.rps-a td.sambung-bawah{border-bottom:0}
+.hub{margin:3px 0}
+.hub th{background:#fff}
+.identitas>*{vertical-align:middle}
+.rps-b{font-size:8pt;line-height:1.16}
+.rps-b th,.rps-b td{padding:2px 4px}
+.rps-b ol,.rps-b ul{padding-left:12px}
+.rps-b .sec{margin-bottom:2px}
+.notes{break-before:page;margin-top:10px;font-size:9.5pt}
+.notes ol{padding-left:24px}
+.notes li{margin-bottom:2px}
+.error{max-width:600px;margin:40px auto;padding:16px;background:#fff}
+@media print{
+  body{background:#fff}
+  .bar{display:none}
+  .page{width:auto;min-height:0;margin:0;padding:0 1px;box-shadow:none;break-after:page}
+  .page:last-child{break-after:auto}
+  .page.cover{height:182mm}
+}
+</style>
+</head>
+<body>
+<div class="bar">
+  <button type="button" onclick="window.print()">Cetak / Simpan PDF</button>
+  <span>Pilih tujuan “Simpan sebagai PDF”, ukuran A4. Disarankan memakai Chrome.</span>
+  <a href="rps.html">Kembali ke RPS web</a>
+</div>
+<main id="doc"><p class="error">Data RPS belum termuat. Pastikan rps-data.js berada satu folder dengan halaman ini.</p></main>
+
+<!-- Isi RPS ada di rps-data.js. Halaman ini mengatur tata letak cetak saja. -->
+<script src="rps-data.js"></script>
+<script>
+(() => {
+"use strict";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const miring = s => esc(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+const ol = (arr, f = esc) => `<ol>${arr.map(x => `<li>${f(x)}</li>`).join("")}</ol>`;
+const ul = arr => `<ul>${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+const cols = (...w) => `<colgroup>${w.map(x => `<col style="width:${x}%">`).join("")}</colgroup>`;
+const tgl = s => s ? D.mid(D.parse(s)) : "-";
+const awalKapital = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+const METODE = { SGD: "small group discussion", CBL: "case-based learning", PjBL: "project-based learning", PBL: "problem-based learning" };
+const subs = RPS.subcpmk;
+const subsOf = k => subs.filter(s => s.cpmk === k);
+const cplOf = c => [].concat(c.cpl).join(", ");
+const jumlah = arr => arr.reduce((a, s) => a + s.bobot, 0);
+
+/* 1. Sampul */
+function sampul() {
+  return `<section class="page cover">
+    <div><h1>RENCANA PEMBELAJARAN SEMESTER (RPS)<br>MATA KULIAH ${esc(M.namaMK.toUpperCase())}<br>(${esc(M.kode)})</h1></div>
+    <img src="img/Logo-Unhas-200px.png" alt="Logo Universitas Hasanuddin">
+    <table><tr><td></td><td class="b">Tim Pengajar</td></tr>${RPS.dosen.map((d, i) => `<tr><td>${i + 1}.</td><td>${esc(d.nama)}</td></tr>`).join("")}</table>
+    <div>${[M.prodi, M.fakultas, M.universitas, M.kota, M.tahunAkademik.split("/").pop()].map(x => esc(x.toUpperCase())).join("<br>")}</div>
+  </section>`;
+}
+
+/* 2. Deskripsi */
+function deskripsi() {
+  const daftar = arr => `<table>${cols(11, 89)}<tbody>${arr.map(x => `<tr><td class="b">${esc(x.kode)}</td><td>${esc(x.teks)}</td></tr>`).join("")}</tbody></table>`;
+  return `<section class="page desc">
+    <h2>${esc(M.prodi.toUpperCase())}<br>${esc(M.fakultas.toUpperCase())}</h2>
+    <h3>Visi</h3><p class="c">“${esc(RPS.visi)}”</p>
+    <h3>Misi</h3>${ol(RPS.misi)}
+    <h3>Profil Lulusan</h3>
+    <table>${cols(5, 20, 75)}<thead><tr><th>No.</th><th>Profil Lulusan</th><th>Deskripsi</th></tr></thead>
+      <tbody>${RPS.profilLulusan.map((p, i) => `<tr><td class="c">${i + 1}.</td><td>${esc(p.nama)}</td><td>${esc(p.teks)}</td></tr>`).join("")}</tbody></table>
+    <h3>Capaian Pembelajaran Lulusan (CPL) Prodi yang Dibebankan pada MK</h3>${daftar(RPS.cpl)}
+    <h3>Capaian Pembelajaran Mata Kuliah (CPMK)</h3>${daftar(RPS.cpmk)}
+    <h3>Subcapaian Pembelajaran Mata Kuliah (Sub-CPMK)</h3>${daftar(subs)}
+  </section>`;
+}
+
+/* 3. Peta analisis pembelajaran */
+function peta() {
+  const kotak = [`<div class="b">LULUS MATA KULIAH ${esc(M.namaMK.toUpperCase())}</div>`];
+  [...RPS.cpmk].reverse().forEach(c => {
+    kotak.push(`<div class="blue"><b>${esc(c.kode)}:</b> ${esc(c.teks)}</div>`);
+    [...subsOf(c.kode)].reverse().forEach(s => kotak.push(`<div><b>${esc(s.kode)}:</b> ${esc(s.teks)}</div>`));
+  });
+  kotak.push(`<div class="b">Kompetensi awal</div>`);
+  return `<section class="page"><h2>Peta Analisis Pembelajaran</h2><br>
+    <div class="peta">${kotak.join('<div class="arrow">▲</div>')}</div></section>`;
+}
+
+/* 4. RPS(a): identitas, capaian, hubungan CPL dan Sub-CPMK */
+function matriks() {
+  const cplSub = s => [].concat(cpmkByKode[s.cpmk].cpl);
+  /* Jika satu CPMK membebani beberapa CPL, bobot Sub-CPMK dibagi rata. */
+  const nilai = (s, l) => cplSub(s).includes(l) ? s.bobot / cplSub(s).length : 0;
+  const angka = n => n ? Number(n.toFixed(2)).toLocaleString("id-ID") : "";
+  const n = RPS.cpl.length;
+  return `<table class="hub">${cols(14, ...RPS.cpl.map(() => 48 / n), 22, 16)}
+    <thead><tr><th></th>${RPS.cpl.map(l => `<th>${esc(l.kode)} (%)</th>`).join("")}<th>Bobot penilaian (%)</th><th>Jumlah minggu</th></tr></thead>
+    <tbody>${subs.map(s => `<tr><td class="b">${esc(s.kode)}</td>${RPS.cpl.map(l => `<td class="c">${angka(nilai(s, l.kode))}</td>`).join("")}<td class="c">${s.bobot}</td><td class="c">${pekanOf(s.kode).length}</td></tr>`).join("")}
+    <tr class="b"><td></td>${RPS.cpl.map(l => `<td class="c">${angka(subs.reduce((a, s) => a + nilai(s, l.kode), 0))}</td>`).join("")}<td class="c">${jumlah(subs)}</td><td></td></tr></tbody></table>`;
+}
+function rpsA() {
+  const O = M.otorisasi;
+  const judul = teks => `<td colspan="6" class="grey">${teks}</td>`;
+  const isiBaris = (kode, teks, span = 1) => `${kode === null ? "" : `<td${span > 1 ? ` rowspan="${span}"` : ""}>${esc(kode)}</td>`}<td colspan="5">${teks}</td>`;
+  const cp = [
+    judul("CPL-Prodi yang dibebankan pada MK"),
+    ...RPS.cpl.map(l => isiBaris(l.kode, esc(l.teks))),
+    judul("CPL → Capaian Pembelajaran Mata Kuliah (CPMK)"),
+    ...RPS.cpmk.map(c => isiBaris(cplOf(c), `<b>${esc(c.kode)}:</b> ${esc(c.teks)}`)),
+    judul("CPMK → Sub-CPMK"),
+    ...subs.map((s, i) => {
+      const baru = !i || subs[i - 1].cpmk !== s.cpmk;
+      return isiBaris(baru ? s.cpmk : null, `<b>${esc(s.kode)}:</b> ${esc(s.teks)}`, subsOf(s.cpmk).length);
+    }),
+    judul("Hubungan antara CPL terhadap Sub-CPMK"),
+    `<td colspan="6">${matriks()}</td>`
+  ].map((sel, i, semua) => `<tr><td class="b ${i ? "sambung-atas" : ""} ${i < semua.length - 1 ? "sambung-bawah" : ""}">${i ? "" : "Capaian Pembelajaran (CP)"}</td>${sel}</tr>`).join("");
+  const baris = (label, isi) => `<tr><td class="b">${label}</td><td colspan="6">${isi}</td></tr>`;
+  return `<section class="page rps-a">
+    <table>${cols(14, 9, 24, 11, 11, 19, 12)}
+    <tbody>
+      <tr class="blue head"><td class="m"><img src="img/Logo-Unhas-200px.png" alt="Logo Universitas Hasanuddin"></td>
+        <td colspan="5" class="c m b">${[M.universitas, M.fakultas, M.prodi].map(x => esc(x.toUpperCase())).join("<br>")}</td>
+        <td class="c m"><b>Kode Dokumen</b><br>${esc(M.kodeDokumen || "")}</td></tr>
+      <tr class="blue"><td colspan="7" class="c b">RENCANA PEMBELAJARAN SEMESTER</td></tr>
+      <tr class="grey identitas"><td>MATA KULIAH (MK)</td><th>KODE</th><th>RUMPUN MK</th><th colspan="2">BOBOT (sks)</th><th>SEMESTER</th><th>TGL PENYUSUNAN</th></tr>
+      <tr class="identitas"><td class="b">${esc(M.namaMK)}</td><td class="c">${esc(M.kode)}</td><td class="c">${esc(M.rumpunMK || "-")}</td><td class="c">T = ${M.sksTeori}</td><td class="c">P = ${M.sksPraktik}</td><td class="c">${esc(M.semester)}</td>
+        <td class="c">${esc(tgl(M.tanggalPenyusunan))}${M.tanggalRevisi ? `<br>Revisi: ${esc(tgl(M.tanggalRevisi))}` : ""}</td></tr>
+      <tr><td rowspan="2" class="b">OTORISASI / PENGESAHAN</td><th colspan="2">PENGEMBANG RPS</th><th colspan="2">KOORDINATOR MK</th><th colspan="2">KETUA PRODI</th></tr>
+      <tr><td colspan="2" class="sign">${esc(O.pengembang)}</td><td colspan="2" class="sign">${esc(O.koordinator)}</td><td colspan="2" class="sign">${esc(O.ketuaProdi)}</td></tr>
+      ${cp}
+      ${baris("Deskripsi singkat mata kuliah", esc(RPS.deskripsi))}
+      ${baris("Bahan kajian atau materi pembelajaran", ol(RPS.bahanKajian))}
+      ${baris("Pustaka", `<b>Utama</b>${ol(RPS.pustaka.utama, miring)}<b>Pendukung</b>${ol(RPS.pustaka.pendukung, miring)}`)}
+      ${baris("Dosen pengampu", ol(RPS.dosen.map(d => d.nama)))}
+      ${baris("Mata kuliah syarat", esc(M.prasyarat.join(", ") || "-"))}
+    </tbody></table>
+  </section>`;
+}
+
+/* 5. RPS(b): rencana per pertemuan */
+function selLuring(p, sub) {
+  /* Nama dosen dan tanggal sengaja tidak dicetak agar RPS berlaku lintas semester. */
+  const w = { ...RPS.bawaanPertemuan.waktu, ...(p.waktu || {}) };
+  const tugas = RPS.penugasan.filter(t => [].concat(t.pekan).includes(p.pekan)).map(t => "Mengerjakan tugas: " + t.judul);
+  const bagian = (judul, lama, isi) => `<div class="sec"><b>${judul}</b> [${esc(lama)}]${isi}</div>`;
+  const metode = (p.metode || sub.metode || []).map(m => METODE[m] || m);
+  return `<div class="sec"><b>Bentuk pembelajaran:</b> ${esc(p.bentuk)}</div>
+    ${bagian("Kegiatan belajar terbimbing", w.terbimbing, ul([awalKapital(metode.join(", "))]))}
+    ${bagian("Kegiatan penugasan terstruktur", w.terstruktur, ul(p.terstruktur || [["Membaca pustaka", ...tugas].join("; ")]))}
+    ${bagian("Kegiatan belajar mandiri", w.mandiri, ul(p.mandiri || ["Membaca pustaka"]))}`;
+}
+function rpsB() {
+  const baris = pertemuan.map((p, i) => {
+    const sub = subByKode[p.sub] || {};
+    const baru = !i || pertemuan[i - 1].sub !== p.sub;
+    let n = 1; while (baru && pertemuan[i + n]?.sub === p.sub) n++;
+    const gabung = isi => baru ? `<td rowspan="${n}">${isi}</td>` : "";
+    return `<tr><td class="c">${p.pekan}</td>
+      ${gabung(`<b>${esc(p.sub)}:</b> ${esc(sub.teks)}`)}${gabung(esc(sub.indikator))}
+      <td><div class="sec"><b>Teknik formatif:</b><br>${esc(awalKapital(p.formatif.join(", ")))}</div><div class="sec"><b>Teknik sumatif:</b><br>${esc(sub.teknik)}</div><div class="sec"><b>Kriteria:</b><br>${esc(p.kriteria)}</div></td>
+      <td>${selLuring(p, sub)}</td><td>${esc(p.daring || "")}</td>
+      <td>${ol(p.materi)}</td>${gabung(`<div class="c">${sub.bobot}%</div>`)}</tr>`;
+  }).join("");
+  const catatan = [
+    "Capaian Pembelajaran Lulusan Program Studi (CPL-Prodi) adalah kemampuan yang dimiliki oleh setiap lulusan program studi yang merupakan internalisasi dari sikap, pengetahuan, dan keterampilan sesuai dengan jenjang program studinya yang diperoleh melalui proses pembelajaran.",
+    "CPL yang dibebankan pada mata kuliah adalah satu atau beberapa CPL-Prodi yang digunakan untuk pembentukan atau pengembangan sebuah mata kuliah dan penguasaannya dibebankan kepada suatu mata kuliah.",
+    "Capaian Pembelajaran Mata Kuliah (CPMK) adalah kemampuan yang dijabarkan secara spesifik dari “CPL yang dibebankan pada mata kuliah” dan bersifat spesifik terhadap bahan kajian atau materi pembelajaran mata kuliah tersebut. CPMK diturunkan dari CPL.",
+    "Subcapaian Pembelajaran Mata Kuliah (Sub-CPMK) adalah kemampuan yang dijabarkan secara spesifik dari CPMK yang dapat diukur dan merupakan kemampuan akhir yang direncanakan pada setiap tahap pembelajaran, serta bersifat spesifik terhadap materi pembelajaran mata kuliah tersebut. Sub-CPMK diturunkan dari CPMK.",
+    "Penilaian formatif adalah proses evaluasi yang dilakukan secara berkelanjutan selama pembelajaran berlangsung dan bertujuan untuk memantau perkembangan belajar mahasiswa, memberikan umpan balik agar mahasiswa memenuhi capaian pembelajarannya, dan memperbaiki proses pembelajaran.",
+    "Penilaian sumatif bertujuan untuk menilai pencapaian hasil belajar mahasiswa sebagai dasar penentuan kelulusan mata kuliah dan kelulusan program studi, dengan mengacu pada pemenuhan CPL. Penilaian sumatif dilakukan dalam bentuk ujian tertulis, ujian lisan, penilaian proyek, penilaian tugas, uji kompetensi, dan/atau bentuk penilaian lain yang sejenis.",
+    "Indikator penilaian adalah pernyataan spesifik dan terukur yang digunakan untuk mengidentifikasi kemampuan atau kinerja hasil belajar mahasiswa yang disertai bukti-bukti.",
+    "Kriteria penilaian adalah standar atau patokan yang digunakan untuk mengukur atau mengevaluasi ketercapaian tujuan pembelajaran berdasarkan indikator yang telah ditetapkan. Kriteria penilaian merupakan pedoman bagi penilai agar penilaian konsisten dan tidak bias. Kriteria dapat bersifat kuantitatif maupun kualitatif.",
+    "Teknik penilaian terdiri atas partisipasi, observasi, unjuk kerja, tes tertulis, tes lisan, dan angket.",
+    "Instrumen penilaian terdiri atas penilaian proses dalam bentuk rubrik dan/atau penilaian hasil dalam bentuk portofolio atau karya desain.",
+    "Bentuk pembelajaran dapat berupa kuliah, responsi, tutorial, seminar, praktikum, praktik, studio, penelitian, perancangan, pengembangan, tugas akhir, pelatihan bela negara, pertukaran pelajar, magang, wirausaha, pengabdian kepada masyarakat, dan/atau bentuk pembelajaran lain. Bentuk pembelajaran tersebut dilakukan melalui kegiatan belajar terbimbing, kegiatan penugasan terstruktur, dan/atau kegiatan mandiri.",
+    "Metode pembelajaran dapat berupa diskusi kelompok kecil (small group discussion; SGD), simulasi (roleplay simulation; RPS), pembelajaran berbasis kasus (case-based learning; CBL), pembelajaran kolaboratif (collaborative learning), pembelajaran kooperatif (cooperative learning; CoL), pembelajaran berbasis proyek (project-based learning; PjBL), pembelajaran berbasis masalah (problem-based learning; PBL), atau metode pembelajaran lain yang dapat secara efektif memfasilitasi pemenuhan capaian pembelajaran lulusan.",
+    "Materi pembelajaran adalah rincian atau uraian dari bahan kajian yang dapat disajikan dalam bentuk beberapa pokok dan subpokok bahasan.",
+    "Bobot penilaian adalah persentase penilaian terhadap setiap pencapaian Sub-CPMK yang besarnya proporsional dengan tingkat kesulitan pencapaian Sub-CPMK tersebut. Jumlah keseluruhan bobot penilaian adalah 100%."
+  ];
+  return `<section class="page rps-b">
+    <table>${cols(4.5, 14, 17, 14, 21, 6, 19, 4.5)}
+      <thead><tr><th rowspan="2">Per&shy;temuan ke-</th><th rowspan="2">Sub-CPMK<br>(Kemampuan akhir tiap tahapan belajar)</th><th colspan="2">Penilaian</th><th colspan="2">Bentuk Pembelajaran (BP) dan Metode Pembelajaran (MP)<br>[Estimasi waktu]</th><th rowspan="2">Materi Pembelajaran<br>[Pustaka]</th><th rowspan="2">Bobot</th></tr>
+      <tr><th>Indikator</th><th>Teknik &amp; Kriteria</th><th>Luring</th><th>Daring</th></tr>
+      <tr>${[1,2,3,4,5,6,7,8].map(n => `<th>(${n})</th>`).join("")}</tr></thead>
+      <tbody>${baris}</tbody></table>
+    <div class="notes"><b>Catatan</b>${ol(catatan)}</div>
+  </section>`;
+}
+
+document.title = `RPS ${M.namaMK} (${M.tahunAkademik.split("/").pop()}) - angkatan ${M.angkatan}`;
+document.getElementById("doc").innerHTML = sampul() + deskripsi() + peta() + rpsA() + rpsB();
+})();
+</script>
+</body>
+</html>

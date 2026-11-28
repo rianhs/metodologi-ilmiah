@@ -22,6 +22,7 @@ Mahasiswa belajar menelaah karya ilmiah secara sistematis, menyusun proposal ris
 |---|---|
 | [`index.html`](index.html) | Portal mata kuliah: informasi umum, tim pengajar, dan tautan perangkat pembelajaran |
 | [`rps.html`](rps.html) | Rencana Pembelajaran Semester (RPS) |
+| [`rps-baku.html`](rps-baku.html) | RPS format baku untuk cetak PDF |
 | [`sap.html`](sap.html) | Satuan Acara Perkuliahan (SAP) pekan 1 sampai 16 |
 | [`lembar-kerja.html`](lembar-kerja.html) | Lembar kerja dan asesmen diri Tugas 1 sampai 5 |
 | [`rtm-poster.html`](rtm-poster.html) | Rencana Tugas Mahasiswa (RTM) Tugas 6: poster artikel ilmiah |
@@ -54,10 +55,10 @@ Sisa bobot nilai berasal dari kuis di LMS Sikola.
 
 ## Pemeliharaan
 
-Setiap halaman berupa satu file HTML tanpa proses *build*. Font dan ikon dimuat dari layanan daring (Google Fonts dan unpkg).
+Halaman berupa file HTML tanpa proses *build*; kedua halaman RPS berbagi `rps-data.js`. Font dan ikon dimuat dari layanan daring (Google Fonts dan unpkg).
 
 - Data portal berada di objek `MI` dalam `index.html`.
-- Data RPS berada di objek `RPS` dalam `rps.html`. Setelah mengubahnya, salin seluruh blok `const RPS` ke `sap.html`.
+- Data RPS berada di objek `RPS` dalam `rps-data.js`, dipakai oleh `rps.html` dan `rps-baku.html`. Setelah mengubahnya, salin seluruh blok `const RPS` ke `sap.html`.
 - Data khusus SAP berada di objek `SAP` dalam `sap.html`.
 - Kedua RTM memuat salinan objek `RPS`. Ketentuan tugas dan salinan indikator rubrik berada di objek `RTM`.
 - Perubahan jadwal, judul tugas, atau tim pengajar perlu disamakan di semua halaman terkait.
